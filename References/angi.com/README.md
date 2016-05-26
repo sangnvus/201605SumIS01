@@ -64,14 +64,17 @@ interfaces.
 To setup apache, setup a virtual host to point to the public/ directory of the
 project and you should be ready to go! It should look something like below:
 
-    <VirtualHost *:80>
-        ServerName zf2-tutorial.localhost
-        DocumentRoot /path/to/zf2-tutorial/public
-        SetEnv APPLICATION_ENV "development"
-        <Directory /path/to/zf2-tutorial/public>
-            DirectoryIndex index.php
-            AllowOverride All
-            Order allow,deny
-            Allow from all
-        </Directory>
-    </VirtualHost>
+<VirtualHost *:80>
+    ServerAdmin bachcanhki6784@gmail.com
+    DocumentRoot "C:\xampp\htdocs\angi.com\public"
+    ServerName angi.com.local
+	ServerAlias www.angi.com.local
+    ErrorLog "logs/angi.com.local.log"
+    CustomLog "logs/angi.com.local.log" common
+	<Directory "C:\xampp\htdocs\angi.com\public">
+		DirectoryIndex index.php
+        AllowOverride All
+        Order allow,deny
+        Allow from all
+    </Directory>
+</VirtualHost>
