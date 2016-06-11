@@ -80,12 +80,13 @@ li.top-register:hover>a{
     box-shadow: 0 5px 10px rgba(0,0,0,.2);
     text-align: center;
     right: -66px;
+    background: #fff !important;
 }
 .hover-signin:before{
     content: '';
     position: absolute;
     bottom: 89%;
-    left: 45%;
+    left: 46%;
     height: 17px;
     width: 5%;
     background-color: #fff;
@@ -96,7 +97,7 @@ li.top-register:hover>a{
     position: absolute;
     bottom: 89%;
     right: 45%;
-    height: 17px;
+    height: 16px;
     width: 5%;
     background-color: #fff;
     transform: skew(0deg, 45deg);
@@ -136,6 +137,7 @@ li.top-register:hover>a{
     display: none;
     position: absolute;
     background: none;
+    z-index: 1;
 }
 ul.hover-menu{
     left: 15px;
@@ -193,7 +195,7 @@ ul.hover-menu  li a:hover{
 }
 .title-row a.small-tit{
     float: right;
-    padding-top: 30px;
+    margin-top: 30px;
 }
 .title-row a.small-tit:hover{
     color: #d02028;
@@ -212,6 +214,7 @@ hr.underTit{
     display: table;
     width: 100%;
 }
+.item-content li{margin: 10px 0}
 .img-item img{
     width: 100%;
 }
@@ -243,22 +246,34 @@ hr.underTit{
     margin-bottom: 5px;
     padding-left: 10px;
 }
-.item-address,{
+.item-address{
     padding-left: 20px;
     -moz-text-overflow: ellipsis;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
     color: #c2c2c2;
     font-size: 13px;
-    margin-bottom: 0;
+    /*margin-bottom: 0;*/
     overflow: hidden;
-    padding-right: 15px;
+    padding: 10px;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
-.rate-star, .rate-dollar{
-    font-size: 13px;
+.rate-dollar{
+    padding-left: 7px;
+    border-left: 1px solid #fff;
+    font-size: 12px;
+}
+.rate-star{
+    padding-right: 5px;
+    font-size: 11px;
+}
+.rate-dollar i{
+    padding-right: 4px;
+}
+.rate-star i{
+    padding-left: 2px;
 }
 i.filled{
     color: #eec60e;
@@ -294,8 +309,97 @@ i.filled{
     background: #d02028;
     color: #fff;
 }
+
+.small-tit-news{
+    padding: 0 10px;
+    border-right: 1px solid #8d8d8d;
+}
+
+.news-title{
+    white-space: nowrap;
+    font-weight: bold;
+}
+.news-title a{
+    color: #000;
+}
+.news-title a:hover{
+    color: #d02028;
+}
+
+.news-desc{
+    color: #5d5b5b;
+    line-height: 18pt;
+    height: 48px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
 /*=============================================het index==============================================*/
 
+/*=========================================category/search============================================*/
+
+.item-cat .col-md-3{
+    padding-right: 0;
+}
+
+.sidebar-content{
+    border-bottom: 1px solid #eee;
+}
+.sidebar-content li a{
+    color: #8d8d8d;
+}
+.sidebar-content li a:hover{
+    color: #d02028;
+}
+
+.item-name-sm{
+    margin-top: 5px !important;
+    margin-bottom: 0 !important;
+}
+.item-address-sm{
+    padding: 5px !important;
+}
+.category-itemdetail>p{margin: 0}
+.category-itemdetail>button{margin-bottom: 10px}
+
+.paging{
+    text-align: center;
+    margin: 30px 0;
+}
+.paging ul{
+    text-align: center;
+    display: inline-block;
+}
+.paging ul li{
+    display: inline-block;
+}
+.paging ul li a{
+    padding: 10px 20px;
+    border: 1px solid #ddd;
+    position: relative;
+    margin-right: -5px;
+    color: #969595
+}
+.paging ul li a:hover{
+    background: #eee;
+}
+
+.pagin-left{
+    color: #fff !important;
+    background: #c62039;
+    border: #c62039 !important;
+    border-radius: 5px 0 0 5px;
+}
+.pagin-right{
+    color: #fff !important;
+    background: #c62039;
+    border: #c62039 !important;
+    border-radius: 0 5px 5px 0;
+}
+.pagin-left:hover, .pagin-right:hover{
+    background: #c62039 !important;
+}
 /*===============================================footer=================================================*/
 .footer{
     background: #333;
