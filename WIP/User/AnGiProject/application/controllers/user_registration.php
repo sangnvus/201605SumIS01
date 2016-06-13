@@ -1,0 +1,93 @@
+<?php
+class user_registration extends CI_Controller
+{
+	public function __construct()
+	{
+		parent::__construct();
+		$this->load->helper(array('form','url','date'));
+		$this->load->library(array('session', 'form_validation', 'email'));
+		$this->load->database();
+		$this->load->model('User_register_model');
+	}
+	
+	function index()
+	{
+		$this->register();
+	}
+
+
+
+    function register()
+    {
+		//set validation rules
+		$this->form_validation->set_rules('fname', 'First Name', 'trim|required|min_length[3]|max_length[30]');
+		$this->form_validation->set_rules('lname', 'Last Name', 'trim|required|min_length[3]|max_length[30]');
+		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|is_unique[users.emailUser]');
+		$this->form_validation->set_rules('phone', 'phone', 'trim|numeric');
+		$this->form_validation->set_rules('password', 'Password', 'trim|required|matches[cpassword]|md5');
+		$this->form_validation->set_rules('cpassword', 'Confirm Password', 'trim|required|md5');
+		
+		//validate form input
+		if ($this->form_validation->run() == FALSE)
+        {
+			// fails
+
+			$data ['content'] = 'site/user/user/user_registration.phtml';
+        	$this->load->view('site/layout/layout.phtml', $data);
+        }
+		else
+		{
+			//insert the user registration details into database
+			$address = array(
+					'address'=> $this->input->post('address'),
+					'provinceid' => $this->input->post('province'),
+					'districtid' => $this->input->post('district'),
+					'wardid' => $this->input->post('ward'),
+			);
+
+
+
+			$data = array(
+				'firstNameUser' => $this->input->post('fname'),
+				'lastNameUser' => $this->input->post('lname'),
+				'dateOfBirthUser' => $this->input->post('dob'),
+				'genderUser' => $this->input->post('gender'),
+				'descriptionUser' => $this->input->post('des'),
+				'emailUser' => $this->input->post('email'),
+				'phoneUser' => $this->input->post('phone'),
+				'authorityUser' => $this->input->post('autho'),
+				'passwordUser' => $this->input->post('password'),
+				'dateCreateUser' => date('Y-m-d H:i:s'),
+				'imageID'=> 1,
+				'addressID'=> $this->User_register_model->insertAddress($address)
+			);
+			
+			// insert form data into database
+			if ($this->User_register_model->insertUser($data))
+			{
+					$this->session->set_flashdata('msg','<div class="alert alert-success text-center">You are Successfully Registered !!</div>');
+					redirect('user_registration/register');
+			}
+			else
+			{
+				// error
+				$this->session->set_flashdata('msg','<div class="alert alert-danger text-center">Oops! Error insert.  Please try again later!!!</div>');
+				redirect('user_registration/register');
+			}
+		}
+	}
+	
+	// function verify($hash=NULL)
+	// {
+	// 	if ($this->user_model->verifyEmailID($hash))
+	// 	{
+	// 		$this->session->set_flashdata('verify_msg','<div class="alert alert-success text-center">Your Email Address is successfully verified! Please login to access your account!</div>');
+	// 		redirect('user_registration/register');
+	// 	}
+	// 	else
+	// 	{
+	// 		$this->session->set_flashdata('verify_msg','<div class="alert alert-danger text-center">Sorry! There is error verifying your Email Address!</div>');
+	// 		redirect('user_registration/register');
+	// 	}
+	// }
+}
