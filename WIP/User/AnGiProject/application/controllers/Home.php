@@ -15,4 +15,9 @@ class Home extends CI_Controller {
         $this->load->view('site/layout/layout.phtml', $data);
     }
 
+    public function search() {
+        $data = array();
+        $data['content'] = 'site/home/search/index.phtml';
+        $this->load->view('site/layout/layout.phtml', $data);
+    }
 }

@@ -9,7 +9,7 @@ a:hover, a:active{
     text-decoration: none;
 }
 
-input[type="text"], input[type="email"], input[type="password"], input[type="search"], input[type="telephone"], input[type="tel"], input[type="number"], input[type="submit"], textarea, button, select {
+input[type="text"], input[type="email"], input[type="password"], input[type="search"], input[type="telephone"], input[type="tel"], input[type="number"], input[type="time"], input[type="submit"], input[type="date"], textarea, button, select {
     border: 1px solid #cccccc;
     padding: 6px 30px;
     font-size: 14px;
@@ -363,26 +363,8 @@ i.filled{
 .category-itemdetail>p{margin: 0}
 .category-itemdetail>button{margin-bottom: 10px}
 
-.paging{
-    text-align: center;
-    margin: 30px 0;
-}
-.paging ul{
-    text-align: center;
-    display: inline-block;
-}
-.paging ul li{
-    display: inline-block;
-}
-.paging ul li a{
-    padding: 10px 20px;
-    border: 1px solid #ddd;
-    position: relative;
-    margin-right: -5px;
+.pagination>li>a, .pagination>li>a:hover{
     color: #969595
-}
-.paging ul li a:hover{
-    background: #eee;
 }
 
 .pagin-left{
@@ -425,3 +407,6 @@ a.social-logo{
     margin-top: 8px;
     display: inline-block;
 }
+
+
+.fb-comments, .fb-comments * {width: 100% !important;}
