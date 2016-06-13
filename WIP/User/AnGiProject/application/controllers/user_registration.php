@@ -7,7 +7,7 @@ class user_registration extends CI_Controller
 		$this->load->helper(array('form','url','date'));
 		$this->load->library(array('session', 'form_validation', 'email'));
 		$this->load->database();
-		$this->load->model('User_register_model');
+		$this->load->model('User_model');
 	}
 	
 	function index()
@@ -33,6 +33,9 @@ class user_registration extends CI_Controller
 			// fails
 
 			$data ['content'] = 'site/user/user/user_registration.phtml';
+			$data ['ward'] = $this->User_model->getData('ward');
+			$data ['district'] = $this->User_model->getData('district');
+			$data ['province'] = $this->User_model->getData('province');
         	$this->load->view('site/layout/layout.phtml', $data);
         }
 		else
@@ -59,11 +62,11 @@ class user_registration extends CI_Controller
 				'passwordUser' => $this->input->post('password'),
 				'dateCreateUser' => date('Y-m-d H:i:s'),
 				'imageID'=> 1,
-				'addressID'=> $this->User_register_model->insertAddress($address)
+				'addressID'=> $this->User_model->insertAddress($address)
 			);
 			
 			// insert form data into database
-			if ($this->User_register_model->insertUser($data))
+			if ($this->User_model->insertUser($data))
 			{
 					$this->session->set_flashdata('msg','<div class="alert alert-success text-center">You are Successfully Registered !!</div>');
 					redirect('user_registration/register');

@@ -1,5 +1,5 @@
 <?php
-class User_register_model extends CI_Model
+class User_model extends CI_Model
 {
 	function __construct()
     {
@@ -18,6 +18,15 @@ class User_register_model extends CI_Model
 		$insert_id = $this->db->insert_id();
    		return  $insert_id;
 	}
+
+	function getData($table)
+    {
+		$query=$this->db->get($table);
+        $data=$query->result_array();
+   		return  $data;
+	}
+
+	
 	
 	//send verification email to user's email id
 	// function sendEmail($to_email)
