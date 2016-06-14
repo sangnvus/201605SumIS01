@@ -6,8 +6,6 @@
 <div class="row">
 	<div class="col-md-6 col-md-offset-3">
 		<?php 
-		$this->load->database();
-
 		echo $this->session->flashdata('verify_msg'); ?>
 	</div>
 </div>
@@ -69,16 +67,13 @@
 					<input class="form-control" name="address" type="text" value="<?php echo set_value('address'); ?>" />
 					<span class="text-danger"><?php echo form_error('address'); ?></span>
 				</div>
-					
-				<?php 
-				    $query=$this->db->query("SELECT * FROM province");
-				?>
+
 
 				<div class="form-group">
 					<label for="province">Tỉnh thành</label>
 				    <select name="province" size="1">
 					    <?php 
-					        foreach ($query->result_array() as $key => $row)
+					        foreach ($province as $key => $row)
 					        {
 					           echo '<option value="' . $row['provinceID'] . '">' .$row['typePro'].' '. $row['namePro'] . '</option>';
 					        }
@@ -86,15 +81,11 @@
 					</select>
 				</div>
 
-				<?php 
-				    $query=$this->db->query("SELECT * FROM district");
-				?>
-
 				<div class="form-group">
 					<label for="district">Quận huyện</label>
 				    <select name="district" size="1">
 					    <?php 
-					        foreach ($query->result_array() as $key => $row)
+					        foreach ($district as $key => $row)
 					        {
 					           echo '<option value="' . $row['districtid'] . '">' .$row['typeDis'].' '. $row['nameDis'] . '</option>';
 					        }
@@ -102,16 +93,11 @@
 					</select>
 				</div>
 
-
-				<?php 
-				    $query=$this->db->query("SELECT * FROM ward");
-				?>
-
 				<div class="form-group">
 					<label for="ward">Khu vực</label>
 				    <select name="ward" size="1">
 					    <?php 
-					        foreach ($query->result_array() as $key => $row)
+					        foreach ($ward as $key => $row)
 					        {
 					           echo '<option value="' . $row['wardid'] . '">' .$row['typeWard'].' '. $row['nameWard'] . '</option>';
 					        }
