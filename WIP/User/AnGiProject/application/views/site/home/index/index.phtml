@@ -19,14 +19,14 @@
 
             <ul class="item-content">
                 <?php
-                for($i=0; $i<4; $i++){
-                ?>
+                for ($i = 0; $i < 4; $i++) {
+                    ?>
                     <li class="col-md-3">
                         <a style="display: block; position: relative" class="img-item" href="">
-                            <img src="http://cdn.pasgo.vn/anh-diem-den/nha-hang-ao-quan-ngo-19-dong-tac-avatarjpg-5138.jpg">
+                            <img src="<?php echo ${'image' . $i}; ?>">
                             <div class="item-infor">
-                                <label class="item-name">Ao quán</label>
-                                <span class="rate-star">
+                                <label class="item-name"><?php echo ${'restName' . $i}; ?></label>
+                                <span class="rate-star"><?php echo ${'rate' . $i} ?><!-- fill in the star by rate value -->
                                     <i class="fa fa-star filled" aria-hidden="true"></i>
                                     <i class="fa fa-star filled" aria-hidden="true"></i>
                                     <i class="fa fa-star filled" aria-hidden="true"></i>
@@ -40,7 +40,7 @@
                                     <i class="fa fa-dollar" aria-hidden="true"></i>
                                     <i class="fa fa-dollar" aria-hidden="true"></i>
                                 </span>
-                                <label class="item-address">18 Ngõ 19 Đông Tác, Quận Đống Đa</label>
+                                <label class="item-address"><?php echo ${'address' . $i} ?></label>
                             </div>
                         </a>
 
@@ -50,7 +50,7 @@
                             <button class="place">Đặt chỗ ngay</button>
                         </div>
                     </li>
-                <?php
+                    <?php
                 }
                 ?>
             </ul>
@@ -75,11 +75,13 @@
 
             <ul class="item-content">
                 <?php
-                for($i=0; $i<8; $i++){
+                for ($i = 0; $i < 8; $i++) {
                     ?>
                     <li class="col-md-3">
                         <a style="display: block; position: relative" class="img-item" href="">
-                            <img src="http://cdn.pasgo.vn/anh-diem-den/nha-hang-ao-quan-ngo-19-dong-tac-avatarjpg-5138.jpg">
+                            <img src="<?php foreach ($img as $row) {
+                                            echo $row->addressImage;
+                } ?>">
                             <div class="item-infor">
                                 <label class="item-name">Ao quán</label>
                                 <span class="rate-star">
@@ -115,7 +117,7 @@
 
 
 
-<!--        hết hiển thị nhà hàng-->
+        <!--        hết hiển thị nhà hàng-->
 
         <div class="topdisplay-item">
             <div class="title-content">
@@ -124,10 +126,10 @@
                         <h3>tin tức</h3>
                     </div>
                     <div class="col-md-6">
-                            <a class="small-tit" href="" style="padding-left: 10px">Tất cả</a>
-                            <a class="small-tit small-tit-news" href="">Cập nhật</a>
-                            <a class="small-tit small-tit-news" href="">Sự kiện</a>
-                            <a class="small-tit small-tit-news" href="">Khuyến mãi</a>
+                        <a class="small-tit" href="" style="padding-left: 10px">Tất cả</a>
+                        <a class="small-tit small-tit-news" href="">Cập nhật</a>
+                        <a class="small-tit small-tit-news" href="">Sự kiện</a>
+                        <a class="small-tit small-tit-news" href="">Khuyến mãi</a>
                     </div>
                 </div>
 
@@ -138,7 +140,7 @@
 
             <ul class="item-content">
                 <?php
-                for($i=0; $i<3; $i++){
+                for ($i = 0; $i < 3; $i++) {
                     ?>
                     <li class="col-md-4">
                         <a style="display: block; position: relative" class="img-item" href="">
