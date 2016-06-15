@@ -23,3 +23,28 @@ INSERT INTO rate(rateID, rate, restaurantID, userID) VALUES(2, 5, 2, 1);
 
 INSERT INTO rate(rateID, rate, restaurantID, userID) VALUES(3, 5, 3, 1);
 INSERT INTO rate(rateID, rate, restaurantID, userID) VALUES(4, 2, 4, 1);
+
+
+update food
+set imageID = 1
+where foodID = 1;
+
+update address
+set address = '18 Ngõ 19 Đông Tác, Quận Đống Đa'
+where addressID = 1;
+
+update restaurants
+set shortDesRes = 'World most delicious BBQ'
+where restaurantID = 1;
+
+update restaurants
+set shortDesRes = 'Various kind of dishes and Cheap Buffet'
+where restaurantID = 2;
+
+update restaurants
+set shortDesRes = 'Campaign A'
+where restaurantID = 3;
+
+update restaurants
+set shortDesRes = 'Campaign B'
+where restaurantID = 4;
