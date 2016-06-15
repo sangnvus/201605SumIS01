@@ -13,30 +13,14 @@ class Home extends CI_Controller {
 
     public function index() {
         
-        // array to store data
-        $data = array();
+        // retrieve data from model
+        $rate = $this -> Restaurants_model -> getInterestingRestaurants('rate');
         
-        // --------------------- Top rate -------------------------
-        $query = $this->Restaurants_model->getTopRatingRestaurant();
-
-        // retrieve data from restaurant model
-        for ($i = 0; $i < 4; $i++) {
-            $data['restName' . $i] = $query[$i][1];
-            $data['address' . $i] = $query[$i][2];
-            $data['image' . $i] = $query[$i][3];
-            $data['rate' . $i] = $query[$i][4];
-        }
+        $pro = $this->Restaurants_model->getInterestingRestaurants('promotion');
         
-        // --------------------- End Top Rate -------------------------
-        
-        // --------------------- Top Promotion -------------------------
-        $data['img'] = $this->Restaurants_model->getTopPromotionRestaurant();
-        
-        
-        // --------------------- End Top Promotion -------------------------
-        
-        
-        
+        // prepare data to view
+        $data['rate'] = $rate;
+        $data['pro'] = $pro;
         
         // return to view
         $data['content'] = 'site/home/index/index.phtml';

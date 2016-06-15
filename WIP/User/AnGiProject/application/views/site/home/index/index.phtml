@@ -1,4 +1,4 @@
-<div class="container">
+﻿<div class="container">
     <div class="row">
 
         <div class="topdisplay-item">
@@ -19,14 +19,14 @@
 
             <ul class="item-content">
                 <?php
-                for ($i = 0; $i < 4; $i++) {
+                foreach($rate as $row) {
                     ?>
                     <li class="col-md-3">
                         <a style="display: block; position: relative" class="img-item" href="">
-                            <img src="<?php echo ${'image' . $i}; ?>">
+                            <img src="<?php echo $row['addressImage'] ?>">
                             <div class="item-infor">
-                                <label class="item-name"><?php echo ${'restName' . $i}; ?></label>
-                                <span class="rate-star"><?php echo ${'rate' . $i} ?><!-- fill in the star by rate value -->
+                                <label class="item-name"><?php echo $row['nameRe']; ?></label>
+                                <span class="rate-star"><?php echo $row['average'] ?><!-- fill in the star by rate value -->
                                     <i class="fa fa-star filled" aria-hidden="true"></i>
                                     <i class="fa fa-star filled" aria-hidden="true"></i>
                                     <i class="fa fa-star filled" aria-hidden="true"></i>
@@ -40,7 +40,7 @@
                                     <i class="fa fa-dollar" aria-hidden="true"></i>
                                     <i class="fa fa-dollar" aria-hidden="true"></i>
                                 </span>
-                                <label class="item-address"><?php echo ${'address' . $i} ?></label>
+                                <label class="item-address"><?php echo $row['address'] ?></label>
                             </div>
                         </a>
 
@@ -75,16 +75,14 @@
 
             <ul class="item-content">
                 <?php
-                for ($i = 0; $i < 8; $i++) {
+                foreach($pro as $row) {
                     ?>
                     <li class="col-md-3">
                         <a style="display: block; position: relative" class="img-item" href="">
-                            <img src="<?php foreach ($img as $row) {
-                                            echo $row->addressImage;
-                } ?>">
+                            <img src="<?php echo $row['addressImage']; ?>">
                             <div class="item-infor">
-                                <label class="item-name">Ao quán</label>
-                                <span class="rate-star">
+                                <label class="item-name"><?php echo $row['shortDesRes']; ?></label>
+                                <span class="rate-star"><?php echo $row['average']; ?>
                                     <i class="fa fa-star filled" aria-hidden="true"></i>
                                     <i class="fa fa-star filled" aria-hidden="true"></i>
                                     <i class="fa fa-star filled" aria-hidden="true"></i>
@@ -98,7 +96,7 @@
                                     <i class="fa fa-dollar" aria-hidden="true"></i>
                                     <i class="fa fa-dollar" aria-hidden="true"></i>
                                 </span>
-                                <label class="item-address">18 Ngõ 19 Đông Tác, Quận Đống Đa</label>
+                                <label class="item-address"><?php echo $row['address']; ?></label>
                             </div>
                         </a>
 
