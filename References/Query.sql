@@ -5,7 +5,7 @@ INSERT INTO images(nameImage, addressImage) VALUES("dish", "http://cdn.pasgo.vn/
 INSERT INTO images(nameImage, addressImage) VALUES("topPro", "http://cdn.pasgo.vn/anh-diem-den/nha-hang-nam-son-809-giai-phong-anh-vuong-4219.jpg");
 
 
-INSERT INTO address(address, provinceID, districtID, wardID) VALUES("18 Ngõ 19 Đông Tác, Quận Đống Đa", '01', '001', '00001');
+INSERT INTO address(address, provinceID, districtID, wardID) VALUES("", '01', '001', '00001');
 
 INSERT INTO users(firstnameUser, lastNameUser, imageID, addressID) VALUES("John", "Stunt", 1, 1);
 
