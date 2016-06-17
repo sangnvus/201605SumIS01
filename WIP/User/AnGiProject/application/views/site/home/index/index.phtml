@@ -1,4 +1,4 @@
-﻿<div class="container">
+<div class="container">
     <div class="row">
 
         <div class="topdisplay-item">
@@ -19,7 +19,11 @@
 
             <ul class="item-content">
                 <?php
+                $limit = 0;
                 foreach($rate as $row) {
+                    if($limit == $limitRate){
+                        break;
+                    }
                     ?>
                     <li class="col-md-3">
                         <a style="display: block; position: relative" class="img-item" href="">
@@ -45,12 +49,13 @@
                         </a>
 
                         <div style="border: 1px solid #e0e0e0; text-align: center">
-                            <p class="sale-content">Giảm <strong>20%</strong></p>
-                            <p class="quick-description">Gọi món Việt ba miền</p>
+                            <p class="sale-content">Giảm <strong><?php echo $row['discount']; ?>%</strong></p>
+                            <p class="quick-description"><?php echo $row['descriptionRes']; ?></p>
                             <button class="place">Đặt chỗ ngay</button>
                         </div>
                     </li>
                     <?php
+                    $limit++;
                 }
                 ?>
             </ul>
@@ -75,13 +80,17 @@
 
             <ul class="item-content">
                 <?php
-                foreach($pro as $row) {
+                $limit = 0;
+                foreach($discount as $row) {
+                    if($limit == $limitDis){
+                        break;
+                    }
                     ?>
                     <li class="col-md-3">
                         <a style="display: block; position: relative" class="img-item" href="">
                             <img src="<?php echo $row['addressImage']; ?>">
                             <div class="item-infor">
-                                <label class="item-name"><?php echo $row['shortDesRes']; ?></label>
+                                <label class="item-name"><?php echo $row['nameRe']; ?></label>
                                 <span class="rate-star"><?php echo $row['average']; ?>
                                     <i class="fa fa-star filled" aria-hidden="true"></i>
                                     <i class="fa fa-star filled" aria-hidden="true"></i>
@@ -101,12 +110,13 @@
                         </a>
 
                         <div style="border: 1px solid #e0e0e0; text-align: center">
-                            <p class="sale-content">Giảm <strong>20%</strong></p>
-                            <p class="quick-description">Gọi món Việt ba miền</p>
+                            <p class="sale-content">Giảm <strong><?php echo $row['discount']; ?>%</strong></p>
+                            <p class="quick-description"><?php echo $row['descriptionRes']; ?></p>
                             <button class="place">Đặt chỗ ngay</button>
                         </div>
                     </li>
                     <?php
+                    $limit ++;
                 }
                 ?>
             </ul>
