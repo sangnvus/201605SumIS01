@@ -1,22 +1,30 @@
-<div class="restaurant-place shadow-outside">
+﻿<div class="restaurant-place shadow-outside">
     <p>Đặt chỗ trước khi đến</p>
+    <?php echo form_open('booking'); ?>
     <form class="booking-res">
+        <!--get restaurant id from url (hide this field) -->
+        <input type="hidden" name="restaurantID" value="<?php echo $restID; ?>" />
         <p>
-            <input type="number" placeholder="Số người đến" min="1">
+            <input type="number" name="numPeople" placeholder="Số người đến" min="1">
             <i class="fa fa-user" aria-hidden="true"></i>
         </p>
 
         <p>
-            <input placeholder="Ngày" class="textbox-n" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="date">
+            <input placeholder="Ngày" class="textbox-n" type="text" name="dateBooking" onfocus="(this.type = 'date')" onblur="(this.type = 'text')" id="date">
             <i class="fa fa-calendar" aria-hidden="true"></i>
         </p>
-
         <p>
-            <input placeholder="Giờ" class="textbox-n" type="text" onfocus="(this.type='time')" onblur="(this.type='text')" id="date">
-            <i class="fa fa-clock-o" aria-hidden="true"></i>
+            <input placeholder="Comment" type="textArea" name="bcomment">
         </p>
 
-        <button>đặt chỗ ngay</button>
+        <!-- Need db field -->
+<!--        <p>
+            <input placeholder="Giờ" class="textbox-n" type="text" onfocus="(this.type='time')" onblur="(this.type='text')" id="date">
+            <i class="fa fa-clock-o" aria-hidden="true"></i>
+        </p>-->
+
+        <input type="submit" value="đặt chỗ ngay" />
+        <?php echo form_close(); ?>
         <p>(Hoàn toàn không mất phí)</p>
 
         <span>Hoặc</span>
