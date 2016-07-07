@@ -1,0 +1,166 @@
+
+        <div class="container-fluid">
+            <div class="row">
+                <p style="padding:20px;" />
+            </div>
+            <div class="row">  
+                <div class="col-xs-3 col-md-3">
+                    <img src="assets/image/icon-user.png" class="img-circle img-responsive" height="180px" width="180px" alt="avatar" />                    <br />
+                    <div>
+                        <a href="" class="glyphicon glyphicon-user"> Thông tin tài khoàn</a><br /><br />
+                        <a href="view_reservation.html" class="glyphicon glyphicon-time"> Lịch sừ đắt chố</a><br /><br />
+                        <a href="" class="glyphicon glyphicon-off"> Đăng xuất</a><br /><br />
+                    </div>
+                </div>
+                <div class="col-xs-9 col-md-9"> 
+                <?php 
+                $this->load->library('javascript');
+                echo form_open("customer_profile");
+                ?>
+                    <h1>Thông tin tài khoản</h1>
+                     <table class="table table-unbordered">
+                        <tr>
+                            <td>Ngày lập</td>
+                            <td>
+                                <span id="editDate"><input type="text" value=""/></span>
+                                <span id="regDate"><?php echo $userData[0]['dateCreateUser']; ?></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Họ</td>
+                            <td>
+                                <span id="editfname" name="fname"><input type="text" name="fname" value="<?php echo $userData[0]['firstNameUser'];
+                                 ?>"/></span>
+                                <span id="userfname"><?php echo $userData[0]['firstNameUser'];
+                                 ?></span>
+                            </td>
+                            <td><button type="button" class="btn btn-link" id="changefname">Edit</button></td>
+                        </tr>
+                        <tr>
+                            <td>Tên</td>
+                            <td>
+                                <span id="editlname" name="lname"><input type="text" name="lname" value="<?php echo $userData[0]['lastNameUser'];
+                                 ?>"/></span>
+                                <span id="userlname"><?php echo $userData[0]['lastNameUser'];
+                                 ?></span>
+                            </td>
+                            <td><button type="button" class="btn btn-link" id="changelname">Edit</button></td>
+                        </tr>
+                         <tr>
+                            <td>Số điện thoại</td>
+                            <td>
+                                <span id="editPhoneNo"><input name="phone" type="text" value="<?php echo $userData[0]['phoneUser']; ?>"/></span>
+                                <span id="phoneNo"><?php echo $userData[0]['phoneUser']; ?></span>
+                            </td>
+                            <td><button type="button" class="btn btn-link" id="changePhoneNo">Edit</button></td>
+                        </tr>
+                        <tr>
+                            <td>Email</td>
+                            <td>
+                                <span id="editEmail"><input type="email" name="email" value="<?php echo $userData[0]['emailUser']; ?>"/></span>
+                                <span id="email" name="oemail"><?php echo $userData[0]['emailUser']; ?></span>
+                            </td>
+                            <td><button type="button" class="btn btn-link" id="changeEmail">Edit</button></td>
+                        </tr>
+                        <tr>
+                            <td>Ngày sinh</td>
+                            <td>
+                                <span id="editDob"><input type="date" name="dob" value="<?php echo $userData[0]['dateOfBirthUser']; ?>" max="2015-01-01" min="1950-01-01"/></span>
+                                <span id="Dob"><?php echo $userData[0]['dateOfBirthUser']; ?></span>
+                            </td>
+                            <td><button type="button" class="btn btn-link" id="changeDob">Edit</button></td>
+                        </tr>
+                        <tr>
+                            <td>Giới tính</td>
+                            <td>
+                                <input type="radio" name="gender" value="1" checked disabled> Male
+                                <input type="radio" name="gender" value="0" disabled> Female
+                            </td>
+                            <td><button type="button" class="btn btn-link" id="correctSex">Edit</button></td>
+                        </tr>
+                        <!-- <tr>
+                            <td>Address</td>
+                            <td>
+                                 <span id="editAddr">
+                                 <input type="text" value="<?php echo $addressData[0]['address']; ?>" />
+                                    <div class="form-group">
+                                        <label for="province">Tỉnh thành</label>
+                                        <select name="province" size="1">
+                                            <?php 
+                                                foreach ($province as $key => $row)
+                                                {
+                                                   echo '<option value="' . $row['provinceID'] . '">' .$row['typePro'].' '. $row['namePro'] . '</option>';
+                                                }
+                                            ?>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="district">Quận huyện</label>
+                                        <select name="district" size="1">
+                                            <?php 
+                                                foreach ($district as $key => $row)
+                                                {
+                                                   echo '<option value="' . $row['districtid'] . '">' .$row['typeDis'].' '. $row['nameDis'] . '</option>';
+                                                }
+                                            ?>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="ward">Khu vực</label>
+                                        <select name="ward" size="1">
+                                            <?php 
+                                                foreach ($ward as $key => $row)
+                                                {
+                                                   echo '<option value="' . $row['wardid'] . '">' .$row['typeWard'].' '. $row['nameWard'] . '</option>';
+                                                }
+                                            ?>
+                                        </select>
+                                    </div> 
+                                
+                                </span>
+                                <span id="address"><?php 
+                                echo $addressData[0]['address'] .", ".   
+                                $addressData[0]['typeWard'] ." ". $addressData[0]['nameWard'] .", ".
+                                $addressData[0]['typeDis'] ." ". $addressData[0]['nameDis'] .", ".
+                                $addressData[0]['typePro'] ." ". $addressData[0]['namePro']
+                                ?></span>
+                            </td>
+                            <td><button type="button" class="btn btn-link" id="changeAddr">Edit</button></td>
+                        </tr> -->
+                        <tr>
+                            <td>Password</td>
+                            <td>
+                                <button type="button" class="btn btn-link" id="changePass">Change password</button>
+                                <span id="editPass">
+                                    <input type="password" value="********" />
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Description</td>
+                            <td>
+                                <span id="editDes"><input type="textarea" name="des" value="<?php echo $userData[0]['descriptionUser']; ?>" /></span>
+                                <span id="description"><?php echo $userData[0]['descriptionUser']; ?></span>
+                            ̉</td>
+                            <td><button type="button" class="btn btn-link" id="changeDes">Edit</button></td>
+                        </tr>
+                    </table>
+                    
+                    <button name="submit" type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </div> <!-- close row -->
+        </div>
+        <?php echo form_close(); ?>
+        <?php echo $this->session->flashdata('msg'); ?>
+
+            <!-- Jquery -->
+    <script src="js/profile.js"></script>
+    </body>
+</html>
+
+
+
+
+
