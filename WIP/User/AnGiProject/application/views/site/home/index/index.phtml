@@ -20,8 +20,8 @@
             <ul class="item-content">
                 <?php
                 $limit = 0;
-                foreach($rate as $row) {
-                    if($limit == $limitRate){
+                foreach ($rate as $row) {
+                    if ($limit == $limitRate) {
                         break;
                     }
                     ?>
@@ -47,11 +47,12 @@
                                 <label class="item-address"><?php echo $row['address'] ?></label>
                             </div>
                         </a>
-
                         <div style="border: 1px solid #e0e0e0; text-align: center">
                             <p class="sale-content">Giảm <strong><?php echo $row['discount']; ?>%</strong></p>
                             <p class="quick-description"><?php echo $row['descriptionRes']; ?></p>
-                            <button class="place">Đặt chỗ ngay</button>
+                            <?php echo form_open('booking/reserve/' . $row["restaurantID"]); ?>
+                            <input type="submit" class="place" value="Đặt chỗ ngay" />
+                            <?php echo form_close(); ?> 
                         </div>
                     </li>
                     <?php
@@ -81,8 +82,8 @@
             <ul class="item-content">
                 <?php
                 $limit = 0;
-                foreach($discount as $row) {
-                    if($limit == $limitDis){
+                foreach ($discount as $row) {
+                    if ($limit == $limitDis) {
                         break;
                     }
                     ?>
@@ -112,7 +113,9 @@
                         <div style="border: 1px solid #e0e0e0; text-align: center">
                             <p class="sale-content">Giảm <strong><?php echo $row['discount']; ?>%</strong></p>
                             <p class="quick-description"><?php echo $row['descriptionRes']; ?></p>
-                            <button class="place">Đặt chỗ ngay</button>
+                            <?php echo form_open('booking/reserve/' . $row["restaurantID"]); ?>
+                            <input type="submit" class="place" value="Đặt chỗ ngay" />
+                            <?php echo form_close(); ?> 
                         </div>
                     </li>
                     <?php
@@ -165,6 +168,5 @@
                 ?>
             </ul>
         </div>
-
     </div>
 </div>
