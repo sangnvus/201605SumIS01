@@ -70,14 +70,36 @@
                             </td>
                             <td><button type="button" class="btn btn-link" id="changeDob">Edit</button></td>
                         </tr>
+                        
                         <tr>
-                            <td>Giới tính</td>
+                            <td>Giới tÍnh</td>
                             <td>
-                                <input type="radio" name="gender" value="1" checked disabled> Male
-                                <input type="radio" name="gender" value="0" disabled> Female
+                        <?php if ($userData[0]['genderUser'] == 1)
+                        {
+                            ?>
+                           
+                                <input type="radio" name="gender" value="1" checked disabled> Nam
+                                <input type="radio" name="gender" value="0" disabled> Nữ
+                            
+                        <?php
+                        }
+                         ?>
+
+                         <?php if ($userData[0]['genderUser'] == 0)
+                        {
+                            ?>
+                           
+                                <input type="radio" name="gender" value="1" disabled> Nam
+                                <input type="radio" name="gender" value="0" checked disabled> Nữ
+                            
+                        <?php
+                        }
+                         ?>
+
                             </td>
                             <td><button type="button" class="btn btn-link" id="correctSex">Edit</button></td>
                         </tr>
+
                         <!-- <tr>
                             <td>Address</td>
                             <td>
@@ -137,14 +159,6 @@
                                     <input type="password" value="********" />
                                 </span>
                             </td>
-                        </tr>
-                        <tr>
-                            <td>Description</td>
-                            <td>
-                                <span id="editDes"><input type="textarea" name="des" value="<?php echo $userData[0]['descriptionUser']; ?>" /></span>
-                                <span id="description"><?php echo $userData[0]['descriptionUser']; ?></span>
-                            ̉</td>
-                            <td><button type="button" class="btn btn-link" id="changeDes">Edit</button></td>
                         </tr>
                     </table>
                     

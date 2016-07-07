@@ -17,7 +17,7 @@ class Customer_profile extends CI_Controller{
 
 
     function profile(){
-        $ID =  3;
+        $ID =  2;
         $data['content'] = 'site/user/profile/customer_profile.phtml';
         $userData = $this->User_model->getUser($ID);
         $data['userData'] = $userData;
@@ -35,11 +35,11 @@ class Customer_profile extends CI_Controller{
                 'lastNameUser' => $this->input->post('lname'),
                 'dateOfBirthUser' => $this->input->post('dob'),
                 'genderUser' => $this->input->post('gender'),
-                'descriptionUser' => $this->input->post('des'),
                 'emailUser' => $this->input->post('email'),
                 'phoneUser' => $this->input->post('phone')
             );
-            print_r($data);
+
+            echo($this->input->post('gender'));
 
             if ($this->User_model->updateUser($ID,$data))
             {

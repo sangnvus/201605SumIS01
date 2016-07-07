@@ -54,7 +54,7 @@
     // gender
     $(document).ready(function(){
             $('#correctSex').click(function(){
-            $('input[name=sex]').removeAttr('disabled');
+            $('input[name=gender]').removeAttr('disabled');
         });
     });
 
@@ -76,11 +76,3 @@
         });
     });
 
-    // description
-    $(document).ready(function(){
-            $('#editDes').hide();
-            $('#changeDes').click(function(){
-            $('#description').hide();
-            $('#editDes').show();
-        });
-    });
