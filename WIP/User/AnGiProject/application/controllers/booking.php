@@ -6,7 +6,7 @@ class Booking extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->helper('url', 'form');
+        $this->load->helper(array('url', 'form'));
         $this->load->database();
         $this->load->model('Booking_model');
         $this->load->model('Restaurants_model');
