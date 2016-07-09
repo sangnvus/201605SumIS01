@@ -1,21 +1,5 @@
 -- Sample data used in Home index page 
 
-<<<<<<< HEAD
-INSERT INTO images(nameImage, addressImage) VALUES("profile", "http://cdn.pasgo.vn/anh-diem-den/nha-hang-ao-quan-ngo-19-dong-tac-avatarjpg-5138.jpg");
-INSERT INTO images(nameImage, addressImage) VALUES("dish", "http://cdn.pasgo.vn/anh-diem-den/nha-hang-chen-doan-tran-nghiep-lau-nuong-anh-vuong2-3511.jpg");
-INSERT INTO images(nameImage, addressImage) VALUES("topPro", "http://cdn.pasgo.vn/anh-diem-den/nha-hang-nam-son-809-giai-phong-anh-vuong-4219.jpg");
-
-
-INSERT INTO address(address, provinceID, districtID, wardID) VALUES('', '', '', '');
-
-INSERT INTO users(firstnameUser, lastNameUser, imageID, addressID) VALUES("John", "Stunt", 1, null);
-
-INSERT INTO restaurants(nameRe, addressID, userID) VALUES("Mojo BBQ", 1, 1);
-INSERT INTO restaurants(nameRe, addressID, userID) VALUES("Buffet Restaurant", 1, 1);
-INSERT INTO restaurants(nameRe, addressID, userID) VALUES("A Rest", 1, 1);
-INSERT INTO restaurants(nameRe, addressID, userID) VALUES("B Rest", 1, 1);
-
-=======
 -- Image table
 INSERT INTO images(nameImage, addressImage) VALUES("img A", "http://cdn.pasgo.vn/anh-diem-den/nha-hang-ao-quan-ngo-19-dong-tac-avatarjpg-5138.jpg");
 INSERT INTO images(nameImage, addressImage) VALUES("img B", "http://cdn.pasgo.vn/anh-diem-den/nha-hang-chen-doan-tran-nghiep-lau-nuong-anh-vuong2-3511.jpg");
@@ -50,7 +34,6 @@ INSERT INTO food(nameFo, restaurantID, imageID) VALUES('Menu C ', 3, 3);
 INSERT INTO food(nameFo, restaurantID, imageID) VALUES('Menu D', 4, 4);
 
 -- Rate Table
->>>>>>> 7a552301b9e4e526817ebb43c9dda64ea95fee79
 INSERT INTO rate(rateValue, restaurantID, userID) VALUES(4, 1, 1);
 INSERT INTO rate(rateValue, restaurantID, userID) VALUES(5, 2, 1);
 
