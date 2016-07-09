@@ -1,0 +1,148 @@
+.profile-stt{
+    border: 1px solid #d4d4d4;
+    display: table;
+    width: 100%;
+    margin-top: 25px;
+}
+.profile-stt img{
+    width: 80px;
+    height: 80px;
+    margin: 10px;
+    background-color: transparent;
+    border: 1px solid #f2f2f2;
+    border-radius: 40px;
+}
+.profile-stt p{
+    float: left;
+    width: 100%;
+    color: gray;
+    font-size: 13px;
+}
+.profile-stt p strong{
+    color: #5c5c5c;
+}
+.profile-stt button{
+    float: left;
+    color: #fff;
+    background-color: #357ebd;
+    border-color: #357ebd;
+    font-size: 13px;
+    padding: 2px 5px;
+    width: 100%;
+    border-radius: 4px;
+}
+
+.profile-sidebar{
+    margin-bottom: 80px;
+}
+
+.profile-sidebar li i{
+    font-size: 20px;
+    position: relative;
+    bottom: -2px;
+    width: 20%;
+}
+
+.profile-sidebar>li{
+    padding-left: 17px;
+    line-height: 40px;
+    border: 1px solid #d4d4d4;
+    border-top: none !important;
+    position: relative;
+}
+.profile-sidebar>li:hover{
+    background: #d6d6d6;
+}
+.profile-sidebar>li.active, .profile-sidebar>li:hover, .profile-sidebar>li:hover>a{color: #C00}
+.profile-sidebar>li, .profile-sidebar>li>a{color: #5c5c5c}
+
+.edit-user{margin: 80px 0}
+.edit-user input[type="text"], .edit-user input[type="email"], .edit-user input[type="date"], .edit-user input[type="password"]{
+    border-radius: 4px;
+    width: 50%;
+}
+.edit-user input[type="submit"], .upload-banner input[type="submit"]{
+    border-radius: 4px;
+    background: #D02028;
+    color: #fff;
+    width: initial;
+}
+.edit-user label{width: 25%}
+.edit-user li{margin-top: 25px}
+
+.upload-banner>a{
+    display: block;
+    width: 100%;
+    text-align: center;
+    font-size: 20px;
+    border: 1px solid #d4d4d4;
+    padding: 40px 0;
+}
+.upload-banner{
+    margin-top: 40px;
+    text-align: center;
+}
+.upload-banner>a:hover{
+    color: #C00;
+}
+.upload-banner>a>i{
+    display: block;
+    font-size: 40px;
+}
+.upload-banner>input{
+    border-top: none;
+    width: 100%;
+}
+
+.booking-img{
+    position: relative;
+}
+.booking-img>img{
+    width: 150px;
+    float: left;
+}
+.booking-img>p{
+    position: absolute;
+    z-index: 101;
+    background-color: #c50822;
+    color: #fff;
+    font-weight: 700;
+    padding: 3px 10px;
+    font-size: 14px;
+}
+
+.history-booking{margin: 40px 0}
+.history-booking li{
+    margin-top: 40px;
+    display: table;
+    width: 100%;
+    border: 1px solid #d7d7d7;
+}
+.booking-restaurant-infor{
+    margin-left: 15px;
+    float: left;
+    padding-top: 5px;
+}
+.booking-restaurant-infor>a{
+    width: 100%;
+    font-size: 16px;
+    font-weight: 700;
+    margin-top: 5px;
+    color: #636363;
+}
+.booking-restaurant-infor>p{
+    color: #5e5e5e;
+}
+
+.booking-infor{
+    float: right;
+    margin-right: 15px;
+    text-align: right;
+    padding-top: 30px;
+}
+.booking-infor button{
+    border: none;
+    color: #fff;
+    background: #D02028;
+    border-radius: 3px;
+}

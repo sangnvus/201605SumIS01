@@ -1,0 +1,89 @@
+<link rel="stylesheet" href="<?php echo base_url()?>css/user.css">
+
+<div class="container">
+    <div class="row">
+        <div class="breadcrumb"></div>
+
+        <div class="col-md-3">
+            <table class="profile-stt">
+                <tr>
+                    <td><img src="http://cdn.pasgo.vn/images/Profile/no_avatar.png"></td>
+                    <td>
+                        <p>ID ĂnGì: <strong><?php echo $userData[0]['userID']; ?></strong></p>
+                        <p>ĐT: <strong><?php echo $userData[0]['phoneUser']; ?></strong></p>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="padding: 0 8px 20px"><button>Chọn ảnh</button></td>
+                    <td></td>
+                </tr>
+            </table>
+            <ul class="profile-sidebar">
+                <li class="active"><i class="fa fa-user" aria-hidden="true"></i> Thông tin tài khoản</li>
+                <li><a href="<?php echo base_url(); ?>user_profile/restaurant_banner"><i class="fa fa-picture-o" aria-hidden="true"></i> Banner nhà hàng</a></li>
+                <li><a href="<?php echo base_url(); ?>user_profile/restaurant_infor"><i class="fa fa-wpforms" aria-hidden="true"></i> Thông tin nhà hàng</a></li>
+                <li><a href="<?php echo base_url(); ?>user_profile/restaurant_price"><i class="fa fa-usd" aria-hidden="true"></i> Bảng giá</a></li>
+                <li><a href="<?php echo base_url(); ?>booking/restaurant_manage_booking"><i class="fa fa-cogs" aria-hidden="true"></i> Quản lý đặt chỗ</a></li>
+                <li><a href="<?php echo base_url(); ?>user_profile/change_Password"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Đổi mật khẩu</a></li>
+                <li><a href="<?php echo base_url(); ?>booking/user_booking_history"><i class="fa fa-cutlery" aria-hidden="true"></i> Lịch sử đặt chỗ</a></li>
+                <li><a><i class="fa fa-power-off" aria-hidden="true"></i> Thoát</a></li>
+            </ul>
+        </div>
+
+        <div class="col-md-9">
+            <h1>Thông tin nhà hàng</h1>
+            <form class="edit-user" method="post" action="user_profile">
+                <ul>
+                    <li>
+                        <label>Ngày lập:</label> <input type="text" value="<?php echo $userData[0]['dateCreateUser']; ?>" disabled>
+                    </li>
+                    <li>
+                        <label>Họ:</label> <input type="text" name="lname" value="<?php echo $userData[0]['lastNameUser'];
+                ?>">
+                    </li>
+                    <li>
+                        <label>Tên:</label> <input type="text" name="fname" value="<?php echo $userData[0]['firstNameUser'];
+                ?>"">
+                    </li>
+                    <li>
+                        <label>Email:</label> <input type="text" name="email" value="<?php echo $userData[0]['emailUser']; ?>">
+                    </li>
+
+                    <li>
+                        <label>Ngày sinh:</label> <input type="date" name="dob" value="<?php echo $userData[0]['dateOfBirthUser']; ?>" max="2015-01-01" min="1950-01-01"/>
+                    </li>
+                    <li>
+                        <label>Giới tính:</label> 
+                        <?php if ($userData[0]['genderUser'] == 1)
+                        {
+                            ?>
+                           
+                                <input type="radio" name="gender" value="1" checked > Nam
+                                <input style="margin-left: 100px;" type="radio" name="gender" value="0" > Nữ
+                            
+                        <?php
+                        }
+                         ?>
+
+                         <?php if ($userData[0]['genderUser'] == 0)
+                        {
+                            ?>
+                           
+                                <input type="radio" name="gender" value="1" > Nam
+                                <input style="margin-left: 100px;" type="radio" name="gender" value="0" checked > Nữ
+                            
+                        <?php
+                        }
+                         ?>
+                    </li>
+                    <li>
+                        <label></label>
+                        <input type="submit" value="Cập nhật">
+                    </li>
+                </ul>
+            </form>
+            <?php echo $this->session->flashdata('msg'); ?>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,96 @@
+<link rel="stylesheet" href="<?php echo base_url() ?>css/user.css">
+<div class="container">
+    <div class="row">
+        <div class="breadcrumb"></div>
+
+        <div class="col-md-3">
+            <table class="profile-stt">
+                <tr>
+                    <td><img src="http://cdn.pasgo.vn/images/Profile/no_avatar.png"></td>
+                    <td>
+                        <p>ID ĂnGì: <strong>123</strong></p>
+                        <p>ĐT: <strong>01646223394</strong></p>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="padding: 0 8px 20px"><button>Chọn ảnh</button></td>
+                    <td></td>
+                </tr>
+            </table> 
+            <ul class="profile-sidebar">
+                <li><a href="<?php echo base_url() ?>user_profile"><i class="fa fa-user" aria-hidden="true"></i> Thông tin tài khoản</a></li>
+                <li><a href="<?php echo base_url() ?>user_profile/restaurant_banner"><i class="fa fa-picture-o" aria-hidden="true"></i> Banner nhà hàng</a></li>
+                <li><a href="<?php echo base_url() ?>user_profile/restaurant_infor"><i class="fa fa-wpforms" aria-hidden="true"></i> Thông tin nhà hàng</a></li>
+                <li><a href="<?php echo base_url() ?>user_profile/restaurant_price"><i class="fa fa-usd" aria-hidden="true"></i> Bảng giá</a></li>
+                <li class="active"><i class="fa fa-cogs" aria-hidden="true"></i> Quản lý đặt chỗ</li>
+                <li><a href="<?php echo base_url() ?>user_profile/change_Password"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Đổi mật khẩu</a></li>
+                <li><a href="<?php echo base_url() ?>CONTROLLERNAME/ACTION/ID"><i class="fa fa-cutlery" aria-hidden="true"></i> Lịch sử đặt chỗ</a></li>
+                <li><a><i class="fa fa-power-off" aria-hidden="true"></i> Thoát</a></li>
+            </ul>
+        </div>
+
+        <div class="col-md-9">
+            <h1>Lịch sử đặt chỗ</h1>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Ngày đặt chỗ</th>
+                        <th>ID khách hàng</th>
+                        <th>Số điện thoại</th>
+                        <th>Số người</th>
+                        <th>Thời gian</th>
+                        <th>Tình trạng</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    $counter = 0;
+                    foreach ($list as $row) {
+                        echo '<tr>';
+                        echo form_open('Booking/updateBooking/' . $row['bookingID']);
+                        echo '<th>' . $row['dateCreateBo'] . '</th>';
+                        echo '<th>' . $row['userID'] . '</th>';
+                        echo '<th>' . $row['phoneUser'] . '</th>';
+                        echo '<th>' . $row['quantityMember'] . '</th>';
+                        echo '<th><span style="background-color:red;"> NO TIME FIELD IN DB </span>[20:00 | ' . $row['dateBooking'] . '</th>';
+//                        echo '<th>' . $row['statusBo'] . '</th>';
+                        echo '<th><select class="form-control" name="bookingStatus" id="drplist' . $counter . '" size="1">';
+                        echo '<option value="' . $row['statusBo'] . '">' . $row['statusText'] . '</option>';
+                        echo '<option value="' . $row['dropValue1'] . '">' . $row['dropText1'] . '</option>';
+                        echo '<option value="' . $row['dropValue2'] . '">' . $row['dropText2'] . '</option>';
+                        echo '</select></th>';
+                        echo '<th><input type="submit" id="btnSave' . $counter . '" value="Save" disabled></th>';
+                        echo form_close();
+                        echo '</tr>';
+                        $counter ++;
+                    }
+                    ?>
+                </tbody>
+            </table>
+            <div class="statistic-book"></div>
+        </div>
+    </div>
+</div>
+
+<?php for ($i = 0; $i < $counter; $i++) { ?>
+    <script>
+        $("#drplist<?php echo $i ?>").on('change', function () {
+            // if dropdownlist is changed
+            var defaultIndex = $("#drplist<?php echo $i ?>").prop('selectedIndex');
+            if ($(this).val() == $(this).find("option:selected").val()) {
+                if (defaultIndex != 0) {
+                    $("#btnSave<?php echo $i ?>").removeAttr('disabled');
+                    $("#btnSave<?php echo $i ?>").css('color', 'black');
+//                    alert($("#drplist<?php // echo $i ?>").prop('selectedIndex'));
+                } else {
+                    $("#btnSave<?php echo $i ?>").attr('disabled', 'disabled');
+                    $("#btnSave<?php echo $i ?>").css('color', 'white');
+                }
+            }
+        });
+    </script>
+    <?php
+}
+    

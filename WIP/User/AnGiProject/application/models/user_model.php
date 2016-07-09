@@ -12,6 +12,11 @@ class User_model extends CI_Model
 		return $this->db->insert('users', $data);
 	}
 
+	function updateUser($id,$data){
+		$this->db->where('userID', $id);
+		return $this->db->update("users", $data);
+	}
+
 	function insertAddress($data)
     {
 		$this->db->insert('address', $data);
@@ -25,6 +30,28 @@ class User_model extends CI_Model
         $data=$query->result_array();
    		return  $data;
 	}
+
+	function getUser($ID)
+    {
+    	$query = $this->db->get_where('users', array('userID' => $ID));
+        $data=$query->result_array();
+   		return  $data;
+	}
+
+	function getAddress($ID)
+    {
+    	$this->db->select('*');
+        $this->db->from('address a'); 
+        $this->db->join('province p', 'p.provinceID = a.provinceID');
+        $this->db->join('ward w', 'w.wardid = a.wardID');
+        $this->db->join('district d', 'd.districtID = a.districtID');
+        $this->db->where('a.addressID',$ID); 
+        $query = $this->db->get(); 
+        $data=$query->result_array();
+   		return  $data;
+	}
+
+
 
 	
 	

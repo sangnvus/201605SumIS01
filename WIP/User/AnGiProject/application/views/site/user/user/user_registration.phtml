@@ -3,10 +3,12 @@
 
 <body>
 <div class="container">
+<script src="js/register.js"></script>
 <div class="row">
 	<div class="col-md-6 col-md-offset-3">
 		<?php 
-		echo $this->session->flashdata('verify_msg'); ?>
+		$this->load->library('javascript');
+		?>
 	</div>
 </div>
 
@@ -14,11 +16,11 @@
 	<div class="col-md-6 col-md-offset-3">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<h4>User Registration Form</h4>
+				<h4>Đăng ký thành viên</h4>
 			</div>
 			<div class="panel-body">
 				<?php $attributes = array("name" => "registrationform");
-				echo form_open("user_registration/register", $attributes);?>
+				echo form_open("user_registration", $attributes);?>
 				<div class="form-group">
 					<label for="fname">Họ</label>
 					<input class="form-control" name="fname" placeholder="Your First Name" type="text" value="<?php echo set_value('fname'); ?>" />
@@ -26,14 +28,15 @@
 				</div>
 
 				<div class="form-group">
-					<label for="lname">Tên</label>
+					<label for="name">Tên</label>
 					<input class="form-control" name="lname" placeholder="Last Name" type="text" value="<?php echo set_value('lname'); ?>" />
 					<span class="text-danger"><?php echo form_error('lname'); ?></span>
 				</div>
 
 				<div class="form-group">
 					<label for="dob">Ngày sinh</label>
-					<input class="form-control" name="dob"  type="date" value="<?php echo set_value('dob'); ?>" />
+					
+					<input class="form-control" type="date" name="dob" value="<?php echo set_value('dob'); ?>" max="2015-01-01" min="1950-01-01"/> 
 					<span class="text-danger"><?php echo form_error('dob'); ?></span>
 				</div>
 
@@ -44,72 +47,15 @@
 				</div>
 
 				<div class="form-group">
-					<label for="des">Thông tin</label>
-					<textarea class="form-control" name="des" placeholder="Thông tin thêm về bạn" cols="40" rows="5" ><?php echo set_value('des'); ?></textarea>
-					<span class="text-danger"><?php echo form_error('des'); ?></span>
-				</div>
-
-				<div class="form-group">
 					<label for="email">Email</label>
-					<input class="form-control" name="email" placeholder="Email" type="text" value="<?php echo set_value('email'); ?>" />
+					<input class="form-control" name="email" placeholder="Email" type="email" value="<?php echo set_value('email'); ?>" />
 					<span class="text-danger"><?php echo form_error('email'); ?></span>
 				</div>
-				
+
 				<div class="form-group">
 					<label for="phone">Số điện thoại</label>
 					<input class="form-control" name="phone" type="text" value="<?php echo set_value('phone'); ?>" />
 					<span class="text-danger"><?php echo form_error('phone'); ?></span>
-				</div>
-
-				<div class="form-group">
-					<label for="address">Địa chỉ</label>
-					<input class="form-control" name="address" type="text" value="<?php echo set_value('address'); ?>" />
-					<span class="text-danger"><?php echo form_error('address'); ?></span>
-				</div>
-
-
-				<div class="form-group">
-					<label for="province">Tỉnh thành</label>
-				    <select name="province" size="1">
-					    <?php 
-					        foreach ($province as $key => $row)
-					        {
-					           echo '<option value="' . $row['provinceID'] . '">' .$row['typePro'].' '. $row['namePro'] . '</option>';
-					        }
-				        ?>
-					</select>
-				</div>
-
-				<div class="form-group">
-					<label for="district">Quận huyện</label>
-				    <select name="district" size="1">
-					    <?php 
-						
-					        foreach ($district as $key => $row)
-					        {
-					           echo '<option value="' . $row['districtid'] . '">' .$row['typeDis'].' '. $row['nameDis'] . '</option>';
-					        }
-				        ?>
-					</select>
-				</div>
-
-				<div class="form-group">
-					<label for="ward">Khu vực</label>
-				    <select name="ward" size="1">
-					    <?php 
-					        foreach ($ward as $key => $row)
-					        {
-					           echo '<option value="' . $row['wardid'] . '">' .$row['typeWard'].' '. $row['nameWard'] . '</option>';
-					        }
-				        ?>
-					</select>
-				</div>
-
-
-				<div class="form-group">
-					<label for="autho">Loại tài khoản </label>
-					<input type="radio" name="autho" value="1" checked > Thực khách
-                    <input type="radio" name="autho" value="2"> Chủ nhà hàng
 				</div>
 
 				<div class="form-group">
@@ -124,6 +70,57 @@
 					<span class="text-danger"><?php echo form_error('cpassword'); ?></span>
 				</div>
 
+				<div class="form-group">
+					<label for="autho">Loại tài khoản </label>
+					<input type="radio" name="autho" value="1" checked> Thực khách
+					<input type="radio" name="autho" value="2" > Chủ nhà hàng
+					
+                    
+				</div>
+
+				<div id="myAddress" style="display: none">
+					<div class="form-group" >
+					<label for="address">Địa chỉ</label>
+					<input class="form-control" name="address" type="text" value="<?php echo set_value('address'); ?>" />
+					<span class="text-danger"><?php echo form_error('address'); ?></span>
+					</div>
+
+					<div class="form-group">
+						<label for="province">Tỉnh thành</label>
+					    <select class="form-control" name="province" size="1">
+						    <?php 
+						        foreach ($province as $key => $row)
+						        {
+						           echo '<option value="' . $row['provinceID'] . '">' .$row['typePro'].' '. $row['namePro'] . '</option>';
+						        }
+					        ?>
+						</select>
+					</div>
+
+					<div class="form-group">
+						<label for="district">Quận huyện</label>
+					    <select class="form-control" name="district" size="1">
+						    <?php 
+						        foreach ($district as $key => $row)
+						        {
+						           echo '<option value="' . $row['districtid'] . '">' .$row['typeDis'].' '. $row['nameDis'] . '</option>';
+						        }
+					        ?>
+						</select>
+					</div>
+
+					<div class="form-group">
+						<label for="ward">Khu vực</label>
+					    <select class="form-control" name="ward" size="1">
+						    <?php 
+						        foreach ($ward as $key => $row)
+						        {
+						           echo '<option value="' . $row['wardid'] . '">' .$row['typeWard'].' '. $row['nameWard'] . '</option>';
+						        }
+					        ?>
+						</select>
+					</div>
+				</div>
 				<div class="form-group">
 					<button name="submit" type="submit" class="btn btn-default">Đăng ký</button>
 					<button name="cancel" type="reset" class="btn btn-default">Hủy bỏ</button>

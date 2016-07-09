@@ -40,43 +40,61 @@ class User_registration extends CI_Controller
         }
 		else
 		{
-			//insert the user registration details into database
-			$address = array(
-					'address'=> $this->input->post('address'),
-					'provinceid' => $this->input->post('province'),
-					'districtid' => $this->input->post('district'),
-					'wardid' => $this->input->post('ward'),
-			);
+		//		insert the user registration details into database
+				$address = array(
+						'address'=> $this->input->post('address'),
+						'provinceid' => $this->input->post('province'),
+						'districtid' => $this->input->post('district'),
+						'wardid' => $this->input->post('ward'),
+				);
 
 
+				if($this->input->post('autho') == 1){
+					$data = array(
+						'firstNameUser' => $this->input->post('fname'),
+						'lastNameUser' => $this->input->post('lname'),
+						'dateOfBirthUser' => $this->input->post('dob'),
+						'genderUser' => $this->input->post('gender'),
+						'descriptionUser' => $this->input->post('des'),
+						'emailUser' => $this->input->post('email'),
+						'phoneUser' => $this->input->post('phone'),
+						'authorityUser' => $this->input->post('autho'),
+						'passwordUser' => $this->input->post('password'),
+						'dateCreateUser' => date('Y-m-d H:i:s'),
+						'imageID'=> 1,
+						// 'addressID'=> $this->User_model->insertAddress($address)
+					);
+				}
+				else{
+					$data = array(
+						'firstNameUser' => $this->input->post('fname'),
+						'lastNameUser' => $this->input->post('lname'),
+						'dateOfBirthUser' => $this->input->post('dob'),
+						'genderUser' => $this->input->post('gender'),
+						'descriptionUser' => $this->input->post('des'),
+						'emailUser' => $this->input->post('email'),
+						'phoneUser' => $this->input->post('phone'),
+						'authorityUser' => $this->input->post('autho'),
+						'passwordUser' => $this->input->post('password'),
+						'dateCreateUser' => date('Y-m-d H:i:s'),
+						'imageID'=> 1,
+					    'addressID'=> $this->User_model->insertAddress($address)
+					);
 
-			$data = array(
-				'firstNameUser' => $this->input->post('fname'),
-				'lastNameUser' => $this->input->post('lname'),
-				'dateOfBirthUser' => $this->input->post('dob'),
-				'genderUser' => $this->input->post('gender'),
-				'descriptionUser' => $this->input->post('des'),
-				'emailUser' => $this->input->post('email'),
-				'phoneUser' => $this->input->post('phone'),
-				'authorityUser' => $this->input->post('autho'),
-				'passwordUser' => $this->input->post('password'),
-				'dateCreateUser' => date('Y-m-d H:i:s'),
-				'imageID'=> 1,
-				'addressID'=> $this->User_model->insertAddress($address)
-			);
-			
-			// insert form data into database
-			if ($this->User_model->insertUser($data))
-			{
-					$this->session->set_flashdata('msg','<div class="alert alert-success text-center">You are Successfully Registered !!</div>');
-					redirect('user_registration/register');
-			}
-			else
-			{
-				// error
-				$this->session->set_flashdata('msg','<div class="alert alert-danger text-center">Oops! Error insert.  Please try again later!!!</div>');
-				redirect('user_registration/register');
-			}
+				}
+				
+				// insert form data into database
+				if ($this->User_model->insertUser($data))
+				{
+						$this->session->set_flashdata('msg','<div class="alert alert-success text-center">Đăng ký thành công !!</div>');
+						redirect('user_registration');
+				}
+				else
+				{
+					// error
+					$this->session->set_flashdata('msg','<div class="alert alert-danger text-center">Đăng ký thất bại, kiểm tra thông tin!!!</div>');
+					redirect('user_registration');
+				}
 		}
 	}
 	
