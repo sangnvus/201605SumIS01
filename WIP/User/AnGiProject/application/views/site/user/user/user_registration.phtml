@@ -59,13 +59,26 @@
 				</div>
 
 				<div class="form-group">
+					<label for="subject">Mật khẩu</label>
+					<input class="form-control" name="password" placeholder="Mật khẩu" type="password" />
+					<span class="text-danger"><?php echo form_error('password'); ?></span>
+				</div>
+
+				<div class="form-group">
+					<label for="subject">Xác nhận mật khẩu</label>
+					<input class="form-control" name="cpassword" placeholder="Đánh lại mật khẩu ở trên" type="password" />
+					<span class="text-danger"><?php echo form_error('cpassword'); ?></span>
+				</div>
+
+				<div class="form-group">
 					<label for="autho">Loại tài khoản </label>
-					<input type="radio" name="autho" value="2" checked> Chủ nhà hàng
-					<input type="radio" name="autho" value="1" > Thực khách
+					<input type="radio" name="autho" value="1" checked> Thực khách
+					<input type="radio" name="autho" value="2" > Chủ nhà hàng
+					
                     
 				</div>
 
-				<div id="myAddress">
+				<div id="myAddress" style="display: none">
 					<div class="form-group" >
 					<label for="address">Địa chỉ</label>
 					<input class="form-control" name="address" type="text" value="<?php echo set_value('address'); ?>" />
@@ -108,19 +121,6 @@
 						</select>
 					</div>
 				</div>
-
-				<div class="form-group">
-					<label for="subject">Mật khẩu</label>
-					<input class="form-control" name="password" placeholder="Mật khẩu" type="password" />
-					<span class="text-danger"><?php echo form_error('password'); ?></span>
-				</div>
-
-				<div class="form-group">
-					<label for="subject">Xác nhận mật khẩu</label>
-					<input class="form-control" name="cpassword" placeholder="Đánh lại mật khẩu ở trên" type="password" />
-					<span class="text-danger"><?php echo form_error('cpassword'); ?></span>
-				</div>
-
 				<div class="form-group">
 					<button name="submit" type="submit" class="btn btn-default">Đăng ký</button>
 					<button name="cancel" type="reset" class="btn btn-default">Hủy bỏ</button>

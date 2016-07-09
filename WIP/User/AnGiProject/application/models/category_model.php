@@ -35,7 +35,7 @@ class Category_model extends CI_Model
         $this->db->select_avg('rateValue','overall');
         $this->db->from('rate');
         $this->db->where('restaurantID', $restaurantID);
-        $data = $this->db->get();
+        $data = $this->db->get()->row();
         return  $data;
     }
 	function getDistrict($table)

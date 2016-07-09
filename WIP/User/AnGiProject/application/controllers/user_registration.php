@@ -49,22 +49,39 @@ class User_registration extends CI_Controller
 				);
 
 
+				if($this->input->post('autho') == 1){
+					$data = array(
+						'firstNameUser' => $this->input->post('fname'),
+						'lastNameUser' => $this->input->post('lname'),
+						'dateOfBirthUser' => $this->input->post('dob'),
+						'genderUser' => $this->input->post('gender'),
+						'descriptionUser' => $this->input->post('des'),
+						'emailUser' => $this->input->post('email'),
+						'phoneUser' => $this->input->post('phone'),
+						'authorityUser' => $this->input->post('autho'),
+						'passwordUser' => $this->input->post('password'),
+						'dateCreateUser' => date('Y-m-d H:i:s'),
+						'imageID'=> 1,
+						// 'addressID'=> $this->User_model->insertAddress($address)
+					);
+				}
+				else{
+					$data = array(
+						'firstNameUser' => $this->input->post('fname'),
+						'lastNameUser' => $this->input->post('lname'),
+						'dateOfBirthUser' => $this->input->post('dob'),
+						'genderUser' => $this->input->post('gender'),
+						'descriptionUser' => $this->input->post('des'),
+						'emailUser' => $this->input->post('email'),
+						'phoneUser' => $this->input->post('phone'),
+						'authorityUser' => $this->input->post('autho'),
+						'passwordUser' => $this->input->post('password'),
+						'dateCreateUser' => date('Y-m-d H:i:s'),
+						'imageID'=> 1,
+					    'addressID'=> $this->User_model->insertAddress($address)
+					);
 
-				$data = array(
-					'firstNameUser' => $this->input->post('fname'),
-					'lastNameUser' => $this->input->post('lname'),
-					'dateOfBirthUser' => $this->input->post('dob'),
-					'genderUser' => $this->input->post('gender'),
-					'descriptionUser' => $this->input->post('des'),
-					'emailUser' => $this->input->post('email'),
-					'phoneUser' => $this->input->post('phone'),
-					'authorityUser' => $this->input->post('autho'),
-					'passwordUser' => $this->input->post('password'),
-					'dateCreateUser' => date('Y-m-d H:i:s'),
-					'imageID'=> 1,
-					
-					// 'addressID'=> $this->User_model->insertAddress($address)
-				);
+				}
 				
 				// insert form data into database
 				if ($this->User_model->insertUser($data))
