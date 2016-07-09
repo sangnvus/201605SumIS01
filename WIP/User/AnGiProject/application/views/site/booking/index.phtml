@@ -1,9 +1,6 @@
 ﻿<div class="restaurant-place shadow-outside">
     <p>Đặt chỗ trước khi đến</p>
-    <?php
-    $tempUserID = 2;
-    echo form_open('booking/makeReservation/' . $tempUserID);
-    ?>
+    <?php echo form_open('booking'); ?>
     <form class="booking-res">
         <!--get restaurant id from url (hide this field) -->
         <input type="hidden" name="restaurantID" value="<?php echo $restID; ?>" />
