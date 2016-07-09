@@ -5,9 +5,9 @@ INSERT INTO images(nameImage, addressImage) VALUES("dish", "http://cdn.pasgo.vn/
 INSERT INTO images(nameImage, addressImage) VALUES("topPro", "http://cdn.pasgo.vn/anh-diem-den/nha-hang-nam-son-809-giai-phong-anh-vuong-4219.jpg");
 
 
-INSERT INTO address(address, provinceID, districtID, wardID) VALUES("", '01', '001', '00001');
+INSERT INTO address(address, provinceID, districtID, wardID) VALUES('', '', '', '');
 
-INSERT INTO users(firstnameUser, lastNameUser, imageID, addressID) VALUES("John", "Stunt", 1, 1);
+INSERT INTO users(firstnameUser, lastNameUser, imageID, addressID) VALUES("John", "Stunt", 1, null);
 
 INSERT INTO restaurants(nameRe, addressID, userID) VALUES("Mojo BBQ", 1, 1);
 INSERT INTO restaurants(nameRe, addressID, userID) VALUES("Buffet Restaurant", 1, 1);
