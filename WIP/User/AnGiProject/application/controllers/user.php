@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allow');
 
 class User extends CI_Controller {
 
-    public function __construct() {
+     function __construct() {
         parent::__construct();
         $this->load->helper(array('form', 'url', 'date'));
         $this->load->library(array('session', 'form_validation', 'email'));
@@ -12,10 +12,10 @@ class User extends CI_Controller {
         $this->load->model('User_model');
     }
 
-    public function index() {
+     function index() {
         $ID = 2;
         $data = array();
-        $data['content'] = 'site/user/index.phtml';
+        $data['content'] = 'site/user/profile/index.phtml';
         $userData = $this->User_model->getUser($ID);
         $data['userData'] = $userData;
         $this->load->view('site/layout/layout.phtml', $data);
@@ -39,18 +39,18 @@ class User extends CI_Controller {
 
             if ($this->User_model->updateUser($ID, $data)) {
                 $this->session->set_flashdata('msg', '<div class="alert alert-success text-center">Thành công !!</div>');
-                redirect('user_profile');
+                redirect('user');
             } else {
                 // error
                 $this->session->set_flashdata('msg', '<div class="alert alert-danger text-center">Thất bại, kiểm tra thông tin!!!</div>');
-                redirect('user_profile');
+                redirect('user');
             }
         }
     }
 
-    public function change_Password() {
+     function change_Password() {
         $data = array();
-        $data['content'] = 'site/user/changePassword.phtml';
+        $data['content'] = 'site/user/profile/changePassword.phtml';
         $this->load->view('site/layout/layout.phtml', $data);
     }
 
@@ -67,7 +67,7 @@ class User extends CI_Controller {
         if ($this->form_validation->run() == FALSE) {
             // fails
 
-            $data ['content'] = 'site/user/user_registration.phtml';
+            $data ['content'] = 'site/user/user/user_registration.phtml';
             $data ['ward'] = $this->User_model->getData('ward');
             $data ['district'] = $this->User_model->getData('district');
             $data ['province'] = $this->User_model->getData('province');
