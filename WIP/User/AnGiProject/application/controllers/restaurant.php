@@ -1,7 +1,6 @@
 <?php
 
-if (!defined('BASEPATH'))
-    exit('No direct script access allowed');
+defined('BASEPATH') OR exit('No direct script access allow');
 
 class Restaurant extends CI_Controller {
 
@@ -9,6 +8,7 @@ class Restaurant extends CI_Controller {
         parent::__construct();
         $this->load->helper(array('url', 'form'));
         $this->load->library('session');
+        $this->load->model('Image_model');
     }
 
     public function index() {
@@ -28,23 +28,31 @@ class Restaurant extends CI_Controller {
         $data['content'] = 'site/restaurant/view.phtml';
         $this->load->view('site/layout/layout.phtml', $data);
     }
-    
-    public function Restaurant_Banner() {
-        $data = array();
-        $data['content'] = 'site/restaurant/Rbanner.phtml';
-        $this->load->view('site/layout/layout.phtml', $data);
+
+    public function Restaurant_Banner($restID = 2) {
+        $banner = $this->Image_model->getRestImage($restID);
+        $test = $this->Image_model->getBanner($restID);
+        if ($banner) {
+            $data = array();
+            $data['banner'] = $banner;
+            $data['test'] = $test;
+            
+            $data['content'] = 'site/user/restaurant_owner/Rbanner.phtml';
+            $this->load->view('site/layout/layout.phtml', $data);
+        } else {
+            echo 'No images in database!';
+        }
     }
 
     public function Restaurant_infor() {
         $data = array();
-        $data['content'] = 'site/restaurant/Rinfor.phtml';
+        $data['content'] = 'site/user/restaurant_owner/Rinfor.phtml';
         $this->load->view('site/layout/layout.phtml', $data);
     }
 
     public function Restaurant_price() {
         $data = array();
-        $data['content'] = 'site/restaurant/Rprice.phtml';
+        $data['content'] = 'site/user/restaurant_owner/Rprice.phtml';
         $this->load->view('site/layout/layout.phtml', $data);
     }
-    
 }
