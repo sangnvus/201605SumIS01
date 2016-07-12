@@ -1,4 +1,4 @@
-<?php
+    <?php
 
 defined('BASEPATH') OR exit('No direct script access allow');
 
@@ -13,6 +13,13 @@ class Booking extends CI_Controller {
         $this->load->library('session');
     }
 
+    // when user click on booking link
+    public function reserve($restID) {
+        $data['restID'] = $restID;
+        $data['content'] = 'site/booking/index.phtml';
+        $this->load->view('site/layout/layout.phtml', $data);
+    }
+    
     // when user click save in booking page
     public function makeReservation($userID) {
         date_default_timezone_set('Asia/Ho_Chi_Minh');
@@ -21,7 +28,6 @@ class Booking extends CI_Controller {
         // check to receive service date
         if ($bookDate < $today) {
             echo 'You cannot enter the passed date!';
-            die();
         }
         //user id will be from login process
         $data = array(
@@ -30,22 +36,16 @@ class Booking extends CI_Controller {
             'dateBooking' => $bookDate,
             'commentBo' => $this->input->post('bcomment'),
             'restaurantID' => $this->input->post('restaurantID'),
-            'userID' => $userID,
-            'content' => 'page_to_display'
+            'userID' => $userID
         );
         // insert booking data into database
         if ($this->Booking_model->insertReservation($data)) {
             echo 'You have booked with our restaurant';
+            redirect('booking/viewBooking/2');
         } else {
             echo 'Errors occur cannot make a reservation!';
+            redirect();
         }
-    }
-
-    // when user click on booking link
-    public function reserve($restID) {
-        $data['restID'] = $restID;
-        $data['content'] = 'site/booking/index.phtml';
-        $this->load->view('site/layout/layout.phtml', $data);
     }
 
     // restaurant owner view booking list
@@ -96,7 +96,7 @@ class Booking extends CI_Controller {
                 array_push($data['list'], $brlist);
             }
             
-            $data['content'] = 'site/booking/restaurant_manage_booking.phtml';
+            $data['content'] = 'site/user/restaurant_owner/restaurant_manage_booking.phtml';
             $this->load->view('site/layout/layout.phtml', $data);
         } else {
             echo 'No data in database';
