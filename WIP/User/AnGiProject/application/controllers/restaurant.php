@@ -8,7 +8,6 @@ class Restaurant extends CI_Controller {
         parent::__construct();
         $this->load->helper(array('url', 'form'));
         $this->load->library('session');
-        $this->load->model('Image_model');
     }
 
     public function index() {
@@ -29,19 +28,9 @@ class Restaurant extends CI_Controller {
         $this->load->view('site/layout/layout.phtml', $data);
     }
 
-    public function Restaurant_Banner($restID = 2) {
-        $banner = $this->Image_model->getRestImage($restID);
-        $test = $this->Image_model->getBanner($restID);
-        if ($banner) {
-            $data = array();
-            $data['banner'] = $banner;
-            $data['test'] = $test;
-            
-            $data['content'] = 'site/user/restaurant_owner/Rbanner.phtml';
-            $this->load->view('site/layout/layout.phtml', $data);
-        } else {
-            echo 'No images in database!';
-        }
+    public function Restaurant_Banner() {
+       $data['content'] = 'site/user/restaurant_owner/Rbanner.phtml';
+        $this->load->view('site/layout/layout.phtml', $data);
     }
 
     public function Restaurant_infor() {
