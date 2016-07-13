@@ -41,9 +41,41 @@
                     <li class="top-register">
                         <a href="">Đăng nhập <i class="fa fa-caret-down" aria-hidden="true"></i></a>
                         <div class="hover-menu hover-signin">
-                            <a href="" class="btn">Đăng nhập</a>
+                            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Đăng nhập</button>
                             <div class="hover-register">
                                 <label class="small-tit">Thành viên mới? <a href="">Đăng ký</a></label>
+                            </div>
+                        </div>
+                        <!-- Modal -->
+                        <div class="modal fade" id="myModal" role="dialog">
+                            <div class="modal-dialog">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Login</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form class="submit-form">
+                                            <ul>
+                                                <li>
+                                                    <label>Tên đăng nhập</label>
+                                                    <input type="text">
+                                                </li>
+                                                <li>
+                                                    <label>Mật khẩu</label>
+                                                    <input type="password">
+                                                </li>
+                                                <li>
+                                                    <label></label>
+                                                    <button class="btn">Đăng nhập</button>
+                                                </li>
+                                            </ul>
+                                        </form>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </li>
