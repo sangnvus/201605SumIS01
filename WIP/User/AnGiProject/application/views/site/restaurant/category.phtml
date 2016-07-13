@@ -19,24 +19,26 @@
                 <div class="sidebar-content">
                     <h4>Danh mục</h4>
                     <ul class="sidebar-list">
-                        <li><a href="">Nhà hàng</a></li>
-                        <li><a href="">Buffet</a></li>
-                        <li><a href="">Lẩu & Nướng</a></li>
-                        <li><a href="">Hải sản</a></li>
-                        <li><a href="">Nhật - Hàn</a></li>
-                        <li><a href="">Ăn nhậu</a></li>
+                    <?php 
+                     foreach ($categoriesData as $key => $row)
+                        {
+                            ?>
+                        <li><a href="<?php echo base_url(); ?>Category/index/1/<?php echo $row['categoryOfResID']; ?>"><?php echo $row['nameCOR']; ?></a></li>        
+                            <?php
+                        }
+                    ?>
                     </ul>
                 </div>
 
                 <div class="sidebar-content">
                     <h4>Quận/Huyện</h4>
                     <ul class="sidebar-list">
-                        <li><a href="<?php echo base_url(); ?>Category/index/001">Ba Đình</a></li>
-                        <li><a href="<?php echo base_url(); ?>Category/index/002">Hoàn Kiếm</a></li>
-                        <li><a href="<?php echo base_url(); ?>Category/index/003">Thanh Xuân</a></li>
-                        <li><a href="<?php echo base_url(); ?>Category/index/004">Hai Bà Trưng</a></li>
-                        <li><a href="<?php echo base_url(); ?>Category/index/005">Đống Đa</a></li>
-                        <li><a href="<?php echo base_url(); ?>Category/index/006">Cầu Giấy</a></li>
+                        <li><a href="<?php echo base_url(); ?>Category/index/2/001">Ba Đình</a></li>
+                        <li><a href="<?php echo base_url(); ?>Category/index/2/002">Hoàn Kiếm</a></li>
+                        <li><a href="<?php echo base_url(); ?>Category/index/2/003">Thanh Xuân</a></li>
+                        <li><a href="<?php echo base_url(); ?>Category/index/2/004">Hai Bà Trưng</a></li>
+                        <li><a href="<?php echo base_url(); ?>Category/index/2/005">Đống Đa</a></li>
+                        <li><a href="<?php echo base_url(); ?>Category/index/2/006">Cầu Giấy</a></li>
                     </ul>
                 </div>
             </div>
@@ -44,6 +46,7 @@
             <div class="col-md-10">
                 <ul class="item-content item-cat">
                     <?php 
+                    $j = 0;
                         foreach ($resData as $key => $row)
                         {
                     ?>
@@ -53,11 +56,35 @@
                                 <div class="item-infor">
                                     <label class="item-name item-name-sm"><?php echo $row['nameRe']; ?></label>
                                 <span class="rate-star">
+
+                                <?php 
+                                $i = 1;
+                                for ($i; $i <= $rate[$j]; $i++) {
+                                ?>
                                     <i class="fa fa-star filled" aria-hidden="true"></i>
-                                    <i class="fa fa-star filled" aria-hidden="true"></i>
-                                    <i class="fa fa-star filled" aria-hidden="true"></i>
-                                    <i class="fa fa-star filled" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
+
+                                <?php 
+                                    if(($i + 0.25 <= $rate[$j]) && ($i + 0.75 > $rate[$j]))
+                                    {
+                                        ?>
+                                            <i class="fa fa-star-half-o filled" aria-hidden="true"></i>
+
+                                        <?php
+                                        $i++;
+                                    }
+                                }
+                                ?>
+
+                                <?php
+                                for ($k = 0; $k <= (5 - $i); $k++) {
+                                ?>
+                                    <i class="fa fa-star " aria-hidden="false"></i>
+                                <?php 
+                                }
+                  
+                                $j++; 
+                                ?>  
+                                    
                                 </span>
                                 <span class="rate-dollar">
                                     <i class="fa fa-dollar filled" aria-hidden="true"></i>
@@ -66,17 +93,17 @@
                                     <i class="fa fa-dollar" aria-hidden="true"></i>
                                     <i class="fa fa-dollar" aria-hidden="true"></i>
                                 </span>
-                                    <label class="item-address item-address-sm">18 Ngõ 19 Đông Tác, Quận Đống Đa</label>
+                                    <label class="item-address item-address-sm"><?php echo $row['address']; ?></label>
                                 </div>
                             </a>
-
                             <div class="category-itemdetail" style="border: 1px solid #e0e0e0; text-align: center">
-                                <p class="sale-content">Giảm <strong><?php echo $row['discount']; ?></strong></p>
+                                <p class="sale-content">Giảm <strong><?php echo $row['discount']; ?>%</strong></p>
                                 <p class="quick-description"><?php echo $row['latitudeRe']; ?></p>
                                 <button class="place">Đặt chỗ ngay</button>
                             </div>
                         </li>
                     <?php
+                         
                         }
                     ?>
                 </ul>
