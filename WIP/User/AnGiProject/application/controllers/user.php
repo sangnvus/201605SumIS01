@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 defined('BASEPATH') OR exit('No direct script access allow');
 
@@ -88,7 +88,6 @@ class User extends CI_Controller {
                     'lastNameUser' => $this->input->post('lname'),
                     'dateOfBirthUser' => $this->input->post('dob'),
                     'genderUser' => $this->input->post('gender'),
-                    'descriptionUser' => $this->input->post('des'),
                     'emailUser' => $this->input->post('email'),
                     'phoneUser' => $this->input->post('phone'),
                     'authorityUser' => $this->input->post('autho'),
@@ -117,11 +116,11 @@ class User extends CI_Controller {
             // insert form data into database
             if ($this->User_model->insertUser($data)) {
                 $this->session->set_flashdata('msg', '<div class="alert alert-success text-center">Đăng ký thành công !!</div>');
-                redirect('user_registration');
+                redirect('user/register');
             } else {
                 // error
                 $this->session->set_flashdata('msg', '<div class="alert alert-danger text-center">Đăng ký thất bại, kiểm tra thông tin!!!</div>');
-                redirect('user_registration');
+                redirect('user/register');
             }
         }
     }
