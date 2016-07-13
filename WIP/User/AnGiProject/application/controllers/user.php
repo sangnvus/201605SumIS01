@@ -12,46 +12,127 @@ class User extends CI_Controller {
         $this->load->model('User_model');
     }
 
-     function index() {
-        $ID = 2;
-        $data = array();
-        $data['content'] = 'site/user/profile/index.phtml';
-        $userData = $this->User_model->getUser($ID);
-        $data['userData'] = $userData;
-        $this->load->view('site/layout/layout.phtml', $data);
-
-
+    public function index() {
+        $ID =363;
         //set validation rules
         $this->form_validation->set_rules('fname', 'First Name', 'trim|required|min_length[3]|max_length[30]');
         $this->form_validation->set_rules('lname', 'Last Name', 'trim|required|min_length[3]|max_length[30]');
         //$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|is_unique[users.emailUser]');
+        if($this->form_validation->run() == FALSE){
+            $data = array();
+             $data['content'] = 'site/user/profile/index.phtml';
+             $userData = $this->User_model->getUser($ID);
+             $data['userData'] = $userData;
 
-        if ($this->form_validation->run() == true) {
-            $data = array(
+             if($userData[0]['authorityUser'] == 2){
+
+                $data['addressData'] =  $this->User_model->getAddress($userData[0]['addressID']);
+                $data['province'] = $this->User_model->getData('province');
+                $data['district'] = $this->User_model->getData('district');
+                $data['ward'] =  $this->User_model->getData('ward');
+
+            }
+            $this->load->view('site/layout/layout.phtml', $data);    
+        }
+        else{
+             $data = array();
+             $data['content'] = 'site/user/profile/index.phtml';
+             $userData = $this->User_model->getUser($ID);
+             $data['userData'] = $userData;
+
+             if($userData[0]['authorityUser'] == 2){
+
+                $data['addressData'] =  $this->User_model->getAddress($userData[0]['addressID']);
+                $data['province'] = $this->User_model->getData('province');
+                $data['district'] = $this->User_model->getData('district');
+                $data['ward'] =  $this->User_model->getData('ward');
+
+            }
+            $this->load->view('site/layout/layout.phtml', $data);    
+                $data = array(
                 'firstNameUser' => $this->input->post('fname'),
                 'lastNameUser' => $this->input->post('lname'),
                 'dateOfBirthUser' => $this->input->post('dob'),
                 'genderUser' => $this->input->post('gender'),
                 'emailUser' => $this->input->post('email'),
-            );
+                );
 
-            echo($this->input->post('gender'));
+                if ($this->User_model->updateUser($ID,$data))
+                {
+                        $this->session->set_flashdata('msg','<div class="alert alert-success text-center">Thành công !!</div>');
+                        if($userData[0]['authorityUser'] == 1){
+                            redirect('user');
+                        }
+                }
+                else
+                {
+                    // error
+                    $this->session->set_flashdata('msg','<div class="alert alert-danger text-center">Thất bại, kiểm tra thông tin!!!</div>');
+                        if($userData[0]['authorityUser'] == 1){
+                            redirect('user');
+                        }
+                }
+                
+                if ($userData[0]['authorityUser'] == 2) {
+                    $address = array(
+                            'address'=> $this->input->post('address'),
+                            'provinceid' => $this->input->post('province'),
+                            'districtid' => $this->input->post('district'),
+                            'wardid' => $this->input->post('ward'),
+                    );
 
-            if ($this->User_model->updateUser($ID, $data)) {
-                $this->session->set_flashdata('msg', '<div class="alert alert-success text-center">Thành công !!</div>');
-                redirect('user');
-            } else {
-                // error
-                $this->session->set_flashdata('msg', '<div class="alert alert-danger text-center">Thất bại, kiểm tra thông tin!!!</div>');
-                redirect('user');
-            }
+                    if ($this->User_model->updateAddress($userData[0]['addressID'] ,$address))
+                    {
+                            $this->session->set_flashdata('msg','<div class="alert alert-success text-center">Thành công !!</div>');
+                            redirect('user');
+                    }
+                    else
+                    {
+                        // error
+                        $this->session->set_flashdata('msg','<div class="alert alert-danger text-center">Thất bại, kiểm tra địa chỉ !!!</div>');
+                        redirect('user');
+                    }
+                }
         }
     }
 
-     function change_Password() {
-        $data = array();
-        $data['content'] = 'site/user/profile/changePassword.phtml';
-        $this->load->view('site/layout/layout.phtml', $data);
+    public function change_Password() {
+        $ID =368;
+        // $data = array();
+        // $data['content'] = 'site/user/profile/changePassword.phtml';
+        // $this->load->view('site/layout/layout.phtml', $data);
+
+        $opw = $this->input->post('opassword');
+        $npw = $this->input->post('npassword');
+        $cpw = $this->input->post('cpassword');
+        $data = array(
+                'o' => $this->input->post('opassword'),
+                'n' => $this->input->post('npassword'),
+                'c' => $this->input->post('cpassword'),
+            );
+
+        print_r($data);
+         // $opw = md5($opw);
+         // echo "xxx".$opw;
+        $this->form_validation->set_rules('opassword', 'Old Password', 'trim|required');
+        $this->form_validation->set_rules('npassword', 'Password', 'trim|required|matches[cpassword]');
+        $this->form_validation->set_rules('cpassword', 'Confirm Password', 'trim|required');
+        if ($this->form_validation->run() == FALSE){ 
+            $userData = $this->User_model->getUser($ID);
+            $data['userData'] = $userData;
+            $data['content'] = 'site/user/profile/changePassword.phtml';
+            $this->load->view('site/layout/layout.phtml', $data);
+        }
+        else{
+            if($this->User_model->changePassword($ID,$opw,$npw)){
+                $this->session->set_flashdata('msg','<div class="alert alert-success text-center">Thành công !</div>');
+            }
+            if($this->User_model->changePassword($ID,$opw,$npw) == FALSE){
+                $this->session->set_flashdata('msg','<div class="alert alert-danger text-center">Thất bại, mật khẩu cũ không đúng !</div>');    
+            }
+
+            redirect('user/change_Password');
+        }
     }
 
     function register() {
@@ -88,6 +169,7 @@ class User extends CI_Controller {
                     'lastNameUser' => $this->input->post('lname'),
                     'dateOfBirthUser' => $this->input->post('dob'),
                     'genderUser' => $this->input->post('gender'),
+                    'descriptionUser' => $this->input->post('des'),
                     'emailUser' => $this->input->post('email'),
                     'phoneUser' => $this->input->post('phone'),
                     'authorityUser' => $this->input->post('autho'),
@@ -116,27 +198,17 @@ class User extends CI_Controller {
             // insert form data into database
             if ($this->User_model->insertUser($data)) {
                 $this->session->set_flashdata('msg', '<div class="alert alert-success text-center">Đăng ký thành công !!</div>');
-                redirect('user/register');
+                redirect('user');
             } else {
                 // error
                 $this->session->set_flashdata('msg', '<div class="alert alert-danger text-center">Đăng ký thất bại, kiểm tra thông tin!!!</div>');
-                redirect('user/register');
+                redirect('user');
             }
         }
     }
 
-    // function verify($hash=NULL)
-    // {
-    // 	if ($this->user_model->verifyEmailID($hash))
-    // 	{
-    // 		$this->session->set_flashdata('verify_msg','<div class="alert alert-success text-center">Your Email Address is successfully verified! Please login to access your account!</div>');
-    // 		redirect('user_registration/register');
-    // 	}
-    // 	else
-    // 	{
-    // 		$this->session->set_flashdata('verify_msg','<div class="alert alert-danger text-center">Sorry! There is error verifying your Email Address!</div>');
-    // 		redirect('user_registration/register');
-    // 	}
-    // }
+public function testComm(){
+    return;
+}
     
 }
