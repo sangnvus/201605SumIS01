@@ -36,7 +36,7 @@ ul, li{
     line-height: 1.5;
     text-align: center;
 }
-
+.btn:hover{color: #fff}
 .small-tit{
     font-size: 12px;
     color: #8d8d8d;
@@ -102,10 +102,17 @@ li.top-register:hover>a{
     background-color: #fff;
     transform: skew(0deg, 45deg);
 }
-.hover-signin a.btn{
+.btn-info:hover {
+    background-color: #bd052b;
+    border: none;
+}
+.hover-signin .btn{
     padding: 6px 35px;
     color: #fff;
+    border: none;
 }
+.submit-form>ul>li>label{width: 150px}
+.submit-form>ul>li{margin-top: 20px}
 .hover-register{
     padding: 9px 14px;
     white-space: nowrap
