@@ -24,6 +24,11 @@ class User_model extends CI_Model
    		return  $insert_id;
 	}
 
+	function updateAddress($id,$data){
+		$this->db->where('addressID', $id);
+		return $this->db->update("address", $data);
+	}
+
 	function getData($table)
     {
 		$query=$this->db->get($table);
@@ -42,14 +47,48 @@ class User_model extends CI_Model
     {
     	$this->db->select('*');
         $this->db->from('address a'); 
-        $this->db->join('province p', 'p.provinceID = a.provinceID');
-        $this->db->join('ward w', 'w.wardid = a.wardID');
-        $this->db->join('district d', 'd.districtID = a.districtID');
         $this->db->where('a.addressID',$ID); 
+        $this->db->join('district d', 'd.districtID = a.districtID','right outer');
+        $this->db->join('ward w', 'w.wardid = a.wardID','right outer');
+        $this->db->join('province p', 'a.provinceID = p.provinceID','right outer');
+        
+        //$this->db->where('a.addressID',$ID); 
         $query = $this->db->get(); 
         $data=$query->result_array();
    		return  $data;
 	}
+
+	function changePassword($ID,$pw,$npw) {
+		$tpw = md5($pw);
+		$tnpw = md5($npw);
+		echo $pw . ' ';
+		echo($tpw);
+		//$array = array('userID' => $ID, 'passwordUser' => $tpw);
+
+	    $this->db->select('*');
+        $this->db->from('users');
+        //$this->db->where($array);
+        $this->db->where('userID',$ID); 
+        $this->db->where('passwordUser',$tpw); 
+        $query = $this->db->get();
+
+        if( $query->num_rows> 0)  {
+        	echo "true";
+        	die();
+            $data = array(
+         	  'passwordUser'   => $tnpw
+     	    );
+     	    $this->db->where('userID', $ID);	
+		    $this->db->update("users", $data);
+		    return TRUE;
+        }
+        else{
+        	 echo "FALSE";
+        	 die();
+       	   return FALSE;
+
+        }
+    }
 
 
 
