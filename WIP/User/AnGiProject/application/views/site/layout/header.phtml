@@ -1,4 +1,4 @@
-<div class="topheader" style="background: #d02028">
+﻿<div class="topheader" style="background: #d02028">
     <div class="container">
         <div class="row">
             <nav class="col-md-12 col-sm-12 navbar">
@@ -9,7 +9,7 @@
                     <li>
                         <a href="">Ẩm thực</a>
                         <ul class="hover-menu">
-                            <li><a href="<?php echo base_url()?>restaurant/category">Nhà hàng</a></li>
+                            <li><a href="<?php echo base_url() ?>restaurant/category">Nhà hàng</a></li>
                             <li><a href="">Buffet</a></li>
                             <li><a href="">Lẩu & Nướng</a></li>
                             <li><a href="">Hải sản</a></li>
@@ -39,31 +39,6 @@
                     </li>
 
                     <li class="top-register">
-                    <?php
-                        if($this->session->userdata("ID") != null)
-                        {
-                            $lname = $this->session->userdata("lname");
-                            $fname = $this->session->userdata("fname");
-                            $Type = $this->session->userdata("Type");
-                            $full = $lname." ".$fname
-                            
-                            ?>
-                            
-                            <a href=""><?php echo $full; ?> <i class="fa fa-caret-down" aria-hidden="true"></i></a>
-                            <div class="hover-menu hover-signin">
-                                <ul class="user-loged">
-                                    <li><a href="">Thông tin tài khoản</a></li>
-                                    <li><a href="">Quản lý mật khẩu</a></li>
-                                    <li><a href="">Lịch sử đặt chỗ</a></li>
-                                    <button style="margin: 8px 0" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Đăng xuất</button>
-                                </ul>
-                            </div>
-                            <?php
-                        }
-                        else {
-                       
-                    ?>
-
                         <a href="">Đăng nhập <i class="fa fa-caret-down" aria-hidden="true"></i></a>
                         <div class="hover-menu hover-signin">
                             <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Đăng nhập</button>
@@ -82,15 +57,15 @@
                                         <h4 class="modal-title">Login</h4>
                                     </div>
                                     <div class="modal-body">
-                                        <form class="submit-form" action="user/login" method="post">
+                                        <form class="submit-form">
                                             <ul>
                                                 <li>
-                                                    <label>Số điện thoại</label>
-                                                    <input type="text" name = "phone">
+                                                    <label>Tên đăng nhập</label>
+                                                    <input type="text" >
                                                 </li>
                                                 <li>
                                                     <label>Mật khẩu</label>
-                                                    <input type="password" name = "password">
+                                                    <input type="password" >
                                                 </li>
                                                 <li>
                                                     <label></label>
@@ -103,8 +78,6 @@
 
                             </div>
                         </div>
-
-                        <?php } ?>
                     </li>
                 </ul>
             </nav>
@@ -116,10 +89,13 @@
     <div class="container">
         <div class="row">
             <div class="col-md-9">
-                <form class="search">
-                    <input type="text" placeholder="Buffet, Lẩu & Nướng, Hải sản...">
-                    <button><i class="fa fa-search" aria-hidden="true"></i></button>
-                </form>
+                <?php
+                $attribute = array("class" => "search");
+                echo form_open('search/', $attribute);
+                ?>
+                <input type="text" name="userTerm" placeholder="Buffet, Lẩu & Nướng, Hải sản..." required="true">
+                <button type="submit" name="btnSearch" value="btnSearchValue"><i class="fa fa-search" aria-hidden="true"></i></button>
+                <?php echo form_close(); ?>
             </div>
         </div>
     </div>
@@ -165,3 +141,24 @@
         </a>
     </div>
 </div>
+
+<script>
+    
+//    custom html5 error message for a required field
+    
+    $(document).ready(function () {
+        var intputElements = document.getElementsByTagName("INPUT");
+        for (var i = 0; i < intputElements.length; i++) {
+            intputElements[i].oninvalid = function (e) {
+                e.target.setCustomValidity("");
+                if (!e.target.validity.valid) {
+//                    if (e.target.name == "username") {
+                        e.target.setCustomValidity("Please insert your keyword in the box");
+//                    } else {
+//                        e.target.setCustomValidity("The field 'Password' cannot be left blank");
+//                    }
+                }
+            };
+        }
+    })
+</script>

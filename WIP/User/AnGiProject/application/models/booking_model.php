@@ -20,11 +20,9 @@ class Booking_model extends CI_Model {
 
     // for customer
     function getCustomerBookingList($userID) {
-        $sql = " SELECT bookingID, b.restaurantID, addressImage, nameRe, descriptionRes, discount, address, dateBooking, quantityMember, statusBo " .
-                " FROM restaurants r, booking b, Users u, images i, food f, address addr " .
-                " WHERE r.restaurantID = b.restaurantID AND r.restaurantID = f.restaurantID " .
-                " AND f.imageID = i.imageID AND r.addressID = addr.addressID AND b.userID = u.userID AND b.userID = " . $userID .
-                " ORDER BY dateBooking DESC; ";
+        $sql = " SELECT * FROM booking b, users u " .
+                " WHERE b.userID = u.userID AND b.userID = " . $userID . "; ";
+
         $query = $this->db->query($sql);
         if ($query->num_rows() > 0) {
             $data = $query->result();
@@ -54,15 +52,16 @@ class Booking_model extends CI_Model {
     }
 
     // restaurant owner update booking status
-    function updateReservation($status, $bid){
-        $sql = " UPDATE Booking " . 
-               " SET statusBo = $status " .
-               " WHERE bookingID = $bid; ";
-        $this -> db -> query($sql);
-        if($this->db->affected_rows() == '1'){
+    function updateReservation($status, $bid) {
+        $sql = " UPDATE Booking " .
+                " SET statusBo = $status " .
+                " WHERE bookingID = $bid; ";
+        $this->db->query($sql);
+        if ($this->db->affected_rows() == '1') {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
+
 }

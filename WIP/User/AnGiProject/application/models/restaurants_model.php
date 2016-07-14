@@ -2,69 +2,54 @@
 
 class Restaurants_model extends CI_Model {
 
-    // variables to hold selection fields in sql query
-    private $restID = 'r.restaurantID';
-    private $all = '*';
-
     function __construct() {
         parent::__construct();
     }
 
-    public function getQuery($id, $value) {
-        return ' SELECT ' . $value . ', AVG(rateValue) AS average ' .
-                ' FROM restaurants rest, rate r, images im, address addr, Users u, food f ' .
-                ' WHERE rest.restaurantID = ' . $id . ' AND rest.restaurantID = r.restaurantID  AND rest.addressID = addr.addressID ' .
-                ' AND rest.userID = u.userID AND f.imageID = im.imageID AND f.restaurantID = rest.restaurantID; ';
+    function getRestOwner($ID) {
+        $sql = " SELECT * FROM restaurants r, users u " .
+                " WHERE r.userID = u.userID AND authorityUser = 1 AND r.restaurantID = " . $ID . "; ";
+        $query = $this->db->query($sql);
+        $data = $query->result_array();
+        return $data;
     }
 
-    // return restaurant's rating
-    public function getRestaurantRating($id) {
+// return specific restaurant
+    public function getSepecificRestaurant($id) {
 
-        $query = $this->db->query($this->getQuery($id, $this->restID));
+        $sql = " SELECT r.restaurantID, img.imageID,addressImage, nameRe, descriptionRes, nameImage, AVG(rateValue) AS average, discount, address " .
+                " FROM food f, restaurants r, images img, address addr, rate " .
+                " WHERE r.restaurantID = " . $id . " AND f.restaurantID = r.restaurantID  AND f.imageID = img.imageID " .
+                " AND r.addressID = addr.addressID AND rate.restaurantID = r.restaurantID; "; // -- AND typeImage='restaurantImage'
+
+        $query = $this->db->query($sql);
 
         if ($query->num_rows() > 0) {
-            $data = $query-> row();
+            $data = $query->row();
             return $data;
         } else {
             return NULL;
         }
     }
 
-    // return all restaurants information
+// return all restaurants information
     public function getInterestingRestaurants($sortBy) {
-        // retrieve all restaurants
-        $restID = $this->db->query(' SELECT restaurantID AS ID FROM restaurants ');
-        $data = array();
-        foreach ($restID->result() as $id) {
+// retrieve all restaurants
+        $sql = " SELECT r.restaurantID, img.imageID,addressImage, descriptionRes, nameRe, nameImage, AVG(rateValue) AS average, discount, address " .
+                " FROM food f, restaurants r, restaurantcategories cate, categoriesofrestaurant cateOf, images img, address addr, rate " .
+                " WHERE f.restaurantID = r.restaurantID AND f.imageID = img.imageID AND r.addressID = addr.addressID " .
+                " AND rate.restaurantID = r.restaurantID " . // -- AND typeImage = 'restaurantsImage'
+                " GROUP BY r.restaurantID " .
+                " ORDER BY " . $sortBy . " DESC; ";
 
-            // get all restaurants
-            $query = $this->db->query($this->getQuery($id->ID, $this->all));
-            $values = $query->result_array();
-            $data = array_merge($data, $values);
-        }
+        $query = $this->db->query($sql);
 
-        // check if there is information returned from database
-        if ($data != null) {
-            if (strcasecmp($sortBy, 'discount') == 0) {
-                usort($data, array(__CLASS__, 'sortByDiscount'));
-                return $data;
-            } else {
-                usort($data, array(__CLASS__, 'sortByRating'));
-                return $data;
-            }
+        if ($query->num_rows() > 0) {
+            $data = $query->result();
+            return $data;
         } else {
-            return false;
+            return NULL;
         }
-    }
-
-    // sort by averate rating function in descending order
-    function sortByRating($a, $b) {
-        return $b['average'] - $a['average'];
-    }
-
-    // sort by discount function in descending order
-    function sortByDiscount($a, $b) {
-        return $b['discount'] - $a['discount'];
     }
 
 }
