@@ -21,19 +21,43 @@
             </table>
             <ul class="profile-sidebar">
                 <li class="active"><i class="fa fa-user" aria-hidden="true"></i> Thông tin tài khoản</li>
-                <li><a href="<?php echo base_url(); ?>restaurant/restaurant_banner"><i class="fa fa-picture-o" aria-hidden="true"></i> Banner nhà hàng</a></li>
-                <li><a href="<?php echo base_url(); ?>restaurant/restaurant_infor"><i class="fa fa-wpforms" aria-hidden="true"></i> Thông tin nhà hàng</a></li>
-                <li><a href="<?php echo base_url(); ?>restaurant/restaurant_price"><i class="fa fa-usd" aria-hidden="true"></i> Bảng giá</a></li>
-                <li><a href="<?php echo base_url(); ?>booking/manageReservation/2"><i class="fa fa-cogs" aria-hidden="true"></i> Quản lý đặt chỗ</a></li>
-                <li><a href="<?php echo base_url(); ?>user/change_Password"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Đổi mật khẩu</a></li>
+            
+            <?php if ($userData[0]['authorityUser'] == 2){
+            ?>
+                <li><a href="<?php echo base_url(); ?>user/restaurant_banner"><i class="fa fa-picture-o" aria-hidden="true"></i> Banner nhà hàng</a></li>
+                <li><a href="<?php echo base_url(); ?>user/restaurant_infor"><i class="fa fa-wpforms" aria-hidden="true"></i> Thông tin nhà hàng</a></li>
+                <li><a href="<?php echo base_url(); ?>user/restaurant_price"><i class="fa fa-usd" aria-hidden="true"></i> Bảng giá</a></li>
+                <li><a href="<?php echo base_url(); ?>booking/restaurant_manage_booking"><i class="fa fa-cogs" aria-hidden="true"></i> Quản lý đặt chỗ</a></li>                
+            <?php
+            }
+            ?>     
+            <?php if ($userData[0]['authorityUser'] == 1){
+            ?>        
                 <li><a href="<?php echo base_url(); ?>booking/user_booking_history"><i class="fa fa-cutlery" aria-hidden="true"></i> Lịch sử đặt chỗ</a></li>
-                <li><a><i class="fa fa-power-off" aria-hidden="true"></i> Thoát</a></li>
+            <?php
+            }
+            ?>            
+                <li><a href="<?php echo base_url(); ?>user/change_Password"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Đổi mật khẩu</a></li>
+
+                <li><a href="<?php echo base_url(); ?>user/sign_out"></i> Thoát</a></li>
             </ul>
         </div>
 
         <div class="col-md-9">
-            <h1>Thông tin tài khoản</h1>
-            <form class="edit-user" method="post" action="user_profile">
+            <?php if ($userData[0]['authorityUser'] == 1){
+            ?>
+                <h1>Thông tin thực khách</h1>
+            <?php
+            }
+            ?>
+            <?php if ($userData[0]['authorityUser'] == 2){
+            ?>
+                <h1>Thông tin chủ nhà hàng</h1>
+            <?php
+            }
+            ?>
+            
+            <form class="edit-user" method="post" action="user">
                 <ul>
                     <li>
                         <label>Ngày lập:</label> <input type="text" value="<?php echo $userData[0]['dateCreateUser']; ?>" disabled>
@@ -41,10 +65,11 @@
                     <li>
                         <label>Họ:</label> <input type="text" name="lname" value="<?php echo $userData[0]['lastNameUser'];
                 ?>">
+                        <span class="text-danger"><?php echo form_error('lname'); ?></span>
                     </li>
                     <li>
                         <label>Tên:</label> <input type="text" name="fname" value="<?php echo $userData[0]['firstNameUser'];
-                ?>">
+                ?>"">
                     </li>
                     <li>
                         <label>Email:</label> <input type="text" name="email" value="<?php echo $userData[0]['emailUser']; ?>">
@@ -77,6 +102,70 @@
                         }
                          ?>
                     </li>
+            <?php if ($userData[0]['authorityUser'] == 2){
+            ?>
+
+                    <li>
+                        <label>Địa chỉ:</label> <input type="text" name="address" value="<?php 
+                        echo $addressData[0]['address'] ;
+                        
+                ?>"">
+                    </li>
+
+                    <li>
+                        <label>Tỉnh thành:</label> 
+                        <select name="province" size="1">
+                            <?php 
+                                foreach ($province as $key => $row)
+                                {
+                                   if($addressData[0]['provinceID'] == $row['provinceID']){
+                                        echo '<option value="' . $row['provinceID'] . '" selected >' .$row['typePro'].' '. $row['namePro'] . '</option>';
+                                   }
+                                   else{
+                                        echo '<option value="' . $row['provinceID'] . '">' .$row['typePro'].' '. $row['namePro'] . '</option>';
+                                   }
+                                }
+                            ?>
+                        </select>
+
+                    </li>
+                    <li>
+                        <label>Quận huyện:</label> 
+                        <select name="district" size="1">
+                            <?php 
+                                foreach ($district as $key => $row)
+                                {
+                                   if($addressData[0]['districtid'] == $row['districtid']){
+                                        echo '<option value="' . $row['districtid'] . '" selected >' .$row['typeDis'].' '. $row['nameDis'] . '</option>';
+                                   }
+                                   else{
+                                        echo '<option value="' . $row['districtid'] . '">' .$row['typeDis'].' '. $row['nameDis'] . '</option>';
+                                   }
+                                   
+                                }
+                            ?>
+                        </select>
+                    </li>
+                    <li>
+                        <label>Khu vực:</label>
+                        <select name="ward" size="1">
+                            <?php 
+                                foreach ($ward as $key => $row)
+                                {   
+                                   if($addressData[0]['wardid'] == $row['wardid']){
+                                        echo '<option value="' . $row['wardid'] . '" selected >' .$row['typeWard'].' '. $row['nameWard'] . '</option>';
+                                   }
+                                   echo '<option value="' . $row['wardid'] . '">' .$row['typeWard'].' '. $row['nameWard'] . '</option>';
+                                }
+                            ?>
+                        </select>                        
+                    </li>
+
+
+            <?php
+            }
+            ?>                     
+
                     <li>
                         <label></label>
                         <input type="submit" value="Cập nhật">

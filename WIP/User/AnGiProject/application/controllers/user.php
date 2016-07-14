@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 defined('BASEPATH') OR exit('No direct script access allow');
 
@@ -7,13 +7,14 @@ class User extends CI_Controller {
      function __construct() {
         parent::__construct();
         $this->load->helper(array('form', 'url', 'date'));
-        $this->load->library(array('session', 'form_validation', 'email'));
+        $this->load->library(array('session', 'form_validation', 'email',"session"));
         $this->load->database();
         $this->load->model('User_model');
     }
 
     public function index() {
-        $ID =363;
+         $ID = $this->session->userdata("ID");
+        //$ID = 1;
         //set validation rules
         $this->form_validation->set_rules('fname', 'First Name', 'trim|required|min_length[3]|max_length[30]');
         $this->form_validation->set_rules('lname', 'Last Name', 'trim|required|min_length[3]|max_length[30]');
@@ -97,26 +98,15 @@ class User extends CI_Controller {
     }
 
     public function change_Password() {
-        $ID =368;
-        // $data = array();
-        // $data['content'] = 'site/user/profile/changePassword.phtml';
-        // $this->load->view('site/layout/layout.phtml', $data);
+        $ID = $this->session->userdata("ID");
 
         $opw = $this->input->post('opassword');
         $npw = $this->input->post('npassword');
         $cpw = $this->input->post('cpassword');
-        $data = array(
-                'o' => $this->input->post('opassword'),
-                'n' => $this->input->post('npassword'),
-                'c' => $this->input->post('cpassword'),
-            );
 
-        print_r($data);
-         // $opw = md5($opw);
-         // echo "xxx".$opw;
-        $this->form_validation->set_rules('opassword', 'Old Password', 'trim|required');
-        $this->form_validation->set_rules('npassword', 'Password', 'trim|required|matches[cpassword]');
-        $this->form_validation->set_rules('cpassword', 'Confirm Password', 'trim|required');
+        $this->form_validation->set_rules('opassword', 'Old Password', 'trim|required|min_length[7]');
+        $this->form_validation->set_rules('npassword', 'Password', 'trim|required|matches[cpassword]|min_length[7]');
+        $this->form_validation->set_rules('cpassword', 'Confirm Password', 'trim|required|min_length[7]');
         if ($this->form_validation->run() == FALSE){ 
             $userData = $this->User_model->getUser($ID);
             $data['userData'] = $userData;
@@ -125,9 +115,11 @@ class User extends CI_Controller {
         }
         else{
             if($this->User_model->changePassword($ID,$opw,$npw)){
+               
                 $this->session->set_flashdata('msg','<div class="alert alert-success text-center">Thành công !</div>');
             }
-            if($this->User_model->changePassword($ID,$opw,$npw) == FALSE){
+            
+            else{
                 $this->session->set_flashdata('msg','<div class="alert alert-danger text-center">Thất bại, mật khẩu cũ không đúng !</div>');    
             }
 
@@ -140,9 +132,9 @@ class User extends CI_Controller {
         $this->form_validation->set_rules('fname', 'First Name', 'trim|required|min_length[3]|max_length[30]');
         $this->form_validation->set_rules('lname', 'Last Name', 'trim|required|min_length[3]|max_length[30]');
         $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|is_unique[users.emailUser]');
-        $this->form_validation->set_rules('phone', 'phone', 'trim|numeric');
-        $this->form_validation->set_rules('password', 'Password', 'trim|required|matches[cpassword]|md5');
-        $this->form_validation->set_rules('cpassword', 'Confirm Password', 'trim|required|md5');
+        $this->form_validation->set_rules('phone', 'phone', 'trim|numeric|min_length[7]|is_unique[users.phoneUser]');
+        $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[7]|matches[cpassword]');
+        $this->form_validation->set_rules('cpassword', 'Confirm Password', 'trim|required|min_length[7]');
 
         //validate form input
         if ($this->form_validation->run() == FALSE) {
@@ -173,7 +165,7 @@ class User extends CI_Controller {
                     'emailUser' => $this->input->post('email'),
                     'phoneUser' => $this->input->post('phone'),
                     'authorityUser' => $this->input->post('autho'),
-                    'passwordUser' => $this->input->post('password'),
+                    'passwordUser' => md5($this->input->post('password')),
                     'dateCreateUser' => date('Y-m-d H:i:s'),
                     'imageID' => 1,
                         // 'addressID'=> $this->User_model->insertAddress($address)
@@ -188,7 +180,7 @@ class User extends CI_Controller {
                     'emailUser' => $this->input->post('email'),
                     'phoneUser' => $this->input->post('phone'),
                     'authorityUser' => $this->input->post('autho'),
-                    'passwordUser' => $this->input->post('password'),
+                    'passwordUser' => md5($this->input->post('password')),
                     'dateCreateUser' => date('Y-m-d H:i:s'),
                     'imageID' => 1,
                     'addressID' => $this->User_model->insertAddress($address)
@@ -207,8 +199,30 @@ class User extends CI_Controller {
         }
     }
 
-public function testComm(){
-    return;
-}
-    
+    public function login(){
+        $phone = $this->input->post('phone');
+        $password = $this->input->post('password');    
+        $data = $this->User_model->checkLogin($phone,$password);
+        if(count($data) > 0){
+            $data=array(
+            "fname" => $data[0]['firstNameUser'],
+            "lname" => $data[0]['lastNameUser'],
+            "ID" => $data[0]['userID'],
+            "Type" => $data[0]['authorityUser'],
+            );
+
+            $this->session->set_userdata($data);
+            // echo "name :";
+            // echo $this->session->userdata("Type");   
+        }
+            // else{
+            //     echo "Wrong!";
+            //     die();
+            // }
+    }
+    public function sign_out(){
+        $this->session->sess_destroy();
+        echo "sign_out";
+    }
+
 }

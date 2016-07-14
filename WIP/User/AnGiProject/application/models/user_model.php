@@ -59,41 +59,71 @@ class User_model extends CI_Model
 	}
 
 	function changePassword($ID,$pw,$npw) {
-		$tpw = md5($pw);
-		$tnpw = md5($npw);
-		echo $pw . ' ';
-		echo($tpw);
-		//$array = array('userID' => $ID, 'passwordUser' => $tpw);
+		// echo "  /   ".$pw."   /   ";
+		$pw = md5($pw);
+		$npw = md5($npw);
+		// echo "  /   ".$pw."   /   ";
 
-	    $this->db->select('*');
-        $this->db->from('users');
-        //$this->db->where($array);
-        $this->db->where('userID',$ID); 
-        $this->db->where('passwordUser',$tpw); 
-        $query = $this->db->get();
+		// echo "  /   ".$npw."  /   ";
+		
+		
+    //     $this->db->select('passwordUser');
+    //     $this->db->from('users'); 
+    //     $this->db->where('userID',$ID);
+    //     $query = $this->db->get();
 
-        if( $query->num_rows> 0)  {
-        	echo "true";
-        	die();
+    //     $sql = "SELECT userID, passwordUser FROM users WHERE userID = " . $ID;
+    //     $query = $this -> db -> query($sql);
+    //      if ($query->num_rows() > 0) {
+    //         $data = $query->result_array();
+    //         // echo $data[0]['passwordUser'] . '<br />';
+    //         // echo $pw;
+    //         if( $data[0]['passwordUser'] === $pw ){
+    //         	$updatePass = "UPDATE users SET passwordUser = '" . $this->db->escape(htmlentities($npw)) . "' WHERE userID = " . $ID;
+    //         	$this -> db -> query($updatePass);
+    //         	if($this->db->affected_rows() == '1'){
+    //         		return true;
+    //         	}
+    //     	}
+    //     }
+         	
+    //     else {
+    //     	return false;
+    //     }
+    // }
+
+
+        $data =  $query ->result_array();
+        echo $data[0]['passwordUser']." VS ".$pw;
+        //die();
+        if( $data[0]['passwordUser'] === $pw ){
+        	
+        	
             $data = array(
-         	  'passwordUser'   => $tnpw
+         	  'passwordUser'   => $npw
      	    );
      	    $this->db->where('userID', $ID);	
 		    $this->db->update("users", $data);
 		    return TRUE;
         }
-        else{
-        	 echo "FALSE";
-        	 die();
+        else{ 
        	   return FALSE;
 
         }
     }
+    
 
+    function checkLogin($phone,$pw){
+    	$this->db->select('*');
+        $this->db->from('users');
+        $this->db->where('phoneUser',$phone);
+        $this->db->where('passwordUser',md5($pw));
+        $query = $this->db->get();
+        $data =  $query ->result_array();
+        return $data;
+    }
 
-
-	
-	
+}
 	//send verification email to user's email id
 	// function sendEmail($to_email)
 	// {
@@ -129,4 +159,4 @@ class User_model extends CI_Model
 	// 	return $this->db->update('users', $data);
 	// }
 
-}
+//}

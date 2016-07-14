@@ -39,6 +39,31 @@
                     </li>
 
                     <li class="top-register">
+                    <?php
+                        if($this->session->userdata("ID") != null)
+                        {
+                            $lname = $this->session->userdata("lname");
+                            $fname = $this->session->userdata("fname");
+                            $Type = $this->session->userdata("Type");
+                            $full = $lname." ".$fname
+                            
+                            ?>
+                            
+                            <a href=""><?php echo $full; ?> <i class="fa fa-caret-down" aria-hidden="true"></i></a>
+                            <div class="hover-menu hover-signin">
+                                <ul class="user-loged">
+                                    <li><a href="">Thông tin tài khoản</a></li>
+                                    <li><a href="">Quản lý mật khẩu</a></li>
+                                    <li><a href="">Lịch sử đặt chỗ</a></li>
+                                    <button style="margin: 8px 0" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Đăng xuất</button>
+                                </ul>
+                            </div>
+                            <?php
+                        }
+                        else {
+                       
+                    ?>
+
                         <a href="">Đăng nhập <i class="fa fa-caret-down" aria-hidden="true"></i></a>
                         <div class="hover-menu hover-signin">
                             <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Đăng nhập</button>
@@ -57,15 +82,15 @@
                                         <h4 class="modal-title">Login</h4>
                                     </div>
                                     <div class="modal-body">
-                                        <form class="submit-form">
+                                        <form class="submit-form" action="user/login" method="post">
                                             <ul>
                                                 <li>
-                                                    <label>Tên đăng nhập</label>
-                                                    <input type="text">
+                                                    <label>Số điện thoại</label>
+                                                    <input type="text" name = "phone">
                                                 </li>
                                                 <li>
                                                     <label>Mật khẩu</label>
-                                                    <input type="password">
+                                                    <input type="password" name = "password">
                                                 </li>
                                                 <li>
                                                     <label></label>
@@ -78,6 +103,8 @@
 
                             </div>
                         </div>
+
+                        <?php } ?>
                     </li>
                 </ul>
             </nav>
