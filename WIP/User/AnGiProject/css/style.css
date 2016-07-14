@@ -111,6 +111,17 @@ li.top-register:hover>a{
     color: #fff;
     border: none;
 }
+.user-loged li{
+    border-bottom: 1px dotted #333;
+}
+.user-loged li a{
+    display: block;
+    padding: 8px;
+
+}
+.user-loged li a:hover{
+    color: red;
+}
 .submit-form>ul>li>label{width: 150px}
 .submit-form>ul>li{margin-top: 20px}
 .hover-register{
