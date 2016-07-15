@@ -13,32 +13,6 @@ class Booking extends CI_Controller {
         $this->load->library(array('session', 'email'));
     }
 
-    public function testEmail() {
-        $config = Array(
-            'protocol' => 'smtp',
-            'smtp_host' => 'ssl://smtp.googlemail.com',
-            'smtp_port' => 465,
-            'smtp_user' => 'soulivongfc@gmail.com', // change it to yours
-            'smtp_pass' => '123Unique', // change it to yours
-            'mailtype' => 'html',
-            'charset' => 'iso-8859-1',
-            'wordwrap' => TRUE
-        );
-
-        $message = 'test codeIgniter email';
-        $this->load->library('email', $config);
-        $this->email->set_newline("\r\n");
-        $this->email->from('soulivongfc@gmail.com'); // change it to yours
-        $this->email->to('soulivongse03451@fpt.edu.vn'); // change it to yours
-        $this->email->subject('Resume from JobsBuddy for your Job posting');
-        $this->email->message($message);
-        if ($this->email->send()) {
-            echo 'Email sent.';
-        } else {
-            show_error($this->email->print_debugger());
-        }
-    }
-
     // when user click on booking link
     public function reserve($restID) {
         $data['restID'] = $restID;
@@ -73,9 +47,7 @@ class Booking extends CI_Controller {
 //            $customerEmail = $userInfo[0]['emailUser'];
 //            $customerName = $userInfo[0]['firstNameUser'] . ' - ' . $userInfo[0]['lastNameUser'];
 //            $restOwnerEmail = $restInfo[0]['emailUser'];
-            $customerEmail = "soulivongfc@gmail.com";
-            $customerName = "Soulivong";
-            $restOwnerEmail = "soulivongse03451@fpt.edu.vn";
+  
             $messages = "booking date: $bookDate \n" .
                     "number of people: $this->input->post('numPeople') \n" .
                     "comment: $this->input->post('restaurantID')";
