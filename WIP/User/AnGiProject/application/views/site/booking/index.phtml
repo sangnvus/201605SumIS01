@@ -1,6 +1,14 @@
 ﻿<div class="restaurant-place shadow-outside">
     <p>Đặt chỗ trước khi đến</p>
-    <?php echo form_open('booking'); ?>
+
+    <?php
+//     if user restaurant id is not set by booking -> reserve function
+    if(!isset($restID)){
+        $restID = $fromView;
+    }
+    $userID = $this->session->userdata("ID");
+    echo form_open('booking/makeReservation/' . $userID);
+    ?>
     <form class="booking-res">
         <!--get restaurant id from url (hide this field) -->
         <input type="hidden" name="restaurantID" value="<?php echo $restID; ?>" />
@@ -12,6 +20,9 @@
         <p>
             <input placeholder="Ngày" class="textbox-n" type="text" name="dateBooking" onfocus="(this.type = 'date')" onblur="(this.type = 'text')" id="date">
             <i class="fa fa-calendar" aria-hidden="true"></i>
+        </p>
+        <p>
+            <input placeholder="Thời gian" class="textbox-n" type="time" name="bookingTime">
         </p>
         <p>
             <input placeholder="Comment" type="textArea" name="bcomment">

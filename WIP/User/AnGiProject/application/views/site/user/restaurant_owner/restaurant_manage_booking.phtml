@@ -25,13 +25,18 @@
                 <li><a href="<?php echo base_url() ?>restaurant/restaurant_price"><i class="fa fa-usd" aria-hidden="true"></i> Bảng giá</a></li>
                 <li class="active"><i class="fa fa-cogs" aria-hidden="true"></i> Quản lý đặt chỗ</li>
                 <li><a href="<?php echo base_url() ?>user/change_Password"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Đổi mật khẩu</a></li>
-                <li><a href="<?php echo base_url() ?>CONTROLLERNAME/ACTION/ID"><i class="fa fa-cutlery" aria-hidden="true"></i> Lịch sử đặt chỗ</a></li>
+                <li><a href="<?php echo base_url(); ?>booking/viewBooking"><i class="fa fa-cutlery" aria-hidden="true"></i> Lịch sử đặt chỗ</a></li>
                 <li><a><i class="fa fa-power-off" aria-hidden="true"></i> Thoát</a></li>
             </ul>
         </div>
 
         <div class="col-md-9">
             <h1>Lịch sử đặt chỗ</h1>
+            <?php 
+                if($isUpdate != null){
+                    echo $this->session->flashdata('msgUpdateBooking');
+                }
+            ?>
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -40,32 +45,38 @@
                         <th>Số điện thoại</th>
                         <th>Số người</th>
                         <th>Thời gian</th>
+                        <th>Request</th>
                         <th>Tình trạng</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
+                    if($isOrder == false){
+                        echo $this->session->flashdata('msgOrder');
+                    }else{
                     $counter = 0;
                     foreach ($list as $row) {
                         echo '<tr>';
-                        echo form_open('Booking/updateBooking/' . $row['bookingID']);
+                        echo form_open('booking/manageReservation/');
+                        echo '<input type="hidden" name="bid" value="'.$row['bookingID'].'" >';
                         echo '<th>' . $row['dateCreateBo'] . '</th>';
                         echo '<th>' . $row['userID'] . '</th>';
                         echo '<th>' . $row['phoneUser'] . '</th>';
                         echo '<th>' . $row['quantityMember'] . '</th>';
-                        echo '<th><span style="background-color:red;"> NO TIME FIELD IN DB </span>[20:00 | ' . $row['dateBooking'] . '</th>';
-//                        echo '<th>' . $row['statusBo'] . '</th>';
+                        echo '<th><span style="background-color:red;"> NO TIME FIELD IN DB | </span>' . $row['dateBooking'] . '</th>';
+                        echo '<th>' . $row['request'] . '</th>';
                         echo '<th><select class="form-control" name="bookingStatus" id="drplist' . $counter . '" size="1">';
                         echo '<option value="' . $row['statusBo'] . '">' . $row['statusText'] . '</option>';
                         echo '<option value="' . $row['dropValue1'] . '">' . $row['dropText1'] . '</option>';
                         echo '<option value="' . $row['dropValue2'] . '">' . $row['dropText2'] . '</option>';
                         echo '</select></th>';
-                        echo '<th><input type="submit" id="btnSave' . $counter . '" value="Save" disabled></th>';
+                        echo '<th><input type="submit" id="btnSave' . $counter . '" name="manageBooking" value="Save" disabled></th>';
                         echo form_close();
                         echo '</tr>';
                         $counter ++;
                     }
+                }
                     ?>
                 </tbody>
             </table>
@@ -74,7 +85,11 @@
     </div>
 </div>
 
-<?php for ($i = 0; $i < $counter; $i++) { ?>
+
+<?php 
+if($isOrder == true){
+
+for ($i = 0; $i < $counter; $i++) { ?>
     <script>
         $("#drplist<?php echo $i ?>").on('change', function () {
             // if dropdownlist is changed
@@ -92,5 +107,6 @@
         });
     </script>
     <?php
+    }
 }
     

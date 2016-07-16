@@ -13,6 +13,31 @@ class Booking extends CI_Controller {
         $this->load->library(array('session', 'email'));
     }
 
+//    public function testEmail() {
+//        $config = Array(
+//            'protocol' => 'smtp',
+//            'smtp_host' => 'ssl://smtp.googlemail.com',
+//            'smtp_port' => 465,
+//            'smtp_user' => 'soulivongfc@gmail.com', // change it to yours
+//            'smtp_pass' => '123Unique', // change it to yours
+//            'mailtype' => 'html',
+//            'charset' => 'iso-8859-1',
+//            'wordwrap' => TRUE
+//        );
+//
+//        $message = 'test codeIgniter email';
+//        $this->load->library('email', $config);
+//        $this->email->set_newline("\r\n");
+//        $this->email->from('soulivongfc@gmail.com'); // change it to yours
+//        $this->email->to('soulivongse03451@fpt.edu.vn'); // change it to yours
+//        $this->email->subject('Resume from JobsBuddy for your Job posting');
+//        $this->email->message($message);
+//        if ($this->email->send()) {
+//            echo 'Email sent.';
+//        } else {
+//            show_error($this->email->print_debugger());
+//        }
+//    }
     // when user click on booking link
     public function reserve($restID) {
         $data['restID'] = $restID;
@@ -21,10 +46,12 @@ class Booking extends CI_Controller {
     }
 
     // when user click save in booking page
-    public function makeReservation($userID = 2, $restID = 2) {
+    public function makeReservation($userID) {
         date_default_timezone_set('Asia/Ho_Chi_Minh');
         $today = date('Y-m-d H:i:s');
         $bookDate = $this->input->post('dateBooking');
+        $bookingTime = $this->input->post('bookingTime');
+
         // check to receive service date
         if ($bookDate < $today) {
             echo 'You cannot enter the passed date!';
@@ -34,6 +61,7 @@ class Booking extends CI_Controller {
             'dateCreateBo' => $today,
             'quantityMember' => $this->input->post('numPeople'),
             'dateBooking' => $bookDate,
+            'bookingTime' => $bookingTime,
             'commentBo' => $this->input->post('bcomment'),
             'restaurantID' => $this->input->post('restaurantID'),
             'userID' => $userID
@@ -41,20 +69,20 @@ class Booking extends CI_Controller {
         // insert booking data into database
         if ($this->Booking_model->insertReservation($data)) {
 
-            $userInfo = $this->User_model->getUser($userID);
-            $restInfo = $this->Restaurants_model->getRestOwner($restID);
-
+//            $userInfo = $this->User_model->getUser($userID);
+//            $restInfo = $this->Restaurants_model->getRestOwner($restID);
 //            $customerEmail = $userInfo[0]['emailUser'];
 //            $customerName = $userInfo[0]['firstNameUser'] . ' - ' . $userInfo[0]['lastNameUser'];
 //            $restOwnerEmail = $restInfo[0]['emailUser'];
-  
-            $messages = "booking date: $bookDate \n" .
-                    "number of people: $this->input->post('numPeople') \n" .
-                    "comment: $this->input->post('restaurantID')";
-
+//            $customerEmail = "soulivongfc@gmail.com";
+//            $customerName = "Soulivong";
+//            $restOwnerEmail = "soulivongse03451@fpt.edu.vn";
+//            $messages = "booking date: $bookDate \n" .
+//                    "number of people: $this->input->post('numPeople') \n" .
+//                    "comment: $this->input->post('restaurantID')";
             // inform restaurant owner
 //            $this->emailToRestOwner($customerEmail, $customerName, $restOwnerEmail, $messages);
-            redirect('booking/viewBooking/2');
+            redirect('booking/viewBooking/' . $userID);
         } else {
             echo 'Errors occur cannot make a reservation!';
             redirect();
@@ -82,7 +110,32 @@ class Booking extends CI_Controller {
     }
 
     // restaurant owner view booking list
-    public function manageReservation($restID) {
+    public function manageReservation() {
+        // check if user update booking status
+        // ------------------------------------
+        $isUpdate = false;
+        $formSubmit = $this->input->post('manageBooking');
+        if( $formSubmit != null ){
+            $bid = $this -> input -> post('bid');
+            $status = $this->input->post('bookingStatus');
+
+            if ($this->Booking_model->updateReservation($status, $bid)) {
+                $this->session->set_flashdata('msgUpdateBooking', '<div class="alert alert-success">Lưu thành công !!</div>');            
+
+                $isUpdate = true;
+            } else {
+                $this->session->set_flashdata('msgUpdateBooking', '<div class="alert alert-danger">Lưu thất bại !!</div>');            
+                $data['isUpdate'] = $isUpdate;
+                $isUpdate = false;
+            }
+        }
+        // ------------------------------------
+        $isOrder = false;
+        $restID = $this->session->userdata("ID");
+        if ($restID == null) {
+            redirect(base_url());
+            return;
+        }
         $blist = $this->Booking_model->getBookingList($restID);
         // if data exist in db
         if ($blist) {
@@ -119,6 +172,7 @@ class Booking extends CI_Controller {
                     'phoneUser' => $row->phoneUser,
                     'quantityMember' => $row->quantityMember,
                     'dateBooking' => $row->dateBooking,
+                    'request' => $row->commentBo,
                     'statusText' => $statusText,
                     // remaining dropdownlist values
                     'dropValue1' => $dropValue1,
@@ -129,17 +183,29 @@ class Booking extends CI_Controller {
                 array_push($data['list'], $brlist);
             }
 
+            $isOrder = true;
+            $data['isOrder'] = $isOrder;
+            $data['isUpdate'] = $isUpdate;
             $data['content'] = 'site/user/restaurant_owner/restaurant_manage_booking.phtml';
             $this->load->view('site/layout/layout.phtml', $data);
         } else {
-            echo 'No data in database';
+            $this->session->set_flashdata('msgOrder', '<div class="alert alert-danger">Chưa có đơn hàng nào !!</div>');
+            $data['isOrder'] = $isOrder;
+            $data['content'] = 'site/user/restaurant_owner/restaurant_manage_booking.phtml';
+            $this->load->view('site/layout/layout.phtml', $data);
         }
     }
 
     // customers view thier booking lists
-    public function viewBooking($userID = 2) {
-        // assume user id = 2
+    public function viewBooking() {
+        $userID = $this->session->userdata("ID");
+        if($userID == null){
+            redirect(base_url());
+            return;
+         }
+ 
         $blist = $this->Booking_model->getCustomerBookingList($userID);
+        $isBooked = false;
         // if users have maded reservation
         if ($blist) {
             $brid = $this->Booking_model->getBookRestId($userID);
@@ -169,6 +235,7 @@ class Booking extends CI_Controller {
                             'campaign' => $rating->descriptionRes,
                             'address' => $rating->address,
                             'serveDate' => $r->dateBooking,
+                            'bookingTime' => $r->bookingTime,
                             'quantityMember' => $r->quantityMember,
                             'statusText' => $statusText,
                             'avgRating' => $avgRating
@@ -182,11 +249,16 @@ class Booking extends CI_Controller {
 
             // sort data by dateBooking in descending order
             usort($data['list'], array(__CLASS__, 'sortByDateDesc'));
-
+            $isBooked = true;
+            $data['isBooked'] = $isBooked;
             $data['content'] = 'site/booking/user_history_booking.phtml';
             $this->load->view('site/layout/layout.phtml', $data);
         } else {
-            echo 'You have not performed any reservation!';
+            // echo 'You have not performed any reservation!';
+            $this->session->set_flashdata('msgBooking', '<div class="alert alert-danger">Bạn chưa đặt chỗ bao giờ !!</div>');
+            $data['isBooked'] = $isBooked;
+            $data['content'] = 'site/booking/user_history_booking.phtml';
+            $this->load->view('site/layout/layout.phtml', $data);
         }
     }
 
@@ -201,9 +273,20 @@ class Booking extends CI_Controller {
     // when restaurant update booking from restaurant_manage_booking page
     public function updateBooking($bid) {
         $status = $this->input->post('bookingStatus');
+        $isUpdate = false;
         if ($this->Booking_model->updateReservation($status, $bid)) {
-            echo 'updated!';
+            $this->session->set_flashdata('msgUpdateBooking', '<div class="alert alert-success">Lưu thành công !!</div>');            
+
+            $isUpdate = true;
+            $data['isUpdate'] = $isUpdate;
+            $data['content'] = 'site/user/restaurant_owner/restaurant_manage_booking.phtml';
+            $this->load->view('site/layout/layout.phtml', $data);
         } else {
+            $this->session->set_flashdata('msgUpdateBooking', '<div class="alert alert-danger">Lưu thất bại !!</div>');            
+            $data['isUpdate'] = $isUpdate;
+            $data['content'] = 'site/user/restaurant_owner/restaurant_manage_booking.phtml';
+            $this->load->view('site/layout/layout.phtml', $data);
+
             echo 'Errors!';
         }
     }

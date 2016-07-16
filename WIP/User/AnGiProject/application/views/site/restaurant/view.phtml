@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="<?php echo base_url()?>css/viewRestaurant.css">
+<link rel="stylesheet" href="<?php echo base_url() ?>css/viewRestaurant.css">
 
 <div class="container">
     <div class="row">
@@ -25,7 +25,11 @@
 
                 <div class="stick-point"></div>
 
-                <?php $this->load->view('site/booking/index.phtml') ?>
+                <?php
+                // send restaurant id from view booking -> index.phtml
+                $myView['fromView'] = $restUrl;
+                $this->load->view('site/booking/index.phtml', $myView);
+                ?>
 
 
             </div>
@@ -115,9 +119,9 @@
                                 <p>
                                     <strong>Không gian:</strong><br/>
 
-                                        - Phong cách đồng quê lãng mạn, độc đáo<br/>
+                                    - Phong cách đồng quê lãng mạn, độc đáo<br/>
 
-                                        - Sức chứa 200 khách
+                                    - Sức chứa 200 khách
                                 </p>
 
                                 <p>
@@ -141,7 +145,7 @@
                                 <p>
                                     Hà Thành xô bồ dân tứ xứ đổ về, kẻ Trung, người Bắc, ai ra đi cũng mang theo trong mình tình quê hương, tình bạn bè, anh em làm thứ vốn liếng dắt thân lập nghiệp. Khi thứ chân tình nồng hậu của người quê, đất cũ đôi khi bị lớp bụi của tiền bạc, lo toan phủ mờ, những lúc thấy mệt mỏi và nao nao ấy, anh em lại rủ nhau về Ao Quán, ngồi dưới gốc chuối, rặng dừa để chén tạc chén thù, chia ngọt sẻ bùi câu chuyện bôn ba nơi đất khách.
                                 </p>
-                                
+
                                 <img src="http://cdn.pastaxi-manager.onepas.vn/content/uploads/articles/aoquan/nha-hang-ao-quan-ngo-19-dong-tac-1.jpg">
                                 <p style="text-align: center"><span style="font-size: 12px">Ao Quán Đông Tác – Chốn hẹn của những người quen </span></p>
 
@@ -178,13 +182,17 @@
                                 <style>#gmap_canvas img{max-width:none!important;background:none!important}</style>
                             </div>
                             <script type='text/javascript'>
-                                function init_map(){
-                                    var myOptions = {zoom:13,center:new google.maps.LatLng(21.022951879558534,105.81340667091669),mapTypeId: google.maps.MapTypeId.ROADMAP};
+                                function init_map() {
+                                    var myOptions = {zoom: 13, center: new google.maps.LatLng(21.022951879558534, 105.81340667091669), mapTypeId: google.maps.MapTypeId.ROADMAP};
                                     map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);
-                                    marker = new google.maps.Marker({map: map,position: new google.maps.LatLng(21.022951879558534,105.81340667091669)});
-                                    infowindow = new google.maps.InfoWindow({content:'<strong>Ao quán</strong><br>Số 18 Ngõ 19 Đông Tác, Phường Kim Liên, Quận Đống Đa, Hà Nội<br>'});
-                                    google.maps.event.addListener(marker, 'click', function(){infowindow.open(map,marker);});infowindow.open(map,marker);
-                                }google.maps.event.addDomListener(window, 'load', init_map);
+                                    marker = new google.maps.Marker({map: map, position: new google.maps.LatLng(21.022951879558534, 105.81340667091669)});
+                                    infowindow = new google.maps.InfoWindow({content: '<strong>Ao quán</strong><br>Số 18 Ngõ 19 Đông Tác, Phường Kim Liên, Quận Đống Đa, Hà Nội<br>'});
+                                    google.maps.event.addListener(marker, 'click', function () {
+                                        infowindow.open(map, marker);
+                                    });
+                                    infowindow.open(map, marker);
+                                }
+                                google.maps.event.addDomListener(window, 'load', init_map);
                             </script>
                         </div>
                     </div>
@@ -207,27 +215,27 @@
                         </div>
                         <ul class="item-content item-cat">
                             <?php
-                            for($i=0; $i<4; $i++){
+                            for ($i = 0; $i < 4; $i++) {
                                 ?>
                                 <li class="col-md-3">
                                     <a style="display: block; position: relative" class="img-item" href="">
                                         <img src="http://cdn.pasgo.vn/anh-diem-den/nha-hang-ao-quan-ngo-19-dong-tac-avatarjpg-5138.jpg">
                                         <div class="item-infor">
                                             <label class="item-name item-name-sm">Ao quán</label>
-                                <span class="rate-star">
-                                    <i class="fa fa-star filled" aria-hidden="true"></i>
-                                    <i class="fa fa-star filled" aria-hidden="true"></i>
-                                    <i class="fa fa-star filled" aria-hidden="true"></i>
-                                    <i class="fa fa-star filled" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                </span>
-                                <span class="rate-dollar">
-                                    <i class="fa fa-dollar filled" aria-hidden="true"></i>
-                                    <i class="fa fa-dollar filled" aria-hidden="true"></i>
-                                    <i class="fa fa-dollar filled" aria-hidden="true"></i>
-                                    <i class="fa fa-dollar" aria-hidden="true"></i>
-                                    <i class="fa fa-dollar" aria-hidden="true"></i>
-                                </span>
+                                            <span class="rate-star">
+                                                <i class="fa fa-star filled" aria-hidden="true"></i>
+                                                <i class="fa fa-star filled" aria-hidden="true"></i>
+                                                <i class="fa fa-star filled" aria-hidden="true"></i>
+                                                <i class="fa fa-star filled" aria-hidden="true"></i>
+                                                <i class="fa fa-star" aria-hidden="true"></i>
+                                            </span>
+                                            <span class="rate-dollar">
+                                                <i class="fa fa-dollar filled" aria-hidden="true"></i>
+                                                <i class="fa fa-dollar filled" aria-hidden="true"></i>
+                                                <i class="fa fa-dollar filled" aria-hidden="true"></i>
+                                                <i class="fa fa-dollar" aria-hidden="true"></i>
+                                                <i class="fa fa-dollar" aria-hidden="true"></i>
+                                            </span>
                                             <label class="item-address item-address-sm">18 Ngõ 19 Đông Tác, Quận Đống Đa</label>
                                         </div>
                                     </a>

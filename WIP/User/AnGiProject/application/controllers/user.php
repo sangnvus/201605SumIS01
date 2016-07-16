@@ -14,6 +14,10 @@ class User extends CI_Controller {
 
     public function index() {
          $ID = $this->session->userdata("ID");
+         if($ID == null){
+            redirect(base_url());
+            return;
+         }
         //$ID = 1;
         //set validation rules
         $this->form_validation->set_rules('fname', 'First Name', 'trim|required|min_length[3]|max_length[30]');
@@ -99,7 +103,11 @@ class User extends CI_Controller {
 
     public function change_Password() {
         $ID = $this->session->userdata("ID");
-
+        if($ID == null){
+            redirect(base_url());
+            return;
+         }
+        
         $opw = $this->input->post('opassword');
         $npw = $this->input->post('npassword');
         $cpw = $this->input->post('cpassword');
@@ -161,7 +169,6 @@ class User extends CI_Controller {
                     'lastNameUser' => $this->input->post('lname'),
                     'dateOfBirthUser' => $this->input->post('dob'),
                     'genderUser' => $this->input->post('gender'),
-                    'descriptionUser' => $this->input->post('des'),
                     'emailUser' => $this->input->post('email'),
                     'phoneUser' => $this->input->post('phone'),
                     'authorityUser' => $this->input->post('autho'),
@@ -176,7 +183,6 @@ class User extends CI_Controller {
                     'lastNameUser' => $this->input->post('lname'),
                     'dateOfBirthUser' => $this->input->post('dob'),
                     'genderUser' => $this->input->post('gender'),
-                    'descriptionUser' => $this->input->post('des'),
                     'emailUser' => $this->input->post('email'),
                     'phoneUser' => $this->input->post('phone'),
                     'authorityUser' => $this->input->post('autho'),
@@ -210,19 +216,17 @@ class User extends CI_Controller {
             "ID" => $data[0]['userID'],
             "Type" => $data[0]['authorityUser'],
             );
-
             $this->session->set_userdata($data);
-            // echo "name :";
-            // echo $this->session->userdata("Type");   
+            redirect(base_url());
         }
-            // else{
-            //     echo "Wrong!";
-            //     die();
-            // }
+        else{
+            $this->session->set_flashdata('msg', '<div class="alert alert-danger text-center">Thông tin đăng nhập không đúng !!</div>');
+            redirect(base_url());
+        }
     }
     public function sign_out(){
         $this->session->sess_destroy();
-        echo "sign_out";
+        redirect(base_url());
     }
 
 }

@@ -1,4 +1,4 @@
-﻿<div class="container">
+<div class="container">
     <div class="row">
 
         <div class="topdisplay-item">
@@ -81,9 +81,9 @@
 
             <ul class="item-content">
                 <?php
-                $limit = 0;
+                $lim = 0;
                 foreach ($highestDiscount as $row) {
-                    if ($limit == $limitDis) {
+                    if ($lim == $limitDis) {
                         break;
                     }
                     ?>
@@ -118,7 +118,7 @@
                         </div>
                     </li>
                     <?php
-                    $limit ++;
+                    $lim ++;
                 }
                 ?>
             </ul>

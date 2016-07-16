@@ -9,6 +9,7 @@ class Search extends CI_Controller {
         $this->load->database();
         $this->load->model('Search_model');
         $this->load->helper(array('form', 'url'));
+        $this -> load -> library('session');
     }
     
     public function index(){

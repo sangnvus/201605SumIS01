@@ -7,9 +7,9 @@ class Home extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->database();
-        $this->load->helper(array('url', 'form',));
+        $this->load->helper(array('url', 'form'));
         $this->load->model('Restaurants_model');
-        $this->load->library(array('session'));
+        $this -> load -> library('session');
     }
 
     public function index() {
