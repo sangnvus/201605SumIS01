@@ -6,7 +6,7 @@
             <div class="title-content">
                 <div class="title-row">
                     <div class="col-md-12">
-                        <h3>14 kết quả tìm kiếm cho "ăn"</h3>
+                        <?php echo "<h3>" . $amount . " kết quả tìm kiếm về \"" . $keyword . "\"</h3>"; ?>
                     </div>
                 </div>
 
@@ -44,35 +44,37 @@
             <div class="col-md-10">
                 <ul class="item-content item-cat">
                     <?php
-                    for($i=0; $i<20; $i++){
+                    foreach ($food as $row) {
                         ?>
                         <li class="col-md-3">
                             <a style="display: block; position: relative" class="img-item" href="">
-                                <img src="http://cdn.pasgo.vn/anh-diem-den/nha-hang-ao-quan-ngo-19-dong-tac-avatarjpg-5138.jpg">
+                                <img src="<?php echo $row->addressImage; ?>">
                                 <div class="item-infor">
-                                    <label class="item-name item-name-sm">Ao quán</label>
-                                <span class="rate-star">
-                                    <i class="fa fa-star filled" aria-hidden="true"></i>
-                                    <i class="fa fa-star filled" aria-hidden="true"></i>
-                                    <i class="fa fa-star filled" aria-hidden="true"></i>
-                                    <i class="fa fa-star filled" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                </span>
-                                <span class="rate-dollar">
-                                    <i class="fa fa-dollar filled" aria-hidden="true"></i>
-                                    <i class="fa fa-dollar filled" aria-hidden="true"></i>
-                                    <i class="fa fa-dollar filled" aria-hidden="true"></i>
-                                    <i class="fa fa-dollar" aria-hidden="true"></i>
-                                    <i class="fa fa-dollar" aria-hidden="true"></i>
-                                </span>
-                                    <label class="item-address item-address-sm">18 Ngõ 19 Đông Tác, Quận Đống Đa</label>
+                                    <label class="item-name item-name-sm"><?php echo $row->nameFo . ' - ' . $row->nameRe; ?></label>
+                                    <span class="rate-star"><?php echo $row->average; ?>
+                                        <i class="fa fa-star filled" aria-hidden="true"></i>
+                                        <i class="fa fa-star filled" aria-hidden="true"></i>
+                                        <i class="fa fa-star filled" aria-hidden="true"></i>
+                                        <i class="fa fa-star filled" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                    </span>
+                                    <span class="rate-dollar">
+                                        <i class="fa fa-dollar filled" aria-hidden="true"></i>
+                                        <i class="fa fa-dollar filled" aria-hidden="true"></i>
+                                        <i class="fa fa-dollar filled" aria-hidden="true"></i>
+                                        <i class="fa fa-dollar" aria-hidden="true"></i>
+                                        <i class="fa fa-dollar" aria-hidden="true"></i>
+                                    </span>
+                                    <label class="item-address item-address-sm"><?php echo $row->address; ?></label>
                                 </div>
                             </a>
 
                             <div class="category-itemdetail" style="border: 1px solid #e0e0e0; text-align: center">
-                                <p class="sale-content">Giảm <strong>20%</strong></p>
-                                <p class="quick-description">Gọi món Việt ba miền</p>
-                                <button class="place">Đặt chỗ ngay</button>
+                                <p class="sale-content">Giảm <strong><?php echo $row->discount; ?></strong></p>
+                                <p class="quick-description"><?php echo $row->nameCOR; ?></p>
+                                <?php echo form_open('booking/reserve/' . $row->restaurantID); ?>
+                                <input type="submit" class="place" value="Đặt chỗ ngay" />
+                                <?php echo form_close(); ?> 
                             </div>
                         </li>
                         <?php

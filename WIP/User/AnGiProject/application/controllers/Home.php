@@ -13,26 +13,32 @@ class Home extends CI_Controller {
     }
 
     public function index() {
+        // sortby restaurant statement
+        define("sortByAvg", "average");
+        define("sortByDisc", "discount");
 
+        // number of restaurants to display
+        define("showTopRating", 4);
+        define("showhighestDiscount", 8);
         // retrieve data from model
-        $rate = $this->Restaurants_model->getInterestingRestaurants('rate');
-        $discount = $this->Restaurants_model->getInterestingRestaurants('discount');
+        $rate = $this->Restaurants_model->getInterestingRestaurants(sortByAvg);
+        $discount = $this->Restaurants_model->getInterestingRestaurants(sortByDisc);
+        
+        // if there is data returned from database
+        if ($rate) {
 
-        if ($this->Restaurants_model->getInterestingRestaurants('isReturn')) {
-            // prepare data to view
-            $data['rate'] = $rate;
-            $data['discount'] = $discount;
-            $data['limitRate'] = 4;
-            $data['limitDis'] = 8;
+            $data['topRating'] = $rate;
+            $data['highestDiscount'] = $discount;
+
+            $data['limitRate'] = showTopRating;
+            $data['limitDis'] = showhighestDiscount;
 
             // return to view
             $data['content'] = 'site/home/index/index.phtml';
             $this->load->view('site/layout/layout.phtml', $data);
-        }else{
+        } else {
             echo "No information exists in database!";
-            die();
-            $data['content'] = 'site/home/index/index.phtml';
-            $this->load->view('site/layout/layout.phtml', $data);
         }
     }
+
 }
