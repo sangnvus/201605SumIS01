@@ -2,7 +2,7 @@
     <div class="row">
         <div class="breadcrumb"></div>
         <?php $this->load->helper('url'); ?>
-        <div class="topdisplay-item" style="display: table">
+        <div class="topdisplay-item" style="display: table; width: 100%">
             <div class="title-content">
                 <div class="title-row">
                     <div class="col-md-12">
@@ -32,14 +32,19 @@
 
                 <div class="sidebar-content">
                     <h4>Quận/Huyện</h4>
-                    <ul class="sidebar-list">
-                        <li><a href="<?php echo base_url(); ?>Category/index/2/001">Ba Đình</a></li>
-                        <li><a href="<?php echo base_url(); ?>Category/index/2/002">Hoàn Kiếm</a></li>
-                        <li><a href="<?php echo base_url(); ?>Category/index/2/003">Thanh Xuân</a></li>
-                        <li><a href="<?php echo base_url(); ?>Category/index/2/004">Hai Bà Trưng</a></li>
-                        <li><a href="<?php echo base_url(); ?>Category/index/2/005">Đống Đa</a></li>
-                        <li><a href="<?php echo base_url(); ?>Category/index/2/006">Cầu Giấy</a></li>
-                    </ul>
+
+                    <div class="form-group">
+                        <select class="form-control" ID="district" size="1">
+                        <option value="" >chọn quận huyện</option>
+                            <?php 
+                                foreach ($districtData as $key => $row)
+                                {
+                                   echo '<option value="' . $row['districtid'] . '">' .$row['typeDis'].' '. $row['nameDis'] . '</option>';
+                                }
+                            ?>
+                        </select>
+                    </div>
+
                 </div>
             </div>
 
@@ -109,15 +114,35 @@
                 </ul>
             </div>
         </div>
-
+        <!-- <?php echo $pagination; ?> -->
         <div style="text-align: center">
             <ul class="pagination">
-                <li><a href="">1</a></li>
+            <?php 
+            for ($k = 1; $k <= $pages; $k++) {
+
+                echo '<li><a href="' . base_url(). 'Category/index/' .$type.'/'.$ID.'/'.$k. '">' .$k.'</a></li>';
+
+            }
+            ?>
+           
+<!--                 <li><a href="">1</a></li>
                 <li><a href="">2</a></li>
                 <li><a href="">3</a></li>
                 <li><a href="">4</a></li>
-                <li><a href="">5</a></li>
+                <li><a href="">5</a></li> -->
             </ul>
         </div>
     </div>
 </div>
+<script type="text/javascript">
+
+$('#district').change(
+    function() {
+        var e = document.getElementById("district");
+        var ID = e.options[e.selectedIndex].value;
+        console.log(ID);
+        window.location.replace("<?php echo base_url(); ?>Category/index/2/"+ID);
+    }
+);
+
+</script>
