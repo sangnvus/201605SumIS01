@@ -54,7 +54,9 @@ class Booking extends CI_Controller {
 
         // check to receive service date
         if ($bookDate < $today) {
-            echo 'You cannot enter the passed date!';
+            $this->session->set_flashdata('dateErrorMsg', '<div class="alert alert-danger">| You cannot enter the passed date!!!</div>');
+            $restID = $this->input->post('restaurantID');
+            redirect('booking/reserve/' . $restID);
         }
         //user id will be from login process
         $data = array(
@@ -113,20 +115,20 @@ class Booking extends CI_Controller {
     public function manageReservation() {
         // check if user update booking status
         // ------------------------------------
-        $isUpdate = false;
+        $isUpdate = null;
         $formSubmit = $this->input->post('manageBooking');
-        if( $formSubmit != null ){
-            $bid = $this -> input -> post('bid');
+        if ($formSubmit != null) {
+            $bid = $this->input->post('bid');
             $status = $this->input->post('bookingStatus');
 
             if ($this->Booking_model->updateReservation($status, $bid)) {
-                $this->session->set_flashdata('msgUpdateBooking', '<div class="alert alert-success">Lưu thành công !!</div>');            
+                $this->session->set_flashdata('msgUpdateBooking', '<div class="alert alert-success">Lưu thành công !!</div>');
 
                 $isUpdate = true;
             } else {
-                $this->session->set_flashdata('msgUpdateBooking', '<div class="alert alert-danger">Lưu thất bại !!</div>');            
-                $data['isUpdate'] = $isUpdate;
+                $this->session->set_flashdata('msgUpdateBooking', '<div class="alert alert-danger">Lưu thất bại !!</div>');
                 $isUpdate = false;
+                $data['isUpdate'] = $isUpdate;
             }
         }
         // ------------------------------------
@@ -191,6 +193,7 @@ class Booking extends CI_Controller {
         } else {
             $this->session->set_flashdata('msgOrder', '<div class="alert alert-danger">Chưa có đơn hàng nào !!</div>');
             $data['isOrder'] = $isOrder;
+            $data['isUpdate'] = $isUpdate;
             $data['content'] = 'site/user/restaurant_owner/restaurant_manage_booking.phtml';
             $this->load->view('site/layout/layout.phtml', $data);
         }
@@ -199,11 +202,11 @@ class Booking extends CI_Controller {
     // customers view thier booking lists
     public function viewBooking() {
         $userID = $this->session->userdata("ID");
-        if($userID == null){
+        if ($userID == null) {
             redirect(base_url());
             return;
-         }
- 
+        }
+
         $blist = $this->Booking_model->getCustomerBookingList($userID);
         $isBooked = false;
         // if users have maded reservation
@@ -254,7 +257,7 @@ class Booking extends CI_Controller {
             $data['content'] = 'site/booking/user_history_booking.phtml';
             $this->load->view('site/layout/layout.phtml', $data);
         } else {
-            // echo 'You have not performed any reservation!';
+            // when user have not performed any reservation
             $this->session->set_flashdata('msgBooking', '<div class="alert alert-danger">Bạn chưa đặt chỗ bao giờ !!</div>');
             $data['isBooked'] = $isBooked;
             $data['content'] = 'site/booking/user_history_booking.phtml';
@@ -271,24 +274,23 @@ class Booking extends CI_Controller {
     }
 
     // when restaurant update booking from restaurant_manage_booking page
-    public function updateBooking($bid) {
-        $status = $this->input->post('bookingStatus');
-        $isUpdate = false;
-        if ($this->Booking_model->updateReservation($status, $bid)) {
-            $this->session->set_flashdata('msgUpdateBooking', '<div class="alert alert-success">Lưu thành công !!</div>');            
-
-            $isUpdate = true;
-            $data['isUpdate'] = $isUpdate;
-            $data['content'] = 'site/user/restaurant_owner/restaurant_manage_booking.phtml';
-            $this->load->view('site/layout/layout.phtml', $data);
-        } else {
-            $this->session->set_flashdata('msgUpdateBooking', '<div class="alert alert-danger">Lưu thất bại !!</div>');            
-            $data['isUpdate'] = $isUpdate;
-            $data['content'] = 'site/user/restaurant_owner/restaurant_manage_booking.phtml';
-            $this->load->view('site/layout/layout.phtml', $data);
-
-            echo 'Errors!';
-        }
-    }
-
+//    public function updateBooking($bid) {
+//        $status = $this->input->post('bookingStatus');
+//        $isUpdate = false;
+//        if ($this->Booking_model->updateReservation($status, $bid)) {
+//            $this->session->set_flashdata('msgUpdateBooking', '<div class="alert alert-success">Lưu thành công !!</div>');            
+//
+//            $isUpdate = true;
+//            $data['isUpdate'] = $isUpdate;
+//            $data['content'] = 'site/user/restaurant_owner/restaurant_manage_booking.phtml';
+//            $this->load->view('site/layout/layout.phtml', $data);
+//        } else {
+//            $this->session->set_flashdata('msgUpdateBooking', '<div class="alert alert-danger">Lưu thất bại !!</div>');            
+//            $data['isUpdate'] = $isUpdate;
+//            $data['content'] = 'site/user/restaurant_owner/restaurant_manage_booking.phtml';
+//            $this->load->view('site/layout/layout.phtml', $data);
+//
+//            echo 'Errors!';
+//        }
+//    }
 }

@@ -9,7 +9,7 @@ class Home extends CI_Controller {
         $this->load->database();
         $this->load->helper(array('url', 'form'));
         $this->load->model('Restaurants_model');
-        $this -> load -> library('session');
+        $this->load->library('session');
     }
 
     public function index() {
@@ -23,22 +23,20 @@ class Home extends CI_Controller {
         // retrieve data from model
         $rate = $this->Restaurants_model->getInterestingRestaurants(sortByAvg);
         $discount = $this->Restaurants_model->getInterestingRestaurants(sortByDisc);
+
+
+        $data['topRating'] = $rate;
+        $data['highestDiscount'] = $discount;
+
+        $data['limitRate'] = showTopRating;
+        $data['limitDis'] = showhighestDiscount;
+
+        // return to view
+        $data['dbMsg'] = "<div class='alert alert-danger text-center'>chưa có thông tin nhà hàng!!!</div>";
         
-        // if there is data returned from database
-        if ($rate) {
+        $data['content'] = 'site/home/index/index.phtml';
+        $this->load->view('site/layout/layout.phtml', $data);
 
-            $data['topRating'] = $rate;
-            $data['highestDiscount'] = $discount;
-
-            $data['limitRate'] = showTopRating;
-            $data['limitDis'] = showhighestDiscount;
-
-            // return to view
-            $data['content'] = 'site/home/index/index.phtml';
-            $this->load->view('site/layout/layout.phtml', $data);
-        } else {
-            echo "No information exists in database!";
-        }
     }
 
 }

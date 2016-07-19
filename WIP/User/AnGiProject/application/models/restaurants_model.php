@@ -44,12 +44,9 @@ class Restaurants_model extends CI_Model {
 
         $query = $this->db->query($sql);
 
-        if ($query->num_rows() > 0) {
-            $data = $query->result();
-            return $data;
-        } else {
-            return NULL;
-        }
+
+        $data = $query->result();
+        return $data;
     }
 
 }

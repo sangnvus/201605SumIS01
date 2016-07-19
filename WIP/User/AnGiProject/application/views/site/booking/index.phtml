@@ -1,24 +1,25 @@
 ﻿<div class="restaurant-place shadow-outside">
-    <p>Đặt chỗ trước khi đến</p>
-
+    <p>Đặt chỗ trước khi đến <?php echo $this->session->flashdata('dateErrorMsg'); ?></p>
     <?php
 //     if user restaurant id is not set by booking -> reserve function
-    if(!isset($restID)){
+    if (!isset($restID)) {
         $restID = $fromView;
     }
     $userID = $this->session->userdata("ID");
-    echo form_open('booking/makeReservation/' . $userID);
+    if ($userID != null) {
+        echo form_open('booking/makeReservation/' . $userID);
+    }
     ?>
     <form class="booking-res">
         <!--get restaurant id from url (hide this field) -->
         <input type="hidden" name="restaurantID" value="<?php echo $restID; ?>" />
         <p>
-            <input type="number" name="numPeople" placeholder="Số người đến" min="1">
+            <input type="number" name="numPeople" placeholder="Số người đến" min="1" required>
             <i class="fa fa-user" aria-hidden="true"></i>
         </p>
 
         <p>
-            <input placeholder="Ngày" class="textbox-n" type="text" name="dateBooking" onfocus="(this.type = 'date')" onblur="(this.type = 'text')" id="date">
+            <input placeholder="Ngày" class="textbox-n" type="text" name="dateBooking" onfocus="(this.type = 'date')" onblur="(this.type = 'text')" id="date" required=>
             <i class="fa fa-calendar" aria-hidden="true"></i>
         </p>
         <p>
@@ -27,15 +28,18 @@
         <p>
             <input placeholder="Comment" type="textArea" name="bcomment">
         </p>
-
-        <!-- Need db field -->
-<!--        <p>
-            <input placeholder="Giờ" class="textbox-n" type="text" onfocus="(this.type='time')" onblur="(this.type='text')" id="date">
-            <i class="fa fa-clock-o" aria-hidden="true"></i>
-        </p>-->
-
-        <input type="submit" value="đặt chỗ ngay" />
-        <?php echo form_close(); ?>
+       
+        <?php if ($userID == null) { ?>
+            <!--trigger modal from login page-->
+            <div>
+                <button type = "button" class = "btn btn-info btn-lg" data-toggle = "modal" data-target = "#myModal">đặt chỗ ngay</button>
+            </div>
+            <?php
+        } else {
+            echo '<input type="submit" value="đặt chỗ ngay" />';
+        }
+        echo form_close();
+        ?>
         <p>(Hoàn toàn không mất phí)</p>
 
         <span>Hoặc</span>
