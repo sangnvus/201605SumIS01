@@ -9,8 +9,8 @@
                 <tr>
                     <td><img src="http://cdn.pasgo.vn/images/Profile/no_avatar.png"></td>
                     <td>
-                        <p>ID ĂnGì: <strong><?php echo $userData[0]['userID']; ?></strong></p>
-                        <p>ĐT: <strong><?php echo $userData[0]['phoneUser']; ?></strong></p>
+                        <p>ID ĂnGì: <strong><?php echo $this->session->userdata("ID"); ?></strong></p>
+                        <p>ĐT: <strong><?php echo $this->session->userdata("phone"); ?></strong></p>
                     </td>
                 </tr>
 

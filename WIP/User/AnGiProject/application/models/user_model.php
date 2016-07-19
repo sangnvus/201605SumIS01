@@ -67,10 +67,10 @@ class User_model extends CI_Model
 		// echo "  /   ".$npw."  /   ";
 		
 		
-    //     $this->db->select('passwordUser');
-    //     $this->db->from('users'); 
-    //     $this->db->where('userID',$ID);
-    //     $query = $this->db->get();
+        $this->db->select('passwordUser');
+        $this->db->from('users'); 
+        $this->db->where('userID',$ID);
+        $query = $this->db->get();
 
     //     $sql = "SELECT userID, passwordUser FROM users WHERE userID = " . $ID;
     //     $query = $this -> db -> query($sql);

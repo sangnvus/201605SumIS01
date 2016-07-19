@@ -215,6 +215,7 @@ class User extends CI_Controller {
             "lname" => $data[0]['lastNameUser'],
             "ID" => $data[0]['userID'],
             "Type" => $data[0]['authorityUser'],
+            "phone" => $data[0]['phoneUser'],
             );
             $this->session->set_userdata($data);
             redirect(base_url());

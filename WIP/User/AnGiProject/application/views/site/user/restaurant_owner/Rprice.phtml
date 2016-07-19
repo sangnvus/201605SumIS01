@@ -11,8 +11,8 @@
                 <tr>
                     <td><img src="http://cdn.pasgo.vn/images/Profile/no_avatar.png"></td>
                     <td>
-                        <p>ID ĂnGì: <strong>123</strong></p>
-                        <p>ĐT: <strong>01646223394</strong></p>
+                        <p>ID ĂnGì: <strong><?php echo $this->session->userdata("ID"); ?></strong></p>
+                        <p>ĐT: <strong><?php echo $this->session->userdata("phone"); ?></strong></p>
                     </td>
                 </tr>
 
@@ -34,7 +34,7 @@
         </div>
 
         <div class="col-md-9">
-            <h1>Đổi mật khẩu</h1>
+            <h1>Bảng giá</h1>
             <form class="edit-user">
                 <ul>
                     <li>

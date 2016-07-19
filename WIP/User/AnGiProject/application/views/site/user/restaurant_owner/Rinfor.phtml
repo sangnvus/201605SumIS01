@@ -11,8 +11,8 @@
                 <tr>
                     <td><img src="http://cdn.pasgo.vn/images/Profile/no_avatar.png"></td>
                     <td>
-                        <p>ID ĂnGì: <strong>123</strong></p>
-                        <p>ĐT: <strong>01646223394</strong></p>
+                        <p>ID ĂnGì: <strong><?php echo $this->session->userdata("ID"); ?></strong></p>
+                        <p>ĐT: <strong><?php echo $this->session->userdata("phone"); ?></strong></p>
                     </td>
                 </tr>
 
@@ -34,24 +34,40 @@
         </div>
 
         <div class="col-md-9">
-            <h1>Đổi mật khẩu</h1>
+            <h1>Thông tin nhà hàng</h1>
             <form class="edit-user">
                 <ul>
                     <li>
-                        <label>Loại hình ẩm thực:</label> <input type="text" value="">
+                        <label>Loại hình ẩm thực:</label> 
+                        <select class="" name="category" size="1">
+                            <?php 
+                                foreach ($categoriesData as $key => $row)
+                                {
+                                   echo '<option value="' . $row['categoryOfResID'] . '">' .$row['nameCOR']. '</option>';
+                                }
+                            ?>
+                        </select>
+                    </li>
+
+                    <li>
+                        <label>Món đặc sắc:</label> <input type="text" value="" name = "favouriteFood">
                     </li>
                     <li>
-                        <label>Món đặc sắc:</label> <input type="text" value="">
+                        <label>Giá trung bình/người (VNĐ):</label>  <input type="text" value="" name = "minPrice">
+                        <input type="text" value="" name = "maxPrice">
+ 
                     </li>
                     <li>
-                        <label>Giá trung bình/người:</label> <input type="text" value="">
+                        <label>Không gian:</label> <input type="text" value="" name="spaceRes">
                     </li>
                     <li>
-                        <label>Không gian:</label> <input type="text" value="">
+                        <label>Chỗ để ô tô:</label> <input type="checkbox" name="carParkingRes" value="1"><br>
                     </li>
                     <li>
-                        <label>Chỗ để ô tô:</label> <input type="text" value="">
+                        <label>giờ đóng/mở cửa:</label> <input type="time" value="" name="closeTimeRe">
+                         đến &nbsp&nbsp<input type="time" value="" name="openTimeRe">
                     </li>
+
                     <li>
                         <label>Điểm đặc trưng khác:</label> <input type="text" value="">
                     </li>
