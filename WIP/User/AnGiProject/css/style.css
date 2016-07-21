@@ -9,7 +9,7 @@ a:hover, a:active{
     text-decoration: none;
 }
 
-input[type="text"], input[type="email"], input[type="password"], input[type="search"], input[type="telephone"], input[type="tel"], input[type="number"], input[type="time"], input[type="submit"], input[type="date"], textarea, button, select {
+textarea, input[type="text"], input[type="email"], input[type="password"], input[type="search"], input[type="telephone"], input[type="tel"], input[type="number"], input[type="time"], input[type="submit"], input[type="date"], textarea, button, select {
     border: 1px solid #cccccc;
     padding: 6px 30px;
     font-size: 14px;
@@ -19,7 +19,7 @@ input[type="text"], input[type="email"], input[type="password"], input[type="sea
     color: #555;
 }
 
-input:focus, select:focus, button:focus, textarea:focus{
+input:focus, select:focus, button:focus, textarea:focus, select:focus{
     outline: 0;
 }
 

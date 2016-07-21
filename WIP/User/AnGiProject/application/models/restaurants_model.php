@@ -6,6 +6,8 @@ class Restaurants_model extends CI_Model {
         parent::__construct();
     }
 
+
+
     function getRestOwner($ID) {
         $sql = " SELECT * FROM restaurants r, users u " .
                 " WHERE r.userID = u.userID AND authorityUser = 1 AND r.restaurantID = " . $ID . "; ";
@@ -15,6 +17,21 @@ class Restaurants_model extends CI_Model {
     }
 
 // return specific restaurant
+    public function getResByUser($userID){
+        $this->db->select('*');
+        $this->db->from('restaurants r'); 
+        $this->db->join('address a', 'r.addressID = a.addressID');
+        $this->db->where('r.userID',$userID);  
+        $query = $this->db->get(); 
+        $data=$query->result_array();
+        return  $data;
+    }
+
+    public function updateResInfo($id,$data){
+        $this->db->where('restaurantID', $id);
+        return $this->db->update("restaurants", $data);
+    }
+    
     public function getSepecificRestaurant($id) {
 
         $sql = " SELECT r.restaurantID, img.imageID,addressImage, nameRe, descriptionRes, nameImage, AVG(rateValue) AS average, discount, address " .
@@ -44,9 +61,12 @@ class Restaurants_model extends CI_Model {
 
         $query = $this->db->query($sql);
 
-
-        $data = $query->result();
-        return $data;
+        if ($query->num_rows() > 0) {
+            $data = $query->result();
+            return $data;
+        } else {
+            return NULL;
+        }
     }
 
 }

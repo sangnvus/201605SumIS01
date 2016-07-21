@@ -19,48 +19,44 @@
 
             <ul class="item-content">
                 <?php
-                if (count($topRating) > 0) {
-                    $limit = 0;
-                    foreach ($topRating as $row) {
-                        if ($limit == $limitRate) {
-                            break;
-                        }
-                        ?>
-                        <li class="col-md-3">
-                            <a style="display: block; position: relative" class="img-item" href="">
-                                <img src="<?php echo $row->addressImage; ?>">
-                                <div class="item-infor">
-                                    <label class="item-name"><?php echo $row->nameRe; ?></label>
-                                    <span class="rate-star"><?php echo $row->average; ?><!-- fill in the star by rate value -->
-                                        <i class="fa fa-star filled" aria-hidden="true"></i>
-                                        <i class="fa fa-star filled" aria-hidden="true"></i>
-                                        <i class="fa fa-star filled" aria-hidden="true"></i>
-                                        <i class="fa fa-star filled" aria-hidden="true"></i>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                    </span>
-                                    <span class="rate-dollar">
-                                        <i class="fa fa-dollar filled" aria-hidden="true"></i>
-                                        <i class="fa fa-dollar filled" aria-hidden="true"></i>
-                                        <i class="fa fa-dollar filled" aria-hidden="true"></i>
-                                        <i class="fa fa-dollar" aria-hidden="true"></i>
-                                        <i class="fa fa-dollar" aria-hidden="true"></i>
-                                    </span>
-                                    <label class="item-address"><?php echo $row->address; ?></label>
-                                </div>
-                            </a>
-                            <div style="border: 1px solid #e0e0e0; text-align: center">
-                                <p class="sale-content">Giảm <strong><?php echo $row->discount; ?>%</strong></p>
-                                <p class="quick-description"><?php echo $row->descriptionRes; ?></p>
-                                <?php echo form_open('booking/reserve/' . $row->restaurantID); ?>
-                                <input type="submit" class="place" value="Đặt chỗ ngay" />
-                                <?php echo form_close(); ?> 
-                            </div>
-                        </li>
-                        <?php
-                        $limit++;
+                $limit = 0;
+                foreach ($topRating as $row) {
+                    if ($limit == $limitRate) {
+                        break;
                     }
-                } else {
-                    echo $dbMsg;
+                    ?>
+                    <li class="col-md-3">
+                        <a style="display: block; position: relative" class="img-item" href="<?php echo base_url().'restaurant/view/1'; ?>">
+                            <img src="<?php echo $row->addressImage; ?>">
+                            <div class="item-infor">
+                                <label class="item-name"><?php echo $row->nameRe; ?></label>
+                                <span class="rate-star"><?php echo $row->average; ?><!-- fill in the star by rate value -->
+                                    <i class="fa fa-star filled" aria-hidden="true"></i>
+                                    <i class="fa fa-star filled" aria-hidden="true"></i>
+                                    <i class="fa fa-star filled" aria-hidden="true"></i>
+                                    <i class="fa fa-star filled" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                </span>
+                                <span class="rate-dollar">
+                                    <i class="fa fa-dollar filled" aria-hidden="true"></i>
+                                    <i class="fa fa-dollar filled" aria-hidden="true"></i>
+                                    <i class="fa fa-dollar filled" aria-hidden="true"></i>
+                                    <i class="fa fa-dollar" aria-hidden="true"></i>
+                                    <i class="fa fa-dollar" aria-hidden="true"></i>
+                                </span>
+                                <label class="item-address"><?php echo $row->address; ?></label>
+                            </div>
+                        </a>
+                        <div style="border: 1px solid #e0e0e0; text-align: center">
+                            <p class="sale-content">Giảm <strong><?php echo $row->discount; ?>%</strong></p>
+                            <p class="quick-description"><?php echo $row->descriptionRes; ?></p>
+                            <?php echo form_open('booking/reserve/' . $row->restaurantID); ?>
+                            <input type="submit" class="place" value="Đặt chỗ ngay" />
+                            <?php echo form_close(); ?> 
+                        </div>
+                    </li>
+                    <?php
+                    $limit++;
                 }
                 ?>
             </ul>
@@ -85,51 +81,44 @@
 
             <ul class="item-content">
                 <?php
-                if ($highestDiscount > 0) {
-                    $lim = 0;
-                    foreach ($highestDiscount as $row) {
-                        if ($lim == $limitDis) {
-                            break;
-                        }
-                        ?>
-                        <li class="col-md-3">
-                            <a style="display: block; position: relative" class="img-item" href="">
-                                <img src="<?php echo $row->addressImage; ?>">
-                                <div class="item-infor">
-                                    <label class="item-name"><?php echo $row->nameRe; ?></label>
-                                    <span class="rate-star"><?php echo $row->average; ?><!-- fill in the star by rate value -->
-                                        <i class="fa fa-star filled" aria-hidden="true"></i>
-                                        <i class="fa fa-star filled" aria-hidden="true"></i>
-                                        <i class="fa fa-star filled" aria-hidden="true"></i>
-                                        <i class="fa fa-star filled" aria-hidden="true"></i>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                    </span>
-                                    <span class="rate-dollar">
-                                        <i class="fa fa-dollar filled" aria-hidden="true"></i>
-                                        <i class="fa fa-dollar filled" aria-hidden="true"></i>
-                                        <i class="fa fa-dollar filled" aria-hidden="true"></i>
-                                        <i class="fa fa-dollar" aria-hidden="true"></i>
-                                        <i class="fa fa-dollar" aria-hidden="true"></i>
-                                    </span>
-                                    <label class="item-address"><?php echo $row->address; ?></label>
-                                </div>
-                            </a>
-                            <div style="border: 1px solid #e0e0e0; text-align: center">
-                                <p class="sale-content">Giảm <strong><?php echo $row->discount; ?>%</strong></p>
-                                <p class="quick-description"><?php echo $row->descriptionRes; ?></p>
-                                <?php echo form_open('booking/reserve/' . $row->restaurantID); ?>
-                                <input type="submit" class="place" value="Đặt chỗ ngay" />
-                                <?php
-                                echo form_close();
-                                ?> 
-
-                            </div>
-                        </li>
-                        <?php
-                        $lim ++;
+                $lim = 0;
+                foreach ($highestDiscount as $row) {
+                    if ($lim == $limitDis) {
+                        break;
                     }
-                } else {
-                    echo $dbMsg;
+                    ?>
+                    <li class="col-md-3">
+                        <a style="display: block; position: relative" class="img-item" href="">
+                            <img src="<?php echo $row->addressImage; ?>">
+                            <div class="item-infor">
+                                <label class="item-name"><?php echo $row->nameRe; ?></label>
+                                <span class="rate-star"><?php echo $row->average; ?><!-- fill in the star by rate value -->
+                                    <i class="fa fa-star filled" aria-hidden="true"></i>
+                                    <i class="fa fa-star filled" aria-hidden="true"></i>
+                                    <i class="fa fa-star filled" aria-hidden="true"></i>
+                                    <i class="fa fa-star filled" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                </span>
+                                <span class="rate-dollar">
+                                    <i class="fa fa-dollar filled" aria-hidden="true"></i>
+                                    <i class="fa fa-dollar filled" aria-hidden="true"></i>
+                                    <i class="fa fa-dollar filled" aria-hidden="true"></i>
+                                    <i class="fa fa-dollar" aria-hidden="true"></i>
+                                    <i class="fa fa-dollar" aria-hidden="true"></i>
+                                </span>
+                                <label class="item-address"><?php echo $row->address; ?></label>
+                            </div>
+                        </a>
+                        <div style="border: 1px solid #e0e0e0; text-align: center">
+                            <p class="sale-content">Giảm <strong><?php echo $row->discount; ?>%</strong></p>
+                            <p class="quick-description"><?php echo $row->descriptionRes; ?></p>
+                            <?php echo form_open('booking/reserve/' . $row->restaurantID); ?>
+                            <input type="submit" class="place" value="Đặt chỗ ngay" />
+                            <?php echo form_close(); ?> 
+                        </div>
+                    </li>
+                    <?php
+                    $lim ++;
                 }
                 ?>
             </ul>

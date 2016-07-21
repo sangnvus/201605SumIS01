@@ -106,7 +106,7 @@ h2.restaurant-name{
 form.booking-res>p{
     position: relative;
 }
-form.booking-res>p>input{
+form.booking-res>p>input, form.booking-res>p>textarea{
     width: 100%;
     border-radius: 4px;
 }

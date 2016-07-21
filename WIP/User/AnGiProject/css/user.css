@@ -57,9 +57,10 @@
 .profile-sidebar>li, .profile-sidebar>li>a{color: #5c5c5c}
 
 .edit-user{margin: 80px 0}
-.edit-user input[type="text"], .edit-user input[type="email"], .edit-user input[type="date"], .edit-user input[type="password"]{
+.edit-user input[type="text"], .edit-user input[type="email"], .edit-user input[type="date"], .edit-user input[type="password"], .edit-user select,  .edit-user input[type="number"]  {
     border-radius: 4px;
     width: 50%;
+    display: inline-block;
 }
 .edit-user input[type="submit"], .upload-banner input[type="submit"]{
     border-radius: 4px;
@@ -67,7 +68,12 @@
     color: #fff;
     width: initial;
 }
-.edit-user label{width: 25%}
+.edit-user label{
+    width: 25%;
+    line-height: 32px;
+    height: 32px;
+    vertical-align: top;
+}
 .edit-user li{margin-top: 25px}
 
 .upload-banner>a{
@@ -145,4 +151,13 @@
     color: #fff;
     background: #D02028;
     border-radius: 3px;
+}
+
+.inline-double-text{
+    width: 50%;
+    display: inline-block;
+}
+.inline-double-text input{
+    width: 100% !important;
+    border-radius: 4px !important;
 }

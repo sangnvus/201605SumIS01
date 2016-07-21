@@ -35,8 +35,13 @@
 
         <div class="col-md-9">
             <h1>Thông tin nhà hàng</h1>
-            <form class="edit-user">
+            <form class="edit-user" method="POST">
                 <ul>
+                    <li>
+                        <label>Tên nhà hàng:</label> <input type="text" value="<?php echo $resData[0]['nameRe']; ?>" name = "nameRe" 
+                        >
+                        <span class="text-danger"><?php echo form_error('nameRe'); ?></span>
+                    </li>
                     <li>
                         <label>Loại hình ẩm thực:</label> 
                         <select class="" name="category" size="1">
@@ -50,27 +55,125 @@
                     </li>
 
                     <li>
-                        <label>Món đặc sắc:</label> <input type="text" value="" name = "favouriteFood">
+                        <label>Món đặc sắc:</label> <input type="text" value="<?php echo $resData[0]['favouriteFood']; ?>" name = "favouriteFood">
+                        <span class="text-danger"><?php echo form_error('favouriteFood'); ?></span>
                     </li>
                     <li>
-                        <label>Giá trung bình/người (VNĐ):</label>  <input type="text" value="" name = "minPrice">
-                        <input type="text" value="" name = "maxPrice">
- 
+                        <label>Giá trung bình/người (vnđ):</label>
+                        <div class="inline-double-text">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input placeholder="Từ..." class="textbox-n" type="number" value="<?php echo $resData[0]['minPrice']; ?>" name="minPrice" onfocus="(this.type='number')" onblur="(this.type='text')">
+                                </div>
+                                <div class="col-md-6">
+                                    <input placeholder="Đến..." class="textbox-n" type="number" value="<?php echo $resData[0]['maxPrice']; ?>" name="maxPrice" onfocus="(this.type='number')" onblur="(this.type='text')">
+                                </div>
+                            </div>
+                        </div>
                     </li>
                     <li>
-                        <label>Không gian:</label> <input type="text" value="" name="spaceRes">
+                        <label>Không gian:</label> <input type="text" value="<?php echo $resData[0]['spaceRes']; ?>" name="spaceRes">
+                        <span class="text-danger"><?php echo form_error('spaceRes'); ?></span>
                     </li>
                     <li>
-                        <label>Chỗ để ô tô:</label> <input type="checkbox" name="carParkingRes" value="1"><br>
+                        <label>Chỗ để ô tô:</label>
+                        <?php if ($resData[0]['carParkingRes'] == 1)
+                        {
+                            ?>
+                                <input type="radio" name="carParkingRes" value="0"> Không
+                                <input style="margin-left: 100px;" type="radio" name="carParkingRes" value="1" checked> Có
+                                
+                            
+                        <?php
+                        }else
+                        {
+                            ?>
+                               <input type="radio" name="carParkingRes" value="0" checked> Không
+                               <input style="margin-left: 100px;" type="radio" name="carParkingRes" value="1" > Có
+                            
+                        <?php } ?>
+
+<!--                         <input type="radio" name="gender" value="yes" checked> Có
+                        <input style="margin-left: 100px;" type="radio" name="no" value="female"> Không -->
                     </li>
                     <li>
-                        <label>giờ đóng/mở cửa:</label> <input type="time" value="" name="closeTimeRe">
-                         đến &nbsp&nbsp<input type="time" value="" name="openTimeRe">
+                        <label>Hoạt động</label>
+                        <div class="inline-double-text">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input placeholder="Mở cửa" class="textbox-n" type="text" name="openTimeRe" onfocus="(this.type='time')" onblur="(this.type='text')">
+                                </div>
+                                <div class="col-md-6">
+                                    <input placeholder="Đóng cửa" class="textbox-n" type="text" name="closeTimeRe" onfocus="(this.type='time')" onblur="(this.type='text')">
+                                </div>
+                            </div>
+                        </div>
+
+                    </li>       
+                    <li>
+                        <label>Mức giảm giá (%):</label> 
+                        <input class="textbox-n" type="number" name="discount" value="<?php echo $resData[0]['discount']; ?>" onfocus="(this.type='number')" onblur="(this.type='text')">
+                    <li>
+                        <label>Điểm đặc trưng khác:</label> <input type="text" name="otherPoints" value="<?php echo $resData[0]['otherPoints']; ?>">
                     </li>
 
                     <li>
-                        <label>Điểm đặc trưng khác:</label> <input type="text" value="">
+                        <label>Địa chỉ:</label> <input type="text" name="address" value="<?php 
+                        echo $addressData[0]['address'] ;
+                        
+                ?>">
                     </li>
+
+                    <li>
+                        <label>Tỉnh thành:</label> 
+                        <select name="province" size="1">
+                            <?php 
+                                foreach ($province as $key => $row)
+                                {
+                                   if($addressData[0]['provinceID'] == $row['provinceID']){
+                                        echo '<option value="' . $row['provinceID'] . '" selected >' .$row['typePro'].' '. $row['namePro'] . '</option>';
+                                   }
+                                   else{
+                                        echo '<option value="' . $row['provinceID'] . '">' .$row['typePro'].' '. $row['namePro'] . '</option>';
+                                   }
+                                }
+                            ?>
+                        </select>
+
+                    </li>
+                    <li>
+                        <label>Quận huyện:</label> 
+                        <select name="district" size="1">
+                            <?php 
+                                foreach ($district as $key => $row)
+                                {
+                                   if($addressData[0]['districtid'] == $row['districtid']){
+                                        echo '<option value="' . $row['districtid'] . '" selected >' .$row['typeDis'].' '. $row['nameDis'] . '</option>';
+                                   }
+                                   else{
+                                        echo '<option value="' . $row['districtid'] . '">' .$row['typeDis'].' '. $row['nameDis'] . '</option>';
+                                   }
+                                   
+                                }
+                            ?>
+                        </select>
+                    </li>
+                    <li>
+                        <label>Khu vực:</label>
+                        <select name="ward" size="1">
+                            <?php 
+                                foreach ($ward as $key => $row)
+                                {   
+                                   if($addressData[0]['wardid'] == $row['wardid']){
+                                        echo '<option value="' . $row['wardid'] . '" selected >' .$row['typeWard'].' '. $row['nameWard'] . '</option>';
+                                   }
+                                   echo '<option value="' . $row['wardid'] . '">' .$row['typeWard'].' '. $row['nameWard'] . '</option>';
+                                }
+                            ?>
+                        </select>                        
+                    </li>             
+
+
                     <li>
                         <label>Nội dung:</label>
                         <textarea class="ckeditor" name="editor"></textarea>
@@ -81,6 +184,7 @@
                     </li>
                 </ul>
             </form>
+            <?php echo $this->session->flashdata('msgResInfo'); ?>
         </div>
     </div>
 </div>

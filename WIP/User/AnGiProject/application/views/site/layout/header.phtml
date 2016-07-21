@@ -4,17 +4,25 @@
             <nav class="col-md-12 col-sm-12 navbar">
                 <ul class="topbar">
 
-                    <li class="top-home"><a href="">Logo</a> </li>
+                    <li class="top-home"><a href="<?php echo base_url(); ?>">Logo</a> </li>
 
                     <li>
                         <a href="">Ẩm thực</a>
                         <ul class="hover-menu">
-                            <li><a href="<?php echo base_url() ?>restaurant/category">Nhà hàng</a></li>
+<!--                             <li><a href="<?php echo base_url() ?>restaurant/category">Nhà hàng</a></li>
                             <li><a href="">Buffet</a></li>
                             <li><a href="">Lẩu & Nướng</a></li>
                             <li><a href="">Hải sản</a></li>
                             <li><a href="">Nhật - Hàn</a></li>
-                            <li><a href="">Địa điểm nhậu</a></li>
+                            <li><a href="">Địa điểm nhậu</a></li> -->
+                            <?php 
+                            foreach ($categoriesData as $key => $row)
+                            {
+                            ?>
+                            <li><a href="<?php echo base_url(); ?>Category/index/1/<?php echo $row['categoryOfResID']; ?>"><?php echo $row['nameCOR']; ?></a></li>        
+                            <?php
+                            }
+                            ?>
                         </ul>
                     </li>
 
@@ -40,43 +48,74 @@
 
                     <li class="top-register">
                         <?php
-                        $full = "Đăng nhập";
-                        $isLogIn = false;
+                         $full = "Đăng nhập";
+                         $isLogIn = false;
                         if ($this->session->userdata("ID") != null) {
                             $lname = $this->session->userdata("lname");
                             $fname = $this->session->userdata("fname");
                             $Type = $this->session->userdata("Type");
                             $full = $lname . " " . $fname;
                             $isLogIn = true;
-                        }
-                        ?>   
-
-                        <a href=""><?php echo $full; ?> <i class="fa fa-caret-down" aria-hidden="true"></i></a>
-                        <div class="hover-menu hover-signin">
+                        } 
+                         ?>   
+                        
+                            <a href=""><?php echo $full; ?> <i class="fa fa-caret-down" aria-hidden="true"></i></a>
+                            <div class="hover-menu hover-signin">
                             <!-- if users have signed in -->
-                            <?php if ($isLogIn == true) { ?>
+                            <?php
+                            if($isLogIn == true){ ?>
                                 <ul class="user-loged">
-                                    <li><a href="<?php echo base_url(); ?>user"> Thông tin tài khoản</a></li>
-                                    <li><a href="<?php echo base_url(); ?>user/change_Password"> Quản hlý mật khẩu</a></li>
-                                    <li><a href="<?php echo base_url(); ?>booking/viewBooking "> Lịch sử đặt chỗ</a></li>
-                                    <li><a href="<?php echo base_url(); ?>user/sign_out">Đăng xuất</a></li>
+                                        <li><a href="<?php echo base_url(); ?>user"> Thông tin tài khoản</a></li>
+                                        <li><a href="<?php echo base_url(); ?>user/change_Password"> Quản hlý mật khẩu</a></li>
+                                        <li><a href="<?php echo base_url(); ?>booking/viewBooking "> Lịch sử đặt chỗ</a></li>
+                                        <a href="<?php echo base_url(); ?>user/sign_out" style="margin: 8px 0" class="btn btn-info btn-lg">Đăng xuất</a>
                                 </ul>
 
                                 <!-- if users have not signed in      -->
-                                <?php
-                            } else {
-                                ?>
-                                <!--trigger modal from login page-->
+                        <?php     
+                        }else{
+                            ?>
                                 <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"><?php echo $full; ?></button>
                                 <div class="hover-register">
                                     <label class="small-tit">Thành viên mới? <a href="<?php echo base_url(); ?>user/register">Đăng ký</a></label>
                                 </div>
-                                <?php
-                            }
+                                   <?php 
+                        }
                             ?>
-                        </div>
-                        <!--login page-->
-                        <?php $this->load->view('site/user/user/login.phtml'); ?>
+                            </div>
+                         
+                            <!-- Modal -->
+                            <div class="modal fade" id="myModal" role="dialog">
+                                <div class="modal-dialog">
+
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">Login</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form class="submit-form" action="login" method="post">
+                                                <ul>
+                                                    <li>
+                                                        <label>Số điện thoại</label>
+                                                        <input type="text" name = "phone">
+                                                    </li>
+                                                    <li>
+                                                        <label>Mật khẩu</label>
+                                                        <input type="password" name = "password">
+                                                    </li>
+                                                    <li>
+                                                        <label></label>
+                                                        <button class="btn">Đăng nhập</button>
+                                                    </li>
+                                                </ul>
+                                            </form>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
                     </li>
                 </ul>
             </nav>
