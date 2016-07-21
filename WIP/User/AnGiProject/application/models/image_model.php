@@ -4,6 +4,8 @@ class Image_model extends CI_Model {
 
     function __construct() {
         parent::__construct();
+        // typeImage: 0 customer avatar, 1 restaurant avatar, 2 banner, 3 food
+        // authorityUser: 1 customer, 2 restaurant owner
     }
 
     function insertImage($data) {
@@ -33,28 +35,51 @@ class Image_model extends CI_Model {
         }
     }
 
+    // -------------------- avatar -------------------------
     // update restaurant 0 avartar, 1 restaurant, 2 banner
-//    function updateAvatar($userID, $typeImage) {
-//        $sql = "UPDATE images SET userID = ? WHERE imageID = (SELECT imageID FROM images WHERE userID = ? AND typeImage = ?);";
-//        $this -> db -> query($sql, array($userID, $userID, $typeImage));
-//    }
-
-    // -------------------- banner -------------------------
-    // 0 avartar, 1 restaurant, 2 banner
-    function getBanner() {
-        $query = $this->db->get_where('images', array('typeImage' => 2));
+    function getAvatar($userType, $userID, $imageType) {
+        $sql = " SELECT * FROM images img, users u " .
+                " WHERE img.userID = u.userID AND authorityUser = ? AND img.userID = ? AND typeImage = ?;";
+        $query = $this->db->query($sql, array($userType, $userID, $imageType));
         return $query->result();
     }
 
-    function insertBannerImage($data, $userID) {
+    function insertAvatar($data) {
         $this->db->insert('images', $data);
-        $this->db->where('userID', $userID);
-        $this->db->update("users", $data);
-        if ($this->db->affected_rows() == '1') {
-            return true;
-        } else {
-            return false;
+    }
+
+    function deleteAvatar($userType, $userID, $imageType) {
+        $avatar = $this->getAvatar($userType, $userID, $imageType);
+        $previousImageID = null;
+        foreach ($avatar as $row) {
+            $previousImageID = $row->imageID;
         }
+        if ($previousImageID == null) {
+            return;
+        } else {
+            $sql = "DELETE FROM images WHERE imageID = " . $previousImageID;
+            $this->db->query($sql);
+        }
+    }
+
+    // -------------------- end of avatar -------------------------
+    // -------------------- banner -------------------------
+    // user types: 1 customer, 2 restaurant owner
+    // image types: 0 customer avatar, 1 restaurant avatar, 2 banner
+    function getBanner($userID) {
+        $sql = " SELECT * FROM images img, users u " .
+                " WHERE img.userID = u.userID AND authorityUser = 2 AND img.userID = ? AND typeImage = 2;";
+        $query = $this->db->query($sql, array($userID));
+        return $query->result();
+    }
+
+    function insertBannerImage($data) {
+        $this->db->insert('images', $data);
+    }
+
+    function deleteBanner($imgID) {
+        $sql = " DELETE FROM images WHERE imageID = ?; ";
+        $this->db->query($sql, array($imgID));
     }
 
     // -------------------- end of banner -------------------------

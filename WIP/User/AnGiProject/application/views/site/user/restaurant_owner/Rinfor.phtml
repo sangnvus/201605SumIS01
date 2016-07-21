@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="<?php echo base_url()?>css/user.css">
+<link rel="stylesheet" href="<?php echo base_url() ?>css/user.css">
 <script src="../resource/ckeditor/ckeditor.js"></script>
 
 
@@ -7,20 +7,9 @@
         <div class="breadcrumb"></div>
 
         <div class="col-md-3">
-            <table class="profile-stt">
-                <tr>
-                    <td><img src="http://cdn.pasgo.vn/images/Profile/no_avatar.png"></td>
-                    <td>
-                        <p>ID ĂnGì: <strong><?php echo $this->session->userdata("ID"); ?></strong></p>
-                        <p>ĐT: <strong><?php echo $this->session->userdata("phone"); ?></strong></p>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td style="padding: 0 8px 20px"><button>Chọn ảnh</button></td>
-                    <td></td>
-                </tr>
-            </table>
+            
+            <?php $this->load->view('site/user/user/profile_image.phtml'); ?>
+            
             <ul class="profile-sidebar">
                 <li><a href="<?php echo base_url(); ?>user"><i class="fa fa-user" aria-hidden="true"></i> Thông tin tài khoản</a></li>
                 <li><a href="<?php echo base_url(); ?>restaurant/restaurant_banner"><i class="fa fa-picture-o" aria-hidden="true"></i> Banner nhà hàng</a></li>
@@ -40,17 +29,16 @@
                 <ul>
                     <li>
                         <label>Tên nhà hàng:</label> <input type="text" value="<?php echo $resData[0]['nameRe']; ?>" name = "nameRe" 
-                        >
+                                                            >
                         <span class="text-danger"><?php echo form_error('nameRe'); ?></span>
                     </li>
                     <li>
                         <label>Loại hình ẩm thực:</label> 
                         <select class="" name="category" size="1">
-                            <?php 
-                                foreach ($categoriesData as $key => $row)
-                                {
-                                   echo '<option value="' . $row['categoryOfResID'] . '">' .$row['nameCOR']. '</option>';
-                                }
+                            <?php
+                            foreach ($categoriesData as $key => $row) {
+                                echo '<option value="' . $row['categoryOfResID'] . '">' . $row['nameCOR'] . '</option>';
+                            }
                             ?>
                         </select>
                     </li>
@@ -64,10 +52,10 @@
                         <div class="inline-double-text">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <input placeholder="Từ..." class="textbox-n" type="number" value="<?php echo $resData[0]['minPrice']; ?>" name="minPrice" onfocus="(this.type='number')" onblur="(this.type='text')">
+                                    <input placeholder="Từ..." class="textbox-n" type="number" value="<?php echo $resData[0]['minPrice']; ?>" name="minPrice" onfocus="(this.type = 'number')" onblur="(this.type = 'text')">
                                 </div>
                                 <div class="col-md-6">
-                                    <input placeholder="Đến..." class="textbox-n" type="number" value="<?php echo $resData[0]['maxPrice']; ?>" name="maxPrice" onfocus="(this.type='number')" onblur="(this.type='text')">
+                                    <input placeholder="Đến..." class="textbox-n" type="number" value="<?php echo $resData[0]['maxPrice']; ?>" name="maxPrice" onfocus="(this.type = 'number')" onblur="(this.type = 'text')">
                                 </div>
                             </div>
                         </div>
@@ -78,20 +66,19 @@
                     </li>
                     <li>
                         <label>Chỗ để ô tô:</label>
-                        <?php if ($resData[0]['carParkingRes'] == 1)
-                        {
-                            ?>
-                                <input type="radio" name="carParkingRes" value="0"> Không
-                                <input style="margin-left: 100px;" type="radio" name="carParkingRes" value="1" checked> Có
-                                
-                            
                         <?php
-                        }else
-                        {
+                        if ($resData[0]['carParkingRes'] == 1) {
                             ?>
-                               <input type="radio" name="carParkingRes" value="0" checked> Không
-                               <input style="margin-left: 100px;" type="radio" name="carParkingRes" value="1" > Có
-                            
+                            <input type="radio" name="carParkingRes" value="0"> Không
+                            <input style="margin-left: 100px;" type="radio" name="carParkingRes" value="1" checked> Có
+
+
+                            <?php
+                        } else {
+                            ?>
+                            <input type="radio" name="carParkingRes" value="0" checked> Không
+                            <input style="margin-left: 100px;" type="radio" name="carParkingRes" value="1" > Có
+
                         <?php } ?>
 
 <!--                         <input type="radio" name="gender" value="yes" checked> Có
@@ -102,10 +89,10 @@
                         <div class="inline-double-text">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <input placeholder="Mở cửa" class="textbox-n" type="text" name="openTimeRe" value="<?php echo $resData[0]['openTimeRe']; ?>" onfocus="(this.type='time')" onblur="(this.type='text')">
+                                    <input placeholder="Mở cửa" class="textbox-n" type="text" name="openTimeRe" value="<?php echo $resData[0]['openTimeRe']; ?>" onfocus="(this.type = 'time')" onblur="(this.type = 'text')">
                                 </div>
                                 <div class="col-md-6">
-                                    <input placeholder="Đóng cửa" class="textbox-n" type="text" name="closeTimeRe" value="<?php echo $resData[0]['closeTimeRe']; ?>" onfocus="(this.type='time')" onblur="(this.type='text')">
+                                    <input placeholder="Đóng cửa" class="textbox-n" type="text" name="closeTimeRe" value="<?php echo $resData[0]['closeTimeRe']; ?>" onfocus="(this.type = 'time')" onblur="(this.type = 'text')">
                                 </div>
                             </div>
                         </div>
@@ -113,31 +100,28 @@
                     </li>       
                     <li>
                         <label>Mức giảm giá (%):</label> 
-                        <input class="textbox-n" type="number" name="discount" value="<?php echo $resData[0]['discount']; ?>" onfocus="(this.type='number')" onblur="(this.type='text')">
+                        <input class="textbox-n" type="number" name="discount" value="<?php echo $resData[0]['discount']; ?>" onfocus="(this.type = 'number')" onblur="(this.type = 'text')">
                     <li>
                         <label>Điểm đặc trưng khác:</label> <input type="text" name="otherPoints" value="<?php echo $resData[0]['otherPoints']; ?>">
                     </li>
 
                     <li>
-                        <label>Địa chỉ:</label> <input type="text" name="address" value="<?php 
-                        echo $addressData[0]['address'] ;
-                        
-                ?>">
+                        <label>Địa chỉ:</label> <input type="text" name="address" value="<?php
+                        echo $addressData[0]['address'];
+                        ?>">
                     </li>
 
                     <li>
                         <label>Tỉnh thành:</label> 
                         <select name="province" size="1">
-                            <?php 
-                                foreach ($province as $key => $row)
-                                {
-                                   if($addressData[0]['provinceID'] == $row['provinceID']){
-                                        echo '<option value="' . $row['provinceID'] . '" selected >' .$row['typePro'].' '. $row['namePro'] . '</option>';
-                                   }
-                                   else{
-                                        echo '<option value="' . $row['provinceID'] . '">' .$row['typePro'].' '. $row['namePro'] . '</option>';
-                                   }
+                            <?php
+                            foreach ($province as $key => $row) {
+                                if ($addressData[0]['provinceID'] == $row['provinceID']) {
+                                    echo '<option value="' . $row['provinceID'] . '" selected >' . $row['typePro'] . ' ' . $row['namePro'] . '</option>';
+                                } else {
+                                    echo '<option value="' . $row['provinceID'] . '">' . $row['typePro'] . ' ' . $row['namePro'] . '</option>';
                                 }
+                            }
                             ?>
                         </select>
 
@@ -145,31 +129,27 @@
                     <li>
                         <label>Quận huyện:</label> 
                         <select name="district" size="1">
-                            <?php 
-                                foreach ($district as $key => $row)
-                                {
-                                   if($addressData[0]['districtid'] == $row['districtid']){
-                                        echo '<option value="' . $row['districtid'] . '" selected >' .$row['typeDis'].' '. $row['nameDis'] . '</option>';
-                                   }
-                                   else{
-                                        echo '<option value="' . $row['districtid'] . '">' .$row['typeDis'].' '. $row['nameDis'] . '</option>';
-                                   }
-                                   
+                            <?php
+                            foreach ($district as $key => $row) {
+                                if ($addressData[0]['districtid'] == $row['districtid']) {
+                                    echo '<option value="' . $row['districtid'] . '" selected >' . $row['typeDis'] . ' ' . $row['nameDis'] . '</option>';
+                                } else {
+                                    echo '<option value="' . $row['districtid'] . '">' . $row['typeDis'] . ' ' . $row['nameDis'] . '</option>';
                                 }
+                            }
                             ?>
                         </select>
                     </li>
                     <li>
                         <label>Khu vực:</label>
                         <select name="ward" size="1">
-                            <?php 
-                                foreach ($ward as $key => $row)
-                                {   
-                                   if($addressData[0]['wardid'] == $row['wardid']){
-                                        echo '<option value="' . $row['wardid'] . '" selected >' .$row['typeWard'].' '. $row['nameWard'] . '</option>';
-                                   }
-                                   echo '<option value="' . $row['wardid'] . '">' .$row['typeWard'].' '. $row['nameWard'] . '</option>';
+                            <?php
+                            foreach ($ward as $key => $row) {
+                                if ($addressData[0]['wardid'] == $row['wardid']) {
+                                    echo '<option value="' . $row['wardid'] . '" selected >' . $row['typeWard'] . ' ' . $row['nameWard'] . '</option>';
                                 }
+                                echo '<option value="' . $row['wardid'] . '">' . $row['typeWard'] . ' ' . $row['nameWard'] . '</option>';
+                            }
                             ?>
                         </select>                        
                     </li>             
@@ -185,7 +165,7 @@
                     </li>
                 </ul>
             </form>
-            
+
         </div>
     </div>
 </div>

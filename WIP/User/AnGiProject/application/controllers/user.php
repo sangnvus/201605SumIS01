@@ -4,110 +4,142 @@ defined('BASEPATH') OR exit('No direct script access allow');
 
 class User extends CI_Controller {
 
-     function __construct() {
+    function __construct() {
         parent::__construct();
         $this->load->helper(array('form', 'url', 'date'));
         $this->load->library(array('session', 'form_validation', 'email'));
         $this->load->database();
-        $this->load->model('User_model');
+        $this->load->model(array('User_model', 'Image_model'));
+
+        // typeImage: 0 customer avatar, 1 restaurant avatar, 2 banner, 3 food
+        // authorityUser: 1 customer, 2 restaurant owner
     }
 
     public function index() {
-         $ID = $this->session->userdata("ID");
-         if($ID == null){
+        // user unauthentication users try to access via url
+        if ($this->session->userdata("ID") == null) {
+            redirect(base_url());
+        }
+
+        $ID = $this->session->userdata("ID");
+        if ($ID == null) {
             redirect(base_url());
             return;
-         }
-        //$ID = 1;
+        }
+
         //set validation rules
         $this->form_validation->set_rules('fname', 'First Name', 'trim|required|min_length[3]|max_length[30]');
         $this->form_validation->set_rules('lname', 'Last Name', 'trim|required|min_length[3]|max_length[30]');
         //$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|is_unique[users.emailUser]');
-        if($this->form_validation->run() == FALSE){
+        if ($this->form_validation->run() == FALSE) {
             $data = array();
-             $data['content'] = 'site/user/profile/index.phtml';
-             $userData = $this->User_model->getUser($ID);
-             $data['userData'] = $userData;
+            $data['content'] = 'site/user/profile/index.phtml';
+            $userData = $this->User_model->getUser($ID);
+            $data['userData'] = $userData;
 
-             if($userData[0]['authorityUser'] == 2){
+            if ($userData[0]['authorityUser'] == 2) {
 
-                $data['addressData'] =  $this->User_model->getAddress($userData[0]['addressID']);
+                $data['addressData'] = $this->User_model->getAddress($userData[0]['addressID']);
                 $data['province'] = $this->User_model->getData('province');
                 $data['district'] = $this->User_model->getData('district');
-                $data['ward'] =  $this->User_model->getData('ward');
-
+                $data['ward'] = $this->User_model->getData('ward');
             }
-            $this->load->view('site/layout/layout.phtml', $data);    
-        }
-        else{
-             $data = array();
-             $data['content'] = 'site/user/profile/index.phtml';
-             $userData = $this->User_model->getUser($ID);
-             $data['userData'] = $userData;
+            $this->load->view('site/layout/layout.phtml', $data);
+        } else {
+            $data = array();
+            $data['content'] = 'site/user/profile/index.phtml';
+            $userData = $this->User_model->getUser($ID);
+            $data['userData'] = $userData;
 
-             if($userData[0]['authorityUser'] == 2){
+            if ($userData[0]['authorityUser'] == 2) {
 
-                $data['addressData'] =  $this->User_model->getAddress($userData[0]['addressID']);
+                $data['addressData'] = $this->User_model->getAddress($userData[0]['addressID']);
                 $data['province'] = $this->User_model->getData('province');
                 $data['district'] = $this->User_model->getData('district');
-                $data['ward'] =  $this->User_model->getData('ward');
-
+                $data['ward'] = $this->User_model->getData('ward');
             }
-            $this->load->view('site/layout/layout.phtml', $data);    
-                $data = array(
+            $this->load->view('site/layout/layout.phtml', $data);
+            $data = array(
                 'firstNameUser' => $this->input->post('fname'),
                 'lastNameUser' => $this->input->post('lname'),
                 'dateOfBirthUser' => $this->input->post('dob'),
                 'genderUser' => $this->input->post('gender'),
                 'emailUser' => $this->input->post('email'),
+            );
+
+            if ($this->User_model->updateUser($ID, $data)) {
+                $this->session->set_flashdata('msg', '<div class="alert alert-success text-center">Thành công !!</div>');
+                if ($userData[0]['authorityUser'] == 1) {
+                    redirect('user');
+                }
+            } else {
+                // error
+                $this->session->set_flashdata('msg', '<div class="alert alert-danger text-center">Thất bại, kiểm tra thông tin!!!</div>');
+                if ($userData[0]['authorityUser'] == 1) {
+                    redirect('user');
+                }
+            }
+
+            if ($userData[0]['authorityUser'] == 2) {
+                $address = array(
+                    'address' => $this->input->post('address'),
+                    'provinceid' => $this->input->post('province'),
+                    'districtid' => $this->input->post('district'),
+                    'wardid' => $this->input->post('ward'),
                 );
 
-                if ($this->User_model->updateUser($ID,$data))
-                {
-                        $this->session->set_flashdata('msg','<div class="alert alert-success text-center">Thành công !!</div>');
-                        if($userData[0]['authorityUser'] == 1){
-                            redirect('user');
-                        }
-                }
-                else
-                {
+                if ($this->User_model->updateAddress($userData[0]['addressID'], $address)) {
+                    $this->session->set_flashdata('msg', '<div class="alert alert-success text-center">Thành công !!</div>');
+                    redirect('user');
+                } else {
                     // error
-                    $this->session->set_flashdata('msg','<div class="alert alert-danger text-center">Thất bại, kiểm tra thông tin!!!</div>');
-                        if($userData[0]['authorityUser'] == 1){
-                            redirect('user');
-                        }
+                    $this->session->set_flashdata('msg', '<div class="alert alert-danger text-center">Thất bại, kiểm tra địa chỉ !!!</div>');
+                    redirect('user');
                 }
-                
-                if ($userData[0]['authorityUser'] == 2) {
-                    $address = array(
-                            'address'=> $this->input->post('address'),
-                            'provinceid' => $this->input->post('province'),
-                            'districtid' => $this->input->post('district'),
-                            'wardid' => $this->input->post('ward'),
-                    );
-
-                    if ($this->User_model->updateAddress($userData[0]['addressID'] ,$address))
-                    {
-                            $this->session->set_flashdata('msg','<div class="alert alert-success text-center">Thành công !!</div>');
-                            redirect('user');
-                    }
-                    else
-                    {
-                        // error
-                        $this->session->set_flashdata('msg','<div class="alert alert-danger text-center">Thất bại, kiểm tra địa chỉ !!!</div>');
-                        redirect('user');
-                    }
-                }
+            }
         }
     }
 
-    public function change_Password() {
-        $ID = $this->session->userdata("ID");
-        if($ID == null){
+    // image, user id , phone number
+    // load when login
+    function userImage() {
+        // user unauthentication users try to access via url
+        if ($this->session->userdata("ID") == null) {
             redirect(base_url());
-            return;
-         }
-        
+        }
+
+        $ID = $this->session->userdata("ID");
+        $userType = $this->session->userdata("Type");
+        // user types: 1 customer, 2 restaurant owner
+        // image types: 0 customer avatar, 1 restaurant avatar, 2 banner
+        $imageType = 0;
+        $defaultImg = "images/customer/avatar/default_avatar.png";
+        if ($userType == 2) {
+            $imageType = 1;
+            $defaultImg = "images/restOwner/restaurant/default_restaurant.png";
+        }
+        // authority 2 = restaurant owner, typeImage 1 restaurant profile
+        $avatar = $this->Image_model->getAvatar($userType, $ID, $imageType);
+        $avt = null;
+        if (count($avatar) > 0) {
+            foreach ($avatar as $row) {
+                $avt = $row->addressImage;
+            }
+        } else {
+            $avt = $defaultImg;
+        }
+       
+        // set avatar sesstion
+        $this->session->set_userdata('avatarSes', $avt);
+    }
+
+    public function change_Password() {
+        // user unauthentication users try to access via url
+        if ($this->session->userdata("ID") == null) {
+            redirect(base_url());
+        }
+        $ID = $this->session->userdata("ID");
+
         $opw = $this->input->post('opassword');
         $npw = $this->input->post('npassword');
         $cpw = $this->input->post('cpassword');
@@ -115,20 +147,17 @@ class User extends CI_Controller {
         $this->form_validation->set_rules('opassword', 'Old Password', 'trim|required|min_length[7]');
         $this->form_validation->set_rules('npassword', 'Password', 'trim|required|matches[cpassword]|min_length[7]');
         $this->form_validation->set_rules('cpassword', 'Confirm Password', 'trim|required|min_length[7]');
-        if ($this->form_validation->run() == FALSE){ 
+        if ($this->form_validation->run() == FALSE) {
             $userData = $this->User_model->getUser($ID);
             $data['userData'] = $userData;
             $data['content'] = 'site/user/profile/changePassword.phtml';
             $this->load->view('site/layout/layout.phtml', $data);
-        }
-        else{
-            if($this->User_model->changePassword($ID,$opw,$npw)){
-               
-                $this->session->set_flashdata('msg','<div class="alert alert-success text-center">Thành công !</div>');
-            }
-            
-            else{
-                $this->session->set_flashdata('msg','<div class="alert alert-danger text-center">Thất bại, mật khẩu cũ không đúng !</div>');    
+        } else {
+            if ($this->User_model->changePassword($ID, $opw, $npw)) {
+
+                $this->session->set_flashdata('msg', '<div class="alert alert-success text-center">Thành công !</div>');
+            } else {
+                $this->session->set_flashdata('msg', '<div class="alert alert-danger text-center">Thất bại, mật khẩu cũ không đúng !</div>');
             }
 
             redirect('user/change_Password');
@@ -173,8 +202,7 @@ class User extends CI_Controller {
                     'phoneUser' => $this->input->post('phone'),
                     'authorityUser' => $this->input->post('autho'),
                     'passwordUser' => md5($this->input->post('password')),
-                    'dateCreateUser' => date('Y-m-d H:i:s'),
-                    'imageID' => 1,
+                    'dateCreateUser' => date('Y-m-d H:i:s')
                         // 'addressID'=> $this->User_model->insertAddress($address)
                 );
             } else {
@@ -188,7 +216,6 @@ class User extends CI_Controller {
                     'authorityUser' => $this->input->post('autho'),
                     'passwordUser' => md5($this->input->post('password')),
                     'dateCreateUser' => date('Y-m-d H:i:s'),
-                    'imageID' => 1,
                     'addressID' => $this->User_model->insertAddress($address)
                 );
             }
@@ -205,27 +232,34 @@ class User extends CI_Controller {
         }
     }
 
-    public function login(){
+    public function login() {
         $phone = $this->input->post('phone');
-        $password = $this->input->post('password');    
-        $data = $this->User_model->checkLogin($phone,$password);
-        if(count($data) > 0){
-            $data=array(
-            "fname" => $data[0]['firstNameUser'],
-            "lname" => $data[0]['lastNameUser'],
-            "ID" => $data[0]['userID'],
-            "Type" => $data[0]['authorityUser'],
-            "phone" => $data[0]['phoneUser'],
+        $password = $this->input->post('password');
+        $data = $this->User_model->checkLogin($phone, $password);
+        if (count($data) > 0) {
+            $data = array(
+                "fname" => $data[0]['firstNameUser'],
+                "lname" => $data[0]['lastNameUser'],
+                "ID" => $data[0]['userID'],
+                "Type" => $data[0]['authorityUser'],
+                "phone" => $data[0]['phoneUser'],
             );
             $this->session->set_userdata($data);
+            // load user image
+            $this ->userImage();
+            
             redirect(base_url());
-        }
-        else{
+        } else {
             $this->session->set_flashdata('msg', '<div class="alert alert-danger text-center">Thông tin đăng nhập không đúng !!</div>');
             redirect(base_url());
         }
     }
-    public function sign_out(){
+
+    public function sign_out() {
+        // user unauthentication users try to access via url
+        if ($this->session->userdata("ID") == null) {
+            redirect(base_url());
+        }
         $this->session->sess_destroy();
         redirect(base_url());
     }

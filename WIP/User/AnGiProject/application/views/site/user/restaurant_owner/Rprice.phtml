@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="<?php echo base_url()?>css/user.css">
+<link rel="stylesheet" href="<?php echo base_url() ?>css/user.css">
 <script src="../resource/ckeditor/ckeditor.js"></script>
 
 
@@ -7,20 +7,9 @@
         <div class="breadcrumb"></div>
 
         <div class="col-md-3">
-            <table class="profile-stt">
-                <tr>
-                    <td><img src="http://cdn.pasgo.vn/images/Profile/no_avatar.png"></td>
-                    <td>
-                        <p>ID ĂnGì: <strong><?php echo $this->session->userdata("ID"); ?></strong></p>
-                        <p>ĐT: <strong><?php echo $this->session->userdata("phone"); ?></strong></p>
-                    </td>
-                </tr>
 
-                <tr>
-                    <td style="padding: 0 8px 20px"><button>Chọn ảnh</button></td>
-                    <td></td>
-                </tr>
-            </table>
+            <?php $this->load->view('site/user/user/profile_image.phtml'); ?>
+
             <ul class="profile-sidebar">
                 <li><a href="<?php echo base_url(); ?>user"><i class="fa fa-user" aria-hidden="true"></i> Thông tin tài khoản</a></li>
                 <li><a href="<?php echo base_url(); ?>restaurant/restaurant_banner"><i class="fa fa-picture-o" aria-hidden="true"></i> Banner nhà hàng</a></li>

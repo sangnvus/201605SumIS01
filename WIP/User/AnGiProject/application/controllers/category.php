@@ -1,23 +1,22 @@
 <?php
-class Category extends CI_Controller
-{
-	public function __construct()
-	{
-		parent::__construct();
-		$this->load->helper(array('url','form'));
-		$this->load->library(array('session'));
-		$this->load->database();
-		$this->load->model('Category_model');
-	}
-	
-	function index($type = 0,$ID = 0,$page = 1)
-	{
-		$data['content'] = 'site/restaurant/Category.phtml';
-		$districtData = $this->Category_model-> getDistrict();
-        $categoriesData = $this->Category_model-> getCategories();
-        $count = $this->Category_model->countAll($type,$ID);
+
+class Category extends CI_Controller {
+
+    public function __construct() {
+        parent::__construct();
+        $this->load->helper(array('url', 'form'));
+        $this->load->library(array('session'));
+        $this->load->database();
+        $this->load->model('Category_model');
+    }
+
+    function index($type = 0, $ID = 0, $page = 1) {
+        $data['content'] = 'site/restaurant/Category.phtml';
+        $districtData = $this->Category_model->getDistrict();
+        $categoriesData = $this->Category_model->getCategories();
+        $count = $this->Category_model->countAll($type, $ID);
         //sua so items/trang
-        $pages = ceil($count/1);
+        $pages = ceil($count / 1);
 
         // $config['total_rows'] = $this->Category_model->countAll($type,$ID);
         // // $a = $this->Category_model->countAll($type,$ID);
@@ -28,14 +27,13 @@ class Category extends CI_Controller
         // $config['per_page'] = 1;
         // $start=$this->uri->segment(3);
 
-        $resData = $this->Category_model->getRes($type,$ID,$count,$page);
+        $resData = $this->Category_model->getRes($type, $ID, $count, $page);
 
         $rate = array();
-        foreach ($resData as $key => $row)
-        {
-        	$rate[] = $this->Category_model->getRate($row['restaurantID']);
+        foreach ($resData as $key => $row) {
+            $rate[] = $this->Category_model->getRate($row['restaurantID']);
         }
-        
+
         $data['categoriesData'] = $categoriesData;
         $data['districtData'] = $districtData;
         $data['resData'] = $resData;
@@ -47,8 +45,7 @@ class Category extends CI_Controller
         //$this->load->library('pagination', $config);
         //$data['pagination'] = $this->pagination->create_links();
 
-        $this->load->view('site/layout/layout.phtml',$data);
-
+        $this->load->view('site/layout/layout.phtml', $data);
     }
 
 }

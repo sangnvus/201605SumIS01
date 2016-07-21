@@ -4,20 +4,9 @@
         <div class="breadcrumb"></div>
 
         <div class="col-md-3">
-            <table class="profile-stt">
-                <tr>
-                    <td><img src="http://cdn.pasgo.vn/images/Profile/no_avatar.png"></td>
-                    <td>
-                        <p>ID ĂnGì: <strong><?php echo $this->session->userdata("ID"); ?></strong></p>
-                        <p>ĐT: <strong><?php echo $this->session->userdata("phone"); ?></strong></p>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td style="padding: 0 8px 20px"><button>Chọn ảnh</button></td>
-                    <td></td>
-                </tr>
-            </table> 
+            
+            <?php $this->load->view('site/user/user/profile_image.phtml'); ?>
+            
             <ul class="profile-sidebar">
                 <li><a href="<?php echo base_url() ?>user"><i class="fa fa-user" aria-hidden="true"></i> Thông tin tài khoản</a></li>
                 <li><a href="<?php echo base_url() ?>restaurant/restaurant_banner"><i class="fa fa-picture-o" aria-hidden="true"></i> Banner nhà hàng</a></li>
@@ -32,10 +21,10 @@
 
         <div class="col-md-9">
             <h1>Quản lý đặt chỗ</h1>
-            <?php 
-                if($isUpdate != null){
-                    echo $this->session->flashdata('msgUpdateBooking');
-                }
+            <?php
+            if ($isUpdate != null) {
+                echo $this->session->flashdata('msgUpdateBooking');
+            }
             ?>
             <table class="table table-striped">
                 <thead>
@@ -52,31 +41,31 @@
                 </thead>
                 <tbody>
                     <?php
-                    if($isOrder == false){
+                    if ($isOrder == false) {
                         echo $this->session->flashdata('msgOrder');
-                    }else{
-                    $counter = 0;
-                    foreach ($list as $row) {
-                        echo '<tr>';
-                        echo form_open('booking/manageReservation/');
-                        echo '<input type="hidden" name="bid" value="'.$row['bookingID'].'" >';
-                        echo '<th>' . $row['dateCreateBo'] . '</th>';
-                        echo '<th>' . $row['userID'] . '</th>';
-                        echo '<th>' . $row['phoneUser'] . '</th>';
-                        echo '<th>' . $row['quantityMember'] . '</th>';
-                        echo '<th><span style="background-color:red;"> NO TIME FIELD IN DB | </span>' . $row['dateBooking'] . '</th>';
-                        echo '<th>' . $row['request'] . '</th>';
-                        echo '<th><select class="form-control" name="bookingStatus" id="drplist' . $counter . '" size="1">';
-                        echo '<option value="' . $row['statusBo'] . '">' . $row['statusText'] . '</option>';
-                        echo '<option value="' . $row['dropValue1'] . '">' . $row['dropText1'] . '</option>';
-                        echo '<option value="' . $row['dropValue2'] . '">' . $row['dropText2'] . '</option>';
-                        echo '</select></th>';
-                        echo '<th><input type="submit" id="btnSave' . $counter . '" name="manageBooking" value="Save" disabled></th>';
-                        echo form_close();
-                        echo '</tr>';
-                        $counter ++;
+                    } else {
+                        $counter = 0;
+                        foreach ($list as $row) {
+                            echo '<tr>';
+                            echo form_open('booking/manageReservation/');
+                            echo '<input type="hidden" name="bid" value="' . $row['bookingID'] . '" >';
+                            echo '<th>' . $row['dateCreateBo'] . '</th>';
+                            echo '<th>' . $row['userID'] . '</th>';
+                            echo '<th>' . $row['phoneUser'] . '</th>';
+                            echo '<th>' . $row['quantityMember'] . '</th>';
+                            echo '<th><span style="background-color:red;"> NO TIME FIELD IN DB | </span>' . $row['dateBooking'] . '</th>';
+                            echo '<th>' . $row['request'] . '</th>';
+                            echo '<th><select class="form-control" name="bookingStatus" id="drplist' . $counter . '" size="1">';
+                            echo '<option value="' . $row['statusBo'] . '">' . $row['statusText'] . '</option>';
+                            echo '<option value="' . $row['dropValue1'] . '">' . $row['dropText1'] . '</option>';
+                            echo '<option value="' . $row['dropValue2'] . '">' . $row['dropText2'] . '</option>';
+                            echo '</select></th>';
+                            echo '<th><input type="submit" id="btnSave' . $counter . '" name="manageBooking" value="Save" disabled></th>';
+                            echo form_close();
+                            echo '</tr>';
+                            $counter ++;
+                        }
                     }
-                }
                     ?>
                 </tbody>
             </table>
@@ -86,27 +75,28 @@
 </div>
 
 
-<?php 
-if($isOrder == true){
+<?php
+if ($isOrder == true) {
 
-for ($i = 0; $i < $counter; $i++) { ?>
-    <script>
-        $("#drplist<?php echo $i ?>").on('change', function () {
-            // if dropdownlist is changed
-            var defaultIndex = $("#drplist<?php echo $i ?>").prop('selectedIndex');
-            if ($(this).val() == $(this).find("option:selected").val()) {
-                if (defaultIndex != 0) {
-                    $("#btnSave<?php echo $i ?>").removeAttr('disabled');
-                    $("#btnSave<?php echo $i ?>").css('color', 'black');
-//                    alert($("#drplist<?php // echo $i ?>").prop('selectedIndex'));
-                } else {
-                    $("#btnSave<?php echo $i ?>").attr('disabled', 'disabled');
-                    $("#btnSave<?php echo $i ?>").css('color', 'white');
+    for ($i = 0; $i < $counter; $i++) {
+        ?>
+        <script>
+            $("#drplist<?php echo $i ?>").on('change', function () {
+                // if dropdownlist is changed
+                var defaultIndex = $("#drplist<?php echo $i ?>").prop('selectedIndex');
+                if ($(this).val() == $(this).find("option:selected").val()) {
+                    if (defaultIndex != 0) {
+                        $("#btnSave<?php echo $i ?>").removeAttr('disabled');
+                        $("#btnSave<?php echo $i ?>").css('color', 'black');
+        //                    alert($("#drplist<?php // echo $i  ?>").prop('selectedIndex'));
+                    } else {
+                        $("#btnSave<?php echo $i ?>").attr('disabled', 'disabled');
+                        $("#btnSave<?php echo $i ?>").css('color', 'white');
+                    }
                 }
-            }
-        });
-    </script>
-    <?php
+            });
+        </script>
+        <?php
     }
 }
     

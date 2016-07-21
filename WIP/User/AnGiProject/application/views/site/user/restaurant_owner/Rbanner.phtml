@@ -5,20 +5,9 @@
         <div class="breadcrumb"></div>
 
         <div class="col-md-3">
-            <table class="profile-stt">
-                <tr>
-                    <td><img src="http://cdn.pasgo.vn/images/Profile/no_avatar.png"></td>
-                    <td>
-                        <p>ID ĂnGì: <strong><?php echo $this->session->userdata("ID"); ?></strong></p>
-                        <p>ĐT: <strong><?php echo $this->session->userdata("phone"); ?></strong></p>
-                    </td>
-                </tr>
 
-                <tr>
-                    <td style="padding: 0 8px 20px"><button>Chọn ảnh</button></td>
-                    <td></td>
-                </tr>
-            </table>
+            <?php $this->load->view('site/user/user/profile_image.phtml'); ?>
+
             <ul class="profile-sidebar">
                 <li><a href="<?php echo base_url(); ?>user"><i class="fa fa-user" aria-hidden="true"></i> Thông tin tài khoản</a></li>
                 <li class="active"><i class="fa fa-picture-o" aria-hidden="true"></i> Banner nhà hàng</li>
@@ -38,24 +27,163 @@
             <ul style="margin: 40px 0">
                 <?php
                 for ($i = 0; $i < 6; $i++) {
-                    ?>
+                    if ($i < count($banner)) {
+                        echo form_open_multipart('image/changeBanner');
+                        ?>
                         <li class="upload-banner">
-                            <a  data-toggle="modal" data-target="#imageModal<?php echo $i; ?>">
-                                <i class="fa fa-plus" aria-hidden="true"></i>
-                                Change
-                            </a>
-                            <input class="" type="text" placeholder="Viết tiêu đề...">
-                            <input type="text" placeholder="Viết mô tả...">
+                            <img id="banner<?php echo $i; ?>" src="<?php echo base_url($banner[$i]->addressImage) ?>" height="600px" width="800px" alt="banner" />
+
+                            <input type="hidden" name="preImgID" value="<?php echo $banner[$i]->imageID ?>" >
+                            <input type="hidden" name="preImgAddr" value="<?php echo $banner[$i]->addressImage ?>" >
+
+                            <input type="text" name="descriptionImage" placeholder="write description" value="<?php echo $banner[$i]->descriptionImage ?>" style="border-color: yellow;"><br />
+                            <label class = "select-file-btn">
+                                <input type="file" name="filename" onchange="readURL<?php echo $i; ?>(this);" />  
+                                <a>
+                                    <i class="fa fa-plus" aria-hidden="true"></i>Add
+                                </a>
+                            </label>
+                            <span class="text-danger"><?php
+                                if (isset($error)) {
+                                    echo $error;
+                                }
+                                ?>
+                            </span>
                         </li>
                         <li class="upload-banner">
                             <input type="submit" value="Cập nhật">
                         </li>
-                    </form>
-                    <?php
+                        <?php
+                        echo form_close();
+                        if (isset($success_msg)) {
+                            echo $success_msg;
+                        }
+                    } else {
+                        echo form_open_multipart('image/changeBanner');
+                        ?>
+                        <li class="upload-banner">
+                            <!--                        <a>
+                                                        <i class="fa fa-plus" aria-hidden="true"></i>Add
+                                                    </a>-->
+                                                    <!--<input class="" type="text" placeholder="Viết tiêu đề...">-->
+                            <input type="text" name="descriptionImage" placeholder="write description" style="border-color: yellow; border-width: 3px;"><br />
+                            <input type="file" name="filename" onchange="readURL<?php echo $i; ?>(this);" />
+                            <img id="banner<?php echo $i; ?>" src="<?php echo base_url('images/restOwner/banner/default_banner.png'); ?>" alt="banner" />
+                            <span class="text-danger"><?php
+                                if (isset($error)) {
+                                    echo $error;
+                                }
+                                ?>
+                            </span>
+                        </li>
+                        <li class="upload-banner">
+                            <input type="submit" value="Cập nhật">
+                        </li>
+                        <?php
+                        echo form_close();
+                        if (isset($success_msg)) {
+                            echo $success_msg;
+                        }
+                    }
                 }
                 ?>
             </ul>
         </div>
     </div>
 </div>
-</div>
+
+<!--preview images-->
+<script>
+
+    function readURL0(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#banner0')
+                        .attr('src', e.target.result)
+                        .width(800)
+                        .height(600);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    function readURL1(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#banner1')
+                        .attr('src', e.target.result)
+                        .width(800)
+                        .height(600);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    function readURL2(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#banner2')
+                        .attr('src', e.target.result)
+                        .width(800)
+                        .height(600);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    function readURL3(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#banner3')
+                        .attr('src', e.target.result)
+                        .width(800)
+                        .height(600);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    function readURL4(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#banner4')
+                        .attr('src', e.target.result)
+                        .width(800)
+                        .height(600);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    function readURL5(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#banner5')
+                        .attr('src', e.target.result)
+                        .width(800)
+                        .height(600);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
+
+}

@@ -1,130 +1,97 @@
 <?php
-class User_model extends CI_Model
-{
-	function __construct()
-    {
-        // Call the Model constructor
+
+class User_model extends CI_Model {
+
+    function __construct() {
         parent::__construct();
+        // typeImage: 0 customer avatar, 1 restaurant avatar, 2 banner, 3 food
+        // authorityUser: 1 customer, 2 restaurant owner
     }
-	
-	function insertUser($data)
-    {
-		return $this->db->insert('users', $data);
-	}
 
-	function updateUser($id,$data){
-		$this->db->where('userID', $id);
-		return $this->db->update("users", $data);
-	}
+    function insertUser($data) {
+        return $this->db->insert('users', $data);
+    }
 
-	function insertAddress($data)
-    {
-		$this->db->insert('address', $data);
-		$insert_id = $this->db->insert_id();
-   		return  $insert_id;
-	}
+    function updateUser($id, $data) {
+        $this->db->where('userID', $id);
+        return $this->db->update("users", $data);
+    }
 
-	function updateAddress($id,$data){
-		$this->db->where('addressID', $id);
-		return $this->db->update("address", $data);
-	}
+    function insertAddress($data) {
+        $this->db->insert('address', $data);
+        $insert_id = $this->db->insert_id();
+        return $insert_id;
+    }
 
-	function getData($table)
-    {
-		$query=$this->db->get($table);
-        $data=$query->result_array();
-   		return  $data;
-	}
+    function updateAddress($id, $data) {
+        $this->db->where('addressID', $id);
+        return $this->db->update("address", $data);
+    }
 
-	function getUser($ID)
-    {
-    	$query = $this->db->get_where('users', array('userID' => $ID));
-        $data=$query->result_array();
-   		return  $data;
-	}
+    function getData($table) {
+        $query = $this->db->get($table);
+        $data = $query->result_array();
+        return $data;
+    }
 
-	function getAddress($ID)
-    {
-    	$this->db->select('*');
-        $this->db->from('address a'); 
-        $this->db->where('a.addressID',$ID); 
-        $this->db->join('district d', 'd.districtID = a.districtID','right outer');
-        $this->db->join('ward w', 'w.wardid = a.wardID','right outer');
-        $this->db->join('province p', 'a.provinceID = p.provinceID','right outer');
-        
+    function getUser($ID) {
+        $query = $this->db->get_where('users', array('userID' => $ID));
+        $data = $query->result_array();
+        return $data;
+    }
+
+    function getAddress($ID) {
+        $this->db->select('*');
+        $this->db->from('address a');
+        $this->db->where('a.addressID', $ID);
+        $this->db->join('district d', 'd.districtID = a.districtID', 'right outer');
+        $this->db->join('ward w', 'w.wardid = a.wardID', 'right outer');
+        $this->db->join('province p', 'a.provinceID = p.provinceID', 'right outer');
+
         //$this->db->where('a.addressID',$ID); 
-        $query = $this->db->get(); 
-        $data=$query->result_array();
-   		return  $data;
-	}
-
-	function changePassword($ID,$pw,$npw) {
-		// echo "  /   ".$pw."   /   ";
-		$pw = md5($pw);
-		$npw = md5($npw);
-		// echo "  /   ".$pw."   /   ";
-
-		// echo "  /   ".$npw."  /   ";
-		
-		
-        $this->db->select('passwordUser');
-        $this->db->from('users'); 
-        $this->db->where('userID',$ID);
         $query = $this->db->get();
+        $data = $query->result_array();
+        return $data;
+    }
 
-    //     $sql = "SELECT userID, passwordUser FROM users WHERE userID = " . $ID;
-    //     $query = $this -> db -> query($sql);
-    //      if ($query->num_rows() > 0) {
-    //         $data = $query->result_array();
-    //         // echo $data[0]['passwordUser'] . '<br />';
-    //         // echo $pw;
-    //         if( $data[0]['passwordUser'] === $pw ){
-    //         	$updatePass = "UPDATE users SET passwordUser = '" . $this->db->escape(htmlentities($npw)) . "' WHERE userID = " . $ID;
-    //         	$this -> db -> query($updatePass);
-    //         	if($this->db->affected_rows() == '1'){
-    //         		return true;
-    //         	}
-    //     	}
-    //     }
-         	
-    //     else {
-    //     	return false;
-    //     }
-    // }
+    function changePassword($ID, $pw, $npw) {
+        $pw = md5($pw);
+        $npw = md5($npw);
+        $this->db->select('passwordUser');
+        $this->db->from('users');
+        $this->db->where('userID', $ID);
+        $query = $this->db->get();  
 
-
-        $data =  $query ->result_array();
-        echo $data[0]['passwordUser']." VS ".$pw;
+        $data = $query->result_array();
+        echo $data[0]['passwordUser'] . " VS " . $pw;
         //die();
-        if( $data[0]['passwordUser'] === $pw ){
-        	
-        	
-            $data = array(
-         	  'passwordUser'   => $npw
-     	    );
-     	    $this->db->where('userID', $ID);	
-		    $this->db->update("users", $data);
-		    return TRUE;
-        }
-        else{ 
-       	   return FALSE;
+        if ($data[0]['passwordUser'] === $pw) {
 
+
+            $data = array(
+                'passwordUser' => $npw
+            );
+            $this->db->where('userID', $ID);
+            $this->db->update("users", $data);
+            return TRUE;
+        } else {
+            return FALSE;
         }
     }
-    
 
-    function checkLogin($phone,$pw){
-    	$this->db->select('*');
+    function checkLogin($phone, $pw) {
+        $this->db->select('*');
         $this->db->from('users');
-        $this->db->where('phoneUser',$phone);
-        $this->db->where('passwordUser',md5($pw));
+        $this->db->where('phoneUser', $phone);
+        $this->db->where('passwordUser', md5($pw));
         $query = $this->db->get();
-        $data =  $query ->result_array();
+        $data = $query->result_array();
         return $data;
     }
 
 }
-	//send verification email to user's email id
+
+//send verification email to user's email id
 	// function sendEmail($to_email)
 	// {
 	// 	$from_email = 'team@mydomain.com';

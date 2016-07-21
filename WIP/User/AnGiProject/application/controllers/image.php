@@ -6,9 +6,11 @@ class Image extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->helper(array('form', 'url'));
+        $this->load->helper(array('form', 'url', 'file'));
         $this->load->library('session');
         $this->load->model('Image_model');
+        // typeImage: 0 customer avatar, 1 restaurant avatar, 2 banner, 3 food
+        // authorityUser: 1 customer, 2 restaurant owner
     }
 
     //index function
@@ -16,9 +18,66 @@ class Image extends CI_Controller {
         //load file upload form
         $this->load->view('view');
     }
-    
+
+    // upload avatar function
+    function changeAvatar() {
+        $ID = $this->session->userdata("ID");
+        $userType = $this->session->userdata('Type');
+
+        // user types: 1 customer, 2 restaurant owner
+        // image types: 0 customer avatar, 1 restaurant avatar, 2 banner
+        //set preferences
+        $config['upload_path'] = './images/customer/avatar';
+        $config['allowed_types'] = 'jpg|png|gif';
+        // <input type="file" name="filename" >
+        $imageName = time() . $_FILES["avatarFile"]['name'];
+        $config['file_name'] = $imageName;
+        // $config['max_size'] = '100';
+
+        $imageType = 0; // customer avatar
+        if ($userType == 2) { // restaurant avatar
+            //set preferences
+            $config['upload_path'] = './images/restOwner/restaurant';
+            $imageType = 1; // restaurant avatar
+        }
+
+        //load upload class library
+        $this->load->library('upload', $config);
+
+        // <input type="file" name="filename" >
+        if (!$this->upload->do_upload('avatarFile')) {
+            // case - failure
+            $upload_error = array('error' => $this->upload->display_errors());
+            $data['upload_avatar_error'] = $upload_error;
+        } else {
+            // case - success
+            $upload_data = $this->upload->data();
+
+            // save image information to database
+            $data['userID'] = $ID;
+            $data['nameImage'] = $imageName;
+            $data['descriptionImage'] = "restaurant avatar image";
+            $data['typeImage'] = $imageType; // 0 avartar, 1 restaurant image, 2 banner
+            $data['addressImage'] = $config['upload_path'] . '/' . $imageName;
+
+            // delete avatar file in server folder
+            $image_addr = $this->Image_model->getAvatar($userType, $ID, $imageType);
+
+            foreach ($image_addr as $row) {
+                unlink($row->addressImage);
+            }
+
+            // delete avatar path in database
+            $this->Image_model->deleteAvatar($userType, $ID, $imageType);
+
+            $this->Image_model->insertAvatar($data);
+            redirect('user');
+        }
+    }
+
     // upload banner function
     function changeBanner() {
+        $ID = $this->session->userdata("ID");
         //set preferences
         $config['upload_path'] = './images/restOwner/banner';
         $config['allowed_types'] = 'jpg|png|gif';
@@ -32,9 +91,8 @@ class Image extends CI_Controller {
         if (!$this->upload->do_upload('filename')) {
             // case - failure
             $upload_error = array('error' => $this->upload->display_errors());
-            $data['upload_error'] = $upload_error;
-            $data['content'] = 'site/user/restaurant_owner/Rbanner.phtml';
-            $this->load->view('site/layout/layout.phtml', $data);
+            $this->session->set_flashdata('upload_error', '<div class="alert alert-danger">' . $upload_error . '</div>');
+            redirect('restaurant/Restaurant_Banner');
         } else {
             // case - success
             $upload_data = $this->upload->data();
@@ -42,24 +100,29 @@ class Image extends CI_Controller {
             $descriptionImage = $this->input->post('bannerDesc');
 
             // save image descrition to database
+            $data['userID'] = $ID;
             $data['nameImage'] = $imageName;
             $data['descriptionImage'] = $descriptionImage;
             $data['typeImage'] = 2; // 0 avartar, 1 restaurant image, 2 banner
-            $data['addressImage'] = base_url('images/restOwner/banner' . $imageName);
+            $data['addressImage'] = 'images/restOwner/banner/' . $imageName;
 
-            $image = $this->Image_model->insertBannerImage($data);
-
-            // if image information is inserted to the database
-            if ($image) {
-                // load view
-                $banner = $this->Image_model->getBanner();
-                $data['banner'] = $banner;
-                $data['success_msg'] = '<div class="alert alert-success text-center">Your file <strong>' . $upload_data['file_name'] . '</strong> was successfully uploaded!</div>';
-                $data['content'] = 'site/user/restaurant_owner/Rbanner.phtml';
-                $this->load->view('site/layout/layout.phtml', $data);
-            } else {
-                echo 'cannot insert image to database!';
+            // delete banner file in server folder
+            $preImage = $this->input->post('preImgAddr');
+            $image_addr = $this->Image_model->getBanner($ID);
+            foreach ($image_addr as $row) {
+                if ($row->addressImage == $preImage) {
+                    unlink($preImage);
+                }
             }
+
+            // delete banner path in database
+            $preImgID = $this->input->post("preImgID");
+            if ($preImgID != null) {
+                $this->Image_model->deleteBanner($preImgID);
+            }
+
+            $this->Image_model->insertBannerImage($data);
+            redirect('restaurant/Restaurant_Banner');
         }
     }
 
