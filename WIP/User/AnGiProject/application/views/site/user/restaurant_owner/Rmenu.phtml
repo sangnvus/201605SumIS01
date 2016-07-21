@@ -24,11 +24,15 @@
 
         <div class="col-md-9">
             <h1>Bảng giá</h1>
-            <form class="edit-user">
+            <?php echo $this->session->flashdata('msgResInfo'); ?>
+<!--             <?php 
+            print_r($resData);
+            ?> -->
+            <form class="edit-user" action="UpdateRestaurant_menu" method="POST">
                 <ul>
                     <li>
                         <label>Cập nhật bảng giá:</label>
-                        <textarea class="ckeditor" name="editor"></textarea>
+                        <textarea class="ckeditor" name="editor"><?php echo $resData[0]['food']; ?></textarea>
                     </li>
                     <li>
                         <label></label>

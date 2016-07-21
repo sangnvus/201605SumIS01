@@ -21,9 +21,6 @@ class Restaurant extends CI_Controller {
     }
 
     public function index($restID = 2) {
-
-
-
         $food = $this->Food_model->getFood($restID);
 
         define("dishToShow", 20);
@@ -36,7 +33,20 @@ class Restaurant extends CI_Controller {
         $this->load->view('site/layout/layout.phtml', $data);
     }
 
-  public function category($type = 0,$ID = 0,$page = 1)
+    public function addNewRes(){
+        $userID = $this->session->userdata("ID");
+        if ($this->restaurants_model->insertNewRes($userID)) {
+            $this->session->set_flashdata('msgResInfo', '<div class="alert alert-success text-center">Tạo nhà hàng thành công !!</div>');
+               redirect('restaurant/Restaurant_infor');
+        } else {
+            // error
+            $this->session->set_flashdata('msgResInfo', '<div class="alert alert-danger text-center">Thất bại, kiểm tra lại!!!</div>');
+               redirect('restaurant/Restaurant_infor');
+        }
+
+    }
+
+    public function category($type = 0,$ID = 0,$page = 1)
     {
         
         $districtData = $this->Category_model-> getDistrict();
@@ -93,7 +103,10 @@ class Restaurant extends CI_Controller {
         
         $data['categoriesData'] = $categoriesData;
         $data['resData'] = $resData;
-        $data['addressData'] = $this->User_model->getAddress($resData[0]['addressID']);
+        if(count($data['resData'] = $resData) > 0){
+            $data['addressData'] = $this->User_model->getAddress($resData[0]['addressID']);
+        }
+        
         $data['province'] = $this->User_model->getData('province');
         $data['district'] = $this->User_model->getData('district');
         $data['ward'] = $this->User_model->getData('ward');
@@ -118,6 +131,7 @@ class Restaurant extends CI_Controller {
                 'closeTimeRe' => $this->input->post('closeTimeRe'),
                 'discount' => $this->input->post('discount'),
                 'otherPoints' => $this->input->post('otherPoints'),
+                'descriptionRes' => $this->input->post('editor'),
             );
             // print_r($data);
             // die();
@@ -129,7 +143,7 @@ class Restaurant extends CI_Controller {
                 'wardid' => $this->input->post('ward'),
             );
 
-            if ($this->restaurants_model->updateResInfo($resData[0]['restaurantID'], $data)) {
+            if ($this->restaurants_model->updateResInfo($userID , $data)) {
                 $this->session->set_flashdata('msgResInfo', '<div class="alert alert-success text-center">Thành công !!</div>');
                 //   redirect('restaurant');
             } else {
@@ -150,9 +164,25 @@ class Restaurant extends CI_Controller {
     }
 
     public function Restaurant_menu() {
-        $data = array();
+        $userID = $this->session->userdata("ID");
+        $resData = $this->restaurants_model->getResByUser($userID);
+        $data['resData'] = $resData;
         $data['content'] = 'site/user/restaurant_owner/Rmenu.phtml';
         $this->load->view('site/layout/layout.phtml', $data);
+    }
+
+    public function UpdateRestaurant_menu() {
+        $userID = $this->session->userdata("ID");
+        $data = array(
+                'food' => $this->input->post('editor'),
+            );
+        if ($this->restaurants_model->updateResInfo($userID, $data)) {
+                $this->session->set_flashdata('msgResInfo', '<div class="alert alert-success text-center">Thành công !!</div>');
+                   redirect('restaurant/Restaurant_menu');
+        } else {
+            $this->session->set_flashdata('msgResInfo', '<div class="alert alert-danger text-center">Thất bại, kiểm tra thông tin!!!</div>');
+               redirect('restaurant/Restaurant_menu');
+        }
     }
 
 }

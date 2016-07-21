@@ -27,10 +27,7 @@ class Restaurants_model extends CI_Model {
         $data=$query->result_array();
         return  $data;
     }
-    public function updateResInfo($id,$data){
-        $this->db->where('restaurantID', $id);
-        return $this->db->update("restaurants", $data);
-    }
+    
     
     // return specific restaurant
     public function getSepecificRestaurant($id) {
@@ -60,10 +57,27 @@ class Restaurants_model extends CI_Model {
                 " ORDER BY " . $sortBy . " DESC; ";
 
         $query = $this->db->query($sql);
-
-
         $data = $query->result();
         return $data;
+    }
+
+    public function insertNewRes($userID){
+        $data = array(
+        'address' => 'Địa chỉ nhà hàng mới',
+        );
+        $this->db->insert('address', $data);
+        $addressID = $this->db->insert_id();
+        $data2 = array(
+        'addressID' => $addressID,
+        'userID' => $userID,
+        );
+        return $this->db->insert('restaurants', $data2);
+    }
+
+    public function updateResInfo($userID,$data){
+        //print_r($data)
+        $this->db->where('userID', $userID);
+        return $this->db->update("restaurants", $data);
     }
 
 }
