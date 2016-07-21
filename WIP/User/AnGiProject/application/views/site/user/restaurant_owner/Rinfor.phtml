@@ -7,14 +7,14 @@
         <div class="breadcrumb"></div>
 
         <div class="col-md-3">
-            
+
             <?php $this->load->view('site/user/profile/profile_image.phtml'); ?>
-            
+
             <ul class="profile-sidebar">
                 <li><a href="<?php echo base_url(); ?>user"><i class="fa fa-user" aria-hidden="true"></i> Thông tin tài khoản</a></li>
                 <li><a href="<?php echo base_url(); ?>restaurant/restaurant_banner"><i class="fa fa-picture-o" aria-hidden="true"></i> Banner nhà hàng</a></li>
                 <li  class="active"><i class="fa fa-wpforms" aria-hidden="true"></i> Thông tin nhà hàng</li>
-                <li><a href="<?php echo base_url(); ?>restaurant/restaurant_menu"><i class="fa fa-usd" aria-hidden="true"></i> Bảng giá</a></li>
+                <li><a href="<?php echo base_url(); ?>restaurant/restaurant_menu"><i class="fa fa-usd" aria-hidden="true"></i> Bảng Menu</a></li>
                 <li><a href="<?php echo base_url(); ?>booking/manageReservation"><i class="fa fa-cogs" aria-hidden="true"></i> Quản lý đặt chỗ</a></li>
                 <li><a href="<?php echo base_url(); ?>user/change_password"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Đổi mật khẩu</li></li>
                 <li><a href="<?php echo base_url(); ?>booking/viewBooking"><i class="fa fa-cutlery" aria-hidden="true"></i> Lịch sử đặt chỗ</a></li>
@@ -24,16 +24,17 @@
 
         <div class="col-md-9">
             <h1>Thông tin nhà hàng</h1>
-            <?php echo $this->session->flashdata('msgResInfo'); 
-            if(count($resData) < 1){
-            ?>
-            <form class="edit-user" action="addNewRes">
-                <h3>Chưa tạo nhà hàng</h3>
-                <input type="submit" value="Thêm nhà hàng">
-            </form>
-            <?php 
-            }else{
-            ?>
+            <?php
+            echo $this->session->flashdata('msgResInfo');
+            if (count($resData) < 1) {
+                ?>
+                <form class="edit-user" action="addNewRes">
+                    <h3>Chưa tạo nhà hàng</h3>
+                    <input type="submit" value="Thêm nhà hàng">
+                </form>
+                <?php
+            } else {
+                ?>
 
                 <form class="edit-user" method="POST">
                     <ul>
@@ -89,10 +90,10 @@
                                 <input type="radio" name="carParkingRes" value="0" checked> Không
                                 <input style="margin-left: 100px;" type="radio" name="carParkingRes" value="1" > Có
 
-                            <?php } ?>
+    <?php } ?>
 
-    <!--                         <input type="radio" name="gender" value="yes" checked> Có
-                            <input style="margin-left: 100px;" type="radio" name="no" value="female"> Không -->
+        <!--                         <input type="radio" name="gender" value="yes" checked> Có
+                                <input style="margin-left: 100px;" type="radio" name="no" value="female"> Không -->
                         </li>
                         <li>
                             <label>Hoạt động</label>
@@ -117,8 +118,8 @@
 
                         <li>
                             <label>Địa chỉ:</label> <input type="text" name="address" value="<?php
-                            echo $addressData[0]['address'];
-                            ?>">
+                                                           echo $addressData[0]['address'];
+                                                           ?>">
                         </li>
 
                         <li>
@@ -175,7 +176,7 @@
                         </li>
                     </ul>
                 </form>
-            <?php } ?>
+<?php } ?>
         </div>
     </div>
 </div>

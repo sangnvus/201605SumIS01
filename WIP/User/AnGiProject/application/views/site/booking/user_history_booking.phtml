@@ -43,13 +43,13 @@
                     foreach ($list as $row) {
                         echo '<li>';
                         echo '<a href = "" class = "booking-img">';
-                        echo "<img src = '" . $row['addressImage'] . "' >";
+//                        echo "<img src = '" . $row['addressImage'] . "' >";
                         echo '<p>' . $row['discount'] . '%</p>';
                         echo '</a>';
                         echo '<div class = "booking-restaurant-infor">';
                         echo '<a>' . $row['nameRe'] . '</a>';
-                        echo '<p>' . $row['address'] . '</p>';
-                        echo '<span style = "font-size: 18px">' . $row['avgRating'];
+//                        echo '<p>' . $row['address'] . '</p>';
+//                        echo '<span style = "font-size: 18px">' . $row['avgRating'];
                         echo '<i class = "glyphicon glyphicon-star filled"></i>';
                         echo '<i class = "glyphicon glyphicon-star filled"></i>';
                         echo '<i class = "glyphicon glyphicon-star filled"></i>';
@@ -60,7 +60,7 @@
                         echo '</div>';
 
                         echo '<div class = "booking-infor">';
-                        echo '<p>[Thời gian: '.$row['bookingTime'].' | ' . $row['serveDate'] . '</p>';
+                        echo '<p>Thời gian: '.$row['bookingTime'].' | ' . $row['serveDate'] . '</p>';
                         echo '<p>Số người: ' . $row['quantityMember'] . '</p>';
                         echo '<button><i class = "fa fa-clock-o" aria-hidden = "true"></i>' . $row['statusText'] . '</button>';
                         echo '</div>';

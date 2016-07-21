@@ -85,37 +85,7 @@
                             </div>
                          
                             <!-- Modal -->
-                            <div class="modal fade" id="myModal" role="dialog">
-                                <div class="modal-dialog">
-
-                                    <!-- Modal content-->
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                            <h4 class="modal-title">Login</h4>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form class="submit-form" action="user/login" method="post">
-                                                <ul>
-                                                    <li>
-                                                        <label>Số điện thoại</label>
-                                                        <input type="text" name = "phone">
-                                                    </li>
-                                                    <li>
-                                                        <label>Mật khẩu</label>
-                                                        <input type="password" name = "password">
-                                                    </li>
-                                                    <li>
-                                                        <label></label>
-                                                        <button class="btn">Đăng nhập</button>
-                                                    </li>
-                                                </ul>
-                                            </form>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
+                           <?php $this -> load -> view('site/user/user/login.phtml'); ?>
                     </li>
                 </ul>
             </nav>

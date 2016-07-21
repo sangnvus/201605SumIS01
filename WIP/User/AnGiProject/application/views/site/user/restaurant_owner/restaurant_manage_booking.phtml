@@ -4,14 +4,14 @@
         <div class="breadcrumb"></div>
 
         <div class="col-md-3">
-            
+
             <?php $this->load->view('site/user/profile/profile_image.phtml'); ?>
-            
+
             <ul class="profile-sidebar">
                 <li><a href="<?php echo base_url() ?>user"><i class="fa fa-user" aria-hidden="true"></i> Thông tin tài khoản</a></li>
                 <li><a href="<?php echo base_url() ?>restaurant/restaurant_banner"><i class="fa fa-picture-o" aria-hidden="true"></i> Banner nhà hàng</a></li>
                 <li><a href="<?php echo base_url() ?>restaurant/restaurant_infor"><i class="fa fa-wpforms" aria-hidden="true"></i> Thông tin nhà hàng</a></li>
-                <li><a href="<?php echo base_url() ?>restaurant/restaurant_menu"><i class="fa fa-usd" aria-hidden="true"></i> Bảng giá</a></li>
+                <li><a href="<?php echo base_url() ?>restaurant/restaurant_menu"><i class="fa fa-usd" aria-hidden="true"></i> Bảng Menu</a></li>
                 <li class="active"><i class="fa fa-cogs" aria-hidden="true"></i> Quản lý đặt chỗ</li>
                 <li><a href="<?php echo base_url() ?>user/change_Password"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Đổi mật khẩu</a></li>
                 <li><a href="<?php echo base_url(); ?>booking/viewBooking"><i class="fa fa-cutlery" aria-hidden="true"></i> Lịch sử đặt chỗ</a></li>
@@ -29,7 +29,7 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Ngày đặt chỗ</th>
+                        <!--<th>Ngày đặt chỗ</th>-->
                         <th>ID khách hàng</th>
                         <th>Số điện thoại</th>
                         <th>Số người</th>
@@ -49,18 +49,18 @@
                             echo '<tr>';
                             echo form_open('booking/manageReservation/');
                             echo '<input type="hidden" name="bid" value="' . $row['bookingID'] . '" >';
-                            echo '<th>' . $row['dateCreateBo'] . '</th>';
+//                            echo '<th>' . $row['dateCreateBo'] . '</th>';
                             echo '<th>' . $row['userID'] . '</th>';
                             echo '<th>' . $row['phoneUser'] . '</th>';
                             echo '<th>' . $row['quantityMember'] . '</th>';
-                            echo '<th><span style="background-color:red;"> NO TIME FIELD IN DB | </span>' . $row['dateBooking'] . '</th>';
-                            echo '<th>' . $row['request'] . '</th>';
-                            echo '<th><select class="form-control" name="bookingStatus" id="drplist' . $counter . '" size="1">';
-                            echo '<option value="' . $row['statusBo'] . '">' . $row['statusText'] . '</option>';
-                            echo '<option value="' . $row['dropValue1'] . '">' . $row['dropText1'] . '</option>';
-                            echo '<option value="' . $row['dropValue2'] . '">' . $row['dropText2'] . '</option>';
+                            echo '<th>' . $row['dateBooking'] . '| ' . $row['bookingTime'] . '</th>';
+                            echo '<th>' . $row['request'] . ' </th>';
+                            echo '<th><select class = "form-control" name = "bookingStatus" id = "drplist' . $counter . '" size = "1">';
+                            echo '<option value = "' . $row['statusBo'] . '">' . $row['statusText'] . ' </option>';
+                            echo '<option value = "' . $row['dropValue1'] . '">' . $row['dropText1'] . ' </option>';
+                            echo '<option value = "' . $row['dropValue2'] . '">' . $row['dropText2'] . ' </option>';
                             echo '</select></th>';
-                            echo '<th><input type="submit" id="btnSave' . $counter . '" name="manageBooking" value="Save" disabled></th>';
+                            echo '<th><input type = "submit" id = "btnSave' . $counter . '" name = "manageBooking" value = "Save" disabled></th>';
                             echo form_close();
                             echo '</tr>';
                             $counter ++;
@@ -88,7 +88,7 @@ if ($isOrder == true) {
                     if (defaultIndex != 0) {
                         $("#btnSave<?php echo $i ?>").removeAttr('disabled');
                         $("#btnSave<?php echo $i ?>").css('color', 'black');
-        //                    alert($("#drplist<?php // echo $i  ?>").prop('selectedIndex'));
+                        //                    alert($("#drplist<?php // echo $i     ?>").prop('selectedIndex'));
                     } else {
                         $("#btnSave<?php echo $i ?>").attr('disabled', 'disabled');
                         $("#btnSave<?php echo $i ?>").css('color', 'white');

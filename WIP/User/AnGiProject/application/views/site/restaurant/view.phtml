@@ -26,9 +26,9 @@
                 <div class="stick-point"></div>
 
                 <?php
-                // send restaurant id from view booking -> index.phtml
-                $myView['fromView'] = $restUrl;
-                $this->load->view('site/booking/index.phtml', $myView);
+                // get restaurant ID from reserve controller and send to booking index.phtml page
+                $data['viewRestID'] = $restID;
+                $this->load->view('site/booking/index.phtml', $data);
                 ?>
 
 

@@ -12,10 +12,6 @@ class Image_model extends CI_Model {
         return $this->db->insert('images', $data);
     }
 
-    function insertFoodImage($data) {
-        return $this->db->insert('food', $data);
-    }
-
     function insertRestImage($data) {
         // 1. insert image into image's table
         // 2. insert imageID into food table with specified restaurant id

@@ -11,42 +11,21 @@ class Booking extends CI_Controller {
         $this->load->model(array('Booking_model', 'User_model', 'Restaurants_model'));
         $this->load->model('Restaurants_model');
         $this->load->library(array('session', 'email'));
+
+        // statusBo 0 waiting, 1 served, 2 cancelled
     }
 
-//    public function testEmail() {
-//        $config = Array(
-//            'protocol' => 'smtp',
-//            'smtp_host' => 'ssl://smtp.googlemail.com',
-//            'smtp_port' => 465,
-//            'smtp_user' => 'soulivongfc@gmail.com', // change it to yours
-//            'smtp_pass' => '123Unique', // change it to yours
-//            'mailtype' => 'html',
-//            'charset' => 'iso-8859-1',
-//            'wordwrap' => TRUE
-//        );
-//
-//        $message = 'test codeIgniter email';
-//        $this->load->library('email', $config);
-//        $this->email->set_newline("\r\n");
-//        $this->email->from('soulivongfc@gmail.com'); // change it to yours
-//        $this->email->to('soulivongse03451@fpt.edu.vn'); // change it to yours
-//        $this->email->subject('Resume from JobsBuddy for your Job posting');
-//        $this->email->message($message);
-//        if ($this->email->send()) {
-//            echo 'Email sent.';
-//        } else {
-//            show_error($this->email->print_debugger());
-//        }
-//    }
     // when user click on booking link
     public function reserve($restID) {
         $data['restID'] = $restID;
-        $data['content'] = 'site/booking/index.phtml';
+        $data['content'] = 'site/restaurant/view.phtml';
         $this->load->view('site/layout/layout.phtml', $data);
     }
 
     // when user click save in booking page
-    public function makeReservation($userID) {
+    public function makeReservation() {
+        $userID = $this->session->userdata("ID");
+
         date_default_timezone_set('Asia/Ho_Chi_Minh');
         $today = date('Y-m-d H:i:s');
         $bookDate = $this->input->post('dateBooking');
@@ -54,9 +33,9 @@ class Booking extends CI_Controller {
 
         // check to receive service date
         if ($bookDate < $today) {
-            $this->session->set_flashdata('dateErrorMsg', '<div class="alert alert-danger">| You cannot enter the passed date!!!</div>');
-            $restID = $this->input->post('restaurantID');
-            redirect('booking/reserve/' . $restID);
+            $this->session->set_flashdata('dateErrorMsg', '<div class="alert alert-danger">You cannot enter the passed date!!!</div>');
+            $userID = $this->input->post('restaurantID');
+            redirect('booking/reserve/' . $userID);
         }
         //user id will be from login process
         $data = array(
@@ -70,44 +49,10 @@ class Booking extends CI_Controller {
         );
         // insert booking data into database
         if ($this->Booking_model->insertReservation($data)) {
-
-//            $userInfo = $this->User_model->getUser($userID);
-//            $restInfo = $this->Restaurants_model->getRestOwner($restID);
-//            $customerEmail = $userInfo[0]['emailUser'];
-//            $customerName = $userInfo[0]['firstNameUser'] . ' - ' . $userInfo[0]['lastNameUser'];
-//            $restOwnerEmail = $restInfo[0]['emailUser'];
-//            $customerEmail = "soulivongfc@gmail.com";
-//            $customerName = "Soulivong";
-//            $restOwnerEmail = "soulivongse03451@fpt.edu.vn";
-//            $messages = "booking date: $bookDate \n" .
-//                    "number of people: $this->input->post('numPeople') \n" .
-//                    "comment: $this->input->post('restaurantID')";
-            // inform restaurant owner
-//            $this->emailToRestOwner($customerEmail, $customerName, $restOwnerEmail, $messages);
             redirect('booking/viewBooking/' . $userID);
         } else {
-            echo 'Errors occur cannot make a reservation!';
-            redirect();
-        }
-    }
-
-    // send email to restaurant owner when there's a booking
-    function emailToRestOwner($from_email, $name, $to_email, $messages) {
-        $subject = "customer make a reservation";
-
-        //Load email library 
-        $this->load->library('email');
-
-        $this->email->from($from_email, $name);
-        $this->email->to($to_email);
-        $this->email->subject($subject);
-        $this->email->message($messages);
-
-        //Send mail 
-        if ($this->email->send()) {
-            echo "Email sent successfully.";
-        } else {
-            echo "Error in sending Email.";
+            $this->session->set_flashdata('dbBookingError', '<div class="alert alert-danger">database errors!!!</div>');
+            redirect('booking/viewBooking/' . $userID);
         }
     }
 
@@ -123,7 +68,6 @@ class Booking extends CI_Controller {
 
             if ($this->Booking_model->updateReservation($status, $bid)) {
                 $this->session->set_flashdata('msgUpdateBooking', '<div class="alert alert-success">Lưu thành công !!</div>');
-
                 $isUpdate = true;
             } else {
                 $this->session->set_flashdata('msgUpdateBooking', '<div class="alert alert-danger">Lưu thất bại !!</div>');
@@ -133,12 +77,18 @@ class Booking extends CI_Controller {
         }
         // ------------------------------------
         $isOrder = false;
-        $restID = $this->session->userdata("ID");
-        if ($restID == null) {
+        $userID = $this->session->userdata("ID");
+        if ($userID == null) {
             redirect(base_url());
             return;
         }
-        $blist = $this->Booking_model->getBookingList($restID);
+
+        $rest = -1;
+        $restaurant = $this->Booking_model->getRestID($userID);
+        foreach ($restaurant as $row) {
+            $rest = $row->restaurantID;
+        }
+        $blist = $this->Booking_model->getBookingList($rest);
         // if data exist in db
         if ($blist) {
             // if blist -> status = 0 => waiting, 1 => served, and 2 => cancelled
@@ -174,6 +124,7 @@ class Booking extends CI_Controller {
                     'phoneUser' => $row->phoneUser,
                     'quantityMember' => $row->quantityMember,
                     'dateBooking' => $row->dateBooking,
+                    'bookingTime' => $row->bookingTime,
                     'request' => $row->commentBo,
                     'statusText' => $statusText,
                     // remaining dropdownlist values
@@ -217,11 +168,11 @@ class Booking extends CI_Controller {
                 $rating = $this->Restaurants_model->getSepecificRestaurant($row->restaurantID);
                 foreach ($blist as $r) {
                     if ($r->restaurantID == $rating->restaurantID) {
-                        if ($rating->average != null || !empty($rating->average)) {
-                            $avgRating = $rating->average;
-                        } else {
-                            $avgRating = 0;
-                        }
+//                        if ($rating->average != null || !empty($rating->average)) {
+//                            $avgRating = $rating->average;
+//                        } else {
+//                            $avgRating = 0;
+//                        }
                         if ($r->statusBo == 1) {
                             $statusText = 'Served';
                         } else if ($r->statusBo == 2) {
@@ -232,17 +183,18 @@ class Booking extends CI_Controller {
                         $bclist = array(
                             'bid' => $r->bookingID,
                             'id' => $r->restaurantID,
-                            'addressImage' => $rating->addressImage,
+//                            'addressImage' => $rating->addressImage,
                             'nameRe' => $rating->nameRe,
                             'discount' => $rating->discount,
                             'campaign' => $rating->descriptionRes,
-                            'address' => $rating->address,
+//                            'address' => $rating->address,
                             'serveDate' => $r->dateBooking,
                             'bookingTime' => $r->bookingTime,
                             'quantityMember' => $r->quantityMember,
                             'statusText' => $statusText,
-                            'avgRating' => $avgRating
+//                            'avgRating' => $avgRating
                         );
+                        // check unique booking id
                         if (!in_array($bclist, $data['list'])) {
                             array_push($data['list'], $bclist);
                         }
@@ -252,6 +204,7 @@ class Booking extends CI_Controller {
 
             // sort data by dateBooking in descending order
             usort($data['list'], array(__CLASS__, 'sortByDateDesc'));
+
             $isBooked = true;
             $data['isBooked'] = $isBooked;
             $data['content'] = 'site/booking/user_history_booking.phtml';

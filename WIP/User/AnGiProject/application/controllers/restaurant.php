@@ -6,16 +6,12 @@ class Restaurant extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        
+
         $this->load->helper(array('url', 'form'));
         $this->load->library(array('session', 'form_validation'));
         $this->load->database();
         $this->load->model(array('Image_model', 'Food_model', 'Category_model', 'restaurants_model', 'User_model'));
 
-        // user unauthentication users try to access via url
-        if ($this->session->userdata("Type") != 2) {
-            redirect(base_url());
-        }
         // typeImage: 0 customer avatar, 1 restaurant avatar, 2 banner, 3 food
         // authorityUser: 1 customer, 2 restaurant owner
     }
@@ -33,31 +29,28 @@ class Restaurant extends CI_Controller {
         $this->load->view('site/layout/layout.phtml', $data);
     }
 
-    public function addNewRes(){
+    public function addNewRes() {
         $userID = $this->session->userdata("ID");
         if ($this->restaurants_model->insertNewRes($userID)) {
             $this->session->set_flashdata('msgResInfo', '<div class="alert alert-success text-center">Tạo nhà hàng thành công !!</div>');
-               redirect('restaurant/Restaurant_infor');
+            redirect('restaurant/Restaurant_infor');
         } else {
             // error
             $this->session->set_flashdata('msgResInfo', '<div class="alert alert-danger text-center">Thất bại, kiểm tra lại!!!</div>');
-               redirect('restaurant/Restaurant_infor');
+            redirect('restaurant/Restaurant_infor');
         }
-
     }
 
-    public function category($type = 0,$ID = 0,$page = 1)
-    {
-        
-        $districtData = $this->Category_model-> getDistrict();
-        $categoriesData = $this->Category_model-> getCategories();
-        $count = $this->Category_model->countAll($type,$ID);
+    public function category($type = 0, $ID = 0, $page = 1) {
+
+        $districtData = $this->Category_model->getDistrict();
+        $categoriesData = $this->Category_model->getCategories();
+        $count = $this->Category_model->countAll($type, $ID);
         //sua so items/trang
-        $pages = ceil($count/1);
-        $resData = $this->Category_model->getRes($type,$ID,$count,$page);
+        $pages = ceil($count / 1);
+        $resData = $this->Category_model->getRes($type, $ID, $count, $page);
         $rate = array();
-        foreach ($resData as $key => $row)
-        {
+        foreach ($resData as $key => $row) {
             $rate[] = $this->Category_model->getRate($row['restaurantID']);
         }
         $data['categoriesData'] = $categoriesData;
@@ -68,9 +61,8 @@ class Restaurant extends CI_Controller {
         $data['type'] = $type;
         $data['ID'] = $ID;
         $data['content'] = 'site/restaurant/Category.phtml';
-        $this->load->view('site/layout/layout.phtml',$data);
+        $this->load->view('site/layout/layout.phtml', $data);
     }
-
 
     public function view($restUrl) {
         $data['restUrl'] = $restUrl;
@@ -79,9 +71,11 @@ class Restaurant extends CI_Controller {
     }
 
     public function Restaurant_Banner() {
+        // user unauthentication users try to access via url
+        if ($this->session->userdata("Type") != 2) {
+            redirect(base_url());
+        }
         $ID = $this->session->userdata("ID");
-        // user types: 1 customer, 2 restaurant owner
-        // image types: 0 customer avatar, 1 restaurant avatar, 2 banner;
 
         $banner = $this->Image_model->getBanner($ID);
         $data['banner'] = $banner;
@@ -90,23 +84,22 @@ class Restaurant extends CI_Controller {
     }
 
     public function Restaurant_infor() {
-        $data = array();
-        $userID = $this->session->userdata("ID");
-        
-        if ($userID == null) {
+        // user unauthentication users try to access via url
+        if ($this->session->userdata("Type") != 2) {
             redirect(base_url());
-            return;
         }
+
+        $userID = $this->session->userdata("ID");
 
         $categoriesData = $this->Category_model->getCategories();
         $resData = $this->restaurants_model->getResByUser($userID);
-        
+        $data = array();
         $data['categoriesData'] = $categoriesData;
         $data['resData'] = $resData;
-        if(count($data['resData'] = $resData) > 0){
+        if (count($data['resData'] = $resData) > 0) {
             $data['addressData'] = $this->User_model->getAddress($resData[0]['addressID']);
         }
-        
+
         $data['province'] = $this->User_model->getData('province');
         $data['district'] = $this->User_model->getData('district');
         $data['ward'] = $this->User_model->getData('ward');
@@ -143,7 +136,7 @@ class Restaurant extends CI_Controller {
                 'wardid' => $this->input->post('ward'),
             );
 
-            if ($this->restaurants_model->updateResInfo($userID , $data)) {
+            if ($this->restaurants_model->updateResInfo($userID, $data)) {
                 $this->session->set_flashdata('msgResInfo', '<div class="alert alert-success text-center">Thành công !!</div>');
                 //   redirect('restaurant');
             } else {
@@ -164,6 +157,10 @@ class Restaurant extends CI_Controller {
     }
 
     public function Restaurant_menu() {
+        // user unauthentication users try to access via url
+        if ($this->session->userdata("Type") != 2) {
+            redirect(base_url());
+        }
         $userID = $this->session->userdata("ID");
         $resData = $this->restaurants_model->getResByUser($userID);
         $data['resData'] = $resData;
@@ -172,16 +169,21 @@ class Restaurant extends CI_Controller {
     }
 
     public function UpdateRestaurant_menu() {
+        // user unauthentication users try to access via url
+        if ($this->session->userdata("Type") != 2) {
+            redirect(base_url());
+        }
+        
         $userID = $this->session->userdata("ID");
         $data = array(
-                'food' => $this->input->post('editor'),
-            );
+            'food' => $this->input->post('editor'),
+        );
         if ($this->restaurants_model->updateResInfo($userID, $data)) {
-                $this->session->set_flashdata('msgResInfo', '<div class="alert alert-success text-center">Thành công !!</div>');
-                   redirect('restaurant/Restaurant_menu');
+            $this->session->set_flashdata('msgResInfo', '<div class="alert alert-success text-center">Thành công !!</div>');
+            redirect('restaurant/Restaurant_menu');
         } else {
             $this->session->set_flashdata('msgResInfo', '<div class="alert alert-danger text-center">Thất bại, kiểm tra thông tin!!!</div>');
-               redirect('restaurant/Restaurant_menu');
+            redirect('restaurant/Restaurant_menu');
         }
     }
 

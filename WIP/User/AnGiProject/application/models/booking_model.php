@@ -4,12 +4,21 @@ class Booking_model extends CI_Model {
 
     function __construct() {
         parent::__construct();
+        // statusBo 0 waiting, 1 served, 2 cancelled
+    }
+
+    // get restaurant id
+    function getRestID($userID) {
+        $sql = " SELECT r.restaurantID FROM restaurants r, users u " .
+                " WHERE r.userID = u.userID AND authorityUser = 2 AND r.userID = ?; ";
+        $query = $this -> db -> query($sql, array($userID));
+        return $query -> result();
     }
 
     // for restaurant owner
     function getBookingList($restID) {
-        $sql = " SELECT * FROM restaurants r, booking b " .
-                " WHERE b.restaurantID = r.restaurantID AND b.restaurantID = ".$restID.";";
+        $sql = " SELECT * FROM restaurants r, booking b, users u " .
+                " WHERE b.restaurantID = r.restaurantID AND u.userID = b.userID AND b.restaurantID = " . $restID . ";";
         $query = $this->db->query($sql);
         if ($query->num_rows() > 0) {
             $data = $query->result();
