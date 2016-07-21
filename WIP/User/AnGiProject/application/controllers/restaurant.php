@@ -94,6 +94,7 @@ class Restaurant extends CI_Controller {
         else{  
             $data = array(
             'nameRe' => $this->input->post('nameRe'),
+            'descriptionRes' => $this->input->post('editor'),
             'favouriteFood' => $this->input->post('favouriteFood'),
             'minPrice' => $this->input->post('minPrice'),
             'maxPrice' => $this->input->post('maxPrice'),
@@ -104,8 +105,10 @@ class Restaurant extends CI_Controller {
             'discount' => $this->input->post('discount'),
             'otherPoints' => $this->input->post('otherPoints'),
             );
-            // print_r($data);
+            // $ck = $this->input->post('editor');
+            // echo  "data".$ck;
             // die();
+
 
             $address = array(
             'address'=> $this->input->post('address'),
