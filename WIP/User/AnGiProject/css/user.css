@@ -161,3 +161,13 @@
     width: 100% !important;
     border-radius: 4px !important;
 }
+
+input[type="file"]{display: none}
+.select-file-btn{
+    color: #fff;
+    background-color: #357ebd;
+    border-color: #357ebd;
+    font-size: 14px;
+    padding: 5px 15px;
+    border-radius: 5px;
+}
