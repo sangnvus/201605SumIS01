@@ -6,7 +6,7 @@
 
         <div class="col-md-3">
 
-            <?php $this->load->view('site/user/user/profile_image.phtml'); ?>
+            <?php $this->load->view('site/user/profile/profile_image.phtml'); ?>
 
             <ul class="profile-sidebar">
                 <li><a href="<?php echo base_url(); ?>user"><i class="fa fa-user" aria-hidden="true"></i> Thông tin tài khoản</a></li>
@@ -62,13 +62,14 @@
                         echo form_open_multipart('image/changeBanner');
                         ?>
                         <li class="upload-banner">
-                            <!--                        <a>
-                                                        <i class="fa fa-plus" aria-hidden="true"></i>Add
-                                                    </a>-->
-                                                    <!--<input class="" type="text" placeholder="Viết tiêu đề...">-->
-                            <input type="text" name="descriptionImage" placeholder="write description" style="border-color: yellow; border-width: 3px;"><br />
-                            <input type="file" name="filename" onchange="readURL<?php echo $i; ?>(this);" />
                             <img id="banner<?php echo $i; ?>" src="<?php echo base_url('images/restOwner/banner/default_banner.png'); ?>" alt="banner" />
+                            <input type="text" name="descriptionImage" placeholder="write description" style="border-color: yellow; border-width: 3px;"><br />
+                            <label class = "select-file-btn">
+                                <input type="file" name="filename" onchange="readURL<?php echo $i; ?>(this);" />  
+                                <a>
+                                    <i class="fa fa-plus" aria-hidden="true"></i>Add
+                                </a>
+                            </label>
                             <span class="text-danger"><?php
                                 if (isset($error)) {
                                     echo $error;

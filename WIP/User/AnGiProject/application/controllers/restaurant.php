@@ -149,9 +149,9 @@ class Restaurant extends CI_Controller {
         }
     }
 
-    public function Restaurant_price() {
+    public function Restaurant_menu() {
         $data = array();
-        $data['content'] = 'site/user/restaurant_owner/Rprice.phtml';
+        $data['content'] = 'site/user/restaurant_owner/Rmenu.phtml';
         $this->load->view('site/layout/layout.phtml', $data);
     }
 
