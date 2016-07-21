@@ -35,6 +35,7 @@
 
         <div class="col-md-9">
             <h1>Thông tin nhà hàng</h1>
+            <?php echo $this->session->flashdata('msgResInfo'); ?>
             <form class="edit-user" method="POST">
                 <ul>
                     <li>
@@ -101,10 +102,10 @@
                         <div class="inline-double-text">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <input placeholder="Mở cửa" class="textbox-n" type="text" name="openTimeRe" onfocus="(this.type='time')" onblur="(this.type='text')">
+                                    <input placeholder="Mở cửa" class="textbox-n" type="text" name="openTimeRe" value="<?php echo $resData[0]['openTimeRe']; ?>" onfocus="(this.type='time')" onblur="(this.type='text')">
                                 </div>
                                 <div class="col-md-6">
-                                    <input placeholder="Đóng cửa" class="textbox-n" type="text" name="closeTimeRe" onfocus="(this.type='time')" onblur="(this.type='text')">
+                                    <input placeholder="Đóng cửa" class="textbox-n" type="text" name="closeTimeRe" value="<?php echo $resData[0]['closeTimeRe']; ?>" onfocus="(this.type='time')" onblur="(this.type='text')">
                                 </div>
                             </div>
                         </div>
@@ -184,7 +185,7 @@
                     </li>
                 </ul>
             </form>
-            <?php echo $this->session->flashdata('msgResInfo'); ?>
+            
         </div>
     </div>
 </div>

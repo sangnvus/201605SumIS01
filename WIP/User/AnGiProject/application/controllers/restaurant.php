@@ -131,13 +131,13 @@ class Restaurant extends CI_Controller {
             if ($this->User_model->updateAddress($resData[0]['addressID'] ,$address))
             {
                     $this->session->set_flashdata('msgResInfo','<div class="alert alert-success text-center">Thành công !!</div>');
-                    redirect('restaurant');
+                    redirect('restaurant/restaurant_infor');
             }
             else
             {
                 // error
                 $this->session->set_flashdata('msgResInfo','<div class="alert alert-danger text-center">Thất bại, kiểm tra địa chỉ !!!</div>');
-                redirect('restaurant');
+                redirect('restaurant/restaurant_infor');
             }
         }
 
