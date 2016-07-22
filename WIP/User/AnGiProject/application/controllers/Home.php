@@ -8,27 +8,52 @@ class Home extends CI_Controller {
         parent::__construct();
         $this->load->database();
         $this->load->helper(array('url', 'form'));
-        $this->load->model(array('Restaurants_model', 'Category_model'));
+        $this->load->model(array('Restaurants_model', 'Category_model', 'Image_model'));
         $this->load->library('session');
     }
 
     public function index() {
-        // sortby restaurant statement
-        define("sortByAvg", "average");
-        define("sortByDisc", "discount");
-
         // number of restaurants to display
         define("showTopRating", 4);
         define("showhighestDiscount", 8);
+
         // retrieve data from model
-        $rate = $this->Restaurants_model->getInterestingRestaurants(sortByAvg);
-        $discount = $this->Restaurants_model->getInterestingRestaurants(sortByDisc);
+        $restProfile = $this->Restaurants_model->getRestProfile();
+        $rate = $this->Restaurants_model->getRestRating();
+        $restImage = $this->Image_model->getRestImage();
+        $counter = 0;
+        $topRating = array();
+        $highestDiscount = array();
+        foreach ($restProfile as $row) {
+
+            if (isset($rate[$counter]) && ($row->restaurantID) == ($rate[$counter]->restaurantID) && ($restImage[$counter]->restaurantID) == $row->restaurantID) {
+                $avgRating = $rate[$counter]->average;
+            } else {
+                $avgRating = 0;
+            }
+            $rprofile = array(
+                'restID' => $row->restaurantID,
+                'campaign' => $row->campaign,
+                'address' => $row->address,
+                'discount' => $row->discount,
+                'restName' => $row->nameRe,
+                'imageAddr' => $restImage[$counter]->addressImage,
+                'average' => $avgRating
+            );
+            $counter++;
+
+            array_push($topRating, $rprofile);
+            array_push($highestDiscount, $rprofile);
+        }
+
+        $topRating = $this->sortRestProfile($topRating, 'average');
+        $highestDiscount = $this->sortRestProfile($highestDiscount, 'discount');
 
         $categoriesData = $this->Category_model->getCategories();
         $data['categoriesData'] = $categoriesData;
-        
-        $data['topRating'] = $rate;
-        $data['highestDiscount'] = $discount;
+
+        $data['topRating'] = $topRating;
+        $data['highestDiscount'] = $highestDiscount;
 
         $data['limitRate'] = showTopRating;
         $data['limitDis'] = showhighestDiscount;
@@ -38,6 +63,17 @@ class Home extends CI_Controller {
 
         $data['content'] = 'site/home/index/index.phtml';
         $this->load->view('site/layout/layout.phtml', $data);
+    }
+
+    function sortRestProfile($a, $subkey) {
+        foreach ($a as $k => $v) {
+            $b[$k] = strtolower($v[$subkey]);
+        }
+        arsort($b);
+        foreach ($b as $key => $val) {
+            $c[] = $a[$key];
+        }
+        return $c;
     }
 
 }

@@ -104,6 +104,7 @@ CREATE TABLE IF NOT EXISTS Restaurants (
  phoneRe NVARCHAR(15),
  food TEXT,
  favouriteFood NVARCHAR(300),
+ campaign NVARCHAR(300),
  spaceRes NVARCHAR(300),
  carParkingRes INT DEFAULT 0,
  otherPoints NVARCHAR(300),

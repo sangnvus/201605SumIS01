@@ -64,12 +64,6 @@ class Restaurant extends CI_Controller {
         $this->load->view('site/layout/layout.phtml', $data);
     }
 
-    public function view($restUrl) {
-        $data['restUrl'] = $restUrl;
-        $data['content'] = 'site/restaurant/view.phtml';
-        $this->load->view('site/layout/layout.phtml', $data);
-    }
-
     public function Restaurant_Banner() {
         // user unauthentication users try to access via url
         if ($this->session->userdata("Type") != 2) {

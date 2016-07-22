@@ -159,51 +159,45 @@ class Booking extends CI_Controller {
         }
 
         $blist = $this->Booking_model->getCustomerBookingList($userID);
+        $rate = $this->Restaurants_model->getRestRating();
+        $restImage = $this->Image_model->getRestImage();
         $isBooked = false;
-        // if users have maded reservation
+        // if users have made reservation
         if ($blist) {
-            $brid = $this->Booking_model->getBookRestId($userID);
-            $data['list'] = array();
-            foreach ($brid as $row) {
-                $rating = $this->Restaurants_model->getSepecificRestaurant($row->restaurantID);
-                foreach ($blist as $r) {
-                    if ($r->restaurantID == $rating->restaurantID) {
-//                        if ($rating->average != null || !empty($rating->average)) {
-//                            $avgRating = $rating->average;
-//                        } else {
-//                            $avgRating = 0;
-//                        }
-                        if ($r->statusBo == 1) {
-                            $statusText = 'Served';
-                        } else if ($r->statusBo == 2) {
-                            $statusText = 'Cancelled';
-                        } else {
-                            $statusText = 'Waiting';
-                        }
-                        $bclist = array(
-                            'bid' => $r->bookingID,
-                            'id' => $r->restaurantID,
-//                            'addressImage' => $rating->addressImage,
-                            'nameRe' => $rating->nameRe,
-                            'discount' => $rating->discount,
-                            'campaign' => $rating->descriptionRes,
-//                            'address' => $rating->address,
-                            'serveDate' => $r->dateBooking,
-                            'bookingTime' => $r->bookingTime,
-                            'quantityMember' => $r->quantityMember,
-                            'statusText' => $statusText,
-//                            'avgRating' => $avgRating
-                        );
-                        // check unique booking id
-                        if (!in_array($bclist, $data['list'])) {
-                            array_push($data['list'], $bclist);
-                        }
-                    }
+            $custBookList = array();
+            $counter = 0;
+            foreach ($blist as $row) {
+                if (isset($rate[$counter]) && ($row->restaurantID) == ($rate[$counter]->restaurantID) && ($restImage[$counter]->restaurantID) == $row->restaurantID) {
+                    $avgRating = $rate[$counter]->average;
+                } else {
+                    $avgRating = 0;
                 }
+                if ($row->statusBo == 1) {
+                    $statusText = 'Served';
+                } else if ($row->statusBo == 2) {
+                    $statusText = 'Cancelled';
+                } else {
+                    $statusText = 'Waiting';
+                }
+                $bclist = array(
+                    'bid' => $row->bookingID,
+                    'id' => $row->restaurantID,
+                    'addressImage' => $restImage[$counter] -> addressImage,
+                    'nameRe' => $row->nameRe,
+                    'discount' => $row->discount,
+                    'campaign' => $row->descriptionRes,
+                    'address' => $row->address,
+                    'serveDate' => $row->dateBooking,
+                    'bookingTime' => $row->bookingTime,
+                    'quantityMember' => $row->quantityMember,
+                    'statusText' => $statusText,
+                    'avgRating' => $avgRating
+                );
+                array_push($custBookList, $bclist);
             }
 
             // sort data by dateBooking in descending order
-            usort($data['list'], array(__CLASS__, 'sortByDateDesc'));
+            usort($custBookList, array(__CLASS__, 'sortByDateDesc'));
 
             $isBooked = true;
             $data['isBooked'] = $isBooked;

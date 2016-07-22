@@ -12,25 +12,6 @@ class Image_model extends CI_Model {
         return $this->db->insert('images', $data);
     }
 
-    function insertRestImage($data) {
-        // 1. insert image into image's table
-        // 2. insert imageID into food table with specified restaurant id
-        $this->insertImage($data);
-        $this->insertFoodImage($data);
-    }
-
-    function getRestImage($restID) {
-        $sql = " SELECT * FROM images img, food f " .
-                " WHERE img.imageID = f.imageID AND f.restaurantID = " . $restID . "; ";
-        $query = $this->db->query($sql);
-        if ($query->num_rows() > 0) {
-            $data = $query->result();
-            return $data;
-        } else {
-            return NULL;
-        }
-    }
-
     // -------------------- avatar -------------------------
     // update restaurant 0 avartar, 1 restaurant, 2 banner
     function getAvatar($userType, $userID, $imageType) {
@@ -59,6 +40,15 @@ class Image_model extends CI_Model {
     }
 
     // -------------------- end of avatar -------------------------
+    // 
+    // restaurant profile image
+    function getRestImage() {
+        $sql = "SELECT r.restaurantID, imageID, addressImage FROM images img, users u, restaurants r
+                WHERE img.userID = u.userID and r.userID = u.userID AND typeImage = 2;";
+        $query = $this->db->query($sql);
+        return $query->result();
+    }
+
     // -------------------- banner -------------------------
     // user types: 1 customer, 2 restaurant owner
     // image types: 0 customer avatar, 1 restaurant avatar, 2 banner

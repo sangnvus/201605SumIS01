@@ -28,26 +28,13 @@ class Booking_model extends CI_Model {
         }
     }
 
-    // for customer
+    // for customer booking list
     function getCustomerBookingList($userID) {
-        $sql = " SELECT * FROM booking b, users u " .
-                " WHERE b.userID = u.userID AND b.userID = " . $userID . "; ";
+        $sql = " SELECT * FROM booking b, users u, restaurants r " .
+                " WHERE b.userID = u.userID AND b.restaurantID = r.restaurantID AND b.userID = ? " .
+                " ORDER BY dateBooking DESC, bookingTime DESC;";
 
-        $query = $this->db->query($sql);
-        if ($query->num_rows() > 0) {
-            $data = $query->result();
-            return $data;
-        } else {
-            return NULL;
-        }
-    }
-
-    //  get restaurant id in booking table with a specific user
-    function getBookRestId($userId) {
-        $sql = " SELECT b.restaurantID FROM booking b, Users u, restaurants r " .
-                " WHERE b.userID = u.userID AND b.restaurantID = r.restaurantID AND b.userID = " . $userId .
-                " ORDER BY dateBooking DESC; ";
-        $query = $this->db->query($sql);
+        $query = $this->db->query($sql, array($userID));
         if ($query->num_rows() > 0) {
             $data = $query->result();
             return $data;

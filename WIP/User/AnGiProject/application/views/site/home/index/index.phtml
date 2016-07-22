@@ -28,30 +28,23 @@
                         ?>
                         <li class="col-md-3">
                             <a style="display: block; position: relative" class="img-item" href="">
-                                <img src="<?php echo $row->addressImage; ?>">
+                                <img src="<?php echo $row['imageAddr']; ?>">
                                 <div class="item-infor">
-                                    <label class="item-name"><?php echo $row->nameRe; ?></label>
-                                    <span class="rate-star"><?php echo $row->average; ?><!-- fill in the star by rate value -->
+                                    <label class="item-name"><?php echo $row['campaign']; ?></label>
+                                    <span class="rate-star"><?php echo $row['average']; ?><!-- fill in the star by rate value -->
                                         <i class="fa fa-star filled" aria-hidden="true"></i>
                                         <i class="fa fa-star filled" aria-hidden="true"></i>
                                         <i class="fa fa-star filled" aria-hidden="true"></i>
                                         <i class="fa fa-star filled" aria-hidden="true"></i>
                                         <i class="fa fa-star" aria-hidden="true"></i>
                                     </span>
-                                    <span class="rate-dollar">
-                                        <i class="fa fa-dollar filled" aria-hidden="true"></i>
-                                        <i class="fa fa-dollar filled" aria-hidden="true"></i>
-                                        <i class="fa fa-dollar filled" aria-hidden="true"></i>
-                                        <i class="fa fa-dollar" aria-hidden="true"></i>
-                                        <i class="fa fa-dollar" aria-hidden="true"></i>
-                                    </span>
-                                    <label class="item-address"><?php echo $row->address; ?></label>
+                                    <label class="item-address"><?php echo $row['address']; ?></label>
                                 </div>
                             </a>
                             <div style="border: 1px solid #e0e0e0; text-align: center">
-                                <p class="sale-content">Giảm <strong><?php echo $row->discount; ?>%</strong></p>
-                                <p class="quick-description"><?php echo $row->descriptionRes; ?></p>
-                                <?php echo form_open('booking/reserve/' . $row->restaurantID); ?>
+                                <p class="sale-content">Giảm <strong><?php echo $row['discount']; ?>%</strong></p>
+                                <p class="quick-description"><?php echo $row['restName']; ?></p>
+                                <?php echo form_open('booking/reserve/' . $row['restID']); ?>
                                 <input type="submit" class="place" value="Đặt chỗ ngay" />
                                 <?php echo form_close(); ?> 
                             </div>
@@ -94,35 +87,25 @@
                         ?>
                         <li class="col-md-3">
                             <a style="display: block; position: relative" class="img-item" href="">
-                                <img src="<?php echo $row->addressImage; ?>">
+                                <img src="<?php echo $row['imageAddr']; ?>">
                                 <div class="item-infor">
-                                    <label class="item-name"><?php echo $row->nameRe; ?></label>
-                                    <span class="rate-star"><?php echo $row->average; ?><!-- fill in the star by rate value -->
+                                    <label class="item-name"><?php echo $row['campaign']; ?></label>
+                                    <span class="rate-star"><?php echo $row['average']; ?><!-- fill in the star by rate value -->
                                         <i class="fa fa-star filled" aria-hidden="true"></i>
                                         <i class="fa fa-star filled" aria-hidden="true"></i>
                                         <i class="fa fa-star filled" aria-hidden="true"></i>
                                         <i class="fa fa-star filled" aria-hidden="true"></i>
                                         <i class="fa fa-star" aria-hidden="true"></i>
                                     </span>
-                                    <span class="rate-dollar">
-                                        <i class="fa fa-dollar filled" aria-hidden="true"></i>
-                                        <i class="fa fa-dollar filled" aria-hidden="true"></i>
-                                        <i class="fa fa-dollar filled" aria-hidden="true"></i>
-                                        <i class="fa fa-dollar" aria-hidden="true"></i>
-                                        <i class="fa fa-dollar" aria-hidden="true"></i>
-                                    </span>
-                                    <label class="item-address"><?php echo $row->address; ?></label>
+                                    <label class="item-address"><?php echo $row['address']; ?></label>
                                 </div>
                             </a>
                             <div style="border: 1px solid #e0e0e0; text-align: center">
-                                <p class="sale-content">Giảm <strong><?php echo $row->discount; ?>%</strong></p>
-                                <p class="quick-description"><?php echo $row->descriptionRes; ?></p>
-                                <?php echo form_open('booking/reserve/' . $row->restaurantID); ?>
+                                <p class="sale-content">Giảm <strong><?php echo $row['discount']; ?>%</strong></p>
+                                <p class="quick-description"><?php echo $row['restName']; ?></p>
+                                <?php echo form_open('booking/reserve/' . $row['restID']); ?>
                                 <input type="submit" class="place" value="Đặt chỗ ngay" />
-                                <?php
-                                echo form_close();
-                                ?> 
-
+                                <?php echo form_close(); ?> 
                             </div>
                         </li>
                         <?php

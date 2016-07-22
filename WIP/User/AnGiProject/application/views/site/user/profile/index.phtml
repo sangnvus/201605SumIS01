@@ -112,15 +112,15 @@
                         <li>
                             <label>Quận huyện:</label> 
                             <select name="district" size="1">
-    <?php
-    foreach ($district as $key => $row) {
-        if ($addressData[0]['districtid'] == $row['districtid']) {
-            echo '<option value="' . $row['districtid'] . '" selected >' . $row['typeDis'] . ' ' . $row['nameDis'] . '</option>';
-        } else {
-            echo '<option value="' . $row['districtid'] . '">' . $row['typeDis'] . ' ' . $row['nameDis'] . '</option>';
-        }
-    }
-    ?>
+                                <?php
+                                foreach ($district as $key => $row) {
+                                    if ($addressData[0]['districtid'] == $row['districtid']) {
+                                        echo '<option value="' . $row['districtid'] . '" selected >' . $row['typeDis'] . ' ' . $row['nameDis'] . '</option>';
+                                    } else {
+                                        echo '<option value="' . $row['districtid'] . '">' . $row['typeDis'] . ' ' . $row['nameDis'] . '</option>';
+                                    }
+                                }
+                                ?>
                             </select>
                         </li>
                         <li>
@@ -138,9 +138,9 @@
                         </li>
 
 
-                                <?php
-                            }
-                            ?>                     
+                        <?php
+                    }
+                    ?>                     
 
                     <li>
                         <label></label>
@@ -148,7 +148,7 @@
                     </li>
                 </ul>
             </form>
-<?php echo $this->session->flashdata('msg'); ?>
+            <?php echo $this->session->flashdata('msg'); ?>
         </div>
     </div>
 </div>

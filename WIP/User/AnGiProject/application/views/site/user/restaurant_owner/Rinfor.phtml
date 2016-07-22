@@ -28,7 +28,7 @@
             echo $this->session->flashdata('msgResInfo');
             if (count($resData) < 1) {
                 ?>
-                <form class="edit-user" action="addNewRes">
+                <form class="edit-user" action="Restaurant/addNewRes">
                     <h3>Chưa tạo nhà hàng</h3>
                     <input type="submit" value="Thêm nhà hàng">
                 </form>
@@ -90,10 +90,10 @@
                                 <input type="radio" name="carParkingRes" value="0" checked> Không
                                 <input style="margin-left: 100px;" type="radio" name="carParkingRes" value="1" > Có
 
-    <?php } ?>
+                            <?php } ?>
 
-        <!--                         <input type="radio" name="gender" value="yes" checked> Có
-                                <input style="margin-left: 100px;" type="radio" name="no" value="female"> Không -->
+                <!--                         <input type="radio" name="gender" value="yes" checked> Có
+                                        <input style="margin-left: 100px;" type="radio" name="no" value="female"> Không -->
                         </li>
                         <li>
                             <label>Hoạt động</label>
@@ -118,8 +118,8 @@
 
                         <li>
                             <label>Địa chỉ:</label> <input type="text" name="address" value="<?php
-                                                           echo $addressData[0]['address'];
-                                                           ?>">
+                            echo $addressData[0]['address'];
+                            ?>">
                         </li>
 
                         <li>
@@ -176,7 +176,7 @@
                         </li>
                     </ul>
                 </form>
-<?php } ?>
+            <?php } ?>
         </div>
     </div>
 </div>
