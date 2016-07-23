@@ -10,14 +10,34 @@ class Restaurants_model extends CI_Model {
     }
 
     // return specific restaurant
+    function getResByResID($resID) {
+        $this->db->select('*');
+        $this->db->from('restaurants r');
+        $this->db->join('address a', 'r.addressID = a.addressID', 'left');
+        $this->db->where('r.restaurantID', $resID);
+        $query = $this->db->get();
+        $data = $query->result_array();
+        return $data;
+    }
+
     function getResByUser($userID) {
         $this->db->select('*');
         $this->db->from('restaurants r');
-        $this->db->join('address a', 'r.addressID = a.addressID');
+        $this->db->join('address a', 'r.addressID = a.addressID', 'left');
         $this->db->where('r.userID', $userID);
         $query = $this->db->get();
         $data = $query->result_array();
         return $data;
+    }
+
+    function getResCate($resID){
+        $this->db->select('*');
+        $this->db->from('restaurantcategories rc');
+        $this->db->join('categoriesofrestaurant cr', 'rc.categoryOfResID = cr.categoryOfResID', 'left');
+        $this->db->where('restaurantID', $resID);
+        $query = $this->db->get();
+        $data = $query->result_array();
+        return $data;        
     }
 
     // return all restaurants' profile information   
@@ -43,12 +63,16 @@ class Restaurants_model extends CI_Model {
         return $data;
     }
 
+
+
     function insertNewRes($userID) {
+        //insert new empty address for res
         $data = array(
             'address' => 'Địa chỉ nhà hàng mới',
         );
         $this->db->insert('address', $data);
         $addressID = $this->db->insert_id();
+        //insert new res with empty address
         $data2 = array(
             'addressID' => $addressID,
             'userID' => $userID,
@@ -56,8 +80,23 @@ class Restaurants_model extends CI_Model {
         return $this->db->insert('restaurants', $data2);
     }
 
-    function updateResInfo($userID, $data) {
-        $this->db->where('userID', $userID);
+    function insertResCate($resID,$bundleCate){
+        // $checked = implode(',',$bundleCate);
+        // Delete all old checked
+        $this->db->where("restaurantID",$resID);
+        $this->db->delete('restaurantcategories');
+        // insert all new user's choice
+        foreach ($bundleCate as $key => $value) {
+            $data = array(
+            'restaurantID' => $resID,
+            'categoryOfResID' => $value,
+            );
+            $this->db->insert('restaurantcategories', $data);
+        }
+    }
+
+    function updateResInfo($restaurantID, $data) {
+        $this->db->where('restaurantID', $restaurantID);
         return $this->db->update("restaurants", $data);
     }
 

@@ -6,21 +6,51 @@
 
         <div class="restaurant-home">
             <div class="col-md-12" style="margin-bottom: 20px">
-                <h2 class="restaurant-name">Ao quán</h2>
+                <h2 class="restaurant-name"><?php echo $resData[0]['nameRe']; ?></h2>
             </div>
 
             <div class="col-md-3" style="float: right; position: relative">
                 <div class="restaurant-rate shadow-outside">
-                    <span style="font-size: 2em">
+                <span class="rate-star">
+                <?php
+                $i = 1;
+                for ($i; $i <= $rateData['avgrate']; $i++) {
+                    ?>
+                    <i class="fa fa-star filled" aria-hidden="true"></i>
+
+                    <?php
+                    if (($i + 0.25 <= $rateData['avgrate']) && ($i + 0.75 > $rateData['avgrate'])) {
+                        ?>
+                        <i class="fa fa-star-half-o filled" aria-hidden="true"></i>
+
+                        <?php
+                        $i++;
+                    }
+                }
+                ?>
+                <?php
+                for ($k = 0; $k <= (5 - $i); $k++) {
+                    ?>
+                    <i class="fa fa-star " aria-hidden="false"></i>
+                    <?php
+                }
+                ?>  
+
+            </span>
+
+                    <!-- <span style="font-size: 2em">
                         <i class="glyphicon glyphicon-star filled"></i>
                         <i class="glyphicon glyphicon-star filled"></i>
                         <i class="glyphicon glyphicon-star filled"></i>
                         <i class="glyphicon glyphicon-star filled"></i>
                         <i class="glyphicon glyphicon-star"></i>
-                    </span>
+                    </span> -->
 
-                    <p>24 đánh giá</p>
-                    <p>18 Ngõ 19 Đông Tác, Quận Đống Đa</p>
+                    <p><?php echo $rateData['count'];?> đánh giá</p>
+                    <p><?php echo $resData[0]['address'].", ";?>
+                        <?php echo $addressData[0]['typeWard']. " ";echo $addressData[0]['nameWard'].", "?>
+                        <?php echo $addressData[0]['typeDis']. " ";echo $addressData[0]['nameDis'].", "?>    
+                        <?php echo $addressData[0]['typePro']. " ";echo $addressData[0]['namePro']."."?></p>
                 </div>
 
                 <div class="stick-point"></div>
@@ -47,22 +77,44 @@
                         <div id="myCarousel-restaurant" class="carousel slide" data-ride="carousel">
                             <!-- Indicators -->
                             <ol class="carousel-indicators">
+                                <?php 
+                            foreach ($bannerData as $key => $value) 
+                            {
+                            ?>
+                            <li data-target="#myCarousel-restaurant" data-slide-to="0" class="active"></li>
+
+                            <?php
+                            }
+                            ?> 
+                            
                                 <li data-target="#myCarousel-restaurant" data-slide-to="0" class="active"></li>
-                                <li data-target="#myCarousel-restaurant" data-slide-to="1"></li>
+                                <!-- <li data-target="#myCarousel-restaurant" data-slide-to="1"></li>
                                 <li data-target="#myCarousel-restaurant" data-slide-to="2"></li>
                                 <li data-target="#myCarousel-restaurant" data-slide-to="3"></li>
                                 <li data-target="#myCarousel-restaurant" data-slide-to="4"></li>
                                 <li data-target="#myCarousel-restaurant" data-slide-to="5"></li>
-                                <li data-target="#myCarousel-restaurant" data-slide-to="6"></li>
+                                <li data-target="#myCarousel-restaurant" data-slide-to="6"></li> -->
                             </ol>
 
                             <!-- Wrapper for slides -->
                             <div class="carousel-inner" role="listbox">
+                            <?php 
+                            foreach ($bannerData as $key => $value) 
+                            {
+                            ?>
+                            <div class="item actives">
+                                <img src=" <?php echo $value['addressImage'];?> ">
+                            </div>  
+
+                            <?php
+                            }
+                            ?> 
+
                                 <div class="item active">
                                     <img src="http://cdn.pasgo.vn/anh-chi-tiet/quan-an-ngon-18-phan-boi-chau-22-4889.jpg">
                                 </div>
 
-                                <div class="item">
+                                <!-- <div class="item">
                                     <img src="http://cdn.pasgo.vn/anh-chi-tiet/quan-an-ngon-18-phan-boi-chau-21-4890.JPG">
                                 </div>
 
@@ -84,7 +136,7 @@
 
                                 <div class="item">
                                     <img src="http://cdn.pasgo.vn/anh-chi-tiet/quan-an-ngon-18-phan-boi-chau-2-4895.jpg">
-                                </div>
+                                </div> -->
                             </div>
 
                             <!-- Left and right controls -->
@@ -100,49 +152,56 @@
 
                         <div class="content-infor shadow-outside">
                             <div class="highlight-infor">
-                                <h3 style="font-weight: bold; color: #cc0000">ĐIỂM ĐẶC TRƯNG - AO QUÁN</h3>
+                                <h3 style="font-weight: bold; color: #cc0000">ĐIỂM ĐẶC TRƯNG</h3>
                                 <p>
                                     <strong>Loại hình ẩm thực: </strong>
-                                    Gọi món truyền thống, cafe
+                                    <?php 
+                                    foreach ($resCate as $key => $value) {
+                                        echo $value['nameCOR']." - ";
+                                    }
+
+                                    ?>
                                 </p>
 
                                 <p>
                                     <strong>Món đặc sắc: </strong>
-                                    Ếch rang muối, Gà quê nướng, chão chuộc nướng, trạch đồng chiên giòn, nõn đuôi bò, lẩu trê đồng hoa chuối…
+                                    <?php echo $resData[0]['favouriteFood']; ?>
                                 </p>
 
                                 <p>
                                     <strong>Giá trung bình/người (*): </strong>
-                                    180.000 – 210.000 VNĐ
+                                    <?php echo $resData[0]['minPrice']; ?> – <?php echo $resData[0]['maxPrice']; ?> VNĐ
                                 </p>
 
                                 <p>
                                     <strong>Không gian:</strong><br/>
-
-                                    - Phong cách đồng quê lãng mạn, độc đáo<br/>
-
-                                    - Sức chứa 200 khách
+                                    <?php echo $resData[0]['spaceRes']; ?>     
                                 </p>
 
                                 <p>
-                                    <strong>Chỗ để ô tô: </strong>Không
+                                    <strong>Chỗ để ô tô: </strong>
+                                    <?php 
+                                    if($resData[0]['carParkingRes'] == 1)
+                                        echo "Có";
+                                    else echo "Không có"; 
+                                    ?> 
                                 </p>
 
                                 <p>
                                     <strong>Điểm đặc trưng khác:</strong><br/>
-                                    Những món ăn đồng quê độc đáo và tươi sống 100%, nguyên liệu được nhập về từ các vùng quê.
+                                    <?php echo $resData[0]['otherPoints']; ?> 
                                 </p>
 
                                 <hr/>
                                 <p style="font-size: 12px">
-                                    (*) Mức giá trung bình dựa theo gợi ý của nhà hàng và chưa giảm giá khi đặt chỗ qua PASGO
+                                    (*) Mức giá trung bình dựa theo gợi ý của nhà hàng và chưa tính giảm giá
                                 </p>
                             </div>
 
                             <div class="read-more">
-                                <h4>Ao quán Đông Tác- Chốn hẹn của những người quen</h4>
-
-                                <p>
+                                <h4><?php echo $resData[0]['campaign']; ?></h4>
+                                <?php echo $resData[0]['descriptionRes']; ?>
+                                <!-- <p>
                                     Hà Thành xô bồ dân tứ xứ đổ về, kẻ Trung, người Bắc, ai ra đi cũng mang theo trong mình tình quê hương, tình bạn bè, anh em làm thứ vốn liếng dắt thân lập nghiệp. Khi thứ chân tình nồng hậu của người quê, đất cũ đôi khi bị lớp bụi của tiền bạc, lo toan phủ mờ, những lúc thấy mệt mỏi và nao nao ấy, anh em lại rủ nhau về Ao Quán, ngồi dưới gốc chuối, rặng dừa để chén tạc chén thù, chia ngọt sẻ bùi câu chuyện bôn ba nơi đất khách.
                                 </p>
 
@@ -154,11 +213,15 @@
                                 <img src="http://cdn.pastaxi-manager.onepas.vn/content/uploads/articles/aoquan/nha-hang-ao-quan-ngo-19-dong-tac-3.jpg">
                                 <p style="text-align: center"><span style="font-size: 12px">Quán nằm khuất mình trong ngõ nhỏ giữa phố nhưng luôn đông khách</span></p>
 
-                                <p>Nhưng đừng để sự thú vị của không gian khiến bạn choáng ngợp. Hãy giữ “cái đầu lạnh” để không bị những cánh hồng, cánh sen đang dập dìu vỗ ve dưới chân như mối tình thơ thuở quê nhà hay những chùm đèn bằng nơm úp cá tuổi thơ khiến bước chân bạn lỡ nhịp. Đôi khi, vào những dịp đặc biệt, còn có cả tiếng ghi ta gỗ bập bùng, những khúc hát mộc mạc, giản dị như chính không gian khiến thực khách mỉm cười.</p>
+                                <p>Nhưng đừng để sự thú vị của không gian khiến bạn choáng ngợp. Hãy giữ “cái đầu lạnh” để không bị những cánh hồng, cánh sen đang dập dìu vỗ ve dưới chân như mối tình thơ thuở quê nhà hay những chùm đèn bằng nơm úp cá tuổi thơ khiến bước chân bạn lỡ nhịp. Đôi khi, vào những dịp đặc biệt, còn có cả tiếng ghi ta gỗ bập bùng, những khúc hát mộc mạc, giản dị như chính không gian khiến thực khách mỉm cười.</p> -->
 
-                                <h4>Thông tin liên hệ</h4>
-                                <p><strong>Nhà hàng Ao Quán - Số 18 Ngõ 19 Đông Tác, Phường Kim Liên, Quận Đống Đa, Hà Nội</strong></p>
-
+                                <h4>Thông tin liên hệ</h4>                   
+                                <p><strong><?php echo $resData[0]['address'].", ";?>
+                                <?php echo $addressData[0]['typeWard']. " ";echo $addressData[0]['nameWard'].", "?>
+                                <?php echo $addressData[0]['typeDis']. " ";echo $addressData[0]['nameDis'].", "?>    
+                                <?php echo $addressData[0]['typePro']. " ";echo $addressData[0]['namePro']."."?>  
+                                 </strong></p>
+                
 
                                 <div class="fb-like" data-href="http://localhost:8080/AnGiProject/restaurant/view" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
                             </div>
@@ -197,8 +260,9 @@
                         </div>
                     </div>
                     <div id="price" class="tab-pane fade">
-                        <img src="http://cdn.pastaxi-manager.onepas.vn/Content/Uploads/Prices/aoquan/nha-hang-ao-quan-header.jpg">
-                    </div>
+                        <?php echo $resData[0]['food']; ?>
+                        <!-- <img src="http://cdn.pastaxi-manager.onepas.vn/Content/Uploads/Prices/aoquan/nha-hang-ao-quan-header.jpg">
+ -->                    </div>
 
 
                     <div style="margin: 25px 0 25px -15px">

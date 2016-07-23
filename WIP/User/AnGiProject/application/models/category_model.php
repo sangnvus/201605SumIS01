@@ -11,14 +11,14 @@ class Category_model extends CI_Model
 
         $this->db->select('count(*) as count' );
         $this->db->from('restaurants r'); 
-        $this->db->join('address a', 'r.addressID = a.addressID');
+        $this->db->join('address a', 'r.addressID = a.addressID', 'left');
         
         if($type == 1){
-            $this->db->join('restaurantcategories rc', 'rc.restaurantID = r.restaurantID');
+            $this->db->join('restaurantcategories rc', 'rc.restaurantID = r.restaurantID', 'left');
             $this->db->where('rc.categoryOfResID',$ID); 
         }
         elseif ($type == 2) {
-            $this->db->join('district d', 'd.districtID = a.districtID');
+            $this->db->join('district d', 'd.districtID = a.districtID', 'left');
             $this->db->where('d.districtID',$ID);  
         }
         
@@ -30,17 +30,17 @@ class Category_model extends CI_Model
     function getRes($type,$ID,$count,$page){
         //sua so items/trang
         // max - min
-        $this->db->limit($page*1, ($page-1)*1);    
+        $this->db->limit($page*12, ($page-1)*12);    
         $this->db->select('*');
         $this->db->from('restaurants r'); 
-        $this->db->join('address a', 'r.addressID = a.addressID');
+        $this->db->join('address a', 'r.addressID = a.addressID', 'left');
 
         if($type == 1){
-            $this->db->join('restaurantcategories rc', 'rc.restaurantID = r.restaurantID');
+            $this->db->join('restaurantcategories rc', 'rc.restaurantID = r.restaurantID', 'left');
             $this->db->where('rc.categoryOfResID',$ID); 
         }
         if ($type == 2) {
-            $this->db->join('district d', 'd.districtID = a.districtID');
+            $this->db->join('district d', 'd.districtID = a.districtID', 'left');
             $this->db->where('d.districtID',$ID);  
         }
 
@@ -49,48 +49,14 @@ class Category_model extends CI_Model
         return  $data;
     }
 
-    // function getResByLocal($ID)
-    // {
-    //     $this->db->select('*');
-    //     $this->db->from('restaurants r'); 
-    //     $this->db->join('address a', 'r.addressID = a.addressID');
-    //     $this->db->join('district d', 'd.districtID = a.districtID');
-    //     $this->db->where('d.districtID',$ID); 
-    //     $query = $this->db->get(); 
-    //     $data=$query->result_array();
-    //     return  $data;
-    // }
-
-    // function getResByCate($ID)
-    // {
-    //     if ($ID == 0){
-    //     $this->db->select('*');
-    //     $this->db->from('restaurants r'); 
-    //     $this->db->join('address a', 'r.addressID = a.addressID');
-    //     $query = $this->db->get(); 
-    //     $data=$query->result_array();
-    //     return  $data;
-    //     }
-    //     else{
-    //         $this->db->select('*');
-    //         $this->db->from('restaurants r'); 
-    //         $this->db->join('address a', 'r.addressID = a.addressID');
-    //         $this->db->join('restaurantcategories rc', 'rc.restaurantID = r.restaurantID');
-    //         $this->db->where('rc.categoryOfResID',$ID); 
-    //         $query = $this->db->get(); 
-    //         $data=$query->result_array();
-    //         return  $data;
-    //     }
-    // }
-
-
-
     function getRate($restaurantID){
-        $this->db->select_avg('rateValue','overall');
+        $this->db->select("count(rateValue) AS 'count',avg(rateValue) AS 'avgrate'");
         $this->db->from('rate');
         $this->db->where('restaurantID', $restaurantID);
-        $data = $this->db->get()->row();
-        return  $data->overall;
+        $query = $this->db->get(); 
+        $data = $query->result_array();
+        $data2 = $data[0];
+        return $data2;
     }
 
 	function getDistrict()

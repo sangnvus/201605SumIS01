@@ -15,8 +15,9 @@ class Category extends CI_Controller {
         $districtData = $this->Category_model->getDistrict();
         $categoriesData = $this->Category_model->getCategories();
         $count = $this->Category_model->countAll($type, $ID);
+        
         //sua so items/trang
-        $pages = ceil($count / 1);
+        $pages = ceil($count / 12);
 
         // $config['total_rows'] = $this->Category_model->countAll($type,$ID);
         // // $a = $this->Category_model->countAll($type,$ID);
@@ -29,11 +30,13 @@ class Category extends CI_Controller {
 
         $resData = $this->Category_model->getRes($type, $ID, $count, $page);
 
+
         $rate = array();
         foreach ($resData as $key => $row) {
-            $rate[] = $this->Category_model->getRate($row['restaurantID']);
+            array_push($rate, $this->Category_model->getRate($row['restaurantID']));
+            // $rate[] = $this->Category_model->getRate($row['restaurantID']);
         }
-
+        print_r($rate);
         $data['categoriesData'] = $categoriesData;
         $data['districtData'] = $districtData;
         $data['resData'] = $resData;

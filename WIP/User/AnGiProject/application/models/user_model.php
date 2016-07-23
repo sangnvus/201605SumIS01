@@ -44,9 +44,9 @@ class User_model extends CI_Model {
         $this->db->select('*');
         $this->db->from('address a');
         $this->db->where('a.addressID', $ID);
-        $this->db->join('district d', 'd.districtID = a.districtID', 'right outer');
-        $this->db->join('ward w', 'w.wardid = a.wardID', 'right outer');
-        $this->db->join('province p', 'a.provinceID = p.provinceID', 'right outer');
+        $this->db->join('district d', 'd.districtID = a.districtID', 'left');
+        $this->db->join('ward w', 'w.wardid = a.wardID', 'left');
+        $this->db->join('province p', 'a.provinceID = p.provinceID', 'left');
 
         //$this->db->where('a.addressID',$ID); 
         $query = $this->db->get();

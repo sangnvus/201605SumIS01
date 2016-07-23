@@ -55,6 +55,13 @@ class Image_model extends CI_Model {
         return $query->result();
     }
 
+    function getBannerByResID($resID) {
+        $sql = " SELECT addressImage FROM images img, restaurants r " .
+                " WHERE img.userID = r.userID AND r.restaurantID = ? AND typeImage = 2;";
+        $query = $this->db->query($sql, array($resID));
+        return $query->result_array();
+    }
+
     function insertBannerImage($data) {
         $this->db->insert('images', $data);
     }

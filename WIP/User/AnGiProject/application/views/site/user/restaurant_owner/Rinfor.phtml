@@ -40,7 +40,7 @@
                 <img id="restImage" src="<?php echo base_url($restImageAddr); ?>" height="250" width="300" alt="restaurant image" >
                 <label class = "select-file-btn">
                     <input type="file" name="restImgFile" onchange="readRestImageUrl(this);" />
-                    Tai anh profile nhà hàng
+                    Tải ảnh profile nhà hàng
                 </label>
                 <input type="submit" value="Save" id="btnRestProfile" disabled />
                 <span class="text-danger">
@@ -65,24 +65,39 @@
                             <span class="text-danger"><?php echo form_error('nameRe'); ?></span>
                         </li>
                         <li>
-                            <label>Loại hình ẩm thực:</label> 
-                            <select class="" name="category" size="1">
+                            <label>Loại hình ẩm thực:</label>                    
                                 <?php
-                                foreach ($categoriesData as $key => $row) {
-                                    echo '<option value="' . $row['categoryOfResID'] . '">' . $row['nameCOR'] . '</option>';
+                                if(count($resCateData) < 1 ){
+                                    foreach ($categoriesData as $key => $row) {
+                                        echo '<input type="checkbox" name="categoryOfResID[]" value="' . $row['categoryOfResID'] . '">&nbsp' . $row['nameCOR'] . '&nbsp &nbsp &nbsp &nbsp';
+                                    }
+                                }
+                                else{
+                                    foreach ($categoriesData as $key => $row) {
+                                        if(in_array($row['categoryOfResID'], $resCateData)){    
+                                        echo '<input type="checkbox" name="categoryOfResID[]" value="' . $row['categoryOfResID'] . '" checked >&nbsp' . $row['nameCOR'] . '&nbsp &nbsp &nbsp &nbsp';
+                                        }
+                                        else{
+                                             echo '<input type="checkbox" name="categoryOfResID[]" value="' . $row['categoryOfResID'] . '" >&nbsp' . $row['nameCOR'] . '&nbsp &nbsp &nbsp &nbsp';
+                                        }
+                                    }
                                 }
                                 ?>
-                            </select>
+                            
                         </li>
 
                         <li>
-                            <label>Campaign:</label> <input type="text" value="<?php echo $resData[0]['campaign']; ?>" name = "txtCampaign">
-                            <span class="text-danger"><?php echo form_error('txtCampaign'); ?></span>
+                            <label>Campaign:</label> <input type="text" value="<?php echo $resData[0]['campaign']; ?>" name = "campaign">
+                            <span class="text-danger"><?php echo form_error('campaign'); ?></span>
                         </li>
 
                         <li>
                             <label>Món đặc sắc:</label> <input type="text" value="<?php echo $resData[0]['favouriteFood']; ?>" name = "favouriteFood">
                             <span class="text-danger"><?php echo form_error('favouriteFood'); ?></span>
+                        </li>
+                        <li>
+                            <label>Số điện thoại :</label> <input type="text" value="<?php echo $resData[0]['phoneRe']; ?>" name = "phoneRe">
+                            <span class="text-danger"><?php echo form_error('phoneRe'); ?></span>
                         </li>
                         <li>
                             <label>Giá trung bình/người (vnđ):</label>

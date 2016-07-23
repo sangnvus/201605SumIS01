@@ -9,7 +9,7 @@ class User extends CI_Controller {
         $this->load->helper(array('form', 'url', 'date'));
         $this->load->library(array('session', 'form_validation', 'email'));
         $this->load->database();
-        $this->load->model(array('User_model', 'Image_model'));
+        $this->load->model(array('User_model', 'Image_model', 'Category_model'));
 
         // typeImage: 0 avatar, 1 restaurant image, 2 banner
         // authorityUser: 1 customer, 2 restaurant owner
@@ -24,6 +24,7 @@ class User extends CI_Controller {
         $ID = $this->session->userdata("ID");
 
         // load user image
+
         $this->userImage();
 
         //set validation rules
@@ -32,6 +33,8 @@ class User extends CI_Controller {
         //$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|is_unique[users.emailUser]');
         if ($this->form_validation->run() == FALSE) {
             $data = array();
+            $categoriesData = $this->Category_model->getCategories();
+            $data['categoriesData'] = $categoriesData;
             $data['content'] = 'site/user/profile/index.phtml';
             $userData = $this->User_model->getUser($ID);
             $data['userData'] = $userData;
@@ -145,6 +148,8 @@ class User extends CI_Controller {
         $this->form_validation->set_rules('cpassword', 'Confirm Password', 'trim|required|min_length[7]');
         if ($this->form_validation->run() == FALSE) {
             $userData = $this->User_model->getUser($ID);
+            $categoriesData = $this->Category_model->getCategories();
+            $data['categoriesData'] = $categoriesData;
             $data['userData'] = $userData;
             $data['content'] = 'site/user/profile/changePassword.phtml';
             $this->load->view('site/layout/layout.phtml', $data);
@@ -171,7 +176,9 @@ class User extends CI_Controller {
 
         //validate form input
         if ($this->form_validation->run() == FALSE) {
-            // fails
+            // fails   
+            $categoriesData = $this->Category_model->getCategories();
+            $data['categoriesData'] = $categoriesData;
 
             $data ['content'] = 'site/user/user/user_registration.phtml';
             $data ['ward'] = $this->User_model->getData('ward');

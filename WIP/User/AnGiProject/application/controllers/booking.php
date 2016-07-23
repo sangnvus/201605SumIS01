@@ -8,7 +8,7 @@ class Booking extends CI_Controller {
         parent::__construct();
         $this->load->helper(array('url', 'form'));
         $this->load->database();
-        $this->load->model(array('Booking_model', 'User_model', 'Restaurants_model', 'Image_model'));
+        $this->load->model(array('Booking_model', 'User_model', 'Restaurants_model', 'Image_model','category_model'));
         $this->load->library(array('session', 'email'));
 
         // statusBo 0 waiting, 1 served, 2 cancelled
@@ -17,6 +17,16 @@ class Booking extends CI_Controller {
     // when user click on booking link
     public function reserve($restID) {
         $data['restID'] = $restID;
+        $resData = $this->Restaurants_model->getResByResID($restID);
+        $data['resData'] = $resData;
+        $resCate = $this->Restaurants_model->getResCate($restID); 
+        $data['resCate'] = $resCate;
+        $addressData = $this->User_model->getAddress($resData[0]['addressID']);
+        $data['addressData'] =  $addressData;
+        $data['rateData'] =  $this->category_model->getRate($restID);
+        $data['bannerData'] = $this->Image_model->getBannerByResID($resData[0]['restaurantID']);        
+        // print_r($data['bannerData']);
+        // die();
         $data['content'] = 'site/restaurant/view.phtml';
         $this->load->view('site/layout/layout.phtml', $data);
     }
