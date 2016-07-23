@@ -8,8 +8,7 @@ class Booking extends CI_Controller {
         parent::__construct();
         $this->load->helper(array('url', 'form'));
         $this->load->database();
-        $this->load->model(array('Booking_model', 'User_model', 'Restaurants_model'));
-        $this->load->model('Restaurants_model');
+        $this->load->model(array('Booking_model', 'User_model', 'Restaurants_model', 'Image_model'));
         $this->load->library(array('session', 'email'));
 
         // statusBo 0 waiting, 1 served, 2 cancelled

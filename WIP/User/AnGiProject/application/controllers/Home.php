@@ -25,19 +25,28 @@ class Home extends CI_Controller {
         $topRating = array();
         $highestDiscount = array();
         foreach ($restProfile as $row) {
-
-            if (isset($rate[$counter]) && ($row->restaurantID) == ($rate[$counter]->restaurantID) && ($restImage[$counter]->restaurantID) == $row->restaurantID) {
+            
+            // restaurant with rate
+            if (isset($rate[$counter]) && ($row->restaurantID) == ($rate[$counter]->restaurantID)) {
                 $avgRating = $rate[$counter]->average;
             } else {
                 $avgRating = 0;
             }
+            
+            // restaurant with image
+            if(isset($restImage[$counter]) && ($restImage[$counter]->restaurantID) == $row->restaurantID){
+                $imageAddr = $restImage[$counter]->addressImage;
+            }else{
+                $imageAddr = 'images/restOwner/restImage/default_restaurant.png';
+            }
+            
             $rprofile = array(
                 'restID' => $row->restaurantID,
                 'campaign' => $row->campaign,
                 'address' => $row->address,
                 'discount' => $row->discount,
                 'restName' => $row->nameRe,
-                'imageAddr' => $restImage[$counter]->addressImage,
+                'imageAddr' => $imageAddr,
                 'average' => $avgRating
             );
             $counter++;

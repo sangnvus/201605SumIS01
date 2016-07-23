@@ -24,8 +24,7 @@ class Restaurants_model extends CI_Model {
     public function getRestProfile() {
         $sql = " SELECT r.restaurantID, campaign, address, discount, nameRe " . 
                 " FROM restaurants r, address addr, users u " .
-                " WHERE r.addressID = addr.addressID AND r.userID = u.userID " .
-                " GROUP BY restaurantID; "; 
+                " WHERE r.addressID = addr.addressID AND r.userID = u.userID  AND authorityUser = 2; ";
 
         $query = $this->db->query($sql);
         $data = $query->result();

@@ -21,7 +21,7 @@ class Search extends CI_Controller {
         $searchForm = $this->input->post('btnSearch');
         if ($searchForm == 'btnSearchValue') {
             $term = $this->input->post('userTerm');
-            $food = $this->Search_model->getSearchRestaurant($term);
+            $food = $this->Search_model->getRestaurantResult($term);
             // if there is data return from db
             if ($food) {
                 // count search result

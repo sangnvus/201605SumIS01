@@ -28,7 +28,7 @@
             echo $this->session->flashdata('msgResInfo');
             if (count($resData) < 1) {
                 ?>
-                <form class="edit-user" action="Restaurant/addNewRes">
+                <form class="edit-user" action="<?php echo base_url() ?>restaurant/addNewRes">
                     <h3>Chưa tạo nhà hàng</h3>
                     <input type="submit" value="Thêm nhà hàng">
                 </form>
@@ -36,11 +36,32 @@
             } else {
                 ?>
 
+                <?php echo form_open_multipart('image/changeAvatar/restImgFile'); ?>
+                <img id="restImage" src="<?php echo base_url($restImageAddr); ?>" height="250" width="300" alt="restaurant image" >
+                <label class = "select-file-btn">
+                    <input type="file" name="restImgFile" onchange="readRestImageUrl(this);" />
+                    Tai anh profile nhà hàng
+                </label>
+                <input type="submit" value="Save" id="btnRestProfile" disabled />
+                <span class="text-danger">
+                    <?php
+                    if (isset($error)) {
+                        echo $error;
+                    }
+                    ?>
+                </span>
+                <?php
+                echo form_close();
+                if (isset($success_msg)) {
+                    echo $success_msg;
+                }
+                ?>
+
                 <form class="edit-user" method="POST">
                     <ul>
                         <li>
-                            <label>Tên nhà hàng:</label> <input type="text" value="<?php echo $resData[0]['nameRe']; ?>" name = "nameRe" 
-                                                                >
+                            <label>Tên nhà hàng:</label> <input type="text" value="<?php echo $resData[0]['nameRe']; ?>" name="nameRe" >
+                            <input type="hidden" value="<?php echo base_url($restImageAddr); ?>" />
                             <span class="text-danger"><?php echo form_error('nameRe'); ?></span>
                         </li>
                         <li>
@@ -52,6 +73,11 @@
                                 }
                                 ?>
                             </select>
+                        </li>
+
+                        <li>
+                            <label>Campaign:</label> <input type="text" value="<?php echo $resData[0]['campaign']; ?>" name = "txtCampaign">
+                            <span class="text-danger"><?php echo form_error('txtCampaign'); ?></span>
                         </li>
 
                         <li>
@@ -92,8 +118,8 @@
 
                             <?php } ?>
 
-                <!--                         <input type="radio" name="gender" value="yes" checked> Có
-                                        <input style="margin-left: 100px;" type="radio" name="no" value="female"> Không -->
+                                            <!--                         <input type="radio" name="gender" value="yes" checked> Có
+                                                                    <input style="margin-left: 100px;" type="radio" name="no" value="female"> Không -->
                         </li>
                         <li>
                             <label>Hoạt động</label>
@@ -180,3 +206,20 @@
         </div>
     </div>
 </div>
+
+<script>
+    function readRestImageUrl(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#restImage')
+                        .attr('src', e.target.result);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+            // enable submit button
+            $("#btnRestProfile").removeAttr('disabled');
+        }
+    }
+</script>

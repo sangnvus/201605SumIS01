@@ -20,32 +20,33 @@ class Image extends CI_Controller {
     }
 
     // upload avatar function
-    function changeAvatar() {
+    function changeAvatar($type = 'avatarFile') {
+        
         $ID = $this->session->userdata("ID");
         $userType = $this->session->userdata('Type');
-
+        
         // user types: 1 customer, 2 restaurant owner
-        // image types: 0 customer avatar, 1 restaurant avatar, 2 banner
+        // image types: 0 avatar, 1 restaurant image, 2 banner
         //set preferences
-        $config['upload_path'] = './images/customer/avatar';
+        $config['upload_path'] = 'images/avatar';
         $config['allowed_types'] = 'jpg|png|gif';
         // <input type="file" name="filename" >
-        $imageName = time() . $_FILES["avatarFile"]['name'];
+        $imageName = time() . $_FILES[$type]['name'];
         $config['file_name'] = $imageName;
         // $config['max_size'] = '100';
 
         $imageType = 0; // customer avatar
-        if ($userType == 2) { // restaurant avatar
+        if ($type == 'restImgFile') { // restaurant owner
             //set preferences
-            $config['upload_path'] = './images/restOwner/restaurant';
-            $imageType = 1; // restaurant avatar
+            $config['upload_path'] = 'images/restOwner/restImage';
+            $imageType = 1; // restaurant image
         }
 
         //load upload class library
         $this->load->library('upload', $config);
 
         // <input type="file" name="filename" >
-        if (!$this->upload->do_upload('avatarFile')) {
+        if (!$this->upload->do_upload($type)) {
             // case - failure
             $upload_error = array('error' => $this->upload->display_errors());
             $data['upload_avatar_error'] = $upload_error;
@@ -71,6 +72,9 @@ class Image extends CI_Controller {
             $this->Image_model->deleteAvatar($userType, $ID, $imageType);
 
             $this->Image_model->insertAvatar($data);
+            if ($type == 'restImgFile') {
+                redirect('restaurant/Restaurant_infor');
+            }
             redirect('user');
         }
     }

@@ -84,10 +84,24 @@ class Restaurant extends CI_Controller {
         }
 
         $userID = $this->session->userdata("ID");
-
+        $userType = $this->session->userdata("Type");
+        // restaurant image
+        // authority 2 = restaurant owner, typeImage 1 restaurant profile
+        $imageType = 1; 
+        $avatar = $this->Image_model->getAvatar($userType, $userID, $imageType);
+        $avt = null;
+        if (count($avatar) > 0) {
+            foreach ($avatar as $row) {
+                $avt = $row->addressImage;
+            }
+        } else {
+            $avt = 'images/restOwner/restImage/default_restaurant.png';
+        }
+        $data['restImageAddr'] = $avt;
+        // --------------------------
+        
         $categoriesData = $this->Category_model->getCategories();
         $resData = $this->restaurants_model->getResByUser($userID);
-        $data = array();
         $data['categoriesData'] = $categoriesData;
         $data['resData'] = $resData;
         if (count($data['resData'] = $resData) > 0) {
@@ -103,6 +117,7 @@ class Restaurant extends CI_Controller {
         $this->form_validation->set_rules('nameRe', 'Tên nhà hàng', 'trim|required|min_length[3]');
         $this->form_validation->set_rules('favouriteFood', 'Món đặc sắc', 'trim|required|min_length[3]');
         $this->form_validation->set_rules('spaceRes', 'Không gian nhà hàng', 'trim|required|min_length[3]');
+        $this->form_validation->set_rules('txtCampaign', 'Campaign', 'trim|required|');
 
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('site/layout/layout.phtml', $data);
@@ -110,6 +125,7 @@ class Restaurant extends CI_Controller {
             $data = array(
                 'nameRe' => $this->input->post('nameRe'),
                 'favouriteFood' => $this->input->post('favouriteFood'),
+                'campaign' => $this->input->post('txtCampaign'),
                 'minPrice' => $this->input->post('minPrice'),
                 'maxPrice' => $this->input->post('maxPrice'),
                 'spaceRes' => $this->input->post('spaceRes'),
@@ -167,7 +183,7 @@ class Restaurant extends CI_Controller {
         if ($this->session->userdata("Type") != 2) {
             redirect(base_url());
         }
-        
+
         $userID = $this->session->userdata("ID");
         $data = array(
             'food' => $this->input->post('editor'),

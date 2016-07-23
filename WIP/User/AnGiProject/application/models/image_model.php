@@ -4,12 +4,8 @@ class Image_model extends CI_Model {
 
     function __construct() {
         parent::__construct();
-        // typeImage: 0 customer avatar, 1 restaurant avatar, 2 banner, 3 food
+        // typeImage: 0 avatar, 1 restaurant image, 2 banner, 3 food
         // authorityUser: 1 customer, 2 restaurant owner
-    }
-
-    function insertImage($data) {
-        return $this->db->insert('images', $data);
     }
 
     // -------------------- avatar -------------------------
@@ -44,7 +40,7 @@ class Image_model extends CI_Model {
     // restaurant profile image
     function getRestImage() {
         $sql = "SELECT r.restaurantID, imageID, addressImage FROM images img, users u, restaurants r
-                WHERE img.userID = u.userID and r.userID = u.userID AND typeImage = 2;";
+                WHERE img.userID = u.userID and r.userID = u.userID AND typeImage = 1;";
         $query = $this->db->query($sql);
         return $query->result();
     }

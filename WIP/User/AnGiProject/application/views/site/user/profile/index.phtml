@@ -40,11 +40,33 @@
             }
             ?>
 
+            <?php echo form_open_multipart('image/changeAvatar'); ?>
+            <img id="avatar" src="<?php echo base_url($this->session->userdata("avatarSes")); ?>" height="250" width="300" alt="avatar">
+            <label class = "select-file-btn">
+                <input type="file" name="avatarFile" onchange="readURL(this);" />
+                Tai anh
+            </label>
+            <input type="submit" value="Save" id="btnProfile" disabled />
+            <span class="text-danger">
+                <?php
+                if (isset($error)) {
+                    echo $error;
+                }
+                ?>
+            </span>
+            <?php
+            echo form_close();
+            if (isset($success_msg)) {
+                echo $success_msg;
+            }
+            ?>
+
             <form class="edit-user" method="post" action="user">
                 <ul>
                     <li>
                         <label>Ngày lập:</label> <input type="text" value="<?php echo $userData[0]['dateCreateUser']; ?>" disabled>
                     </li>
+
                     <li>
                         <label>Họ:</label> <input type="text" name="lname" value="<?php echo $userData[0]['lastNameUser'];
             ?>">
@@ -136,8 +158,6 @@
                                 ?>
                             </select>                        
                         </li>
-
-
                         <?php
                     }
                     ?>                     
@@ -152,3 +172,20 @@
         </div>
     </div>
 </div>
+
+<script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#avatar')
+                        .attr('src', e.target.result);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+            // enable submit button
+            $("#btnProfile").removeAttr('disabled');
+        }
+    }
+</script>

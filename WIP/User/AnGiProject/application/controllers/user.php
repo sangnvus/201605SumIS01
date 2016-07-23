@@ -11,7 +11,7 @@ class User extends CI_Controller {
         $this->load->database();
         $this->load->model(array('User_model', 'Image_model'));
 
-        // typeImage: 0 customer avatar, 1 restaurant avatar, 2 banner, 3 food
+        // typeImage: 0 avatar, 1 restaurant image, 2 banner
         // authorityUser: 1 customer, 2 restaurant owner
     }
 
@@ -22,10 +22,9 @@ class User extends CI_Controller {
         }
 
         $ID = $this->session->userdata("ID");
-        if ($ID == null) {
-            redirect(base_url());
-            return;
-        }
+
+        // load user image
+        $this->userImage();
 
         //set validation rules
         $this->form_validation->set_rules('fname', 'First Name', 'trim|required|min_length[3]|max_length[30]');
@@ -111,13 +110,10 @@ class User extends CI_Controller {
         $ID = $this->session->userdata("ID");
         $userType = $this->session->userdata("Type");
         // user types: 1 customer, 2 restaurant owner
-        // image types: 0 customer avatar, 1 restaurant avatar, 2 banner
+        // image types: 0  avatar, 1 restaurant image, 2 banner
         $imageType = 0;
-        $defaultImg = "images/customer/avatar/default_avatar.png";
-        if ($userType == 2) {
-            $imageType = 1;
-            $defaultImg = "images/restOwner/restaurant/default_restaurant.png";
-        }
+        $defaultImg = "images/avatar/default_avatar.png";
+        
         // authority 2 = restaurant owner, typeImage 1 restaurant profile
         $avatar = $this->Image_model->getAvatar($userType, $ID, $imageType);
         $avt = null;
@@ -128,7 +124,7 @@ class User extends CI_Controller {
         } else {
             $avt = $defaultImg;
         }
-       
+
         // set avatar sesstion
         $this->session->set_userdata('avatarSes', $avt);
     }
@@ -246,8 +242,8 @@ class User extends CI_Controller {
             );
             $this->session->set_userdata($data);
             // load user image
-            $this ->userImage();
-            
+            $this->userImage();
+
             redirect(base_url());
         } else {
             $this->session->set_flashdata('msg', '<div class="alert alert-danger text-center">Thông tin đăng nhập không đúng !!</div>');

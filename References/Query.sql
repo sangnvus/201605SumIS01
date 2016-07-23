@@ -10,15 +10,15 @@ INSERT INTO address(address, provinceID, districtID, wardID) VALUES("42 NgÃµ D Ä
 INSERT INTO users(firstNameUser, authorityUser, addressID) VALUES('A', 2, 1);
 INSERT INTO users(firstNameUser, authorityUser, addressID) VALUES('B', 2, 1);
 INSERT INTO users(firstNameUser, authorityUser, addressID) VALUES('C', 2, 1);
-INSERT INTO users(firstNameUser, authorityUser, addressID) VALUES('D', 1, 2);
+INSERT INTO users(firstNameUser, authorityUser, addressID) VALUES('D', 2, 2);
 INSERT INTO users(firstNameUser, authorityUser, addressID) VALUES('E', 2, 1);
 INSERT INTO users(firstNameUser, authorityUser, addressID) VALUES('F', 2, 3);
 
-INSERT INTO images(nameImage, typeImage, addressImage, userID) VALUES("A", 2, "http://economictimes.indiatimes.com/thumb/msid-50941625,width-640,resizemode-4/mughal-gardens-in-full-bloom.jpg", 1);
-INSERT INTO images(nameImage, typeImage, addressImage, userID) VALUES("A", 2, "http://www.gettyimages.co.uk/gi-resources/images/Homepage/Hero/US/embed-504165888.jpg", 2);
-INSERT INTO images(nameImage, typeImage, addressImage, userID) VALUES("A", 2, "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTwHCSZ6IF0BqH8ET0DjaSn9ORbY59Zi-NxlLljfKiRV0Ycv1Bj5A", 3);
-INSERT INTO images(nameImage, typeImage, addressImage, userID) VALUES("A", 2, "http://www.socialmediaexaminer.com/wp-content/uploads/2016/02/kh-social-media-images-600.png", 1);
-INSERT INTO images(nameImage, typeImage, addressImage, userID) VALUES("A", 2, "https://1.bp.blogspot.com/-pJRvVnLqgt0/VsWYK0K2mRI/AAAAAAAAAFE/W3GPxou4bv8/s1600/holi%2Bimages%2B2.jpg", 2);
+INSERT INTO images(nameImage, typeImage, addressImage, userID) VALUES("A", 1, "http://economictimes.indiatimes.com/thumb/msid-50941625,width-640,resizemode-4/mughal-gardens-in-full-bloom.jpg", 1);
+INSERT INTO images(nameImage, typeImage, addressImage, userID) VALUES("A", 1, "http://www.gettyimages.co.uk/gi-resources/images/Homepage/Hero/US/embed-504165888.jpg", 2);
+INSERT INTO images(nameImage, typeImage, addressImage, userID) VALUES("A", 1, "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTwHCSZ6IF0BqH8ET0DjaSn9ORbY59Zi-NxlLljfKiRV0Ycv1Bj5A", 3);
+INSERT INTO images(nameImage, typeImage, addressImage, userID) VALUES("A", 1, "http://www.socialmediaexaminer.com/wp-content/uploads/2016/02/kh-social-media-images-600.png", 1);
+INSERT INTO images(nameImage, typeImage, addressImage, userID) VALUES("A", 1, "https://1.bp.blogspot.com/-pJRvVnLqgt0/VsWYK0K2mRI/AAAAAAAAAFE/W3GPxou4bv8/s1600/holi%2Bimages%2B2.jpg", 2);
 
 INSERT INTO restaurants(nameRe, campaign, discount, addressID, userID) VALUES("Rest A", "Campaign A", 40, 1, 1);
 INSERT INTO restaurants(nameRe, campaign, discount, addressID, userID) VALUES("Rest B", "Campaign B", 60, 2, 2);
