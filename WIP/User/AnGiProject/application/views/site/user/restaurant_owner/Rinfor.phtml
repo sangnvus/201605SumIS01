@@ -40,7 +40,7 @@
                 <img id="restImage" src="<?php echo base_url($restImageAddr); ?>" height="250" width="300" alt="restaurant image" >
                 <label class = "select-file-btn">
                     <input type="file" name="restImgFile" onchange="readRestImageUrl(this);" />
-                    Tải ảnh profile nhà hàng
+                    Tai anh profile nhà hàng
                 </label>
                 <input type="submit" value="Save" id="btnRestProfile" disabled />
                 <span class="text-danger">
@@ -65,25 +65,22 @@
                             <span class="text-danger"><?php echo form_error('nameRe'); ?></span>
                         </li>
                         <li>
-                            <label>Loại hình ẩm thực:</label>                    
-                                <?php
-                                if(count($resCateData) < 1 ){
-                                    foreach ($categoriesData as $key => $row) {
-                                        echo '<input type="checkbox" name="categoryOfResID[]" value="' . $row['categoryOfResID'] . '">&nbsp' . $row['nameCOR'] . '&nbsp &nbsp &nbsp &nbsp';
-                                    }
+                            <label>Loại hình ẩm thực:</label> 
+                            <?php
+                            if (count($resCateData) < 1) {
+                                foreach ($categoriesData as $key => $row) {
+                                    echo '<input type="checkbox" name="categoryOfResID[]" value="' . $row['categoryOfResID'] . '">&nbsp' . $row['nameCOR'] . '&nbsp &nbsp &nbsp &nbsp';
                                 }
-                                else{
-                                    foreach ($categoriesData as $key => $row) {
-                                        if(in_array($row['categoryOfResID'], $resCateData)){    
+                            } else {
+                                foreach ($categoriesData as $key => $row) {
+                                    if (in_array($row['categoryOfResID'], $resCateData)) {
                                         echo '<input type="checkbox" name="categoryOfResID[]" value="' . $row['categoryOfResID'] . '" checked >&nbsp' . $row['nameCOR'] . '&nbsp &nbsp &nbsp &nbsp';
-                                        }
-                                        else{
-                                             echo '<input type="checkbox" name="categoryOfResID[]" value="' . $row['categoryOfResID'] . '" >&nbsp' . $row['nameCOR'] . '&nbsp &nbsp &nbsp &nbsp';
-                                        }
+                                    } else {
+                                        echo '<input type="checkbox" name="categoryOfResID[]" value="' . $row['categoryOfResID'] . '" >&nbsp' . $row['nameCOR'] . '&nbsp &nbsp &nbsp &nbsp';
                                     }
                                 }
-                                ?>
-                            
+                            }
+                            ?>
                         </li>
 
                         <li>
@@ -95,6 +92,7 @@
                             <label>Món đặc sắc:</label> <input type="text" value="<?php echo $resData[0]['favouriteFood']; ?>" name = "favouriteFood">
                             <span class="text-danger"><?php echo form_error('favouriteFood'); ?></span>
                         </li>
+
                         <li>
                             <label>Số điện thoại :</label> <input type="text" value="<?php echo $resData[0]['phoneRe']; ?>" name = "phoneRe">
                             <span class="text-danger"><?php echo form_error('phoneRe'); ?></span>
@@ -133,8 +131,8 @@
 
                             <?php } ?>
 
-                                            <!--                         <input type="radio" name="gender" value="yes" checked> Có
-                                                                    <input style="margin-left: 100px;" type="radio" name="no" value="female"> Không -->
+                                                                        <!--                         <input type="radio" name="gender" value="yes" checked> Có
+                                                                                                <input style="margin-left: 100px;" type="radio" name="no" value="female"> Không -->
                         </li>
                         <li>
                             <label>Hoạt động</label>

@@ -8,7 +8,7 @@ class Booking extends CI_Controller {
         parent::__construct();
         $this->load->helper(array('url', 'form'));
         $this->load->database();
-        $this->load->model(array('Booking_model', 'User_model', 'Restaurants_model', 'Image_model','category_model'));
+        $this->load->model(array('Booking_model', 'User_model', 'Restaurants_model','Category_model', 'Image_model'));
         $this->load->library(array('session', 'email'));
 
         // statusBo 0 waiting, 1 served, 2 cancelled
@@ -19,14 +19,12 @@ class Booking extends CI_Controller {
         $data['restID'] = $restID;
         $resData = $this->Restaurants_model->getResByResID($restID);
         $data['resData'] = $resData;
-        $resCate = $this->Restaurants_model->getResCate($restID); 
+        $resCate = $this->Restaurants_model->getResCate($restID);
         $data['resCate'] = $resCate;
         $addressData = $this->User_model->getAddress($resData[0]['addressID']);
-        $data['addressData'] =  $addressData;
-        $data['rateData'] =  $this->category_model->getRate($restID);
-        $data['bannerData'] = $this->Image_model->getBannerByResID($resData[0]['restaurantID']);        
-        // print_r($data['bannerData']);
-        // die();
+        $data['addressData'] = $addressData;
+        $data['rateData'] = $this->Category_model->getRate($restID);
+        $data['bannerData'] = $this->Image_model->getBannerByResID($resData[0]['restaurantID']);
         $data['content'] = 'site/restaurant/view.phtml';
         $this->load->view('site/layout/layout.phtml', $data);
     }
@@ -36,32 +34,48 @@ class Booking extends CI_Controller {
         $userID = $this->session->userdata("ID");
 
         date_default_timezone_set('Asia/Ho_Chi_Minh');
-        $today = date('Y-m-d H:i:s');
+        $dateCreate = date('Y-m-d H:i:s');
+        $todayDate = date('Y-m-d');
+        $todayTime = date('H:i');
+
         $bookDate = $this->input->post('dateBooking');
         $bookingTime = $this->input->post('bookingTime');
 
+        $isTime = true;
         // check to receive service date
-        if ($bookDate < $today) {
-            $this->session->set_flashdata('dateErrorMsg', '<div class="alert alert-danger">You cannot enter the passed date!!!</div>');
+        if ($bookDate < $todayDate) {
+            $this->session->set_flashdata('dateErrorMsg', '<div class="alert alert-danger">Error, You cannot enter the date in the past!!!</div>');
             $userID = $this->input->post('restaurantID');
+            $isTime = false;
             redirect('booking/reserve/' . $userID);
+        } else if ($bookDate == $todayDate) {
+            if ($bookingTime < $todayTime) {
+                $this->session->set_flashdata('dateErrorMsg', '<div class="alert alert-danger">Error, the time you entered has passed!!!</div>');
+                $userID = $this->input->post('restaurantID');
+                $isTime = false;
+                redirect('booking/reserve/' . $userID);
+            } else {
+                $isTime = true;
+            }
         }
-        //user id will be from login process
-        $data = array(
-            'dateCreateBo' => $today,
-            'quantityMember' => $this->input->post('numPeople'),
-            'dateBooking' => $bookDate,
-            'bookingTime' => $bookingTime,
-            'commentBo' => $this->input->post('bcomment'),
-            'restaurantID' => $this->input->post('restaurantID'),
-            'userID' => $userID
-        );
-        // insert booking data into database
-        if ($this->Booking_model->insertReservation($data)) {
-            redirect('booking/viewBooking/' . $userID);
-        } else {
-            $this->session->set_flashdata('dbBookingError', '<div class="alert alert-danger">database errors!!!</div>');
-            redirect('booking/viewBooking/' . $userID);
+        if ($isTime == true) {
+            //user id will be from login process
+            $data = array(
+                'dateCreateBo' => $dateCreate,
+                'quantityMember' => $this->input->post('numPeople'),
+                'dateBooking' => $bookDate,
+                'bookingTime' => $bookingTime,
+                'commentBo' => $this->input->post('bcomment'),
+                'restaurantID' => $this->input->post('restaurantID'),
+                'userID' => $userID
+            );
+            // insert booking data into database
+            if ($this->Booking_model->insertReservation($data)) {
+                redirect('booking/viewBooking/' . $userID);
+            } else {
+                $this->session->set_flashdata('dbBookingError', '<div class="alert alert-danger">database errors!!!</div>');
+                redirect('booking/viewBooking/' . $userID);
+            }
         }
     }
 
@@ -168,41 +182,81 @@ class Booking extends CI_Controller {
         }
 
         $blist = $this->Booking_model->getCustomerBookingList($userID);
-        $rate = $this->Restaurants_model->getRestRating();
-        $restImage = $this->Image_model->getRestImage();
+        $restProfile = $this->Restaurants_model->getInterestingRestaurants();
+
         $isBooked = false;
         // if users have made reservation
         if ($blist) {
+            // if restaurant category found
+            if (count($blist) > count($restProfile)) {
+                $loopControl = $blist;
+                $innerLoop = $restProfile;
+            } else {
+                $loopControl = $restProfile;
+                $innerLoop = $blist;
+            }
             $custBookList = array();
-            $counter = 0;
-            foreach ($blist as $row) {
-                if (isset($rate[$counter]) && ($row->restaurantID) == ($rate[$counter]->restaurantID) && ($restImage[$counter]->restaurantID) == $row->restaurantID) {
-                    $avgRating = $rate[$counter]->average;
-                } else {
-                    $avgRating = 0;
+            foreach ($loopControl as $row) {
+                for ($i = 0; $i < count($innerLoop); $i++) {
+                    if ($row->restaurantID == $innerLoop[$i]->restaurantID) {
+                        if (count($blist) > count($restProfile)) {
+                            $bid = $row->bookingID;
+                            $serveDate = $row->dateBooking;
+                            $bookingTime = $row->bookingTime;
+                            $quanMember = $row->quantityMember;
+
+                            $campaign = $innerLoop[$i]->campaign;
+                            $address = $innerLoop[$i]->address;
+                            $discount = $innerLoop[$i]->discount;
+                            $restName = $innerLoop[$i]->nameRe;
+                            $imageAddr = $innerLoop[$i]->addressImage;
+                            $average = $innerLoop[$i]->average;
+
+                            if ($row->statusBo == 1) {
+                                $statusText = 'Served';
+                            } else if ($row->statusBo == 2) {
+                                $statusText = 'Cancelled';
+                            } else {
+                                $statusText = 'Waiting';
+                            }
+                        } else {
+                            $campaign = $row->campaign;
+                            $address = $row->address;
+                            $discount = $row->discount;
+                            $restName = $row->nameRe;
+                            $imageAddr = $row->addressImage;
+                            $average = $row->average;
+
+                            $bid = $innerLoop[$i]->bookingID;
+                            $serveDate = $innerLoop[$i]->dateBooking;
+                            $bookingTime = $innerLoop[$i]->bookingTime;
+                            $quanMember = $innerLoop[$i]->quantityMember;
+
+                            if ($innerLoop[$i]->statusBo == 1) {
+                                $statusText = 'Served';
+                            } else if ($innerLoop[$i]->statusBo == 2) {
+                                $statusText = 'Cancelled';
+                            } else {
+                                $statusText = 'Waiting';
+                            }
+                        }
+                        $rprofile = array(
+                            'restID' => $row->restaurantID,
+                            'campaign' => $campaign,
+                            'address' => $address,
+                            'discount' => $discount,
+                            'restName' => $restName,
+                            'bid' => $bid,
+                            'serveDate' => $serveDate,
+                            'bookingTime' => $bookingTime,
+                            'quantityMember' => $quanMember,
+                            'statusText' => $statusText,
+                            'imageAddr' => $imageAddr,
+                            'average' => $average
+                        );
+                        array_push($custBookList, $rprofile);
+                    }
                 }
-                if ($row->statusBo == 1) {
-                    $statusText = 'Served';
-                } else if ($row->statusBo == 2) {
-                    $statusText = 'Cancelled';
-                } else {
-                    $statusText = 'Waiting';
-                }
-                $bclist = array(
-                    'bid' => $row->bookingID,
-                    'id' => $row->restaurantID,
-                    'addressImage' => $restImage[$counter] -> addressImage,
-                    'nameRe' => $row->nameRe,
-                    'discount' => $row->discount,
-                    'campaign' => $row->descriptionRes,
-                    'address' => $row->address,
-                    'serveDate' => $row->dateBooking,
-                    'bookingTime' => $row->bookingTime,
-                    'quantityMember' => $row->quantityMember,
-                    'statusText' => $statusText,
-                    'avgRating' => $avgRating
-                );
-                array_push($custBookList, $bclist);
             }
 
             // sort data by dateBooking in descending order
@@ -210,6 +264,8 @@ class Booking extends CI_Controller {
 
             $isBooked = true;
             $data['isBooked'] = $isBooked;
+            $data['custBookList'] = $custBookList;
+
             $data['content'] = 'site/booking/user_history_booking.phtml';
             $this->load->view('site/layout/layout.phtml', $data);
         } else {

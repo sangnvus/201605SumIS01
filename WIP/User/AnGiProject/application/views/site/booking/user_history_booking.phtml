@@ -6,26 +6,26 @@
         <div class="breadcrumb"></div>
 
         <div class="col-md-3">
-            
+
             <?php $this->load->view('site/user/profile/profile_image.phtml'); ?>
-            
+
             <ul class="profile-sidebar">
                 <li class="active"><i class="fa fa-user" aria-hidden="true"></i> Thông tin tài khoản</li>
-            
-            <?php 
-            $authorityUser = $this->session->userdata("Type");
-            if ($authorityUser == 2){
-            ?>
-                <li><a href="<?php echo base_url(); ?>restaurant/restaurant_banner"><i class="fa fa-picture-o" aria-hidden="true"></i> Banner nhà hàng</a></li>
-                <li><a href="<?php echo base_url(); ?>restaurant/restaurant_infor"><i class="fa fa-wpforms" aria-hidden="true"></i> Thông tin nhà hàng</a></li>
-                <li><a href="<?php echo base_url(); ?>restaurant/restaurant_menu"><i class="fa fa-usd" aria-hidden="true"></i> Bảng giá</a></li>
-                <li><a href="<?php echo base_url(); ?>booking/manageReservation"><i class="fa fa-cogs" aria-hidden="true"></i> Quản lý đặt chỗ</a></li>                
-            <?php
-            }
-            ?>     
-      
+
+                <?php
+                $authorityUser = $this->session->userdata("Type");
+                if ($authorityUser == 2) {
+                    ?>
+                    <li><a href="<?php echo base_url(); ?>restaurant/restaurant_banner"><i class="fa fa-picture-o" aria-hidden="true"></i> Banner nhà hàng</a></li>
+                    <li><a href="<?php echo base_url(); ?>restaurant/restaurant_infor"><i class="fa fa-wpforms" aria-hidden="true"></i> Thông tin nhà hàng</a></li>
+                    <li><a href="<?php echo base_url(); ?>restaurant/restaurant_menu"><i class="fa fa-usd" aria-hidden="true"></i> Bảng giá</a></li>
+                    <li><a href="<?php echo base_url(); ?>booking/manageReservation"><i class="fa fa-cogs" aria-hidden="true"></i> Quản lý đặt chỗ</a></li>                
+                    <?php
+                }
+                ?>     
+
                 <li class="active"><a href="<?php echo base_url(); ?>booking/viewBooking"><i class="fa fa-cutlery" aria-hidden="true"></i> Lịch sử đặt chỗ</a></li>
-           
+
                 <li><a href="<?php echo base_url(); ?>user/change_Password"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Đổi mật khẩu</a></li>
 
                 <li><a href="<?php echo base_url(); ?>user/sign_out"><i class="fa fa-power-off" aria-hidden="true"></i> Thoát</a></li>
@@ -34,22 +34,22 @@
 
         <div class="col-md-9">
             <h1>Lịch sử đặt chỗ</h1>
-            
+
             <ul class="history-booking">
-            <?php
-            if($isBooked == false){
-                echo $this->session->flashdata('msgBooking');
-            }else{
-                    foreach ($list as $row) {
+                <?php
+                if ($isBooked == false) {
+                    echo $this->session->flashdata('msgBooking');
+                } else {
+                    foreach ($custBookList as $row) {
                         echo '<li>';
                         echo '<a href = "" class = "booking-img">';
-//                        echo "<img src = '" . $row['addressImage'] . "' >";
+                        echo "<img src = '" . base_url($row['imageAddr']) . "' alt='restaurant' >";
                         echo '<p>' . $row['discount'] . '%</p>';
                         echo '</a>';
                         echo '<div class = "booking-restaurant-infor">';
-                        echo '<a>' . $row['nameRe'] . '</a>';
-//                        echo '<p>' . $row['address'] . '</p>';
-//                        echo '<span style = "font-size: 18px">' . $row['avgRating'];
+                        echo '<a>' . $row['restName'] . '</a>';
+                        echo '<p>' . $row['address'] . '</p>';
+                        echo '<span style = "font-size: 18px">' . $row['average'];
                         echo '<i class = "glyphicon glyphicon-star filled"></i>';
                         echo '<i class = "glyphicon glyphicon-star filled"></i>';
                         echo '<i class = "glyphicon glyphicon-star filled"></i>';
@@ -60,7 +60,7 @@
                         echo '</div>';
 
                         echo '<div class = "booking-infor">';
-                        echo '<p>Thời gian: '.$row['bookingTime'].' | ' . $row['serveDate'] . '</p>';
+                        echo '<p>Thời gian: ' . $row['serveDate'] . ' | ' . $row['bookingTime'] . '</p>';
                         echo '<p>Số người: ' . $row['quantityMember'] . '</p>';
                         echo '<button><i class = "fa fa-clock-o" aria-hidden = "true"></i>' . $row['statusText'] . '</button>';
                         echo '</div>';

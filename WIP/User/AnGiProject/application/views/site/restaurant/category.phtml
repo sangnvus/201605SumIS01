@@ -50,7 +50,6 @@
                 <ul class="item-content item-cat">
                     <?php
                     $j = 0;
-
                     foreach ($resData as $key => $row) {
                         ?>
                         <li class="col-md-3">
@@ -59,6 +58,7 @@
                                 <div class="item-infor">
                                     <label class="item-name item-name-sm"><?php echo $row['nameRe']; ?></label>
                                     <span class="rate-star">
+
                                         <?php
                                         $i = 1;
                                         for ($i; $i <= $rate[$j]['avgrate']; $i++) {

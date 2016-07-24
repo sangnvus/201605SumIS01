@@ -36,15 +36,6 @@ class Image_model extends CI_Model {
     }
 
     // -------------------- end of avatar -------------------------
-    // 
-    // restaurant profile image
-    function getRestImage() {
-        $sql = "SELECT r.restaurantID, imageID, addressImage FROM images img, users u, restaurants r
-                WHERE img.userID = u.userID and r.userID = u.userID AND typeImage = 1;";
-        $query = $this->db->query($sql);
-        return $query->result();
-    }
-
     // -------------------- banner -------------------------
     // user types: 1 customer, 2 restaurant owner
     // image types: 0 customer avatar, 1 restaurant avatar, 2 banner

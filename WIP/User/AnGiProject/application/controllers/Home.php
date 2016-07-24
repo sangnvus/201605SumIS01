@@ -8,64 +8,40 @@ class Home extends CI_Controller {
         parent::__construct();
         $this->load->database();
         $this->load->helper(array('url', 'form'));
-        $this->load->model(array('Restaurants_model', 'Category_model', 'Image_model'));
+        $this->load->model(array('Restaurants_model', 'Category_model'));
         $this->load->library('session');
     }
 
     public function index() {
-        // number of restaurants to display
-        define("showTopRating", 4);
-        define("showhighestDiscount", 8);
-
-        // retrieve data from model
-        $restProfile = $this->Restaurants_model->getRestProfile();
-        $rate = $this->Restaurants_model->getRestRating();
-        $restImage = $this->Image_model->getRestImage();
-        $counter = 0;
         $topRating = array();
         $highestDiscount = array();
+        // retrieve data from model
+        $restProfile = $this->Restaurants_model->getInterestingRestaurants();
         foreach ($restProfile as $row) {
-            
-            // restaurant with rate
-            if (isset($rate[$counter]) && ($row->restaurantID) == ($rate[$counter]->restaurantID)) {
-                $avgRating = $rate[$counter]->average;
-            } else {
-                $avgRating = 0;
-            }
-            
-            // restaurant with image
-            if(isset($restImage[$counter]) && ($restImage[$counter]->restaurantID) == $row->restaurantID){
-                $imageAddr = $restImage[$counter]->addressImage;
-            }else{
-                $imageAddr = 'images/restOwner/restImage/default_restaurant.png';
-            }
-            
             $rprofile = array(
                 'restID' => $row->restaurantID,
                 'campaign' => $row->campaign,
                 'address' => $row->address,
                 'discount' => $row->discount,
                 'restName' => $row->nameRe,
-                'imageAddr' => $imageAddr,
-                'average' => $avgRating
+                'imageAddr' => $row->addressImage,
+                'average' => $row->average
             );
-            $counter++;
-
             array_push($topRating, $rprofile);
             array_push($highestDiscount, $rprofile);
         }
-
+        
         $topRating = $this->sortRestProfile($topRating, 'average');
         $highestDiscount = $this->sortRestProfile($highestDiscount, 'discount');
-
+        
         $categoriesData = $this->Category_model->getCategories();
         $data['categoriesData'] = $categoriesData;
 
         $data['topRating'] = $topRating;
         $data['highestDiscount'] = $highestDiscount;
 
-        $data['limitRate'] = showTopRating;
-        $data['limitDis'] = showhighestDiscount;
+        $data['limitRate'] = 4;
+        $data['limitDis'] = 8;
 
         // return to view
         $data['dbMsg'] = "<div class='alert alert-danger text-center'>chưa có thông tin nhà hàng!!!</div>";
@@ -74,6 +50,7 @@ class Home extends CI_Controller {
         $this->load->view('site/layout/layout.phtml', $data);
     }
 
+    // sorting function
     function sortRestProfile($a, $subkey) {
         foreach ($a as $k => $v) {
             $b[$k] = strtolower($v[$subkey]);

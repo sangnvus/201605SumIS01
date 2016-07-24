@@ -9,25 +9,27 @@
     <?php
     $userID = $this->session->userdata("ID");
     if ($userID != null) {
-        echo form_open('booking/makeReservation/' . $userID, array('class' => 'booking-res'));
+        echo form_open(base_url('booking/makeReservation/' . $userID), array('class' => 'booking-res'));
+        $isRequired = "required";
     } else {
-        echo '<form class="booking-res" />';
+        echo '<div class="booking-res" >';
+        $isRequired = null;
     }
     ?>
     <!--     <form class="booking-res"> -->
     <!--get restaurant id from url (hide this field) -->
     <input type="hidden" name="restaurantID" value="<?php echo $viewRestID; ?>" />
     <p>
-        <input type="number" name="numPeople" placeholder="Số người đến" min="1" required>
+        <input type="number" name="numPeople" placeholder="Số người đến" min="1" <?php echo $isRequired ?> >
         <i class="fa fa-user" aria-hidden="true"></i>
     </p>
 
     <p>
-        <input placeholder="Ngày" class="textbox-n" type="text" name="dateBooking" onfocus="(this.type = 'date')" onblur="(this.type = 'text')" id="date" required>
+        <input placeholder="Ngày" class="textbox-n" type="text" name="dateBooking" onfocus="(this.type = 'date')" onblur="(this.type = 'text')" id="date" <?php echo $isRequired ?> >
         <i class="fa fa-calendar" aria-hidden="true"></i>
     </p>
     <p>
-        <input placeholder="Thời gian" class="textbox-n" type="time" name="bookingTime" required>
+        <input placeholder="Thời gian" class="textbox-n" type="time" name="bookingTime" <?php echo $isRequired; ?> >
     </p>
     <p>
         <textarea placeholder="Comment" name="bcomment" rows="5"></textarea>
@@ -42,6 +44,7 @@
     if ($userID == null) {
         // trigger login modal
         echo '<input type="submit" value="đặt chỗ ngay" data-toggle="modal" data-target="#myModal"/>';
+        echo '</div>';
     } else {
         echo '<input type="submit" value="đặt chỗ ngay" />';
         echo form_close();

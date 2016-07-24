@@ -6,22 +6,31 @@ class Search_model extends CI_Model {
         parent::__construct();
     }
 
-    function getRestaurantResult($keyword) {
+    function searchCategory($keyword) {
         $term = '%' . htmlentities($keyword) . '%';
-        $sql = " SELECT r.restaurantID, nameRe, food, nameCOR, " .
-                " IF (nameRe LIKE '%?%', 1, 0) AS One, " .
-                " IF (nameCOR LIKE '%?%', 1, 0) AS Two, " .
-                " IF (food LIKE '%?%', 1, 0) AS Three " .
-                " FROM restaurants r, restaurantcategories cate, categoriesofrestaurant cateOf " .
-                " WHERE cate.restaurantID = r.restaurantID AND cate.categoryOfResID = cateOf.categoryOfResID " .
-                " ORDER BY One, Two, Three; ";
+        $sql = " SELECT * FROM restaurantcategories cate, categoriesofrestaurant cateOf " .
+                " WHERE nameCOR LIKE " . $this->db->escape($term) . " AND cate.categoryOfResID = cateOf.categoryOfResID; ";
 
-        $query = $this->db->query($sql, array($term,$term, $term));
+        $query = $this->db->query($sql, $term);
         if ($query->num_rows() > 0) {
             $data = $query->result();
             return $data;
         } else {
-            return NULL;
+            return false;
+        }
+    }
+
+    function searchRestFood($keyword) {
+        $term = '%' . htmlentities($keyword) . '%';
+        $sql = " SELECT restaurantID, nameRe, food, campaign, discount, addressID " . 
+                " FROM restaurants WHERE nameRe LIKE " . $this->db->escape($term) . " OR food LIKE " . $this->db->escape($term) . "; ";
+
+        $query = $this->db->query($sql, $term, $term);
+        if ($query->num_rows() > 0) {
+            $data = $query->result();
+            return $data;
+        } else {
+            return false;
         }
     }
 

@@ -11,11 +11,10 @@ class Category extends CI_Controller {
     }
 
     function index($type = 0, $ID = 0, $page = 1) {
-        $data['content'] = 'site/restaurant/Category.phtml';
         $districtData = $this->Category_model->getDistrict();
         $categoriesData = $this->Category_model->getCategories();
         $count = $this->Category_model->countAll($type, $ID);
-        
+
         //sua so items/trang
         $pages = ceil($count / 12);
 
@@ -36,7 +35,7 @@ class Category extends CI_Controller {
             array_push($rate, $this->Category_model->getRate($row['restaurantID']));
             // $rate[] = $this->Category_model->getRate($row['restaurantID']);
         }
-        print_r($rate);
+
         $data['categoriesData'] = $categoriesData;
         $data['districtData'] = $districtData;
         $data['resData'] = $resData;
@@ -48,6 +47,7 @@ class Category extends CI_Controller {
         //$this->load->library('pagination', $config);
         //$data['pagination'] = $this->pagination->create_links();
 
+        $data['content'] = 'site/restaurant/Category.phtml';
         $this->load->view('site/layout/layout.phtml', $data);
     }
 

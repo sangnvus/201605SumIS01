@@ -7,8 +7,8 @@
                 <div class="title-row">
                     <div class="col-md-12">
                         <?php
-                        if ($isFound == true) {
-                            echo "<h3>" . $amount . " kết quả tìm kiếm về \"" . $keyword . "\"</h3>";
+                        if ($totalResult > 0) {
+                            echo "<h3>" . $totalResult . " kết quả tìm kiếm về \"" . $keyword . "\"</h3>";
                             $sideBarSize = "sidebar col-md-2";
                         } else {
                             echo "<h3>Nothing found for \"" . $keyword . "\"</h3>";
@@ -51,38 +51,63 @@
 
             <div class="col-md-10">
                 <ul class="item-content item-cat">
+                    <!--first search priority-->
                     <?php
-                    if ($isFound == true) { // if searched keyword is found
-                        foreach ($food as $row) {
+                    if ($isCate == true) {  // category found
+                        foreach ($cateList as $row) {
                             ?>
                             <li class="col-md-3">
-
                                 <a style="display: block; position: relative" class="img-item" href="">
-                                    <img src="<?php echo $row->addressImage; ?>">
+                                    <img src="<?php echo $row['imageAddr']; ?>">
                                     <div class="item-infor">
-                                        <label class="item-name item-name-sm"><?php echo $row->nameFo . ' - ' . $row->nameRe; ?></label>
-                                        <span class="rate-star"><?php echo $row->average; ?>
+                                        <label class="item-name"><?php echo $row['campaign']; ?></label>
+                                        <span class="rate-star"><?php echo $row['average']; ?><!-- fill in the star by rate value -->
                                             <i class="fa fa-star filled" aria-hidden="true"></i>
                                             <i class="fa fa-star filled" aria-hidden="true"></i>
                                             <i class="fa fa-star filled" aria-hidden="true"></i>
                                             <i class="fa fa-star filled" aria-hidden="true"></i>
                                             <i class="fa fa-star" aria-hidden="true"></i>
                                         </span>
-                                        <span class="rate-dollar">
-                                            <i class="fa fa-dollar filled" aria-hidden="true"></i>
-                                            <i class="fa fa-dollar filled" aria-hidden="true"></i>
-                                            <i class="fa fa-dollar filled" aria-hidden="true"></i>
-                                            <i class="fa fa-dollar" aria-hidden="true"></i>
-                                            <i class="fa fa-dollar" aria-hidden="true"></i>
-                                        </span>
-                                        <label class="item-address item-address-sm"><?php echo $row->address; ?></label>
+                                        <label class="item-address"><?php echo $row['address']; ?></label>
                                     </div>
                                 </a>
-
-                                <div class="category-itemdetail" style="border: 1px solid #e0e0e0; text-align: center">
-                                    <p class="sale-content">Giảm <strong><?php echo $row->discount; ?></strong></p>
-                                    <p class="quick-description"><?php echo $row->nameCOR; ?></p>
-                                    <?php echo form_open('booking/reserve/' . $row->restaurantID); ?>
+                                <div style="border: 1px solid #e0e0e0; text-align: center">
+                                    <p class="sale-content">Giảm <strong><?php echo $row['discount']; ?>%</strong></p>
+                                    <p class="quick-description"><?php echo $row['restName'] . ' | ' . $row['category']; ?></p>
+                                    <?php echo form_open('booking/reserve/' . $row['restID']); ?>
+                                    <input type="submit" class="place" value="Đặt chỗ ngay" />
+                                    <?php echo form_close(); ?> 
+                                </div>
+                            </li>
+                            <?php
+                        }
+                    }
+                    ?>
+                    
+                    <!--second search priority-->
+                    <?php
+                    if ($isRest == true) { // restaurant found
+                        foreach ($restList as $row) {
+                            ?>
+                            <li class="col-md-3">
+                                <a style="display: block; position: relative" class="img-item" href="">
+                                    <img src="<?php echo $row['imageAddr']; ?>">
+                                    <div class="item-infor">
+                                        <label class="item-name"><?php echo $row['campaign']; ?></label>
+                                        <span class="rate-star"><?php echo $row['average']; ?><!-- fill in the star by rate value -->
+                                            <i class="fa fa-star filled" aria-hidden="true"></i>
+                                            <i class="fa fa-star filled" aria-hidden="true"></i>
+                                            <i class="fa fa-star filled" aria-hidden="true"></i>
+                                            <i class="fa fa-star filled" aria-hidden="true"></i>
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                        </span>
+                                        <label class="item-address"><?php echo $row['address']; ?></label>
+                                    </div>
+                                </a>
+                                <div style="border: 1px solid #e0e0e0; text-align: center">
+                                    <p class="sale-content">Giảm <strong><?php echo $row['discount']; ?>%</strong></p>
+                                    <p class="quick-description"><?php echo $row['restName']; ?></p>
+                                    <?php echo form_open('booking/reserve/' . $row['restID']); ?>
                                     <input type="submit" class="place" value="Đặt chỗ ngay" />
                                     <?php echo form_close(); ?> 
                                 </div>
@@ -96,7 +121,7 @@
         </div>
 
         <?php
-        if ($isFound == true) {
+        if ($isCate == true || $isRest == true) {
             ?>
             <div style="text-align: center">
                 <ul class="pagination">

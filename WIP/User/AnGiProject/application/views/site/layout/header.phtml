@@ -98,11 +98,11 @@
         <div class="row">
             <div class="col-md-9">
                 <?php
-                $attribute = array("class" => "search");
+                $attribute = array("class" => "search", "method" => "get");
                 echo form_open('search/', $attribute);
                 ?>
                 <input type="text" name="userTerm" placeholder="Buffet, Lẩu & Nướng, Hải sản..." required="true">
-                <button type="submit" name="btnSearch" value="btnSearchValue"><i class="fa fa-search" aria-hidden="true"></i></button>
+                <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                 <?php echo form_close(); ?>
             </div>
         </div>

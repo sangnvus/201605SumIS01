@@ -11,32 +11,32 @@
 
             <div class="col-md-3" style="float: right; position: relative">
                 <div class="restaurant-rate shadow-outside">
-                <span class="rate-star">
-                <?php
-                $i = 1;
-                for ($i; $i <= $rateData['avgrate']; $i++) {
-                    ?>
-                    <i class="fa fa-star filled" aria-hidden="true"></i>
-
-                    <?php
-                    if (($i + 0.25 <= $rateData['avgrate']) && ($i + 0.75 > $rateData['avgrate'])) {
-                        ?>
-                        <i class="fa fa-star-half-o filled" aria-hidden="true"></i>
-
+                    <span class="rate-star">
                         <?php
-                        $i++;
-                    }
-                }
-                ?>
-                <?php
-                for ($k = 0; $k <= (5 - $i); $k++) {
-                    ?>
-                    <i class="fa fa-star " aria-hidden="false"></i>
-                    <?php
-                }
-                ?>  
+                        $i = 1;
+                        for ($i; $i <= $rateData['avgrate']; $i++) {
+                            ?>
+                            <i class="fa fa-star filled" aria-hidden="true"></i>
 
-            </span>
+                            <?php
+                            if (($i + 0.25 <= $rateData['avgrate']) && ($i + 0.75 > $rateData['avgrate'])) {
+                                ?>
+                                <i class="fa fa-star-half-o filled" aria-hidden="true"></i>
+
+                                <?php
+                                $i++;
+                            }
+                        }
+                        ?>
+                        <?php
+                        for ($k = 0; $k <= (5 - $i); $k++) {
+                            ?>
+                            <i class="fa fa-star " aria-hidden="false"></i>
+                            <?php
+                        }
+                        ?>  
+
+                    </span>
 
                     <!-- <span style="font-size: 2em">
                         <i class="glyphicon glyphicon-star filled"></i>
@@ -46,11 +46,20 @@
                         <i class="glyphicon glyphicon-star"></i>
                     </span> -->
 
-                    <p><?php echo $rateData['count'];?> đánh giá</p>
-                    <p><?php echo $resData[0]['address'].", ";?>
-                        <?php echo $addressData[0]['typeWard']. " ";echo $addressData[0]['nameWard'].", "?>
-                        <?php echo $addressData[0]['typeDis']. " ";echo $addressData[0]['nameDis'].", "?>    
-                        <?php echo $addressData[0]['typePro']. " ";echo $addressData[0]['namePro']."."?></p>
+                    <p><?php echo $rateData['count']; ?> đánh giá</p>
+                    <p><?php echo $resData[0]['address'] . ", "; ?>
+                        <?php
+                        echo $addressData[0]['typeWard'] . " ";
+                        echo $addressData[0]['nameWard'] . ", "
+                        ?>
+                        <?php
+                        echo $addressData[0]['typeDis'] . " ";
+                        echo $addressData[0]['nameDis'] . ", "
+                        ?>    
+                        <?php
+                        echo $addressData[0]['typePro'] . " ";
+                        echo $addressData[0]['namePro'] . "."
+                        ?></p>
                 </div>
 
                 <div class="stick-point"></div>
@@ -77,16 +86,15 @@
                         <div id="myCarousel-restaurant" class="carousel slide" data-ride="carousel">
                             <!-- Indicators -->
                             <ol class="carousel-indicators">
-                                <?php 
-                            foreach ($bannerData as $key => $value) 
-                            {
-                            ?>
-                            <li data-target="#myCarousel-restaurant" data-slide-to="0" class="active"></li>
+                                <?php
+                                foreach ($bannerData as $key => $value) {
+                                    ?>
+                                    <li data-target="#myCarousel-restaurant" data-slide-to="0" class="active"></li>
 
-                            <?php
-                            }
-                            ?> 
-                            
+                                    <?php
+                                }
+                                ?> 
+
                                 <li data-target="#myCarousel-restaurant" data-slide-to="0" class="active"></li>
                                 <!-- <li data-target="#myCarousel-restaurant" data-slide-to="1"></li>
                                 <li data-target="#myCarousel-restaurant" data-slide-to="2"></li>
@@ -98,48 +106,29 @@
 
                             <!-- Wrapper for slides -->
                             <div class="carousel-inner" role="listbox">
-                            <?php 
-                            foreach ($bannerData as $key => $value) 
-                            {
-                            ?>
-                            <div class="item actives">
-                                <img src=" <?php echo $value['addressImage'];?> ">
-                            </div>  
+                                <?php
+                                if (count($bannerData) > 0) {
+                                    foreach ($bannerData as $key => $value) {
+                                        ?>
+                                        <div class="item active">
+                                            <img src=" <?php echo base_url($value['addressImage']); ?> " width="866px" height="578px" alt="banner">
+                                        </div>  
 
-                            <?php
-                            }
-                            ?> 
+                                        <?php
+                                    }
+                                } else {
+                                    ?> 
 
-                                <div class="item active">
-                                    <img src="http://cdn.pasgo.vn/anh-chi-tiet/quan-an-ngon-18-phan-boi-chau-22-4889.jpg">
-                                </div>
-
-                                <!-- <div class="item">
-                                    <img src="http://cdn.pasgo.vn/anh-chi-tiet/quan-an-ngon-18-phan-boi-chau-21-4890.JPG">
-                                </div>
-
-                                <div class="item">
-                                    <img src="http://cdn.pasgo.vn/anh-chi-tiet/quan-an-ngon-18-phan-boi-chau-14-4891.JPG">
-                                </div>
-
-                                <div class="item">
-                                    <img src="http://cdn.pasgo.vn/anh-chi-tiet/quan-an-ngon-18-phan-boi-chau-19-4892.JPG">
-                                </div>
-
-                                <div class="item">
-                                    <img src="http://cdn.pasgo.vn/anh-chi-tiet/quan-an-ngon-18-phan-boi-chau-16-4893.JPG">
-                                </div>
-
-                                <div class="item">
-                                    <img src="http://cdn.pasgo.vn/anh-chi-tiet/quan-an-ngon-18-phan-boi-chau-7-4894.JPG">
-                                </div>
-
-                                <div class="item">
-                                    <img src="http://cdn.pasgo.vn/anh-chi-tiet/quan-an-ngon-18-phan-boi-chau-2-4895.jpg">
-                                </div> -->
+                                    <div class="item active">
+                                        <img src="<?php echo base_url('images/restOwner/banner/default_banner.png'); ?>" width="866px" height="578px" alt="banner">
+                                    </div>
+                                    
+                                    <?php
+                                }
+                                ?>
                             </div>
 
-                            <!-- Left and right controls -->
+                            <!-- Left and right controls 
                             <a class="left carousel-control" href="#myCarousel-restaurant" role="button" data-slide="prev">
                                 <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
                                 <span class="sr-only">Previous</span>
@@ -155,11 +144,10 @@
                                 <h3 style="font-weight: bold; color: #cc0000">ĐIỂM ĐẶC TRƯNG</h3>
                                 <p>
                                     <strong>Loại hình ẩm thực: </strong>
-                                    <?php 
+                                    <?php
                                     foreach ($resCate as $key => $value) {
-                                        echo $value['nameCOR']." - ";
+                                        echo $value['nameCOR'] . " - ";
                                     }
-
                                     ?>
                                 </p>
 
@@ -180,10 +168,11 @@
 
                                 <p>
                                     <strong>Chỗ để ô tô: </strong>
-                                    <?php 
-                                    if($resData[0]['carParkingRes'] == 1)
+                                    <?php
+                                    if ($resData[0]['carParkingRes'] == 1)
                                         echo "Có";
-                                    else echo "Không có"; 
+                                    else
+                                        echo "Không có";
                                     ?> 
                                 </p>
 
@@ -216,12 +205,21 @@
                                 <p>Nhưng đừng để sự thú vị của không gian khiến bạn choáng ngợp. Hãy giữ “cái đầu lạnh” để không bị những cánh hồng, cánh sen đang dập dìu vỗ ve dưới chân như mối tình thơ thuở quê nhà hay những chùm đèn bằng nơm úp cá tuổi thơ khiến bước chân bạn lỡ nhịp. Đôi khi, vào những dịp đặc biệt, còn có cả tiếng ghi ta gỗ bập bùng, những khúc hát mộc mạc, giản dị như chính không gian khiến thực khách mỉm cười.</p> -->
 
                                 <h4>Thông tin liên hệ</h4>                   
-                                <p><strong><?php echo $resData[0]['address'].", ";?>
-                                <?php echo $addressData[0]['typeWard']. " ";echo $addressData[0]['nameWard'].", "?>
-                                <?php echo $addressData[0]['typeDis']. " ";echo $addressData[0]['nameDis'].", "?>    
-                                <?php echo $addressData[0]['typePro']. " ";echo $addressData[0]['namePro']."."?>  
-                                 </strong></p>
-                
+                                <p><strong><?php echo $resData[0]['address'] . ", "; ?>
+                                        <?php
+                                        echo $addressData[0]['typeWard'] . " ";
+                                        echo $addressData[0]['nameWard'] . ", "
+                                        ?>
+                                        <?php
+                                        echo $addressData[0]['typeDis'] . " ";
+                                        echo $addressData[0]['nameDis'] . ", "
+                                        ?>    
+                                        <?php
+                                        echo $addressData[0]['typePro'] . " ";
+                                        echo $addressData[0]['namePro'] . "."
+                                        ?>  
+                                    </strong></p>
+
 
                                 <div class="fb-like" data-href="http://localhost:8080/AnGiProject/restaurant/view" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
                             </div>
@@ -262,7 +260,7 @@
                     <div id="price" class="tab-pane fade">
                         <?php echo $resData[0]['food']; ?>
                         <!-- <img src="http://cdn.pastaxi-manager.onepas.vn/Content/Uploads/Prices/aoquan/nha-hang-ao-quan-header.jpg">
- -->                    </div>
+                        -->                    </div>
 
 
                     <div style="margin: 25px 0 25px -15px">

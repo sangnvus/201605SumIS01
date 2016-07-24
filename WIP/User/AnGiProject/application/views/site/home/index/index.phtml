@@ -28,7 +28,7 @@
                         ?>
                         <li class="col-md-3">
                             <a style="display: block; position: relative" class="img-item" href="">
-                                <img src="<?php echo $row['imageAddr']; ?>">
+                                <img src="<?php echo base_url($row['imageAddr']); ?>" alt="restaurant">
                                 <div class="item-infor">
                                     <label class="item-name"><?php echo $row['campaign']; ?></label>
                                     <span class="rate-star"><?php echo $row['average']; ?><!-- fill in the star by rate value -->
@@ -87,7 +87,7 @@
                         ?>
                         <li class="col-md-3">
                             <a style="display: block; position: relative" class="img-item" href="">
-                                <img src="<?php echo $row['imageAddr']; ?>">
+                                <img src="<?php echo base_url($row['imageAddr']); ?>" alt="restaurant">
                                 <div class="item-infor">
                                     <label class="item-name"><?php echo $row['campaign']; ?></label>
                                     <span class="rate-star"><?php echo $row['average']; ?><!-- fill in the star by rate value -->

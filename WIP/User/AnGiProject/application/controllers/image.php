@@ -63,11 +63,10 @@ class Image extends CI_Controller {
 
             // delete avatar file in server folder
             $image_addr = $this->Image_model->getAvatar($userType, $ID, $imageType);
-            if($image_addr != null){
+
             foreach ($image_addr as $row) {
                 unlink($row->addressImage);
             }
-        }
 
             // delete avatar path in database
             $this->Image_model->deleteAvatar($userType, $ID, $imageType);

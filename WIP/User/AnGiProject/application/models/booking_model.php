@@ -18,7 +18,7 @@ class Booking_model extends CI_Model {
     // for restaurant owner
     function getBookingList($restID) {
         $sql = " SELECT * FROM restaurants r, booking b, users u " .
-                " WHERE b.restaurantID = r.restaurantID AND u.userID = b.userID AND b.restaurantID = " . $restID . ";";
+                " WHERE b.restaurantID = r.restaurantID AND u.userID = b.userID AND authorityUser = 2 AND b.restaurantID = " . $restID . ";";
         $query = $this->db->query($sql);
         if ($query->num_rows() > 0) {
             $data = $query->result();
