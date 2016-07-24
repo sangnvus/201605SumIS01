@@ -1,0 +1,116 @@
+
+<div class="form-group">
+    <div class="col-lg-6"> 
+        <label for="categoryOfResID">Loại</label> 
+        <select id="categoryOfResID" name="categoryOfResID" class="form-control">        
+          <option id="" value="0" selected="selected">--chọn loại nhà hàng--</option>  
+          <?php foreach($categories as $item){?>
+             <option id="<?php echo $item->categoryOfResID; ?>" value="<?php echo $item->categoryOfResID; ?>" <?php if(isset($categoryOfResID) && $categoryOfResID == $item->categoryOfResID){ echo 'selected="selected"';} else {echo '';} ?> >
+             <?php echo $item->nameCOR; ?>
+             </option>
+          <?php } ?>
+        </select>
+    </div>   
+    <div class="col-lg-6">
+        <input type="hidden" id="restaurantID" name="restaurantID" value="<?php echo isset($restaurantID) ? $restaurantID : '0'; ?>">
+        <label for="memName">Tên</label>
+        <input type="text" class="form-control" value="<?php echo isset($nameRe) ? $nameRe : ''; ?>" id="nameRe"  name="nameRe"> 
+    </div> 
+    <div class="col-lg-6">
+        <label for="userName">Phone</label>
+        <input type="text" class="form-control" id="phoneRe"  name="phoneRe"  value="<?php echo isset($phoneRe) ? $phoneRe : ''; ?>"> 
+    </div>   
+    <div class="col-lg-6"> 
+    <label for="userMail">favouriteFood</label>
+    <input type="text" class="form-control" id="favouriteFood"  name="favouriteFood"  value="<?php echo isset($favouriteFood) ? $favouriteFood : ''; ?>"> 
+    </div>     
+    <div class="col-lg-6"> 
+        <label for="spaceRes">spaceRes</label>
+        <input type="text" class="form-control" id="spaceRes"  name="spaceRes"  value="<?php echo isset($spaceRes) ? $spaceRes : ''; ?>"> 
+    </div>       
+    <div class="col-lg-6"> 
+        <label for="carParkingRes">carParkingRes</label>
+        <input type="text" class="form-control" id="carParkingRes"  name="carParkingRes"  value="<?php echo isset($carParkingRes) ? $carParkingRes : ''; ?>"> 
+    </div>  
+    <div class="col-lg-6"> 
+        <label for="openTimeRe">Giờ mở của</label>
+        <div class=' input-group date time'>
+            <input type="text" class="form-control" id="openTimeRe"  name="openTimeRe"  value="<?php echo isset($openTimeRe) ? $openTimeRe : ''; ?>"> 
+            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-calendar"></span>
+            </span>
+        </div>
+    </div>
+    <div class="col-lg-6"> 
+        <label for="closeTimeRe">Giờ đóng cửa</label>
+        <div class=' input-group date time'>
+            <input type="text" class="form-control" id="closeTimeRe"  name="closeTimeRe"  value="<?php echo isset($closeTimeRe) ? $closeTimeRe : ''; ?>"> 
+            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-calendar"></span>
+            </span>
+        </div>
+    </div>   
+    <div class="col-lg-6"> 
+        <label for="minPrice">minPrice</label>
+        <input type="text" class="form-control" id="minPrice"  name="minPrice"  value="<?php echo isset($minPrice) ? $minPrice : ''; ?>"> 
+    </div>
+    <div class="col-lg-6"> 
+        <label for="maxPrice">maxPrice</label>
+        <input type="text" class="form-control" id="maxPrice"  name="maxPrice"  value="<?php echo isset($maxPrice) ? $maxPrice : ''; ?>"> 
+    </div>      
+    <div class="col-lg-6"> 
+        <label for="rateRe">rateRe</label>
+        <select id="statusBo" name="statusBo" class="form-control">
+            <option id="0" value="0" <?php if(isset($rateRe) && $rateRe == 0){ echo 'selected="selected"';} else {echo '';} ?> >0 *</option>
+            <option id="1" value="1" <?php if(isset($rateRe) && $rateRe == 1){ echo 'selected="selected"';} else {echo '';} ?> >1 *</option>
+            <option id="2" value="2" <?php if(isset($rateRe) && $rateRe == 2){ echo 'selected="selected"'; } else {echo '';} ?>>2 *</option>
+            <option id="3" value="3" <?php if(isset($rateRe) && $rateRe == 3){ echo 'selected="selected"'; } else {echo '';} ?>>3 *</option>
+            <option id="4" value="4" <?php if(isset($rateRe) && $rateRe == 4){ echo 'selected="selected"'; } else {echo '';} ?>>4 *</option>
+            <option id="5" value="5" <?php if(isset($rateRe) && $rateRe == 5){ echo 'selected="selected"'; } else {echo '';} ?>>5 *</option>
+        </select>
+    </div>
+    <div class="col-lg-6"> 
+        <label for="discount">discount</label>
+        <input type="text" class="form-control" id="discount"  name="discount"  value="<?php echo isset($discount) ? $discount : ''; ?>"> 
+    </div>
+    <div class="col-lg-6"> 
+        <label for="quantityBooking">quantityBooking</label>
+        <input type="text" class="form-control" id="quantityBooking"  name="quantityBooking"  value="<?php echo isset($quantityBooking) ? $quantityBooking : ''; ?>"> 
+    </div>       
+    <div class="col-lg-6"> 
+        <label for="userID">Người dùng</label> 
+        <select id="userID" name="userID" class="form-control">        
+          <option id="" value="0" selected="selected">--chọn người dùng--</option>  
+          <?php foreach($users as $item){?>
+             <option id="<?php echo $item->userID; ?>" value="<?php echo $item->userID; ?>" <?php if(isset($userID) && $userID == $item->userID){ echo 'selected="selected"';} else {echo '';} ?> >
+             <?php echo $item->memName.' ('.$item->userName.')' ?>
+             </option>
+          <?php } ?>
+        </select>
+    </div>
+    <div class="col-lg-4">                                                                                                                                
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" name="isDepositBo" id="isDepositBo" <?php echo (isset($isDepositBo) && $isDepositBo) ? 'checked': ''; ?>>isDepositBo
+            </label>
+          </div>
+    </div>
+    <div class="col-lg-4">                                                                                                                                
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" name="isDeactivate" id="isDeactivate" <?php echo (isset($isDeactivate) && $isDeactivate) ? 'checked': ''; ?>>isDeactivate
+            </label>
+          </div>
+    </div>
+    <div class="col-lg-4">                                                                                                                                
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" name="statusRes" id="statusRes" <?php echo (isset($statusRes) && $statusRes) ? 'checked': ''; ?>>statusRes
+            </label>
+          </div>
+    </div>
+</div>  
+<script type="">
+    $('.datepicker').datetimepicker({locale: 'vi'});
+    $('.time').datetimepicker({locale: 'vi',format: 'hh:mm'});
+</script>

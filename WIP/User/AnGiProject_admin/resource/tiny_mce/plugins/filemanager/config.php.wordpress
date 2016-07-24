@@ -1,0 +1,13 @@
+<?php
+	require_once("classes/Authenticators/WordpressAuthenticatorImpl.php");
+
+	// General options
+	$mcFileManagerConfig['general.login_page'] = "not_loggedin.php";
+
+	// General file system options
+	$mcFileManagerConfig['filesystem.path'] = 'files';
+	$mcFileManagerConfig['filesystem.rootpath'] = 'files';
+
+	// Authenication with Session
+	$mcFileManagerConfig['authenticator'] = "WordpressAuthenticatorImpl";
+?>

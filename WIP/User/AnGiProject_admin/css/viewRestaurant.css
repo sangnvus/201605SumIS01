@@ -1,0 +1,140 @@
+h2.restaurant-name{
+  text-transform: uppercase;
+    font-weight: bold;
+    color: #4c4c4c
+}
+
+.nav-tabs{margin-bottom: 10px}
+.nav-tabs>li>a{
+    background: #716b67;
+    color: #fff;
+    border: none;
+    border-bottom: 3px solid #716b67;
+}
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover{
+    background: #716b67;
+    color: #ff0;
+    border-bottom: 3px solid #d02028;
+}
+.nav-tabs>li>a:hover{
+    background-color: #716b67;
+    border-bottom: 3px solid #d02028;
+    color: #ff0;
+}
+
+#myCarousel-restaurant>a{
+    width: 5%;
+}
+#myCarousel-restaurant>a.carousel-control.right, #myCarousel-restaurant>a.carousel-control.left{
+    background: none;
+}
+#myCarousel-restaurant>a>span{
+    top: 50%;
+    font-size: 14pt;
+    background: #000;
+    opacity: .8;
+    border-radius: 50%;
+    padding: 10px 8px 0 8px;
+    width: 40px;
+    height: 40px;
+}
+#myCarousel-restaurant>ol>li{
+    width: 8px;
+    height: 8px;
+}
+#myCarousel-restaurant>ol>li.active{
+    width: 9px;
+    height: 9px;
+}
+
+
+.shadow-outside{
+    -webkit-box-shadow: 0 1px 5px 0 #d6d4d4;
+    -ms-box-shadow: 0 1px 5px 0 #d6d4d4;
+    box-shadow: 0 1px 5px 0 #d6d4d4;
+}
+
+.content-infor{
+    margin: 20px 0;
+    padding: 20px 8px;
+}
+
+.highlight-infor{
+    background-color: #eff3f6;
+    height: auto;
+    padding: 5px 18px 18px;
+    width: 100%;
+}
+
+.read-more{padding: 6px}
+.read-more>p{
+    text-align: justify;
+}
+.read-more>h4{
+    font-weight: bold; margin: 20px 0 10px
+}
+.read-more>img{
+    display: block;
+    max-width: 100%;
+    height: auto;
+    float: none;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.restaurant-rate{
+    margin: 40px 0 20px;
+    padding: 10px;
+    width: 100%;
+    text-align: center;
+}
+.restaurant-rate span{
+    font-size: 2em;
+}
+.restaurant-rate p, .restaurant-place p{
+    font-size: 13px;
+    color: gray;
+}
+
+.restaurant-place{
+    padding: 10px;
+    width: 100%;
+    text-align: center;
+    background: #fff;
+}
+
+form.booking-res>p{
+    position: relative;
+}
+form.booking-res>p>input{
+    width: 100%;
+    border-radius: 4px;
+}
+
+form.booking-res>p>i{
+    position: absolute;
+    top: 8px;
+    font-size: 20px;
+    right: 8px;
+    color: #d02028;
+}
+
+form.booking-res>button{
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #fff;
+    background: #d02028;
+    border-radius: 4px;
+    margin-top: 10px;
+}
+form.booking-res>span{
+    display: block;
+    margin-top: 10px;
+}
+
+.stick {
+    margin-top: 0 !important;
+    position: fixed;
+    top: 0;
+    z-index: 10000;
+}

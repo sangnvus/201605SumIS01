@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<title>Installation instructions for PHP Nuke 7.8</title>
+<link href="css/screen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<div class="header">
+	<h1>Installation instructions for PHP Nuke 7.8</h1>
+</div>
+
+<div class="content">
+	<p>Installing MCFileManager is pretty easy if you have some basic programming/configuration skills.</p>
+
+	<div class="separator"></div>
+
+	<h2>Requirements</h2>
+	<div class="section">
+		<p>MCFileManager requires the following to be pre installed on your web server.
+		<ul>
+				<li><a href="http://www.apache.org">Apache 1.3+</a>, IIS 4 or other web server capable of running PHP</li>
+				<li><a href="http://www.php.net">PHP 4.3+</a> script language used by the MCFileManager.</li>
+				<li><a href="http://www.phpnuke.org">PHP Nuke 7.8</a> PHP Nuke CMS System.</li>
+			</ul>
+		</p>
+	</div>
+
+	<div class="separator"></div>
+
+	<h2>Downloading</h2>
+	<div class="section">
+		<p>Since this product is under commercial license, downloading of this software is restricted to customers only. For download and purchase instructions check our <a href="http://tinymce.moxiecode.com">web site.</a></p>
+	</div>
+
+	<div class="separator"></div>
+
+	<h2>Extracting the archives</h2>
+	<div class="section">
+		<p>On windows you could use <a href="http://www.winzip.com">WinZip</a> or something similar. And on other operating systems such as Linux you simply extract the archive with the tar command. You can find a example on how to extract the archived file on Linux below.</p>
+		<p>Extract the contents of the zip/tgz to the includes/tiny_mce/plugins directory located in your PHP Nuke installation.</p>
+
+		<h3>Extract example using a shell:</h3>
+		<div class="example">
+<pre>
+$ cd wwwroot/phpnuke/includes/tiny_mce/plugins
+$ gzip -d MCFileManager_x_x.tar.gz
+$ tar xvf MCFileManager_x_x.tar
+</pre>
+		</div>
+	</div>
+
+	<div class="separator"></div>
+
+	<h2>Setup MCFileManager to integrate with PHP Nuke 7.8</h2>
+	<div class="section">
+		<p>Replace the &quot;config.php&quot; file with &quot;config.php.phpnuke&quot; these files are located in the &quot;includes/tiny_mce/plugins/filemanager&quot; directory. The &quot;config.php.phpnuke&quot; is a predefined configuration that integrates with PHP Nuke, you may need to modify this file if you have specific needs consult the <a href="configuration.html">configuration section</a> of this manual for details.</p>
+		<p>Modify the $advanced_editor option in PHPNuke global configuration file located in &lt;phpnuke installation dir&gt;/config.php. Set the value of this property to 1 this will switch the editor instances within PHP Nuke to a more advanced state.</p>
+		<p>Modify the &lt;phpnuke installation dir&gt;/includes/javascript.php file and add the filemanager to the list of plugins.</p>
+		<p>Replace the the &quot;fileBrowserCallBack&quot; value of the file_browser_callback option with &quot;mcFileManager.filebrowserCallBack&quot;.</p>
+		<p><strong>Note that we didn't build PHP Nuke so it's not our fault that this is a somewhat tricky process.</strong></p>
+	</div>
+
+	<div class="separator"></div>
+
+	<h2>Setup MCFileManager to integrate with PHP Nuke 7.8 (Patched)</h2>
+	<div class="section">
+		<p>Replace the &quot;config.php&quot; file with &quot;config.php.phpnuke&quot; these files are located in the &quot;includes/tiny_mce/plugins/filemanager&quot; directory. The &quot;config.php.phpnuke&quot; is a predefined configuration that integrates with PHP Nuke, you may need to modify this file if you have specific needs consult the <a href="configuration.html">configuration section</a> of this manual for details.</p>
+		<p>Download the TinyMCE 2.x+ patch for PHP Nuke 7.8 from the <a href="http://www.phpnuke.org/modules.php?name=Downloads&d_op=viewdownloaddetails&lid=579">PHP Nuke site</a>.</p>
+		<p>Follow the installation instructions in the ZIP file.</p>
+		<p>Update the tinymce_gzip.php file with the latest version if you install a TinyMCE version above 2.0.2.</p>
+		<p>Modify the &lt;phpnuke installation dir&gt;/includes/tinymce/tiny_mce_init_advanced.js file and add the filemanager to the list of plugins available you may also modify the other .js files.</p>
+		<p>Copy the &lt;phpnuke installation dir&gt;/includes/tinymce/themes/advanced/css/editor_ui.css to your PHP theme style/editor.css. So in other words replace for example &lt;phpnuke installation dir&gt;/themes/DeepBlue/style/editor.css with &lt;phpnuke installation dir&gt;/includes/tinymce/themes/advanced/css/editor_ui.css.</p>
+		<p>Modify the all relative image paths in the CSS file so they point to the correct images for example replace all &quot;../images/&quot; with 
+		&quot;../../../includes/tiny_mce/themes/advanced/images/buttons.gif&quot;.</p>
+		<p><strong>Note that we didn't build PHP Nuke so it's not our fault that this is a somewhat tricky process.</strong></p>
+	</div>
+
+	<div class="separator"></div>
+
+	<h2>Testing the installation</h2>
+	<div class="section">
+		<p>Ones you have finished the installation a &quot;browse&quot; button should appear in the link and image dialogs, this button will popup the filemanager in a separate window. The next step after installation is probably to configure the MCFileManager for your needs, check the <a href="configuration.html">configuration reference</a> for details.</p>
+	</div>
+</div>
+
+<div class="footer">
+	<div class="helpindexlink"><a href="index.html">Help index</a></div>
+	<div class="copyright">Copyright &copy; 2005-2006 Moxiecode Systems AB</div>
+	<br style="clear: both" />
+</div>
+
+</body>
+</html>

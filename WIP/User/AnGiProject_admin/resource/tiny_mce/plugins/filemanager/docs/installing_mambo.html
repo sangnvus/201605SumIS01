@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<title>Installation instructions for Mambo (mosCE)</title>
+<link href="css/screen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<div class="header">
+	<h1>Installation instructions for Mambo (mosCE)</h1>
+</div>
+
+<div class="content">
+	<p>Installing MCFileManager is pretty easy if you have some basic programming/configuration skills.</p>
+
+	<div class="separator"></div>
+
+	<h2>Requirements</h2>
+	<div class="section">
+		<p>MCFileManager requires the following to be pre installed on your web server.
+		<ul>
+				<li><a href="http://www.apache.org">Apache 1.3+</a>, IIS 4 or other web server capable of running PHP</li>
+				<li><a href="http://www.php.net">PHP 4.3+</a> script language used by the MCFileManager.</li>
+				<li><a href="http://www.cellardoor.za.net/mosce/">MosCE</a> TinyMCE editor Mambot.</li>
+			</ul>
+		</p>
+	</div>
+
+	<div class="separator"></div>
+
+	<h2>Extracting the archives</h2>
+	<div class="section">
+		<p>On windows you could use <a href="http://www.winzip.com">WinZip</a> or something similar. And on other operating systems such as Linux you simply extract the archive with the tar command. You can find a example on how to extract the archived file on Linux below.</p>
+		<p>Extract the contents of the zip/tgz to the &lt;mambo installation dir&gt;/mambots/editors/mosce/jscripts/tiny_mce/plugins directory.</p>
+
+		<h3>Extract example using a shell:</h3>
+		<div class="example">
+<pre>
+$ cd &lt;mambo installation dir&gt;/mambots/editors/mosce/jscripts/tiny_mce/plugins
+$ gzip -d MCFileManager_x_x.tar.gz
+$ tar xvf MCFileManager_x_x.tar
+</pre>
+		</div>
+	</div>
+
+	<div class="separator"></div>
+
+	<h2>Setup MCFileManager to integrate with MosCE</h2>
+	<div class="section">
+		<p>Rename the config.php.mambo in &lt;mambo installation dir&gt;/mambots/editors/mosce/jscripts/tiny_mce/plugins/filemanager to &quot;config.php&quot;. This file is a contains the basic configuration for Mambo and mosCE.</p>
+		<p>Add the filemanager in the &lt;mambo installation dir&gt;/mambots/editors/mosce/mosce_config.php file, the option name to add it to is called $editor_extra_plugins.</p>
+	</div>
+
+	<div class="separator"></div>
+
+	<h2>Testing the installation</h2>
+	<div class="section">
+		<p>Ones you have finished the installation a &quot;browse&quot; button should appear in the link and image dialogs, this button will popup the filemanager in a separate window. The next step after installation is probably to configure the MCFileManager for your needs, check the <a href="configuration.html">configuration reference</a> for details.</p>
+	</div>
+</div>
+
+<div class="footer">
+	<div class="helpindexlink"><a href="index.html">Help index</a></div>
+	<div class="copyright">Copyright &copy; 2005-2006 Moxiecode Systems AB</div>
+	<br style="clear: both" />
+</div>
+
+</body>
+</html>

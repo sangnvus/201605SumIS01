@@ -1,0 +1,70 @@
+<link rel="stylesheet" href="<?php echo base_url()?>css/user.css">
+<script src="../resource/ckeditor/ckeditor.js"></script>
+
+
+<div class="container">
+    <div class="row">
+        <div class="breadcrumb"></div>
+
+        <div class="col-md-3">
+            <table class="profile-stt">
+                <tr>
+                    <td><img src="http://cdn.pasgo.vn/images/Profile/no_avatar.png"></td>
+                    <td>
+                        <p>ID ĂnGì: <strong>123</strong></p>
+                        <p>ĐT: <strong>01646223394</strong></p>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="padding: 0 8px 20px"><button>Chọn ảnh</button></td>
+                    <td></td>
+                </tr>
+            </table>
+            <ul class="profile-sidebar">
+                <li><a href="../user_profile"><i class="fa fa-user" aria-hidden="true"></i> Thông tin tài khoản</a></li>
+                <li><a href="../user_profile/restaurant_banner"><i class="fa fa-picture-o" aria-hidden="true"></i> Banner nhà hàng</a></li>
+                <li  class="active"><i class="fa fa-wpforms" aria-hidden="true"></i> Thông tin nhà hàng</li>
+                <li><a href="../user_profile/restaurant_price"><i class="fa fa-usd" aria-hidden="true"></i> Bảng giá</a></li>
+                <li><a href="../booking/restaurant_manage_booking"><i class="fa fa-cogs" aria-hidden="true"></i> Quản lý đặt chỗ</a></li>
+                <li><a href="../user_profile/change_password"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Đổi mật khẩu</li></li>
+                <li><a href="../booking/user_booking_history"><i class="fa fa-cutlery" aria-hidden="true"></i> Lịch sử đặt chỗ</a></li>
+                <li><a><i class="fa fa-power-off" aria-hidden="true"></i> Thoát</a></li>
+            </ul>
+        </div>
+
+        <div class="col-md-9">
+            <h1>Đổi mật khẩu</h1>
+            <form class="edit-user">
+                <ul>
+                    <li>
+                        <label>Loại hình ẩm thực:</label> <input type="text" value="">
+                    </li>
+                    <li>
+                        <label>Món đặc sắc:</label> <input type="text" value="">
+                    </li>
+                    <li>
+                        <label>Giá trung bình/người:</label> <input type="text" value="">
+                    </li>
+                    <li>
+                        <label>Không gian:</label> <input type="text" value="">
+                    </li>
+                    <li>
+                        <label>Chỗ để ô tô:</label> <input type="text" value="">
+                    </li>
+                    <li>
+                        <label>Điểm đặc trưng khác:</label> <input type="text" value="">
+                    </li>
+                    <li>
+                        <label>Nội dung:</label>
+                        <textarea class="ckeditor" name="editor"></textarea>
+                    </li>
+                    <li>
+                        <label></label>
+                        <input type="submit" value="Cập nhật">
+                    </li>
+                </ul>
+            </form>
+        </div>
+    </div>
+</div>

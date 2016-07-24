@@ -1,0 +1,59 @@
+<link rel="stylesheet" href="<?php echo base_url()?>css/user.css">
+
+<div class="container">
+    <div class="row">
+        <div class="breadcrumb"></div>
+
+        <div class="col-md-3">
+            <table class="profile-stt">
+                <tr>
+                    <td><img src="http://cdn.pasgo.vn/images/Profile/no_avatar.png"></td>
+                    <td>
+                        <p>ID ĂnGì: <strong>123</strong></p>
+                        <p>ĐT: <strong>01646223394</strong></p>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="padding: 0 8px 20px"><button>Chọn ảnh</button></td>
+                    <td></td>
+                </tr>
+            </table>
+            <ul class="profile-sidebar">
+                <li class="active"><i class="fa fa-user" aria-hidden="true"></i> Thông tin tài khoản</li>
+                <li><a href="/user_profile/restaurant_banner"><i class="fa fa-picture-o" aria-hidden="true"></i> Banner nhà hàng</a></li>
+                <li><a href="/user_profile/restaurant_infor"><i class="fa fa-wpforms" aria-hidden="true"></i> Thông tin nhà hàng</a></li>
+                <li><a href="/user_profile/restaurant_price"><i class="fa fa-usd" aria-hidden="true"></i> Bảng giá</a></li>
+                <li><a href="/booking/restaurant_manage_booking"><i class="fa fa-cogs" aria-hidden="true"></i> Quản lý đặt chỗ</a></li>
+                <li><a href="/user_profile/change_Password"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Đổi mật khẩu</a></li>
+<!--                <li><a href="/booking/user_booking_history"><i class="fa fa-cutlery" aria-hidden="true"></i> Lịch sử đặt chỗ</a></li>-->
+                <li><a><i class="fa fa-power-off" aria-hidden="true"></i> Thoát</a></li>
+            </ul>
+        </div>
+
+        <div class="col-md-9">
+            <h1>Thông tin nhà hàng</h1>
+            <form class="edit-user">
+                <ul>
+                    <li>
+                        <label>Tên:</label> <input type="text" value="Vũ Hoàng Hiếu">
+                    </li>
+                    <li>
+                        <label>Email:</label> <input type="email" value="vuhoanghieu17894@gmail.com">
+                    </li>
+                    <li>
+                        <label>Ngày sinh:</label> <input type="date">
+                    </li>
+                    <li>
+                        <label>Giới tính:</label> <input type="radio" name="gender" value="male" checked> Nam
+                        <input style="margin-left: 100px;" type="radio" name="gender" value="female"> Nữ
+                    </li>
+                    <li>
+                        <label></label>
+                        <input type="submit" value="Cập nhật">
+                    </li>
+                </ul>
+            </form>
+        </div>
+    </div>
+</div>

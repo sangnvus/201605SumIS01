@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<title>Option: remember_last_path</title>
+<link href="css/screen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<div class="header">
+	<h1>Option: remember_last_path</h1>
+</div>
+
+<div class="content">
+	<p>This option enables you to disable the feature that remembers the last path the user was in. This path will only be used as a default path if you for example specify a URL to the script that path will be used instead. This feature is enabled by default but can be disabled by setting the option value to false.</p>
+	<h3>Example of usage in init call on page level:</h3>
+	<div class="example">
+<pre>
+mcFileManager.init({
+	remember_last_path : false
+});
+</pre>
+</div>
+<br />
+	<h3>Example of usage in mcFileManager.open call</h3>
+	<div class="example">
+<pre>
+&lt;a href=&quot;javascript:mcFileManager.open('example1','url','','',{remember_last_path : false});&quot;&gt;[Browse]&lt;/a&gt;
+</pre>
+	</div><br />
+	<h3>Example of usage in a TinyMCE init call</h3>
+	<div class="example"><pre>
+tinyMCE.init({
+	mode : &quot;textareas&quot;,
+	theme : &quot;advanced&quot;,
+	plugins : &quot;advimage,advlink,<strong>filemanager</strong>&quot;,
+	<strong>filemanager_remember_last_path : false</strong>
+});</pre>
+	</div>
+</div>
+
+<div class="footer">
+	<div class="helpindexlink"><a href="index.html">Help index</a></div>
+	<div class="copyright">Copyright &copy; 2005-2006 Moxiecode Systems AB</div>
+	<br style="clear: both" />
+</div>
+
+</body>
+</html>

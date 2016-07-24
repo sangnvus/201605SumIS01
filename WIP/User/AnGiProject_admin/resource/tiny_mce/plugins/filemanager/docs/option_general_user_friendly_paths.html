@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<title>Option: general.user_friendly_paths</title>
+<link href="css/screen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<div class="header">
+	<h1>Option: general.user_friendly_paths</h1>
+</div>
+
+<div class="content">
+	<p>If this option is enabled, all visible file/directory paths will be cropped with the root path. So for example if you set the root path to /www/myfiles and have the path set to /www/myfiles/somedir the presented path will be /somedir. This option is very useful if you have user or project specific directories.</p>
+	<h3>Example of usage in the config.php file:</h3>
+	<div class="example">
+<code>
+$mcFileManagerConfig['general.user_friendly_paths'] = true;
+</code>
+</div>
+<br />
+	<h3>Example of usage in a mc_access file:</h3>
+	<div class="example">
+<code>
+general.user_friendly_paths=true
+</code>
+	</div>
+</div>
+
+<div class="footer">
+	<div class="helpindexlink"><a href="index.html">Help index</a></div>
+	<div class="copyright">Copyright &copy; 2005-2006 Moxiecode Systems AB</div>
+	<br style="clear: both" />
+</div>
+
+</body>
+</html>

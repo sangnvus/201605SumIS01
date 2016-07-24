@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<title>Frequently Asked Questions</title>
+<link href="css/screen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<div class="header">
+	<h1>Frequently Asked Questions</h1>
+</div>
+
+<div class="content">
+	<p>MCFileManager if created to be easy to integrate with existing server applications such as CMS systems, web hosting controllers or LMS systems.</p>
+
+	<div class="separator"></div>
+
+	<h2>I can't override option XYZ in a specific directory / mc_access not working.</h2>
+	<div class="section">
+		<p>Check the .allow_override option in you config.php file and also that it's not restricted by some other mc_access file. Remember the config options inherits.</p>
+	</div>
+
+	<div class="separator"></div>
+
+	<h2>Variable substitution in options is not working.</h2>
+	<div class="section">
+		<p>If you specify for example ${rootpath} remember to place the contents of this option within ' characters instead of &quot; characters.</p>
+		<p>This will not work: $mcFileManagerConfig['filesystem.file_templates'] = &quot;${rootpath}/templates/document.htm&quot;</p>
+		<p>This will work: $mcFileManagerConfig['filesystem.file_templates'] = '${rootpath}/templates/document.htm'</p>
+	</div>
+</div>
+
+<div class="footer">
+	<div class="helpindexlink"><a href="index.html">Help index</a></div>
+	<div class="copyright">Copyright &copy; 2005-2006 Moxiecode Systems AB</div>
+	<br style="clear: both" />
+</div>
+
+</body>
+</html>

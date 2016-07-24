@@ -1,0 +1,247 @@
+/* MSIE only styles */
+
+/* commented backslash hack v2 \*/ 
+* html body {
+	height: 100%;
+}
+/* end hack */ 
+
+* html body {
+	margin: 58px 0 0px 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+* html #toolbar {
+	position: absolute;
+	top: 0;
+	padding: 0;
+	height: 40px;
+}
+ 
+* html #filelist {
+	padding: 0 0px;
+	overflow-y: scroll;
+	height: 100%;
+}
+
+/* Mozilla styles below */
+
+html>body {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+}
+
+html>body #toolbar {
+	position: fixed;
+	top: 0;
+	padding: 0;
+	height: 40px;
+}
+
+html>body #filelist {
+	position: fixed;
+	top: 55px;
+	bottom: 0px;
+	padding: 0px;
+	overflow: auto;
+	overflow-y: scroll;
+}
+
+/* General styles for both */
+
+#top, #filelist {
+	width: 100%;
+}
+
+body {
+	background-color: #F0F0EE;
+}
+
+a:link	{  
+	font-size: 11px; 
+	color: #000000; 
+	text-decoration: none;
+}
+
+a:active	{  
+	text-decoration: underline;
+}
+
+a:visited	{  
+	font-size: 11px; 
+	color: #000000;
+	text-decoration: none;
+}
+
+a:hover	{  	
+	text-decoration: underline;
+}
+
+.filelistPath {
+	font-family: Sans-serif, Verdana, Arial;
+	font-size: 9pt;
+	color: #000000;
+	font-weight: bold;
+	height: 15px;
+	line-height: 15px;
+	vertical-align: middle;
+	border-top: 1px solid #CCCCCC;
+	padding-left: 3px;
+	overflow: hidden;
+}
+
+.mceSeparatorLine {
+	border: 0;
+	padding: 0;
+	margin-left: 4px;
+	margin-right: 2px;
+}
+
+/* Button CSS rules */
+
+a.mceButtonDisabled img, a.mceButtonNormal img, a.mceButtonSelected img {
+	width: 20px;
+	height: 20px;
+	cursor: default;
+	margin-top: 1px;
+	margin-left: 1px;
+}
+
+a.mceButtonDisabled img {
+	border: 0 !important;
+}
+
+a.mceButtonNormal img, a.mceButtonSelected img {
+	border: 1px solid #F0F0EE !important;
+}
+
+a.mceButtonSelected img {
+	border: 1px solid #C0C0BB !important;
+}
+
+a.mceButtonNormal img:hover, a.mceButtonSelected img:hover {
+	border: 1px solid #0A246A !important;
+	cursor: default;
+	background-color: #B6BDD2;
+}
+
+a.mceButtonDisabled img {
+	-moz-opacity:0.3;
+	opacity: 0.3;
+	border: 1px solid #F0F0EE !important;
+	cursor: default;
+}
+
+/* MSIE specific rules */
+
+* html a.mceButtonNormal img, * html a.mceButtonSelected img, * html a.mceButtonDisabled img {
+	border: 0px !important;
+	margin-top: 2px;
+	margin-bottom: 1px;
+}
+
+* html a.mceButtonDisabled img {
+	filter:progid:DXImageTransform.Microsoft.Alpha(opacity=30);
+	border: 0px !important;
+}
+
+* html a.mceButtonDisabled {
+	border: 1px solid #F0F0EE !important;
+}
+
+* html a.mceButtonNormal, * html a.mceButtonSelected {
+	border: 1px solid #F0F0EE;
+	cursor: default;
+}
+
+* html a.mceButtonSelected {
+	border: 1px solid #C0C0BB;
+}
+
+* html a.mceButtonNormal:hover, * html a.mceButtonSelected:hover {
+	border: 1px solid #0A246A;
+	cursor: default;
+	background-color: #B6BDD2;
+}
+
+* html .mceSelectList {
+	margin-top: 2px;
+}
+
+/* Status */
+
+.status {
+	background-color: #F0F0EE;
+	border: 1px solid #CCCCCC;
+	border-top: 0px;
+	font-weight: bold;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	font-family: "MS Sans Serif", Verdana, Arial;
+	font-size: 9pt;
+}
+
+.statusError {
+	color: #880000;
+}
+
+.statusMsg {
+	color: #000000;
+}
+
+/* Filelist */
+
+.toolbaritems {
+}
+
+form {
+	margin: 0px;
+	padding: 0px;
+}
+
+td {
+	font-family: "MS Sans Serif", Verdana, Arial;
+	font-size: 9pt;
+}
+
+.filelistHeadRow td {
+	background-color: #D4D0C8;
+	border-top: 1px solid buttonhighlight;
+	border-left: 1px solid buttonhighlight;
+	border-bottom: 1px solid buttonshadow;
+	border-right: 1px solid buttonshadow;
+	font-weight: bold;
+	padding-left: 3px;
+	padding-right: 3px;
+	padding-top: 1px;
+	padding-bottom: 1px;
+}
+
+.filelistHeadCol a, .filelistHeadCol a:visited {
+	color: #000000;
+}
+
+.filelistFileName, .filelistCutFileName {
+	padding-left: 4px;
+}
+
+.filelistRowOdd {
+	background-color: #FFFFFF;
+}
+
+.filelistRowEven {
+	background-color: #F7F7F7;
+}
+
+.sortarrow {
+	margin-left: 7px;
+	margin-bottom: 2px;
+}
+
+.cutFile {
+	filter:progid:DXImageTransform.Microsoft.Alpha(opacity=40);
+	-moz-opacity:0.4;
+	opacity: 0.4;
+}

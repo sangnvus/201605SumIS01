@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<language-pack>
+	<header>
+		<author>Moxiecode Systems AB</author>
+		<version minor="2" major="0" releasedate="2005-10-28" />
+		<description>
+			This is the English language pack for the MCFileManager.
+		</description>
+	</header>
+
+	<language code="en" title="English" dir="ltr">
+		<group target="common">
+			<item name="exe">Executable file</item>
+			<item name="image">Image file</item>
+			<item name="archive">Compressed archive</item>
+			<item name="html">HTML or Script file</item>
+			<item name="movie">Movie media file</item>
+			<item name="sound">Sound media file</item>
+			<item name="swf">Flash file</item>
+			<item name="powerpoint">Powerpoint file</item>
+			<item name="document">Document file</item>
+			<item name="word">Office document</item>
+			<item name="pdf">Adobe acrobat file</item>
+			<item name="excel">Excel file</item>
+			<item name="txt">Plain text file</item>
+			<item name="xml">XML file</item>
+		</group>
+
+		<group target="frameset">
+			<item name="title">Moxiecode File Browser</item>
+		</group>
+
+		<group target="filelist">
+			<item name="title">Moxiecode File Browser</item>
+			<item name="filename">Filename</item>
+			<item name="size">Size</item>
+			<item name="modified">Modificationdate</item>
+			<item name="confirm_cut">Are you sure you want to cut/move the selected files?</item>
+			<item name="confirm_copy">Are you sure you want to copy the selected files?</item>
+			<item name="confirm_paste">Are you sure you want to paste the files from clipboard here?</item>
+			<item name="confirm_delete">Are you sure you want to delete the selected files?</item>
+			<item name="confirm_unzip">Are you sure you want to unzip the selected file(s)?\nIf the total size is very large, the unzip procedure might take a while.</item>
+			<item name="zip_removed">The following files where removed due to not beeing zip files.</item>
+			<item name="createdir">Create directory</item>
+			<item name="createdoc">Create file</item>
+			<item name="refresh">Refresh</item>
+			<item name="upload">Upload new file</item>
+			<item name="download">Download selected file</item>
+			<item name="props">File/Directory properties</item>
+			<item name="cut">Cut selected files/directories</item>
+			<item name="copy">Copy selected files/directories</item>
+			<item name="paste">Paste files/directories</item>
+			<item name="delete">Delete selected files/directories</item>
+			<item name="unzip">Unzips the specified file</item>
+			<item name="zip">Zips the selected files/directories</item>
+			<item name="imagemanager">Switch to Image Manager</item>
+			<item name="dir">Directory</item>
+			<item name="parent_dir">Parent directory</item>
+			<item name="toggle_all">Toggle all</item>
+			<item name="error_exists">Error: The file/directory {path} already exists.</item>
+			<item name="error_delete_failed">Error: You don't have access to delete files/directories.</item>
+			<item name="error_directory_not_empty">Error: The directory {path} could not be deleted, it's not empty.</item>
+		</group>
+
+		<group target="preview">
+			<item name="title">File / Directory information</item>
+			<item name="directory_information">Directory information</item>
+			<item name="file_information">File information</item>
+			<item name="creationdate">Creationdate:</item>
+			<item name="modificationdate">Modificationdate:</item>
+			<item name="access">Access:</item>
+			<item name="directory">Directory:</item>
+			<item name="subdirectories">Subdirectories:</item>
+			<item name="files">Files:</item>
+			<item name="total_file_size">Total file size:</item>
+			<item name="filename">Filename:</item>
+			<item name="file_size">File size:</item>
+			<item name="file_description">File description:</item>
+			<item name="preview">Preview</item>
+			<item name="no_preview">No preview avalible.</item>
+			<item name="button_select">Select</item>
+			<item name="button_view">View</item>
+			<item name="readable">Readable</item>
+			<item name="not_readable">Not readable</item>
+			<item name="writable">Writable</item>
+			<item name="not_writable">Not writable</item>
+		</group>
+
+		<group target="fileprops">
+			<item name="title">File/Directory properties</item>
+			<item name="description">Properties of the file/directory</item>
+			<item name="properties_on">Properties on:</item>
+			<item name="name">Name:</item>
+			<item name="button_save">Save</item>
+			<item name="button_cancel">Cancel</item>
+			<item name="error_exists">Error: A file/directory with the specified name already exists.</item>
+		</group>
+
+		<group target="createdir">
+			<item name="title">Create directory</item>
+			<item name="description">Insert a name for the directory you wish to create.</item>
+			<item name="template">Template:</item>
+			<item name="select_template">-- Select template --</item>
+			<item name="directory_name">Directory name:</item>
+			<item name="create_in">Create in:</item>
+			<item name="button_create">Create</item>
+			<item name="button_cancel">Cancel</item>
+			<item name="error_missing_name">Error: You must specify a name.</item>
+			<item name="error_invalid_template_selection">Error: You must select a template.</item>
+			<item name="error_template_not_found">Error: The selected template could not be found.</item>
+			<item name="error_invalid_name">Error: The name of the directory you are trying to create is invalid.\\nIt includes invalid characters such as: :;</item>
+			<item name="error_exists">Error: A directory with the specified name already exists.</item>
+		</group>
+
+		<group target="createdoc">
+			<item name="title">Create document</item>
+			<item name="description">Fill in the form to create a new document from a template.</item>
+			<item name="template">Template:</item>
+			<item name="select_template">-- Select template --</item>
+			<item name="required_filename">You must write a filename for the new document.</item>
+			<item name="filename">Filename:</item>
+			<item name="create_in">Create in:</item>
+			<item name="button_create">Create</item>
+			<item name="button_cancel">Cancel</item>
+			<item name="error_missing_document_name">Error: You must specify a document name.</item>
+			<item name="error_missing_template_selection">Error: You must select a template.</item>
+			<item name="error_missing_template">Error: The selected template could not be found.</item>
+			<item name="error_invalid_file_name">Error: The name of the file you are trying to create is invalid.\\nIt includes invalid characters such as: ;.</item>
+			<item name="error_exists">Error: File by that name already exists.</item>
+		</group>
+
+		<group target="upload">
+			<item name="title">Upload</item>
+			<item name="description">Use the form to upload files.</item>
+			<item name="upload_in">Upload in:</item>
+			<item name="valid_extensions">Valid extensions:</item>
+			<item name="max_upload_size">Max upload size:</item>
+			<item name="file_to_upload">File to upload:</item>
+			<item name="as_file_name">As file name:</item>
+			<item name="required_filename">You must write a filename of the file you want to upload.</item>
+			<item name="button_upload">Upload</item>
+			<item name="button_add_upload">Add upload</item>
+			<item name="button_cancel">Cancel</item>
+			<item name="error_exists">Error: The file you are trying to upload already exists.</item>
+			<item name="error_to_large">Error: The file you are trying to upload is to large.</item>
+			<item name="remove">Remove</item>
+		</group>
+
+		<group target="unzip">
+			<item name="title">Unzip overview</item>
+			<item name="description">An overview of the zip file(s) you selected.</item>
+			<item name="zipfile_name">Zipfile name:</item>
+			<item name="current_folder">Current folder:</item>
+			<item name="overwrite_files">Overwrite files:</item>
+			<item name="name">Name</item>
+			<item name="size">Size</item>
+			<item name="csize">CSize</item>
+			<item name="exists">Exists</item>
+			<item name="status">Status</item>
+			<item name="created">Created</item>
+			<item name="button_unzip">Unzip</item>
+			<item name="button_cancel">Cancel</item>
+			<item name="button_back">Back</item>
+			<item name="button_close">Close</item>
+			<item name="Accepted">Accepted</item>
+			<item name="Denied">Denied</item>
+			<item name="Passed">Passed</item>
+			<item name="Failed">Failed</item>
+			<item name="Yes">Yes</item>
+			<item name="No">No</item>
+		</group>
+
+		<group target="zip">
+			<item name="title">Create zip</item>
+			<item name="description">Insert the name of the zip file you wish to create.</item>
+			<item name="created_in">Zip will be created in:</item>
+			<item name="name">Name:</item>
+			<item name="required_filename">You must type a filename.</item>
+			<item name="button_create">Create</item>
+			<item name="button_cancel">Cancel</item>
+		</group>
+	</language>
+</language-pack>

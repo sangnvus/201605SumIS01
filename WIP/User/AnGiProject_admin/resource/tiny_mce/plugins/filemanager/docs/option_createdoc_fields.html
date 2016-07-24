@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<title>Option: createdoc.fields</title>
+<link href="css/screen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<div class="header">
+	<h1>Option: createdoc.fields</h1>
+</div>
+
+<div class="content">
+	<p>This option enables you to specify search/replace fields to be added to the create document dialog. This option should contain a comma separated list of fields where even item are the title of the field and the odd items are the variable names.</p>
+	<p>These fields will then be search/replaced within the template for example a field called title will search for ${title} and replace that with the contents specified by the user. This can be very useful when you want to setup specific fields like title, keywords and description.</p>
+	<h3>Example of usage in the config.php file:</h3>
+	<div class="example">
+<code>
+$mcFileManagerConfig['createdoc.fields'] = "title,Document title,keywords,Keywords";
+</code>
+</div>
+<br />
+	<h3>Example of usage in a mc_access file:</h3>
+	<div class="example">
+<code>
+createdoc.fields=title,Document title,keywords,Keywords
+</code>
+	</div>
+</div>
+
+<div class="footer">
+	<div class="helpindexlink"><a href="index.html">Help index</a></div>
+	<div class="copyright">Copyright &copy; 2005-2006 Moxiecode Systems AB</div>
+	<br style="clear: both" />
+</div>
+
+</body>
+</html>

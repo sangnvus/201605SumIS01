@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<title>Option: relative_urls</title>
+<link href="css/screen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<div class="header">
+	<h1>Option: relative_urls</h1>
+</div>
+
+<div class="content">
+	<p>If this option is set to true, all URLs returned from the MCFileManager will be relative from the specified <a href="jsoption_document_base_url.html">document_base_url</a>. This option is set to false by default.</p><p>Remember this option doesn't do much when using the MCFileManager as a TinyMCE plugin since TinyMCE does the URL convertion, consult the TinyMCE manuals for details on URL convertion.</p>
+	<h3>Example of usage in init call on page level:</h3>
+	<div class="example">
+<pre>
+mcFileManager.init({
+	relative_urls : true
+});
+</pre>
+</div>
+<br />
+	<h3>Example of usage in mcFileManager.open call</h3>
+	<div class="example">
+<pre>
+&lt;a href=&quot;javascript:mcFileManager.open('example1','url','','',{relative_urls : true});&quot;&gt;[Browse]&lt;/a&gt;
+</pre>
+	</div>
+</div>
+
+<div class="footer">
+	<div class="helpindexlink"><a href="index.html">Help index</a></div>
+	<div class="copyright">Copyright &copy; 2005-2006 Moxiecode Systems AB</div>
+	<br style="clear: both" />
+</div>
+
+</body>
+</html>

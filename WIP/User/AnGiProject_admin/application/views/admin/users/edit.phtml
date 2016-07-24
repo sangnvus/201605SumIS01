@@ -1,0 +1,66 @@
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">
+    <a class="btn btn-default" href="<?php echo base_url()?>users/index/<?php echo $level; ?>" role="button">Quay về</a>
+  </div>
+  <div class="panel-body">
+    <div class="bg-danger"><?php echo $error; ?></div>
+    <form method="POST"> 
+        <div class="form-group"> 
+            <label for="userLevel">Loại</label> 
+            <select id="userLevel" name="userLevel" class="form-control">
+              <option id="0" value="0" <?php if(isset($userLevel) && $userLevel == '0'){ echo 'selected="selected"';} else {echo '';} ?> >Thực khách</option>
+              <option id="1" value="1" <?php if(isset($userLevel) && $userLevel == '1'){ echo 'selected="selected"'; } else {echo '';} ?>>Nhà hàng</option>
+            </select>
+        </div> 
+        <div class="form-group"> 
+            <label for="userName">Tên đăng nhập</label>
+            <input type="text" class="form-control" id="userName"  name="userName"  value="<?php echo isset($userName) ? $userName : ''; ?>" placeholder="Tên đăng nhập"> 
+        </div>
+        <div class="form-group"> 
+            <label for="userMail">Email</label>
+            <input type="text" class="form-control" id="userMail"  name="userMail"  value="<?php echo isset($userMail) ? $userMail : ''; ?>" placeholder="Email"> 
+        </div>
+        <div class="form-group"> 
+            <label for="userPass">Mật khẩu</label>
+            <input type="password" class="form-control" id="userPass"  name="userPass" placeholder="Mật khẩu"> 
+        </div>
+        <div class="form-group"> 
+            <label for="userPass">Mật khẩu(Re)</label>
+            <input type="password" class="form-control" id="userPassRe" name="userPassRe" placeholder="Mật khẩu kiểm tra"> 
+        </div>
+       
+        <div class="form-group"> 
+            <label for="memName">Tên đầy đủ</label>
+            <input type="text" class="form-control" value="<?php echo isset($memName) ? $memName : ''; ?>" id="memName"  name="memName" placeholder=""> 
+        </div>
+        <div class="form-group"> 
+            <label for="addressID">Địa chỉ</label> 
+            <select id="addressID" name="addressID" class="form-control">        
+              <option id="" value="0" selected="selected">--chọn địa chỉ--</option>  
+              <?php foreach($address as $adr){?>
+                 <option id="<?php echo $adr->addressID; ?>" value="<?php echo $adr->addressID; ?>" <?php if(isset($addressID) && $addressID == $adr->addressID){ echo 'selected="selected"';} else {echo '';} ?> ><?php echo $adr->address; ?></option>
+              <?php } ?>
+            </select>
+        </div>
+        <div class="form-group"> 
+            <label for="memGender">Giới tính</label> 
+            <select id="memGender" name="memGender" class="form-control">
+              <option id="0" value="0" <?php if(isset($memGender) && $memGender == '0'){ echo 'selected="selected"';} else {echo '';} ?> >Nữ</option>
+              <option id="1" value="1" <?php if(isset($memGender) && $memGender == '1'){ echo 'selected="selected"';} else {echo '';} ?> >Nam</option>
+              <option id="1" value="2" <?php if(isset($memGender) && $memGender == '2'){ echo 'selected="selected"'; } else {echo '';} ?>>Khác</option>
+            </select>
+        </div>
+        <div class="form-group">                                                                                                                                
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" name="userActived" id="userActived" <?php echo (isset($userActived) && $userActived == 1) ? 'checked': ''; ?>>Kích hoạt
+                </label>
+              </div>
+        </div>
+        <input name="submit" id="submit" class="btn btn-info" type="submit" ="Lưu" />
+        
+    </form>
+  </div> 
+</div>
+   

@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<title>Option: path</title>
+<link href="css/screen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<div class="header">
+	<h1>Option: path</h1>
+</div>
+
+<div class="content">
+	<p>This option enables you to specify a default start path, this path will be used when a empty URL is passed to the script or when the remember_last_path option is disabled or when the user starts the MCFileManager for the first time. If this path isn't within the path returned by the Authenticator or within the path configurated it will not be used, this is for security reasons a user would other wise be able to specify any path with a simple JavaScript call.</p>
+	<h3>Example of usage in init call on page level:</h3>
+	<div class="example">
+<pre>
+mcFileManager.init({
+	path : "/somedir/somedir2"
+});
+</pre>
+</div>
+<br />
+	<h3>Example of usage in mcFileManager.open call</h3>
+	<div class="example">
+<pre>
+&lt;a href=&quot;javascript:mcFileManager.open('example1','url','','',{path : "/somedir/somedir2"});&quot;&gt;[Browse]&lt;/a&gt;
+</pre>
+	</div><br />
+	<h3>Example of usage in a TinyMCE init call</h3>
+	<div class="example"><pre>
+tinyMCE.init({
+	mode : &quot;textareas&quot;,
+	theme : &quot;advanced&quot;,
+	plugins : &quot;advimage,advlink,<strong>filemanager</strong>&quot;,
+	<strong>filemanager_path : &quot;testcases/multiple_rootpath_files/root2&quot;</strong>
+});</pre>
+	</div>
+</div>
+
+
+<div class="footer">
+	<div class="helpindexlink"><a href="index.html">Help index</a></div>
+	<div class="copyright">Copyright &copy; 2005-2006 Moxiecode Systems AB</div>
+	<br style="clear: both" />
+</div>
+
+</body>
+</html>

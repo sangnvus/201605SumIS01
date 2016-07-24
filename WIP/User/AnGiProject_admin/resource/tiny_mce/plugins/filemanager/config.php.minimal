@@ -1,0 +1,7 @@
+<?php
+	// Minimal configuration, these are the minimal number of options needed to be modified by you to get MCFileManager up and running.
+
+	// File system options
+	$mcFileManagerConfig['filesystem.path'] = 'files';
+	$mcFileManagerConfig['filesystem.rootpath'] = 'files';
+?>

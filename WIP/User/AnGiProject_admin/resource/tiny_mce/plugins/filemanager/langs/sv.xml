@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<language-pack>
+	<header>
+		<author>Moxiecode Systems AB</author>
+		<version minor="2" major="0" releasedate="2005-10-28" />
+		<description>
+			Detta är det Svenska språkpaketet till MCFileManager.
+		</description>
+	</header>
+
+	<language code="sv" title="Swedish" dir="ltr">
+		<group target="common">
+			<item name="exe">Exekvierbar fil</item>
+			<item name="image">Bild fil</item>
+			<item name="archive">Komprimerat arkiv</item>
+			<item name="html">HTML eller Script fil</item>
+			<item name="movie">Film fil</item>
+			<item name="sound">Ljud file</item>
+			<item name="swf">Flash fil</item>
+			<item name="powerpoint">Powerpoint fil</item>
+			<item name="document">Dokument fil</item>
+			<item name="word">Office dokument</item>
+			<item name="pdf">Adobe acrobat fil</item>
+			<item name="excel">Excel fil</item>
+			<item name="txt">Text file</item>
+			<item name="xml">XML fil</item>
+		</group>
+
+		<group target="frameset">
+			<item name="title">Moxiecode File Browser</item>
+		</group>
+
+		<group target="filelist">
+			<item name="title">Moxiecode File Browser</item>
+			<item name="filename">Filnamn</item>
+			<item name="size">Storlek</item>
+			<item name="modified">Modifierad</item>
+			<item name="confirm_cut">Är du säker på att du vill klippa ut/flytta de markerade filerna?</item>
+			<item name="confirm_copy">Är du säker på att du vill kopiera de markerade filerna?</item>
+			<item name="confirm_paste">Är du säker på att du vill klistra in filerna här?</item>
+			<item name="confirm_delete">Är du säker på att du vill ta bort de markerade filerna?</item>
+			<item name="confirm_unzip">Är du säker på att du vill packa upp de markerade filerna?\nOm storleken på filerna är stora kan det ta några minuter att packa upp.</item>
+			<item name="zip_removed">Följande filer togs bort från markeringen pga. att de inte är zip filer.</item>
+			<item name="createdir">Skapa katalog</item>
+			<item name="createdoc">Skapa dokument</item>
+			<item name="refresh">Uppdatera</item>
+			<item name="upload">Ladda upp ny fil</item>
+			<item name="download">Ladda hem markerad fil</item>
+			<item name="props">Fil/Katalog egenskaper</item>
+			<item name="cut">Klipput markerade filer/kataloger</item>
+			<item name="copy">Kopiera markerade filer/kataloger</item>
+			<item name="paste">Klistra in filer/kataloger</item>
+			<item name="delete">Radera markerade filer/kataloger</item>
+			<item name="unzip">Packa upp vald fil</item>
+			<item name="zip">Packa ihop markerade filer/kataloger</item>
+			<item name="imagemanager">Hoppa till bildhanteraren</item>
+			<item name="dir">Katalog</item>
+			<item name="parent_dir">Förälder katalog</item>
+			<item name="toggle_all">Invertera markerade filer</item>
+			<item name="error_exists">Fel: Filen/katalogen {path} finns redan.</item>
+			<item name="error_delete_failed">Fel: Du har inte rättigheter att radera kataloger.</item>
+			<item name="error_directory_not_empty">Fel: Katalogen {path} kunde inte raderas, den är inte tom.</item>
+		</group>
+
+		<group target="preview">
+			<item name="title">Fil / Katalog information</item>
+			<item name="directory_information">Kataloginformation</item>
+			<item name="file_information">Filinformation</item>
+			<item name="creationdate">Skapad:</item>
+			<item name="modificationdate">Modifierad:</item>
+			<item name="access">Åtkomst:</item>
+			<item name="directory">Katalognamn:</item>
+			<item name="subdirectories">Underkataloger:</item>
+			<item name="files">Filer:</item>
+			<item name="total_file_size">Total filstorlek:</item>
+			<item name="filename">Filnamn:</item>
+			<item name="file_size">Filstorlek:</item>
+			<item name="file_description">Beskrivning:</item>
+			<item name="preview">Förhandsgranskning</item>
+			<item name="no_preview">Ingen förhandsgranskning tillänglig.</item>
+			<item name="button_select">Välj</item>
+			<item name="button_view">Förhandsgranska</item>
+			<item name="readable">Läsbar</item>
+			<item name="not_readable">Inte läsbar</item>
+			<item name="writable">Skrivbar</item>
+			<item name="not_writable">Inte skrivbar</item>
+		</group>
+
+		<group target="fileprops">
+			<item name="title">Egenskaper för fil / katalog.</item>
+			<item name="description">Ställ in egenskaper för fil / katalog.</item>
+			<item name="properties_on">Egenskaper på:</item>
+			<item name="name">Namn:</item>
+			<item name="button_save">Spara</item>
+			<item name="button_cancel">Avbryt</item>
+			<item name="error_exists">Fel: Fel en fil/katalog med det angivna filnamnet finns redan.</item>
+		</group>
+
+		<group target="createdir">
+			<item name="title">Skapa katalog</item>
+			<item name="description">Välj namnet på katalogen du vill skapa.</item>
+			<item name="template">Mall:</item>
+			<item name="select_template">-- Välj mall --</item>
+			<item name="directory_name">Katalognamn:</item>
+			<item name="create_in">Skapa inuti:</item>
+			<item name="button_create">Skapa</item>
+			<item name="button_cancel">Avbryt</item>
+			<item name="error_missing_name">Fel: Du måste ange ett katalognamn.</item>
+			<item name="error_invalid_template_selection">Fel: Du måste välja en mall.</item>
+			<item name="error_template_not_found">Fel: Den valda mallen kunde inte hittas.</item>
+			<item name="error_invalid_name">Fel: Namnet du på katalogen innehåller felaktiga tecken som t.ex: : eller /</item>
+			<item name="error_exists">Fel: En katalog med det angivna namnet finns redan.</item>
+		</group>
+
+		<group target="createdoc">
+			<item name="title">Skapa dokument</item>
+			<item name="description">Fyll i formuläret för att skapa ett nytt dokument.</item>
+			<item name="template">Mall:</item>
+			<item name="select_template">-- Välj mall --</item>
+			<item name="required_filename">Du måste skriva ett filnamn för det nya dokumentet.</item>
+			<item name="filename">Filnamn:</item>
+			<item name="create_in">Skapa inuti:</item>
+			<item name="button_create">Skapa</item>
+			<item name="button_cancel">Avbryt</item>
+			<item name="error_missing_document_name">Fel: Du måste ange ett dokument namn.</item>
+			<item name="error_missing_template_selection">Fel: Du måste välja en mall.</item>
+			<item name="error_missing_template">Fel: Kunde inte hitta mallen.</item>
+			<item name="error_invalid_file_name">Fel: Filnamnet innehåller ogiltiga tecken som t.ex: ;.</item>
+			<item name="error_exists">Fel: En document med det angivna namnet finns redan.</item>
+		</group>
+
+		<group target="upload">
+			<item name="title">Ladda upp</item>
+			<item name="description">Använd formuläret för att ladda upp filer.</item>
+			<item name="upload_in">Ladda upp till:</item>
+			<item name="valid_extensions">Godkända filändelser:</item>
+			<item name="max_upload_size">Max filstorlek:</item>
+			<item name="file_to_upload">File att ladda upp:</item>
+			<item name="as_file_name">Som filnamn:</item>
+			<item name="required_filename">Du måste skriva ett filnamn till filen du vill ladda upp.</item>
+			<item name="button_upload">Ladda upp</item>
+			<item name="button_add_upload">Lägg till fil</item>
+			<item name="button_cancel">Avbryt</item>
+			<item name="error_exists">Fel: En fil med det angivna namnet existerar redan.</item>
+			<item name="error_to_large">Fel: Filen du försöker ladda upp är för stor.</item>
+			<item name="remove">Tabort</item>
+		</group>
+
+		<group target="unzip">
+			<item name="title">Packa upp</item>
+			<item name="description">Här har du en överblick över din zip operation.</item>
+			<item name="zipfile_name">Filnamn:</item>
+			<item name="current_folder">Till katalog:</item>
+			<item name="overwrite_files">Skriv över filer:</item>
+			<item name="name">Namn</item>
+			<item name="size">Storlek</item>
+			<item name="csize">KStorlek</item>
+			<item name="exists">Finns</item>
+			<item name="status">Status</item>
+			<item name="created">Skapad</item>
+			<item name="button_unzip">Packa upp</item>
+			<item name="button_cancel">Avbryt</item>
+			<item name="button_back">Tillbaka</item>
+			<item name="button_close">Stäng</item>
+			<item name="Accepted">Accepterad</item>
+			<item name="Denied">Nekad</item>
+			<item name="Passed">Lyckades</item>
+			<item name="Failed">Misslyckades</item>
+			<item name="Yes">Ja</item>
+			<item name="No">Nej</item>
+		</group>
+
+		<group target="zip">
+			<item name="title">Skapa zip arkiv</item>
+			<item name="description">Skriv ett namn på arkivet i formuläret nedan.</item>
+			<item name="created_in">Skapas inuti:</item>
+			<item name="name">Namn:</item>
+			<item name="required_filename">Du måste fylla i ett filnamn.</item>
+			<item name="button_create">Skapa</item>
+			<item name="button_cancel">Avbryt</item>
+		</group>
+	</language>
+</language-pack>

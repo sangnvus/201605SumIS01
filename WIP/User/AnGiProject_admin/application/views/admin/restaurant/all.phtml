@@ -1,0 +1,58 @@
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">
+    <a class="btn btn-default" href="<?php echo base_url()?>admin/add_restaurant" role="button">Thêm</a>
+  </div>
+  <div class="panel-body">
+    
+  <!-- Table -->
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th class="col-lg-1">ID</th>
+            <th>Loại</th>
+            <th>Tên</th>
+            <th class="col-lg-2">Phone</th> 
+            <th>Địa chỉ</th>
+            <th class="col-lg-2">Trạng thái</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php if (isset($result)){ ?>
+        <?php foreach ($result as $user) {?>
+        <tr>
+            <td><?php echo $user->restaurantID; ?></td>
+            <td><?php echo $user->categoryName; ?></td>
+            <td><?php echo $user->nameRe; ?></td>
+            <td><?php echo $user->phoneRe; ?></td>
+            <td><?php echo $user->address; ?></td>   
+            <td class="text-center"><?php echo $user->statusRes == 1 ? 'Hoạt động' : 'Chưa kích hoạt'; ?></td>
+            <td class="text-center">
+            <a class="btn btn-info" href="<?php echo base_url()?>admin/edit_restaurant/<?php echo $user->restaurantID; ?>">Sửa</a>
+            <a class="btn btn-danger" onclick="return resModule.delete('<?php echo $user->nameRe; ?>');" href="<?php echo base_url()?>admin/delete_restaurant/<?php echo $user->restaurantID; ?>">Xóa</a>   
+            </td>
+        </tr>
+        <?php } ?>
+        <?php } ?>
+    </tbody>
+    <tfoot>
+        <tr>
+        <td colspan="7">                      
+        <?php echo $pagination; ?>
+        </td>
+        </tr>
+    </tfoot>
+  </table>
+  </div>
+      
+</div>
+<script type="text/javascript">
+    window.resModule = window.resModule || {};
+    
+    resModule.delete = resModule.delete || function(name){
+        if (confirm('Xóa ' + name + '?'))
+            return true;
+        return false;
+    }
+</script>

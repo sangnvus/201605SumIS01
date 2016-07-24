@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<title>Installation instructions for Drupal CMS</title>
+<link href="css/screen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<div class="header">
+	<h1>Installation instructions for Drupal CMS</h1>
+</div>
+
+<div class="content">
+	<h2>MCFileManager installation instructions.</h2>
+	<p>
+	First download the latest version of the MCFileManager, you should have recieved a download link in your email when you purchased the plugins. Unpack in a seperate folder on your drive (not into the Drupal installation yet).
+	</p>
+	<p>
+	These instructions assume you have a working Drupal installation and access to the filesystem.
+	</p>
+	<div class="separator"></div>
+	<p>
+	<strong>1.</strong> Download the latest version of a compatible 4.6.x TinyMCE Module, when testing, I used this module: http://drupal.org/node/42452
+	</p>
+	<div class="separator"></div>
+	<p>
+	<strong>2.</strong> Follow the installation instructions in the TinyMCE Module but download the latest verion of TinyMCE, verify that TinyMCE is working, and then proceed to the next step.</p>
+	<p>
+	You directory structure should look like this:<br />
+	</p>
+	<code>
+	/drupal/modules/tinymce/<br />
+	/drupal/modules/tinymce/tinymce.module<br />
+	/drupal/modules/tinymce/plugin_reg.php<br />
+	/drupal/modules/tinymce/tinymce<br />
+	/drupal/modules/tinymce/tinymce/(all tinymce files and folders)<br />
+	</code>
+	<p>
+	(Make sure you enable the image and link (or advlink, advimage) plugins for TinyMCE, using the interface provided by the Drupal 
+	module)
+	</p>
+	<div class="separator"></div>
+	<p>
+	<strong>3.</strong> The archive that this documentation file was/is in, should have two folders, "filemanager" and "imagemanager", copy the contents of the "filemanager" folder into the folder where you extracted the MCFileManager earlier above. It should ask to overwrite index.html in /docs/, accept the overwrite.
+	</p>
+<div class="separator"></div>
+	<p>
+	<strong>4.</strong> Rename or remove config.php, then rename config.drupal to config.php, open up config.php and configure the path and rootpath options (and other options if you wish).
+	</p>
+	<div class="separator"></div>
+	<p><strong>5.</strong> Copy the MCFileManager to the following folder:</p>
+	<p>/drupal/modules/tinymce/tinymce/jscripts/tiny_mce/plugins<br /><br />
+	So the folderstructure should look like this:<br /><br />
+	/drupal/modules/tinymce/tinymce/jscripts/tiny_mce/plugins/filemanager<br /><br />
+	</p>
+<div class="separator"></div>
+	<p><strong>6.</strong> 6. At this point, the filemanager should work. However, there is a small bug in the tinymce.module. You need to edit line 506 in tinymce.drupal and change<br />
+	</p>
+	<code>if ($settings['buttons'][$rname]) {</code>
+	<p>to</p>
+	<code>if ($settings['plugins'][$rname]) {</code>
+	<p>
+	This should be fixed soon, a patch has been sent to Drupal team.
+	</p>
+
+<div class="separator"></div>
+	<p>
+	<strong>7.</strong> Go into drupal, create content, press the image properties icon and look for the "browse" button next to the Image URL field.
+	</p>
+	<div class="separator"></div>
+	<p>
+	If you have problems, visit the forums for the plugin you have problems with at the TinyMCE website (http://tinymce.moxiecode.com).
+	</p>
+
+	<div class="separator"></div>
+<div class="footer">
+	<div class="helpindexlink"><a href="index.html">Help index</a></div>
+	<div class="copyright">Copyright &copy; 2005-2006 Moxiecode Systems AB</div>
+	<br style="clear: both" />
+</div>
+
+</body>
+</html>

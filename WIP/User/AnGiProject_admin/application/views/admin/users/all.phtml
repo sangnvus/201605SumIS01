@@ -1,0 +1,51 @@
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">
+    <a class="btn btn-default" href="<?php echo base_url()?>users/add/<?php echo $level; ?>" role="button">Thêm</a>
+  </div>
+  <div class="panel-body">
+    
+  <!-- Table -->
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Tên đăng nhập</th>
+            <th>Tên đầy đủ</th>
+            <th>Email</th>
+            <th>Địa chỉ</th>
+            <th>Trạng thái</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php if ($rows > 0){ ?>
+        <?php foreach ($result as $user) {?>
+        <tr>
+            <td><?php echo $user->userID; ?></td>
+            <td><?php echo $user->userName; ?></td>
+            <td><?php echo $user->memName; ?></td>
+            <td><?php echo $user->userMail; ?></td>
+            <td><?php echo $user->address; ?></td>
+            <td class="text-center"><?php echo $user->userActived == 1 ? 'Hoạt động' : 'Chưa kích hoạt'; ?></td>
+            <td class="text-center">
+            <a class="btn btn-info" href="<?php echo base_url()?>users/Edit/<?php echo $user->userID; ?>">Sửa</a>
+            <a class="btn btn-danger" onclick="return userModule.delete('<?php echo $user->userName; ?>');" href="<?php echo base_url()?>users/Delete/<?php echo $user->userID; ?>">Xóa</a>   
+            </td>
+        </tr>
+        <?php } ?>
+        <?php } ?>
+    </tbody>
+  </table>
+  </div>
+      
+</div>
+<script type="text/javascript">
+    window.userModule = window.userModule || {};
+    
+    userModule.delete = userModule.delete || function(name){
+        if (confirm('Xóa user ' + name + '?'))
+            return true;
+        return false;
+    }
+</script>

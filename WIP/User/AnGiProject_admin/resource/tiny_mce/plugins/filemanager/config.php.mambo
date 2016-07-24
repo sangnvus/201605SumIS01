@@ -1,0 +1,15 @@
+<?php
+	require_once("classes/Authenticators/MamboAuthenticatorImpl.php");
+
+	// General settings
+	$mcFileManagerConfig['general.login_page'] = "not_loggedin.php";
+
+	// File system settings
+	$mcFileManagerConfig['filesystem.path'] = 'files';
+	$mcFileManagerConfig['filesystem.rootpath'] = 'files';
+
+	// Authenication with Session
+	$mcFileManagerConfig['authenticator'] = "MamboAuthenticatorImpl";
+	$mcFileManagerConfig['authenticator.joomla.valid_users'] = "/(.+)/i"; // All users
+	//$mcFileManagerConfig['authenticator.joomla.valid_users'] = "/(admin|user1|user2)/i";
+?>

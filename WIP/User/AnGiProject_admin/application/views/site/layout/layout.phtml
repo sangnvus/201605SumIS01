@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="vi-VN">
+<head>
+    <title>Ăn Gì</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="../resource/font-awesome-4.6.3/css/font-awesome.css">
+    <link rel="stylesheet" href="../resource/bootstrap-3.3.6-dist/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <script src="../resource/bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
+    <script src="../js/script.js"></script>
+
+    <link rel = "stylesheet" type = "text/css" href = "<?php echo base_url()?>css/style.css">
+
+</head>
+
+<body>
+<?php
+    $data =array(
+                        'user' => $user,
+                        'level' => $level
+                    )
+?>
+<div class="header">
+    <?php $this->load->view('site/layout/header.phtml', $data) ?>
+</div>
+
+<div class="content">
+    <?php $this->load->view($content) ?>
+</div>
+
+<div class="footer">
+    <?php $this->load->view('site/layout/footer.phtml', $data) ?>
+</div>
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<title>Option: filesystem.file_event_listeners</title>
+<link href="css/screen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<div class="header">
+	<h1>Option: filesystem.file_event_listeners</h1>
+</div>
+
+<div class="content">
+	<p>This option enables you to add file listener classes that gets a notification about file modification events. This can be used for logging purposes or if you need to synchronize modifications. The option should contain a comma separated list of class names, this classes needs to be included in the config.php and they should extend the FileEventListener base class.</p>
+	<h3>Example of usage in the config.php file:</h3>
+	<div class="example">
+<code>
+$mcFileManagerConfig['filesystem.file_event_listeners'] = "SomeListener,SomeOtherListener";
+</code>
+</div>
+<br />
+	<h3>Example of usage in a mc_access file:</h3>
+	<div class="example">
+<code>
+filesystem.file_event_listeners=SomeListener,SomeOtherListener
+</code>
+	</div>
+</div>
+
+<div class="footer">
+	<div class="helpindexlink"><a href="index.html">Help index</a></div>
+	<div class="copyright">Copyright &copy; 2005-2006 Moxiecode Systems AB</div>
+	<br style="clear: both" />
+</div>
+
+</body>
+</html>

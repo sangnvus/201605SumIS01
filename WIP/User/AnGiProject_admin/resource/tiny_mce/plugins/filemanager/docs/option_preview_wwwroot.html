@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<title>Option: preview.wwwroot</title>
+<link href="css/screen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<div class="header">
+	<h1>Option: preview.wwwroot</h1>
+</div>
+
+<div class="content">
+	<p>This option should contain the local file system path to the web servers www root. Notice this path can be relative or absolute and if this option is left blank MCFileManager will then try to figure out the wwwroot.</p>
+	<h3>Example of usage in the config.php file:</h3>
+	<div class="example">
+<code>
+$mcFileManagerConfig['preview.wwwroot'] = "/www/something";
+</code>
+</div>
+<br />
+	<h3>Example of usage of realpath in the config.php file:</h3>
+	<div class="example">
+<code>
+$mcFileManagerConfig['preview.wwwroot'] = "../";
+</code>
+</div>
+<br />
+	<h3>Example of usage in a mc_access file:</h3>
+	<div class="example">
+<code>
+preview.wwwroot=/www/something
+</code>
+	</div>
+</div>
+
+<div class="footer">
+	<div class="helpindexlink"><a href="index.html">Help index</a></div>
+	<div class="copyright">Copyright &copy; 2005-2006 Moxiecode Systems AB</div>
+	<br style="clear: both" />
+</div>
+
+</body>
+</html>

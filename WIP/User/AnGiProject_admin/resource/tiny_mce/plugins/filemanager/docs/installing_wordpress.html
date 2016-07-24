@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<title>Installation instructions for Drupal CMS</title>
+<link href="css/screen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<div class="header">
+	<h1>Installation instructions for Drupal CMS</h1>
+</div>
+
+<div class="content">
+	<h2>MCImageManager & MCFileManager installation instructions.</h2>
+	
+	<p>These instructions assume you have a working Wordpress 2.0 installation and access to the filesystem. TinyMCE should be enabled by default in Wordpress.</p>
+
+	<p>First download the latest version of the MCImageManager or/and MCFileManager, you should have recieved a download link in your email when you purchased the plugins. Unpack them in seperate folder on your drive (not into the Wordpress installation yet).</p>
+
+	<p><strong>1. </strong>Copy the imagemanager and filemanager folder into the following folder on the Wordpress installation.</p>
+	<pre>/wordpress/wp-includes/js/tinymce/plugins/</pre>
+	
+	<p><strong>2. </strong>Open up "/wordpress/wp-includes/js/tinymce/tiny_mce_gzip.php", scroll to line 84 and edit the following to enable the file and imagemanager.</p>
+
+	<pre>$plugins = apply_filters('mce_plugins', array('wordpress', 'autosave', 'wphelp'));</pre>
+	<p>into</p>
+	<pre>$plugins = apply_filters('mce_plugins', array('wordpress', 'autosave', 'wphelp', 'filemanager', 'imagemanager'));</pre>
+	
+	<p><strong>3. </strong>For some reason, the Wordpress team has commented out code inside TinyMCE, you need to edit the following file:</p>
+	<pre>/wordpress/wp-includes/js/tinymce/themes/advanced/jscripts/link.js</pre>
+
+	<p>On line 13, change the line from</p>
+
+	<pre>//document.getElementById('hrefbrowsercontainer').innerHTML = getBrowserHTML('hrefbrowser','href','file','theme_advanced_link');</pre>
+	<p>To</p>
+	<pre>document.getElementById('hrefbrowsercontainer').innerHTML = getBrowserHTML('hrefbrowser','href','file','theme_advanced_link');</pre>
+
+	<p>This will enable the button for the link popup box.</p>
+
+	<p><strong>4. </strong>You also need to disable modal dialogs, they can cause really weird behaviour. Go to line 133 in the same file and remove this line. </p>
+	<pre>dialog_type : "modal",</pre>
+	<p>Just delete the entire line.</p>
+
+	<p><strong>4. </strong>Go into the MCImageManager / MCFileManager folder and remove the config.php file, rename the config.php.wordpress file to config.php.</p>
+
+	<p><strong>5. </strong>Open up config.php and configure rootpath to where your files are located, consult the MCImageManager / MCFileManager documentation for more info on how to configure them.</p>
+
+	<p>If you encounter any problems, visit the plugin support forum on the TinyMCE website for help.</p>
+
+	<div class="separator"></div>
+<div class="footer">
+	<div class="helpindexlink"><a href="index.html">Help index</a></div>
+	<div class="copyright">Copyright &copy; 2005-2006 Moxiecode Systems AB</div>
+	<br style="clear: both" />
+</div>
+
+</body>
+</html>

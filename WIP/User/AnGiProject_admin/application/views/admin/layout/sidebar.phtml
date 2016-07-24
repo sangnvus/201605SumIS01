@@ -1,0 +1,86 @@
+<div class="profile-sidebar">
+    <a>
+        <img src="http://jaybabani.com/slant/preview/angular/data/profile/profile-socialmedia.jpg">
+    </a>
+
+    <h4>
+        <a><?php echo $user; ?></a>
+    </h4>
+</div>
+
+<ul class="manage-sb">
+    <li>
+        <a href="../admin">
+            <i class="material-icons">dashboard</i>
+            <span class="title">Bảng tổng quát</span>
+        </a>
+    </li>
+    <li>
+        <a href="javascrip:;">
+            <i class="material-icons">store</i>
+            <span class="title">Nhà hàng</span>
+            <span class="arrow material-icons">keyboard_arrow_right</span>
+        </a>
+        <ul class="sub-menu">                              
+            <li><a href="<?php echo base_url(); ?>admin/restaurant">Tất cả</a></li>
+            <li><a href="<?php echo base_url(); ?>admin/add_restaurant">Thêm mới</a></li>
+        </ul>
+    </li>
+
+    <li>
+        <a href="javascrip:;">
+            <i class="material-icons">supervisor_account</i>
+            <span class="title">Thực khách</span>
+            <span class="arrow material-icons">keyboard_arrow_right</span>
+        </a>
+        <ul class="sub-menu">
+            <li><a href="<?php echo base_url(); ?>admin/eater/0">Tất cả</a></li>
+            <li><a href="<?php echo base_url(); ?>admin/add_eater/0">Thêm mới</a></li>
+        </ul>
+    </li>
+
+    <li>
+        <a href="<?php echo base_url(); ?>admin/booking">
+            <i class="material-icons">person_pin</i>
+            <span class="title">Đặt chỗ</span>
+        </a>
+    </li>
+
+    <li>
+        <a href="javascrip:;">
+            <i class="material-icons">device_hub</i>
+            <span class="title">Danh mục</span>
+            <span class="arrow material-icons">keyboard_arrow_right</span>
+        </a>
+        <ul class="sub-menu">   
+            <li><a href="<?php echo base_url(); ?>admin/categories">Tất cả</a></li>
+            <li><a href="<?php echo base_url(); ?>admin/add_category">Thêm mới</a></li>
+        </ul>
+    </li>
+
+    <li>
+        <a href="javascrip:;">
+            <i class="material-icons">equalizer</i>
+            <span class="title">Báo cáo</span>
+            <span class="arrow material-icons">keyboard_arrow_right</span>
+        </a>
+        <ul class="sub-menu">
+            <li><a>Trang web</a></li>
+            <li><a>Lượng truy cập</a></li>
+            <li><a>Thống kê</a></li>
+        </ul>
+    </li>
+
+    <li>
+        <a href="javascrip:;">
+            <i class="material-icons">settings</i>
+            <span class="title">Cài đặt</span>
+        </a>
+    </li>
+    <li>
+        <a  href="<?php echo base_url(); ?>home/logout"><i class="fa fa-reply-all">Đăng xuất</i></a>
+
+    </li>
+</ul>
+
+
