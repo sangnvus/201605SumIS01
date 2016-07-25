@@ -15,12 +15,12 @@
                             <li><a href="">Hải sản</a></li>
                             <li><a href="">Nhật - Hàn</a></li>
                             <li><a href="">Địa điểm nhậu</a></li> -->
-                            <?php 
-                            foreach ($categoriesData as $key => $row)
-                            {
-                            ?>
-                            <li><a href="<?php echo base_url(); ?>Category/index/1/<?php echo $row['categoryOfResID']; ?>"><?php echo $row['nameCOR']; ?></a></li>        
+                            <li><a href="<?php echo base_url(); ?>Category">Nhaa hang</a></li>
                             <?php
+                            foreach ($categoriesData as $key => $row) {
+                                ?>
+                                <li><a href="<?php echo base_url(); ?>Category/index/1/<?php echo $row['categoryOfResID']; ?>"><?php echo $row['nameCOR']; ?></a></li>        
+                                <?php
                             }
                             ?>
                         </ul>
@@ -48,44 +48,53 @@
 
                     <li class="top-register">
                         <?php
-                         $full = "Đăng nhập";
-                         $isLogIn = false;
+                        $full = "Đăng nhập";
+                        $isLogIn = false;
+                        $isRestOwner = false;
                         if ($this->session->userdata("ID") != null) {
                             $lname = $this->session->userdata("lname");
                             $fname = $this->session->userdata("fname");
-                            $Type = $this->session->userdata("Type");
                             $full = $lname . " " . $fname;
+                            $type = $this->session->userdata("Type");
+                            if ($type == 2) {
+                                $isRestOwner = true;
+                            }
                             $isLogIn = true;
-                        } 
-                         ?>   
-                        
-                            <a href=""><?php echo $full; ?> <i class="fa fa-caret-down" aria-hidden="true"></i></a>
-                            <div class="hover-menu hover-signin">
+                        }
+                        ?>   
+
+                        <a href=""><?php echo $full; ?> <i class="fa fa-caret-down" aria-hidden="true"></i></a>
+                        <div class="hover-menu hover-signin">
                             <!-- if users have signed in -->
-                            <?php
-                            if($isLogIn == true){ ?>
+                            <?php if ($isLogIn == true) { ?>
                                 <ul class="user-loged">
-                                        <li><a href="<?php echo base_url(); ?>user"> Thông tin tài khoản</a></li>
-                                        <li><a href="<?php echo base_url(); ?>user/change_Password"> Quản hlý mật khẩu</a></li>
-                                        <li><a href="<?php echo base_url(); ?>booking/viewBooking "> Lịch sử đặt chỗ</a></li>
-                                        <a href="<?php echo base_url(); ?>user/sign_out" style="margin: 8px 0" class="btn btn-info btn-lg">Đăng xuất</a>
+                                    <li><a href="<?php echo base_url(); ?>user"> Thông tin tài khoản</a></li>
+                                    <li><a href="<?php echo base_url(); ?>user/change_Password"> Quản hlý mật khẩu</a></li>
+                                    <li><a href="<?php echo base_url(); ?>booking/viewBooking "> Lịch sử đặt chỗ</a></li>
+                                    <?php
+                                    if ($isRestOwner) {
+                                        echo '<li><a href="' . base_url('booking/manageReservation') . '"> Quản lý đặt chỗ</a></li>';
+                                    }
+                                    ?>
+                                    <a href="<?php echo base_url(); ?>user/sign_out" style="margin: 8px 0" class="btn btn-info btn-lg">Đăng xuất</a>
+
                                 </ul>
 
                                 <!-- if users have not signed in      -->
-                        <?php     
-                        }else{
-                            ?>
+                                <?php
+                            } else {
+                                ?>
                                 <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"><?php echo $full; ?></button>
                                 <div class="hover-register">
                                     <label class="small-tit">Thành viên mới? <a href="<?php echo base_url(); ?>user/register">Đăng ký</a></label>
                                 </div>
-                                   <?php 
-                        }
+                                <?php
+                            }
                             ?>
-                            </div>
-                         
-                            <!-- Modal -->
-                           <?php $this -> load -> view('site/user/user/login.phtml'); ?>
+                        </div>
+
+                        <!-- Modal -->
+                        <?php $this->load->view('site/user/user/login.phtml'); ?>
                     </li>
                 </ul>
             </nav>

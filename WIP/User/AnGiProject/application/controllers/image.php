@@ -7,9 +7,9 @@ class Image extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->helper(array('form', 'url', 'file'));
-        $this->load->database();
         $this->load->library('session');
         $this->load->model('Image_model');
+        $this->load->database();
         // typeImage: 0 customer avatar, 1 restaurant avatar, 2 banner, 3 food
         // authorityUser: 1 customer, 2 restaurant owner
     }
@@ -43,7 +43,7 @@ class Image extends CI_Controller {
             $imageType = 1; // restaurant image
         }
 
-        //load upload class library
+        //load upload class library 
         $this->load->library('upload', $config);
 
         // <input type="file" name="filename" >

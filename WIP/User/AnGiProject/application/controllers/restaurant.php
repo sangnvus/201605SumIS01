@@ -16,15 +16,7 @@ class Restaurant extends CI_Controller {
         // authorityUser: 1 customer, 2 restaurant owner
     }
 
-    public function index($restID = 2) {
-        $food = $this->Food_model->getFood($restID);
-
-        define("dishToShow", 20);
-
-        $data = array();
-        $data['food'] = $food;
-        $data['limitDisplay'] = dishToShow;
-
+    public function index() {
         $data['content'] = 'site/restaurant/index.phtml';
         $this->load->view('site/layout/layout.phtml', $data);
     }

@@ -1,4 +1,4 @@
-<?php
+ <?php
 
 defined('BASEPATH') OR exit('No direct script access allow');
 
@@ -143,7 +143,7 @@ class Booking extends CI_Controller {
                 $brlist = array(
                     'bookingID' => $row->bookingID,
                     'dateCreateBo' => $row->dateCreateBo,
-                    'userID' => $row->userID,
+                    'username' => $row->firstNameUser . ' ' . $row->lastNameUser,
                     'phoneUser' => $row->phoneUser,
                     'quantityMember' => $row->quantityMember,
                     'dateBooking' => $row->dateBooking,

@@ -43,25 +43,15 @@
 
             <div class="col-md-10">
                 <ul class="item-content item-cat">
-                    <?php
-                    $limit = 0;
-                    foreach ($food as $row) {
-                        if ($limit == $limitDisplay) {
-                            break;
-                        }
-                        ?>
-                        <li class="col-md-3">
-                            <a style="display: block; position: relative" class="img-item" href="">
-                                <img src="<?php echo $row->addressImage; ?>">
-                            </a>
-                            <span>Name: <?php echo $row->nameFo; ?></span><br />
-                            <span>Description: <?php echo $row->descriptionFo; ?></span><br />
-                            <span>Category: <?php echo $row->typeFo; ?></span>
-                        </li>
-                        <?php
-                        $limit ++;
-                    }
-                    ?>
+
+                    <li class="col-md-3">
+                        <a style="display: block; position: relative" class="img-item" href="">
+                            <img src="">
+                        </a>
+                        <span>Name:</span><br />
+                        <span>Description: </span><br />
+                        <span>Category: </span>
+                    </li>
                 </ul>
             </div>
         </div>

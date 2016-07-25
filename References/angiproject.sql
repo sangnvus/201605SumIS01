@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS province (
   namePro varchar(100) NOT NULL,
   typePro varchar(30) NOT NULL,
   PRIMARY KEY (provinceID)
-);
+);  
 
 
 DROP TABLE IF EXISTS District;
@@ -67,7 +67,6 @@ CREATE TABLE IF NOT EXISTS Users (
  userID INT  NOT NULL auto_increment,
  firstNameUser NVARCHAR(50),
  lastNameUser NVARCHAR(50),
- dateOfBirthUser DATE,
  genderUser INT,
  emailUser NVARCHAR(100),
  phoneUser NVARCHAR(15),

@@ -205,7 +205,6 @@ class User extends CI_Controller {
                 $data = array(
                     'firstNameUser' => $this->input->post('fname'),
                     'lastNameUser' => $this->input->post('lname'),
-                    'dateOfBirthUser' => $this->input->post('dob'),
                     'genderUser' => $this->input->post('gender'),
                     'emailUser' => $this->input->post('email'),
                     'phoneUser' => $this->input->post('phone'),

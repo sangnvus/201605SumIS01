@@ -13,6 +13,7 @@ class Category extends CI_Controller {
     function index($type = 0, $ID = 0, $page = 1) {
         $districtData = $this->Category_model->getDistrict();
         $categoriesData = $this->Category_model->getCategories();
+        $data['categoriesData'] = $categoriesData;
         $count = $this->Category_model->countAll($type, $ID);
 
         //sua so items/trang

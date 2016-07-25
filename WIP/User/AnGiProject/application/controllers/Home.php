@@ -30,10 +30,12 @@ class Home extends CI_Controller {
             array_push($topRating, $rprofile);
             array_push($highestDiscount, $rprofile);
         }
-        
-        $topRating = $this->sortRestProfile($topRating, 'average');
-        $highestDiscount = $this->sortRestProfile($highestDiscount, 'discount');
-        
+
+        if ($topRating != null) {
+            $topRating = $this->sortRestProfile($topRating, 'average');
+            $highestDiscount = $this->sortRestProfile($highestDiscount, 'discount');
+        }
+
         $categoriesData = $this->Category_model->getCategories();
         $data['categoriesData'] = $categoriesData;
 
