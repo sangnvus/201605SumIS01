@@ -1,0 +1,78 @@
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <form method="POST" action="">
+  <div class="panel-heading">
+    <a class="btn btn-default" href="<?php echo base_url()?>admin/news" role="button">Quay về</a>
+    <input name="submit" id="submit" class="btn btn-info" type="submit" value="Cập nhật" />
+  </div>
+  <div class="panel-body">
+    <div class="bg-danger"><?php echo $error; ?></div>
+        
+        <div class="form-group">                  
+            <img src="<?php echo isset($imageNews) ? $imageNews : base_url().'upload/img_default.jpg'; ?>" id="imageIDSrc" alt="Ảnh tin tức" style="width: 80px; height: 80px; cursor: pointer;" class="img-thumbnail" onclick="return newsModule.openCkFinder();">
+            <input type="hidden" id="imageNews" name="imageNews" class="form-control" value="<?php echo isset($imageNews) ? $imageNews : ''; ?>"> 
+            <input type="hidden" id="imageNewsTemp" name="imageNewsTemp" class="form-control" value=""> 
+        </div>      
+        <div class="form-group"> 
+            <label for="typeNews">Loại tin</label> 
+            <select id="typeNews" name="typeNews" class="form-control">
+              <option value="31" <?php if(isset($typeNews) && $typeNews == 31){ echo 'selected="selected"';} else {echo '';} ?> >Tin cập nhật</option>
+              <option value="32" <?php if(isset($typeNews) && $typeNews == 32){ echo 'selected="selected"';} else {echo '';} ?> >Sự kiện</option>
+              <option value="33" <?php if(isset($typeNews) && $typeNews == 331){ echo 'selected="selected"';} else {echo '';} ?> >Khuyến mãi</option>
+              <option value="34" <?php if(isset($typeNews) && $typeNews == 34){ echo 'selected="selected"';} else {echo '';} ?> >Trải nghiệm</option>
+               </select>
+        </div>
+        <div class="form-group"> 
+            <label for="titleNews">Tiêu đề</label>
+            <input type="text" name="titleNews" class="form-control" value="<?php echo isset($titleNews) ? $titleNews : ''; ?>"> 
+        </div>         
+        <div class="form-group"> 
+            <label for="commentBo">Ghi chú</label>
+            <textarea id="contentNews" name="contentNews" type="text" class="form-control" ><?php echo isset($contentNews) ? $contentNews : ''; ?></textarea>
+        </div>       
+        <div class="form-group"> 
+            <label for="$statusBo">Trạng thái</label> 
+            <select id="statusNews" name="statusNews" class="form-control">
+              <option id="0" value="0" <?php if(isset($statusNews) && $statusNews == 0){ echo 'selected="selected"';} else {echo '';} ?> >Chưa kích hoạt</option>
+              <option id="1" value="1" <?php if(isset($statusNews) && $statusNews == 1){ echo 'selected="selected"';} else {echo '';} ?> >Kích hoạt</option>
+               </select>
+        </div>   
+        <input name="submit" id="submit" class="btn btn-info" type="submit" value="Cập nhật" />
+        
+    
+  </div> 
+  </form>
+</div>     
+<script type=""> 
+    window.newsModule = window.newsModule || {};
+    CKFinder.setupCKEditor(null, '/resource/ckfinder/' );
+    CKEDITOR.replace("contentNews");
+    
+    $(document).ready(function(){
+        var ok = '<?php echo isset($ok) ? $ok : ''; ?>';
+        if (ok == '1')
+        {
+            setTimeout(function(){
+                location.href = '<?php echo base_url().'admin/news'; ?>';    
+            }, 2000)                                                                       
+        }
+    })     
+    
+    newsModule.openCkFinder = newsModule.openCkFinder || function() {
+         CKFinder.popup( {
+             chooseFiles: true,
+             onInit: function( finder ) {
+                 finder.on( 'files:choose', function( evt ) {
+                     var file = evt.data.files.first();
+                     $('#imageNewsTemp').val(file.getUrl());
+                     $('#imageIDSrc').attr('src', file.getUrl());
+                 } );
+                 finder.on( 'file:choose:resizedImage', function( evt ) {
+                     $('#imageNewsTemp').val(evt.data.resizedUrl);
+                     $('#imageIDSrc').attr('src', evt.data.resizedUrl);
+                 } );
+             }
+         } );
+    }
+       
+</script>

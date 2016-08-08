@@ -1,0 +1,47 @@
+<form method="POST" action="" id="frmres">
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">
+    <a class="btn btn-default" href="<?php echo base_url()?>admin/restaurant" role="button">Quay về</a>
+    <input name="submit" id="submit" class="btn btn-info" type="submit" value="Lưu" />
+  </div>
+  <div class="panel-body">
+    <div class="bg-danger"><?php echo $error; ?></div>
+     
+        <ul class="nav nav-tabs">
+          <li class="active"><a data-toggle="tab" href="#_res_info">Thông tin chung</a></li>
+          <li><a data-toggle="tab" href="#_res_add">Địa chỉ</a></li>   
+          <li><a data-toggle="tab" href="#_res_desc">Mô tả</a></li>   
+          <li><a data-toggle="tab" href="#_res_food">Món ăn</a></li>   
+        </ul>
+        <div class="tab-content">   
+          <div id="_res_info" class="tab-pane fade in active">
+            <?php $this->load->view('admin/restaurant/info.phtml'); ?>
+          </div>
+          <div id="_res_add" class="tab-pane fade in">
+            <?php $this->load->view('admin/restaurant/address.phtml'); ?>
+          </div>
+          <div id="_res_desc" class="tab-pane fade in"> 
+            <div class="form-group">
+                <textarea id="descriptionRes" name="descriptionRes" class="form-control">
+                    <?php echo isset($descriptionRes) ? $descriptionRes : ''; ?>
+                </textarea>
+            </div>
+          </div>
+          <div id="_res_food" class="tab-pane fade in">
+            <?php 
+                if (isset($restaurantID) && $restaurantID > 0) 
+                    $this->load->view('admin/restaurant/foods.phtml');
+            ?>
+          </div>
+        </div> 
+        <div class="form-group col-lg-12"> 
+           <input name="submit" id="submit" class="btn btn-info" type="submit" value="Lưu" />
+        </div> 
+  </div> 
+</div>                                                                           
+</form>
+<script type=""> 
+    CKFinder.setupCKEditor(null, '/resource/ckfinder/' );
+    CKEDITOR.replace("descriptionRes");
+</script>

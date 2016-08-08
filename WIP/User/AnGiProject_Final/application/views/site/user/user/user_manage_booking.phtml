@@ -1,0 +1,58 @@
+<h1><?php echo $title; ?></h1>
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th class="col-lg-1">ID</th>    
+            <th>Ngày đặt</th>    
+            <th>Ngày tạo</th>    
+            <th>Cửa hàng</th> 
+            <th>Người đặt</th> 
+            <th class="text-center col-lg-2">Trạng thái</th>
+            <th class="col-lg-2"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php if ($rows > 0){ ?>
+        <?php foreach ($result as $item) {?>
+        <tr>
+            <td><?php echo $item->bookingID; ?></td>
+            <td><?php echo $item->dateBooking; ?></td>  
+            <td><?php echo $item->dateCreateBo; ?></td>   
+            <td><?php echo $item->restaurantName; ?></td>
+            <td><?php echo $item->userName; ?></td>
+            <td class="text-center"><?php 
+                switch ($item->statusBo){
+                    case 0:
+                        echo 'Mới đặt';
+                        break;
+                    case 1:
+                        echo 'Đã xử lý';
+                        break;
+                    case 10:
+                        echo 'Hoàn thành';
+                        break;
+                    case 99:
+                        echo 'Hủy';
+                        break;
+                }
+            ?></td>
+            <td class="text-center">
+            <a class="btn btn-info" href="<?php echo base_url()?>user_profile/info_booking/<?php echo $item->bookingID; ?>">Xem</a>
+            </td>
+        </tr>
+        <?php } ?>
+        <?php } ?>
+    </tbody>
+    <tfoot>
+        <tr>
+        <td colspan="7">                      
+        <?php echo $pagination; ?>
+        </td>
+        </tr>
+    </tfoot>
+  </table>
+
+<script type="text/javascript">
+    window.bookingModule = window.bookingModule || {};
+
+</script>

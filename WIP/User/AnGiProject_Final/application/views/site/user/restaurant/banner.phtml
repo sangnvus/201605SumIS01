@@ -1,0 +1,98 @@
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">
+    <h3>Ảnh quán ăn</h3>
+  </div>
+  <div class="panel-body">
+    <ul class="item-content">
+        <li class="col-md-3 text-center">
+            <a style="cursor: pointer; display: block; position: relative" class="img-item">                                                                         
+                <img id="img-banner-upload" src="<?php echo base_url(); ?>upload/img_default.jpg" alt="Ảnh món ăn" style="width: 100%; height: 100%;" class="img-thumbnail" onclick="return bannerModule.openCkFinder();">
+            </a> 
+            <div class="col-md-12 img-hidden-action" style="display: none;"><input id="img-banner-main" type="checkbox">Ảnh đại diện</div>
+            <div class="col-md-12 img-hidden-action" style="display: none;">                                                                                                                
+                <button id="btnUpdateBanner" class="btn btn-success" onclick="return bannerModule.uploadImg();">Lưu</button>
+            </div>                                                                                                          
+        </li>
+    <?php foreach($items as $item){ ?>
+        <li class="col-md-3" >
+            <a style="display: block; position: relative" class="img-item">
+                <img alt="Ảnh món ăn" style="width: 100%; height: 100%" class="img-thumbnail" src="<?php echo $item->imageUrl; ?>"> 
+                <i class="fa fa-remove" style="cursor: pointer; position: absolute; top: -5px; right: -5px; font-size: large; display: block;" onclick="return bannerModule.delete('<?php echo $item->restaurantImageId; ?>');"></i> 
+            </a>                                                                                                            
+    <?php } ?>
+    </ul>  
+    <div class="row">
+        <div style="text-align: center">
+            <?php echo $pagination; ?>
+        </div>    
+    </div>   
+</div>
+
+<script type="text/javascript">
+    window.bannerModule = window.bannerModule || {};    
+
+    bannerModule.openCkFinder = bannerModule.openCkFinder || function() {
+         CKFinder.popup( {
+             chooseFiles: true,
+             onInit: function( finder ) {
+                 finder.on( 'files:choose', function( evt ) {
+                     var file = evt.data.files.first();   
+                     $('#img-banner-upload').attr('src', file.getUrl()+'?dummy='+new Date().getTime());
+                     $('.img-hidden-action').show();
+                 } );
+                 finder.on( 'file:choose:resizedImage', function( evt ) {                                         
+                     $('#img-banner-upload').attr('src', evt.data.resizedUrl+'?'+new Date().getTime());
+                     $('.img-hidden-action').show();
+                 } );
+             }
+         } );
+    }
+         
+    bannerModule.delete = bannerModule.delete || function(id){
+        if (confirm('Xóa ảnh?'))
+        {
+            $.ajax({ 
+               type : "GET",  
+               dataType:'json',                                             
+               url: '<?php echo base_url("user_profile/delete_restaurant_banner"); ?>'+'/'+id, // target element(s) to be updated with server response 
+               cache : false,
+               //check this in firefox browser
+               complete : function(response){ 
+                    var jsonData = $.parseJSON(response.responseText);
+                    if (jsonData.type == 'success'){                                   
+                        location.href = '<?php echo base_url("user_profile/restaurant_banner"); ?>';
+                    }
+                    else if (jsonData.type == 'error'){    
+                        alert(jsonData.text);       
+                    }
+               }
+            });          
+        }
+        return false;
+    }
+         
+    bannerModule.uploadImg = bannerModule.uploadImg || function(){         
+        $.ajax({ 
+           type : "POST",
+           data : {
+               'imageUrl' : encodeURIComponent($('#img-banner-upload').attr('src')),
+               'imageMain' : $('#img-banner-main').is(':checked')               
+           },
+           dataType:'json',                                             
+           url: '<?php echo base_url("user_profile/add_restaurant_banner"); ?>', // target element(s) to be updated with server response 
+           cache : false,
+           //check this in firefox browser
+           complete : function(response){ 
+                var jsonData = $.parseJSON(response.responseText);
+                if (jsonData.type == 'success'){          
+                    location.href = '<?php echo base_url("user_profile/restaurant_banner"); ?>';
+                }
+                else if (jsonData.type == 'error'){   
+                    alert(jsonData.text);        
+                }
+           }
+        });        
+        return false;
+    }      
+</script>

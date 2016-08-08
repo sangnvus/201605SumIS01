@@ -1,0 +1,52 @@
+<form method="POST" action=""> 
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">
+    <a class="btn btn-default" href="<?php echo base_url()?>user_profile/restaurant_manage_booking" role="button">Quay về</a>
+    <input name="submit" id="submit" class="btn btn-info" type="submit" value="Cập nhật trạng thái" />
+  </div>
+  <div class="panel-body">
+    <div class="bg-danger"><?php echo $error; ?></div>
+                                                                   
+        <div class="form-group"> 
+            <div class="col-lg-12"> 
+                <label for="restaurantName">Tên quán</label>
+                <input disabled="disabled" type="text" class="form-control" value="<?php echo isset($restaurantName) ? $restaurantName : ''; ?>"> 
+            </div> 
+            <div class="col-lg-4"> 
+                <label for="memName">Mã</label>
+                <input disabled="disabled" type="text" class="form-control" value="<?php echo isset($bookingID) ? $bookingID : ''; ?>"> 
+            </div>
+            <div class="col-lg-4"> 
+                <label for="dateCreateBo">Ngày tạo</label>
+                <input disabled="disabled" type="text" class="form-control" value="<?php echo isset($dateCreateBo) ? $dateCreateBo : ''; ?>"> 
+            </div> 
+            <div class="col-lg-4"> 
+                <label for="quantityMember">Số người</label>
+                <input disabled="disabled" type="text" class="form-control" value="<?php echo isset($quantityMember) ? $quantityMember : ''; ?>"> 
+            </div>   
+            <div class="col-lg-4"> 
+                <label for="dateCreateBo">Ăn vào thời gian</label>
+                <input disabled="disabled" type="text" class="form-control" value="<?php echo isset($dateBooking) ? $dateBooking : ''; ?>"> 
+            </div>  
+            <div class="col-lg-4"> 
+                <label for="userName">Người đặt</label>
+                <input disabled="disabled" type="text" class="form-control" value="<?php echo isset($userName) ? $userName : ''; ?>"> 
+            </div>       
+            <div class="col-lg-4"> 
+                <label for="$statusBo">Trạng thái</label> 
+                <select id="statusBo" name="statusBo" class="form-control">
+                  <option id="0" value="0" <?php if(isset($statusBo) && $statusBo == 0){ echo 'selected="selected"';} else {echo '';} ?> >Mới đặt</option>
+                  <option id="1" value="1" <?php if(isset($statusBo) && $statusBo == 1){ echo 'selected="selected"';} else {echo '';} ?> >Đã xử lý</option>
+                  <option id="99" value="99" <?php if(isset($statusBo) && $statusBo == 99){ echo 'selected="selected"'; } else {echo '';} ?>>Hủy</option>
+                </select>
+            </div>  
+            <div class="col-lg-12"> 
+                <label for="commentBo">Ghi chú</label>
+                <textarea id="commentBo" name="commentBo" type="text" class="form-control" ><?php echo isset($commentBo) ? $commentBo : ''; ?></textarea>
+            </div>                     
+        </div>  
+  </div> 
+</div>
+</form>
+   

@@ -1,0 +1,64 @@
+<div class="restaurant-place shadow-outside">
+    <div id="div_monan_alert" style="display: none;" class="alert alert-warning alert-dismissible fade in" role="alert"> 
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button> 
+        <div id="monan_alert"></div>
+    </div>
+    <p>Đặt chỗ trước khi đến</p>
+    <form class="booking-res" id="booking-res">
+        <p>
+            <input type="number" id="quantityMember" placeholder="Số người đến" min="1">
+            <i class="fa fa-user" aria-hidden="true"></i>
+        </p>
+
+        <p>
+            <input placeholder="Ngày" id='dateBooking' class="textbox-n" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="date">
+            <i class="fa fa-calendar" aria-hidden="true"></i>
+        </p>
+
+        <p>
+            <input placeholder="Giờ" id='timeBooking' class="textbox-n" type="text" onfocus="(this.type='time')" onblur="(this.type='text')" id="date">
+            <i class="fa fa-clock-o" aria-hidden="true"></i>
+        </p>
+
+        <button onclick="return bookingModule.sendBooking();">đặt chỗ ngay</button>
+        <p>(Hoàn toàn không mất phí)</p>
+
+        <span>Hoặc</span>
+        <span>Gọi đến: <strong style="color: #d02028; font-size: 18px"><?php echo $restaurant->restaurantID; ?></strong> để đặt chỗ.</span>
+    </form>
+</div>
+<script type="text/javascript">
+    window.bookingModule = window.bookingModule || {};
+    
+    $(document).ready(function(){   
+    })
+      
+    bookingModule.sendBooking = bookingModule.sendBooking || function(){
+        $('#div_monan_alert').hide();       
+        $.ajax({ 
+           type : "POST",
+           data : {                                     
+               'restaurantID' : '<?php echo $restaurant->restaurantID; ?>',
+               'quantityMember' : $('#booking-res #quantityMember').val(),
+               'dateBooking' : $('#booking-res #dateBooking').val(),
+               'timeBooking' : $('#booking-res #timeBooking').val(),
+           },
+           dataType:'json',                                             
+           url: '<?php echo base_url("restaurant/sendBooking"); ?>', // target element(s) to be updated with server response 
+           cache : false,
+           //check this in firefox browser
+           complete : function(response){ 
+                var jsonData = $.parseJSON(response.responseText);
+                if (jsonData.type == 'success'){ 
+                    $('#monan_alert').html(jsonData.text); 
+                    $('#div_monan_alert').show();
+                }
+                else if (jsonData.type == 'error'){   
+                    $('#monan_alert').html(jsonData.text);
+                    $('#div_monan_alert').show();
+                }
+           }
+        });        
+        return false;
+    }   
+</script>

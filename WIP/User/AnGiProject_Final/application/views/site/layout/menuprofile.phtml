@@ -1,0 +1,77 @@
+<table class="profile-stt">
+    <tr>
+        <td> <img id="imageIDSrc" alt src="<?php echo $addressImage; ?>"> </td>
+        <td>
+            <p>ID ĂnGì: <strong><?php echo $userID; ?></strong></p>
+            <p>ĐT: <strong><?php echo $memName; ?></strong></p>
+        </td>
+    </tr> 
+
+    <tr>
+        <td colspan="2" style="padding: 0 8px 20px">  
+            <button onclick="return profileModule.openCkFinder();">Chọn ảnh</button>
+            <button id="btnUpdateAvatar" style="display: none;" onclick="return profileModule.changeAvatar();">Lưu</button>
+            </td> 
+    </tr>
+</table>
+<ul class="profile-sidebar">
+    <li class="active"><a href="<?php echo base_url()?>user_profile"><i class="fa fa-user" aria-hidden="true"></i> Thông tin tài khoản</a></li>
+    <?php if ($level == 1){ ?>
+    <li><a href="<?php echo base_url()?>user_profile/restaurant_banner"><i class="fa fa-picture-o" aria-hidden="true"></i> Banner nhà hàng</a></li>
+    <li><a href="<?php echo base_url()?>user_profile/restaurant_edit"><i class="fa fa-wpforms" aria-hidden="true"></i> Thông tin nhà hàng</a></li>
+    <li><a href="<?php echo base_url()?>user_profile/restaurant_manage_booking"><i class="fa fa-cogs" aria-hidden="true"></i> Quản lý đặt chỗ</a></li>
+    <?php } ?>
+    <?php if ($level == 0){ ?>
+    <li><a href="<?php echo base_url()?>user_profile/user_manage_booking"><i class="fa fa-cogs" aria-hidden="true"></i> Lịch sử đặt chỗ</a></li>
+    <?php } ?>
+    <li><a href="<?php echo base_url()?>user_profile/change_Password"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Đổi mật khẩu</a></li>
+    <li><a href="<?php echo base_url()?>home/logout"><i class="fa fa-power-off" aria-hidden="true"></i> Thoát</a></li>
+</ul>
+ <script type="text/javascript">
+    window.profileModule = window.profileModule || {};   
+    
+    $(document).ready(function(){ 
+    })
+                
+    profileModule.openCkFinder = profileModule.openCkFinder || function() { 
+        CKFinder.popup( {
+             chooseFiles: true,
+             onInit: function( finder ) {
+                 finder.on( 'files:choose', function( evt ) {
+                     var file = evt.data.files.first();     
+                     $('#imageIDSrc').attr('src', file.getUrl());
+                     $('#btnUpdateAvatar').show();
+                 } );
+                 finder.on( 'file:choose:resizedImage', function( evt ) {   
+                     $('#imageIDSrc').attr('src', evt.data.resizedUrl);
+                     $('#btnUpdateAvatar').show();
+                 } );
+             }
+         } );
+    }
+       
+    profileModule.changeAvatar = profileModule.changeAvatar || function(){ 
+        $.ajax({ 
+           type : "POST",
+           data : {                                         
+               'addressImage' : $('.profile-stt #imageIDSrc').attr('src'),
+           },
+           dataType:'json',                                             
+           url: '<?php echo base_url("user_profile/changeAvatar"); ?>', // target element(s) to be updated with server response 
+           cache : false,
+           //check this in firefox browser
+           complete : function(response){ 
+                var jsonData = $.parseJSON(response.responseText);
+                if (jsonData.type == 'success'){ 
+                    alert(jsonData.text);
+                    $('#btnUpdateAvatar').hide();
+                }
+                else if (jsonData.type == 'error'){   
+                    alert(jsonData.text);
+                }
+           }
+        });        
+        return false;
+    }
+    
+</script>
