@@ -1163,7 +1163,7 @@ class admin extends CI_Controller {
     public function edit_category($id) {
         $this->check_id($id, 'admin/categories');                   
         $level = 0;                               
-        $user = $this->categoriesOfRestaurantModel->Admin_GetById($id);
+        $user = $this->categoriesOfRestaurantModel->GetById($id);
         if ($user == null)
             return redirect(base_url("admin/categories/")); 
                   
@@ -1232,6 +1232,13 @@ class admin extends CI_Controller {
         {                                                                                                        
             $this->load->view('admin/layout/layout.phtml', $data);
         }
+    }
+
+    public function delete_category($id)
+    {                                     
+        $this->check_id($id, 'admin/categories');
+        $this->categoriesOfRestaurantModel->Delete($id);
+        redirect(base_url('admin/categories'));
     }
 
 //    ================================================================================
