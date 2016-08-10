@@ -1,0 +1,65 @@
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">
+    <h2><?php echo $title;?></h2>
+  </div>
+  <div class="panel-body">
+      <div class="row">
+        <div class="col-lg-6">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th colspan="2">Thống kê nhà hàng</th>
+                    </tr>
+                </thead> 
+                <tbody>                   
+                    <tr>
+                        <td>Nhà hàng chờ duyệt</td>
+                        <td><?php echo $restaurant->numberNotActive; ?></td>  
+                    </tr>                 
+                    <tr>
+                        <td>Nhà hàng hoạt động</td>
+                        <td><?php echo $restaurant->numberActived; ?></td>  
+                    </tr>                   
+                    <tr>
+                        <td>Tổng số</td>
+                        <td><?php echo $restaurant->total; ?></td>  
+                    </tr>  
+                </tbody>       
+          </table> 
+        </div>
+        <div class="col-lg-6"> 
+            <table class="table table-bordered"> 
+                <thead>
+                    <tr>
+                        <th colspan="2">Thống kê tin tức</th>
+                    </tr>
+                </thead> 
+                <tbody>                   
+                    <tr>
+                        <td>Tin tức chờ duyệt</td>
+                        <td><?php echo $news->numberNotActive; ?></td>  
+                    </tr>                 
+                    <tr>
+                        <td>Tin tức hoạt động</td>
+                        <td><?php echo $news->numberActived; ?></td>  
+                    </tr>                   
+                    <tr>
+                        <td>Tổng số</td>
+                        <td><?php echo $news->total; ?></td>  
+                    </tr>
+                </tbody>       
+          </table>
+        </div>
+      </div>     
+  </div>       
+</div>
+<script type="text/javascript">
+    window.statisticsModule = window.statisticsModule || {};
+    
+    statisticsModule.delete = statisticsModule.delete || function(name){
+        if (confirm('Xóa ' + name + '?'))
+            return true;
+        return false;
+    }
+</script>

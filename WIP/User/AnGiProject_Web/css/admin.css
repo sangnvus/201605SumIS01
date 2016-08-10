@@ -1,0 +1,114 @@
+ul{
+    list-style-type: none;
+    padding: 0;
+}
+.sidebar{
+    background-color: #37474f;
+    color: #b0bec5;
+}
+.sidebar a{
+    color: #b0bec5;
+    text-decoration: none;
+}
+.profile-sidebar{
+    padding-top: 30px;
+    vertical-align: top;
+    text-align: center;
+}
+.profile-sidebar a{
+    display: inline-block;
+    color: #ececec;
+}
+.profile-sidebar a img{
+    width: 60px;
+    height: 60px;
+    margin-top: 0;
+    background-color: #ececec;
+    -webkit-border-radius: 50% 50%;
+    -moz-border-radius: 50% 50%;
+    border-radius: 50% 50%;
+    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0),0 2px 2px rgba(0,0,0,0.2);
+    -moz-box-shadow: 0 1px 3px rgba(0,0,0,0),0 2px 2px rgba(0,0,0,0.2);
+    -ms-box-shadow: 0 1px 3px rgba(0,0,0,0),0 2px 2px rgba(0,0,0,0.2);
+    -o-box-shadow: 0 1px 3px rgba(0,0,0,0),0 2px 2px rgba(0,0,0,0.2);
+    box-shadow: 0 1px 3px rgba(0,0,0,0),0 2px 2px rgba(0,0,0,0.2);
+}
+
+.manage-sb{
+    margin: 0 -15px;
+}
+.manage-sb>li>a{
+    position: relative;
+    display: block;
+    height: auto;
+    min-height: 45px;
+    padding: 10px 0;
+    clear: both;
+    color: #ececec;
+    color: #b0bec5;
+    text-align: center;
+}
+
+.manage-sb>li>a:hover, .manage-sb>li.active>a{
+    color: #ececec;
+    background-color: #263238;
+}
+
+.manage-sb>li>a>i{
+    position: relative;
+    top: 0;
+    display: inline-block;
+    width: 100%;
+    height: 24px;
+    margin-bottom: 3px;
+    line-height: 24px;
+    text-align: center;
+}
+
+.manage-sb>li.show-child>a>span.title{
+    display: inline-block;
+    float: left;
+    margin-left: 15px;
+    line-height: 23px;
+}
+
+.manage-sb>li.show-child>a>span.arrow{
+    top: 10px;
+    -ms-transform: rotate(90deg); /* IE 9 */
+    -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
+    transform: rotate(90deg);
+}
+
+.manage-sb>li.show-child>a>i{
+    margin-left: 45px;
+    font-size: 18px;
+    float: left;
+    width: auto;
+}
+
+.title{
+    display: block;
+}
+
+.arrow{
+    position: absolute;
+    top: 25px;
+    right: 24px;
+    float: none;
+}
+
+.sub-menu{
+    padding-left: 45px;
+    padding-bottom: 10px;
+    display: none;
+    background-color: #263238;
+}
+
+.sub-menu a{
+    padding: 3px 12px;;
+    display: block;
+    color: #9e9e9e;
+}
+.sub-menu a:hover, .sub-menu a.active{
+    background: #161e22;
+}

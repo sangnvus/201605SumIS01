@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="vi-VN">
+<head>
+    <title>Ăn Gì</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="<?php echo base_url()?>resource/font-awesome-4.6.3/css/font-awesome.css">
+    <link rel="stylesheet" href="<?php echo base_url()?>resource/bootstrap-3.3.6-dist/css/bootstrap.min.css">     
+    <link rel = "stylesheet" type = "text/css" href = "<?php echo base_url()?>resource/bootstrap-3.3.6-dist/plugins/datepicker/bootstrap-datetimepicker.css">
+    <link rel = "stylesheet" type = "text/css" href = "<?php echo base_url()?>css/style.css"> 
+    <link rel="stylesheet" href="<?php echo base_url()?>css/user.css"> 
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <script src="<?php echo base_url()?>resource/bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
+    <script src="<?php echo base_url()?>resource/bootstrap-3.3.6-dist/plugins/moment-with-locales.js"></script>
+    <script src="<?php echo base_url()?>resource/bootstrap-3.3.6-dist/plugins/datepicker/bootstrap-datetimepicker.js"></script>
+    <script type="text/javascript" src="<?=base_url()?>resource/ckeditor/ckeditor.js"></script>
+    <script type="text/javascript" src="<?=base_url()?>resource/ckfinder/ckfinder.js"></script>
+    <script type="text/javascript" src="<?=base_url()?>resource/ckeditor/lang/vi.js"></script>    
+    <script src="<?php echo base_url()?>js/script.js"></script>
+       
+</head>
+
+<body>       
+<div class="header">
+    <?php $this->load->view('site/layout/headernoslider.phtml') ?>
+</div>
+
+<div class="content">      
+    <div class="container">
+        <div class="row">
+            <div class="breadcrumb"></div>
+
+            <div class="col-md-3"> 
+                <?php $this->load->view('site/layout/menuprofile.phtml', $userModel) ?>
+            </div>  
+            <div class="col-md-9">
+                <?php $this->load->view($content, $model) ?>
+            </div>
+        </div>
+</div>       
+</div>
+
+<div class="footer">
+    <?php $this->load->view('site/layout/footer.phtml') ?>
+</div>
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<title>Option: createdoc.include_file_pattern</title>
+<link href="css/screen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<div class="header">
+	<h1>Option: createdoc.include_file_pattern</h1>
+</div>
+
+<div class="content">
+	<p>This option can be used to exclude all file names but those matching the specified regexp pattern.</p>
+	<h3>Example of usage in the config.php file:</h3>
+	<div class="example">
+<code>
+$mcFileManagerConfig['createdoc.include_file_pattern'] = "/^onlythis$|^onlythat$/i";
+</code>
+</div>
+<br />
+	<h3>Example of usage in a mc_access file:</h3>
+	<div class="example">
+<code>
+createdoc.include_file_pattern=/^onlythis$|^onlythat$/i
+</code>
+	</div>
+</div>
+
+<div class="footer">
+	<div class="helpindexlink"><a href="index.html">Help index</a></div>
+	<div class="copyright">Copyright &copy; 2005-2006 Moxiecode Systems AB</div>
+	<br style="clear: both" />
+</div>
+
+</body>
+</html>

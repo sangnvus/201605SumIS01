@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<title>Option: general.tools</title>
+<link href="css/screen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<div class="header">
+	<h1>Option: general.tools</h1>
+</div>
+
+<div class="content">
+	<p>This option enables you to specify what tools are to be available in for users. The option should contain a comma separated list of tools to be visible.</p>
+	<p>
+		<h3>Available tools</h3>
+		<ul>
+			<li>createdir - Create directory icon</li>
+			<li>createdoc - Create document icon</li>
+			<li>refresh - Refresh file list icon</li>
+			<li>upload - Uploads file icon</li>
+			<li>props - File/Directory properties icon</li>
+			<li>cut - Cuts files/directories icon</li>
+			<li>copy - Copy files/directories icon</li>
+			<li>paste - Paste files/directories icon</li>
+			<li>delete - Delete files/directories icon</li>
+			<li>unzip - Upzip icon</li>
+			<li>imagemanager - Image Manager icon. (interoperability with the MCImageManager).</li>
+			<li>separator - Separator line</li>
+		</ul>
+	</p>
+	<h3>Example of usage in the config.php file:</h3>
+	<div class="example">
+<code>
+$mcFileManagerConfig['general.tools'] = "createdir,createdoc,separator,refresh,upload,props,separator,cut,copy,paste,delete,unzip";
+</code>
+</div>
+<br />
+	<h3>Example of usage in a mc_access file:</h3>
+	<div class="example">
+<code>
+general.tools=createdir,createdoc,separator,refresh,upload,props,separator,cut,copy,paste,delete,unzip
+</code>
+	</div>
+</div>
+
+<div class="footer">
+	<div class="helpindexlink"><a href="index.html">Help index</a></div>
+	<div class="copyright">Copyright &copy; 2005-2006 Moxiecode Systems AB</div>
+	<br style="clear: both" />
+</div>
+
+</body>
+</html>

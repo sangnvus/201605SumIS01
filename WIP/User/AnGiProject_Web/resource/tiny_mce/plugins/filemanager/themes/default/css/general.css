@@ -1,0 +1,178 @@
+body {
+	background-color: #FFFFFF;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	margin: 0px;
+}
+
+fieldset {
+	padding: 8px;
+}
+
+/* IE specific */
+* html fieldset {
+	margin-top: -10px;
+}
+
+form, leg2end {
+	margin: 0px;
+	padding: 0px;
+}
+
+legend {
+	font-family: "MS Sans Serif", Verdana, Arial;
+	font-size: 9pt;
+	font-weight: bold;
+}
+
+a:link	{  
+	font-size: 11px; 
+	color: #000000; 
+	text-decoration: none;
+}
+
+a:active	{  
+	text-decoration: underline;
+}
+
+a:visited	{  
+	font-size: 11px; 
+	color: #000000;
+	text-decoration: none;
+}
+
+a:hover	{  	
+	text-decoration: underline;
+}
+
+td {
+	font-family: "MS Sans Serif", Verdana, Arial;
+	font-size: 9pt;
+}
+
+.statusError {
+	color: #880000;
+}
+
+.statusMsg {
+	color: #000000;
+}
+
+.disabledFileName {
+	color: #888888;
+}
+
+.inputText, .inputFile {
+	background: #FFFFFF;
+	border: 1px solid #cccccc;
+}
+
+.inputFile:button {
+	background: #DDDDDD;
+	border: 1px solid #888888;
+	border-bottom: 1px solid #000000;
+	border-right: 1px solid #000000;
+}
+
+input, select, textarea, .title {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+}
+
+.title {
+	font-weight: bold;
+	font-size: 12px;
+}
+
+.button {
+	background: #DDDDDD;
+	border: 1px solid #888888;
+	border-bottom: 1px solid #000000;
+	border-right: 1px solid #000000;
+}
+
+#insert, #view, .button {
+   font-weight: bold;
+   background-color: #FFFFFF;
+}
+
+/* Preview */
+
+.previewText, .previewSubTitle {
+	font-family: "MS Sans Serif", Verdana, Arial;
+	font-size: 9pt;
+}
+
+.previewSubTitle {
+	font-weight: bold;
+}
+
+.previewText {
+	padding-bottom: 5px;
+}
+
+#errorBody {
+	background-color: #F0F0EE;	
+}
+
+#previewBody {
+	background-color: #F0F0EE;
+	margin: 10px;
+	margin-top: 24px;
+	background-image: url(../images/preview_bg.gif);
+	background-repeat: repeat-y;
+}
+
+#previewWrapper {
+	text-align: middle;
+}
+
+#previewIframe {
+	width: 100%;
+	height: 200px;
+	border: 1px solid #000000;
+	background-color: #FFFFFF;
+}
+
+/* Gecko only */
+html>body #previewIframe {
+	width: 252px;
+}
+
+html>body .previewFieldSet {
+	padding-top: 5px;
+}
+
+/* IE Only */
+* html #previewIframe, * html #previewNoPreviewBox {
+	margin-top: 4px;
+}
+
+#previewNoPreviewBox {
+	width: 100%;
+	height: 200px;
+	text-align: center;
+	border: 1px solid #000000;
+}
+
+#previewNoPreviewText {
+	position: relative;
+	top: 45%;
+	font-family: "MS Sans Serif", Verdana, Arial;
+	font-size: 9pt;
+}
+
+.downloadLink:link, .downloadLink:visited {
+	text-decoration: underline;
+}
+
+#createdirBody, #createzipBody {
+	background-color: #F0F0EE;
+}
+
+#previewNewDocIframe {
+	width: 200px;
+	height: 200px;
+	border: 1px solid #000000;
+	background-color: #FFFFFF;
+}

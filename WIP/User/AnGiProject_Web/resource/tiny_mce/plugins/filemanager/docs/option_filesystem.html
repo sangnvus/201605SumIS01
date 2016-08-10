@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<title>Option: filesystem</title>
+<link href="css/screen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<div class="header">
+	<h1>Option: filesystem</h1>
+</div>
+
+<div class="content">
+	<p>This option enables you set the class to be used for the file system implementation. Currently only the local file system (LocalFileImpl) is distributed with the MCFileManager package. But in the future there may be other systems like FTPFileImpl, DBFileImpl and so forth.</p>
+	<p>You can always extend this LocalFileImpl class with your own custom logic, but this can break stability.</p>
+	<h3>Example of usage in the config.php file:</h3>
+	<div class="example">
+<code>
+$mcFileManagerConfig['filesystem'] = "LocalFileImpl";
+</code>
+</div>
+<br />
+	<h3>Example of usage in a mc_access file:</h3>
+	<div class="example">
+<code>
+filesystem=LocalFileImpl
+</code>
+	</div>
+</div>
+
+<div class="footer">
+	<div class="helpindexlink"><a href="index.html">Help index</a></div>
+	<div class="copyright">Copyright &copy; 2005-2006 Moxiecode Systems AB</div>
+	<br style="clear: both" />
+</div>
+
+</body>
+</html>

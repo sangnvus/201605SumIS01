@@ -1,0 +1,223 @@
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">
+    <a class="btn btn-default" href="#" role="button" data-toggle="modal" data-target="#food-edit">Thêm món ăn</a>
+  </div>
+  <div class="panel-body">
+    
+  <!-- Table -->
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th class="text-center">Ảnh</th>
+            <th>Tên</th>
+            <th class="text-center col-lg-2">Giá</th>
+            <th  class="text-center col-lg-2">Loại</th>  
+            <th class=" col-lg-2 text-center">Trạng thái</th>
+            <th class=" col-lg-2"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php if (isset($foods)){ ?>
+        <?php foreach ($foods as $item) {?>
+        <tr>
+            <td class="text-center"><img src="<?php echo $item->imageIDSrc; ?>" alt="Ảnh món ăn" height="50px"></td> 
+            <td><?php echo $item->nameFo; ?></td>
+            <td class="text-right"><?php echo $item->priceFo; ?></td>   
+            <td class="text-center"><?php 
+                switch ($item->typeFo){
+                    case 0:
+                        echo 'Tráng miệng';
+                        break;
+                    case 1:
+                        echo 'Ăn nhanh';
+                        break;
+                    case 2:
+                        echo 'Bữa chính';
+                        break;
+                }
+            ?></td>
+            <td class="text-center"><?php echo $item->statusFo == 1 ? 'Hoạt động' : 'Chưa kích hoạt'; ?></td>
+            <td class="text-center">
+            <a class="btn btn-info" href="#" onclick='return foodModule.edit(<?php echo $item->foodID; ?>)'>Sửa</a>
+            <a class="btn btn-danger" onclick="return foodModule.delete('<?php echo $item->foodID; ?>', '<?php echo $item->nameFo; ?>');" href="#">Xóa</a>   
+            </td>
+        </tr>
+        <?php } ?>
+        <?php } ?>
+    </tbody>
+  </table>
+  </div>
+<div class="modal fade" id="food-edit" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">                                                   
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Món ăn</h4>
+            </div>
+            <div class="modal-body">
+                <div id="div_monan_alert" class="alert alert-warning alert-dismissible fade in" role="alert"> 
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button> 
+                    <div id="monan_alert"></div>
+                </div>
+                <div class="form-group">                  
+                    <img src="" id="imageIDSrc" alt="Ảnh món ăn" style="width: 80px; height: 80px;" class="img-thumbnail" onclick="return foodModule.openCkFinder();">
+                     <input type="hidden" class="form-control" id="imageID" name="imageID"> 
+                     <input type="hidden" class="form-control" id="addressImage" name="addressImage"> 
+                </div>
+                <div class="form-group"> 
+                    <label for="nameFo">Tên</label>               
+                    <input type="hidden" id="foodID"  name="foodID"> 
+                    <input type="text" class="form-control" id="nameFo"  name="nameFo"> 
+                </div>                
+                <div class="form-group"> 
+                    <label for="priceFo">Giá</label>
+                    <input type="text" class="form-control" id="priceFo"  name="priceFo"> 
+                </div>         
+                <div class="form-group"> 
+                    <label for="$statusBo">Loại</label> 
+                    <select id="typeFo" name="typeFo" class="form-control">
+                      <option id="0" value="0" <?php if(isset($typeFo) && $typeFo == 0){ echo 'selected="selected"';} else {echo '';} ?> >Tráng miêng</option>
+                      <option id="1" value="1" <?php if(isset($typeFo) && $typeFo == 1){ echo 'selected="selected"';} else {echo '';} ?> >Ăn nhanh</option>
+                      <option id="1" value="2" <?php if(isset($typeFo) && $typeFo == 2){ echo 'selected="selected"'; } else {echo '';} ?>>Bữa chính</option>
+                    </select>
+                </div>
+                <div class="form-group"> 
+                    <label for="typeFo">Mô tả</label>
+                    <textarea type="text" class="form-control" id="desciptionFo"  name="desciptionFo"></textarea> 
+                </div>
+                <div class="form-group">                                                                                                                                
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" name="statusFo" id="statusFo" <?php echo (isset($statusFo) && $statusFo == 1) ? 'checked': ''; ?>>Kích hoạt
+                        </label>
+                      </div>
+                </div>  
+            </div>
+            <div class="modal-footer"> 
+                <input name="submit" id="monan_submit" class="btn btn-primary" type="button" onclick="return foodModule.addoredit();" value="Cập nhật món ăn"/>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>                
+            </div> 
+        </div>  
+    </div>
+    </div>    
+</div>
+<script type="text/javascript">
+    window.foodModule = window.foodModule || {};
+    $(document).ready(function(){
+        $('#div_monan_alert').hide();  
+    })
+    
+    foodModule.openCkFinder = foodModule.openCkFinder || function() {
+         CKFinder.popup( {
+             chooseFiles: true,
+             onInit: function( finder ) {
+                 finder.on( 'files:choose', function( evt ) {
+                     var file = evt.data.files.first();
+                     $('#food-edit #addressImage').val(file.getUrl());
+                     $('#food-edit #imageIDSrc').attr('src', file.getUrl());
+                 } );
+                 finder.on( 'file:choose:resizedImage', function( evt ) {
+                     $('#food-edit #addressImage').val(evt.data.resizedUrl);
+                     $('#food-edit #imageIDSrc').attr('src', evt.data.resizedUrl);
+                 } );
+             }
+         } );
+    }
+         
+    foodModule.delete = foodModule.delete || function(id, name){
+        if (confirm('Xóa user ' + name + '?'))
+        {
+            $.ajax({ 
+               type : "GET",  
+               dataType:'json',                                             
+               url: '<?php echo base_url("user_profile/delete_food"); ?>'+'/'+id, // target element(s) to be updated with server response 
+               cache : false,
+               //check this in firefox browser
+               complete : function(response){ 
+                    var jsonData = $.parseJSON(response.responseText);
+                    if (jsonData.type == 'success'){  
+                        alert(jsonData.text);                                      
+                        location.href = '<?php echo base_url("user_profile/restaurant_edit"); ?>';
+                    }
+                    else if (jsonData.type == 'error'){   
+                        $('#monan_alert').html(jsonData.text);
+                        $('#div_monan_alert').show();
+                    }
+               }
+            });          
+        }
+        return false;
+    }
+         
+    foodModule.addoredit = foodModule.addoredit || function(){
+        var id = $('#food-edit #foodID').val() || 0;        
+        $.ajax({ 
+           type : "POST",
+           data : {
+               'foodID' : id,
+               'nameFo' : $('#food-edit #nameFo').val(),
+               'imageID' : $('#food-edit #imageID').val(),
+               'addressImage' : $('#food-edit #addressImage').val(),
+               'desciptionFo' : $('#food-edit #desciptionFo').val(),
+               'priceFo' : $('#food-edit #priceFo').val(),
+               'typeFo' : $('#food-edit #typeFo').val(),
+               'restaurantID' : '<?php echo $restaurantID; ?>',
+               'statusFo' : $('#food-edit #statusFo').is(':checked') ? true : false,
+           },
+           dataType:'json',                                             
+           url: '<?php echo base_url("user_profile/addoredit_food"); ?>'+'/'+id, // target element(s) to be updated with server response 
+           cache : false,
+           //check this in firefox browser
+           complete : function(response){ 
+                var jsonData = $.parseJSON(response.responseText);
+                if (jsonData.type == 'success'){ 
+                    $('#monan_alert').html(jsonData.text);
+                    location.href = '<?php echo base_url("user_profile/restaurant_edit"); ?>';
+                }
+                else if (jsonData.type == 'error'){   
+                    $('#monan_alert').html(jsonData.text);
+                    $('#div_monan_alert').show();
+                }
+           }
+        });        
+        return false;
+    }
+    foodModule.edit = foodModule.edit || function(id){ 
+        $.ajax({ 
+           type : "GET",  
+           dataType:'json',                                             
+           url: '<?php echo base_url("user_profile/info_food"); ?>'+'/'+id, // target element(s) to be updated with server response 
+           cache : false,
+           //check this in firefox browser
+           complete : function(response){ 
+                var jsonData = $.parseJSON(response.responseText);
+                if (jsonData.type == 'success'){
+                    var food = $.parseJSON(jsonData.text);
+                    foodModule.fillData(food);
+                    $('#food-edit').modal('show')
+                }
+                else if (jsonData.type == 'error'){   
+                    $('#monan_alert').html(jsonData.text);
+                    $('#div_monan_alert').show();
+                }
+           }
+        });        
+        return false;
+    }
+    
+    foodModule.fillData = foodModule.fillData || function(food){
+        $('#food-edit #foodID').val(food.foodID);
+        $('#food-edit #imageID').val(food.imageID);
+        $('#food-edit #imageIDSrc').attr('src', food.imageIDSrc);
+        $('#food-edit #nameFo').val(food.nameFo);
+        $('#food-edit #desciptionFo').val(food.desciptionFo);
+        $('#food-edit #priceFo').val(food.priceFo);
+        $('#food-edit #typeFo').val(food.typeFo);
+        if (food.statusFo)
+            $('#food-edit #statusFo').attr('checked', true);
+        else    
+            $('#food-edit #statusFo').attr('checked', false);
+    }
+</script>

@@ -1,0 +1,102 @@
+<div class="container">
+    <div class="row">
+        <div class="breadcrumb"></div>
+
+        <div class="topdisplay-item" style="display: table">
+            <div class="title-content">
+                <div class="title-row">
+                    <div class="col-md-12">
+                        <h3><?php echo $count; ?> kết quả tìm kiếm cho "<?php echo $keyword; ?>"</h3>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <hr class="underTit"/>
+                </div>
+            </div>
+
+            <div class="sidebar col-md-2">
+                <div class="sidebar-content">
+                    <h4>Danh mục</h4>
+                    <ul class="sidebar-list">
+                        <?php if (isset($categories)){
+                            foreach($categories as $item){
+                             ?>
+                             <li>
+                                <a href="<?php echo $this->uriutils->BuildSearchUrl($item->categoryOfResID, $district, $keyword); ?>">
+                                    <?php echo $item->nameCOR; ?>
+                                </a>
+                             </li>
+                             <?php  
+                            }
+                        } ?>
+                    </ul>
+                </div>  
+                <div class="sidebar-content">
+                    <h4>Quận/Huyện</h4>
+                    <ul class="sidebar-list">
+                        <?php if (isset($districts)){
+                            foreach($districts as $item){
+                             ?>
+                             <li>
+                                <a href="<?php echo $this->uriutils->BuildSearchUrl($cat, $item->districtid, $keyword); ?>">
+                                    <?php echo $item->nameDis; ?>
+                                </a>
+                             </li>
+                             <?php  
+                            }
+                        } ?>
+                    </ul>
+                </div>
+            </div>   
+            <div class="col-md-10">
+                <div class="item-content item-cat">
+                    <?php
+                    foreach($items as $item){
+                        $star = $item->rateRe;
+                        ?>
+                        <div class="col-md-3">
+                            <a style="display: block; position: relative" class="img-item" href="<?php echo $base_url.'restaurant/view/'.$item->restaurantID; ?>">
+                                <img src="<?php echo $item->imageUrl != '' ? $item->imageUrl : 'http://cdn.pasgo.vn/anh-diem-den/nha-hang-ao-quan-ngo-19-dong-tac-avatarjpg-5138.jpg'; ?>">
+                                <div class="item-infor">
+                                    <label class="item-name item-name-sm"><?php echo $item->nameRe ?></label>
+                                    <span class="rate-star">
+                                        <?php for($j=0; $j< 5; $j++){?>
+                                        <?php if ($j < $star){?>
+                                        <i class="fa fa-star filled" aria-hidden="true"></i>
+                                        <?php }else {?>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <?php }?>                                    
+                                        <?php }?>
+                                    </span>    
+                                    <label class="item-address item-address-sm"><?php echo $item->address ?></label>
+                                </div>
+                            </a>   
+                            <div class="category-itemdetail" style="border: 1px solid #e0e0e0; text-align: center">
+                            <p class="sale-content">Giảm <strong><?php echo $item->discount; ?>%</strong></p>
+                            <p class="quick-description"><?php echo $this->xulychuoi->GetTitleNew( $item->descriptionRes); ?></p>
+                            <a href="<?php echo $base_url.'restaurant/view/'.$item->restaurantID; ?>">
+                                <button class="place">Đặt chỗ ngay</button>
+                            </a>
+                            </div>
+                        </div>
+                        <?php
+                    }
+                    ?>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center">
+            <?php echo $pagination; ?>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+       window.searchModule = window.searchModule = {};
+       searchModule.search = searchModule.search = function(cat, district, offset, keyword) {
+           var a = '<?php echo $this->uriutils->BuildSearchUrl($cat, $district, $key); ?>';
+           offset = 0;
+           location.href = '<?php echo base_url()?>home/search/' + cat+'/'+district+'/'+offset+'/'+encodeURIComponent(keyword);
+       }
+</script>

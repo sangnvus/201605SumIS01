@@ -1,0 +1,36 @@
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Login</h4>
+            </div>
+            <div class="modal-body">
+                <form class="submit-form signinform" action="<?php echo base_url()?>home/login">
+                    <ul>
+                        <li>
+                            <label>Tên đăng nhập</label>
+                            <input name="username" type="text">
+                        </li>
+                        <li>
+                            <label>Mật khẩu</label>
+                            <input name="password" type="password">
+                        </li>
+                        <li>
+                            <label></label>
+                            <button id="submit_login" type="submit" name="submit_login" class="btn">Đăng nhập</button>
+                        </li>
+                    </ul>
+                </form>
+                <script type="text/javascript">
+                    $(document).ready(function(){
+                        
+                    })
+                </script>
+            </div>
+        </div>
+
+    </div>
+</div>

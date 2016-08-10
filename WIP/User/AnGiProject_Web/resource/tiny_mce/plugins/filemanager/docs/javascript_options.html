@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<title>JavaScript options reference</title>
+<link href="css/screen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<div class="header">
+	<h1>JavaScript options reference</h1>
+</div>
+
+<div class="content">
+	<p>This document is the index/reference page for all JavaScript initialization options available for the MCFileManager.</p>
+
+	<div class="separator"></div>
+
+	<h2>JavaScript options</h2>
+	<div class="section">
+		<p>These options are available when the JavaScript for MCFileManager is initialized or with a mcFileManager.open function call. These options are most useful for integration purposes or when using MCFileManager in standalone mode or as a TinyMCE plugin, but remember to add the &quot;filemanager_&quot; prefix infront of each option when it's used as a plugin.<br />
+			<div class="column">
+				<h3>URL options</h3>
+				<ul class="optionlist">
+					<li><a href="jsoption_document_base_url.html">document_base_url</a></li>
+					<li><a href="jsoption_relative_urls.html">relative_urls</a></li>
+					<li><a href="jsoption_remove_script_host.html">remove_script_host</a></li>
+					<li><a href="jsoption_path.html">path</a></li>
+					<li><a href="jsoption_rootpath.html">rootpath</a></li>
+					<li><a href="jsoption_remember_last_path.html">remember_last_path</a></li>
+					<li><a href="jsoption_custom_data.html">custom_data</a></li>
+				</ul>
+			</div>
+			<br style="clear: both" />
+		</p>
+	</div>
+
+	<div class="separator"></div>
+
+	<h2>Setting page level options</h2>
+	<div class="section">
+		<p>
+			Setting options for all open calls on a page is done using the init javascript call, much like the init call in TinyMCE. Notice that this call is normally not needed unless you have specific requirements for the integration with TinyMCE or using the application in standalone mode.
+		</p>
+		<h3>Example of init call:</h3>
+		<div class="example">
+<pre>
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Example&lt;/title&gt;
+<strong>&lt;script language=&quot;javascript&quot; type=&quot;text/javascript&quot; src=&quot;jscripts/mcfilemanager.js&quot;&gt;&lt;/script&gt;</strong>
+<strong>&lt;script language=&quot;javascript&quot; type=&quot;text/javascript&quot;&gt;
+mcFileManager.init({
+	document_base_url : "/",
+	relative_urls : true,
+	remove_script_host : true
+});
+&lt;/script&gt;</strong>
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;h3&gt;Simple example:&lt;/h3&gt;
+&lt;form name=&quot;example1&quot;&gt;
+Some URL field: &lt;input type=&quot;text&quot; name=&quot;url&quot; value=&quot;Select file&quot;&gt;
+<strong>&lt;a href=&quot;javascript:mcFileManager.open('example1','url','','',{document_base_url : "/somedir/somedoc.html"});&quot;&gt;[Browse]&lt;/a&gt;</strong>
+&lt;/form&gt;
+
+&lt;h3&gt;Iframe example:&lt;/h3&gt;
+&lt;form name=&quot;example2&quot;&gt;
+&lt;div&gt;&lt;iframe id=&quot;myiframe&quot; src=&quot;about:blank&quot; style=&quot;width: 600px; height: 450px&quot;&gt;&lt;/iframe&gt;&lt;/div&gt;
+Some URL field: &lt;input type=&quot;text&quot; name=&quot;url&quot; value=&quot;Select file&quot;&gt;
+<strong>&lt;a href=&quot;javascript:mcFileManager.openInIframe('myiframe','example2','url');&quot;&gt;[Browse]&lt;/a&gt;</strong>
+&lt;/form&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+		</div>
+		<br />
+		Remember to remove the last &quot;,&quot; in the config list.
+	</div>
+
+	<div class="separator"></div>
+
+	<h2>MCFileManager as TinyMCE plugin</h2>
+	<div class="section">
+		<p>The MCFileManager can be loaded as a TinyMCE plugin, this is a easy and flexible way of using it together with TinyMCE. Simply place the filemanager directory within the plugins directory of TinyMCE and add it to the plugins option. The above options should simply be prefixed with the &quot;filemanager&quot; prefix.</p>
+
+		<h3>Example of init call for two separate TinyMCE instances with diffrent MCFileManager config settings:</h3>
+		<div class="example"><pre>
+tinyMCE.init({
+	mode : &quot;exact&quot;,
+	elements : &quot;elm1&quot;,
+	theme : &quot;advanced&quot;,
+	plugins : &quot;advimage,advlink,<strong>filemanager</strong>&quot;,
+	<strong>filemanager_path : &quot;testcases/multiple_rootpath_files/root1/somedir&quot;</strong>
+});
+
+tinyMCE.init({
+	mode : &quot;exact&quot;,
+	elements : &quot;elm2&quot;,
+	theme : &quot;advanced&quot;,
+	plugins : &quot;advimage,advlink,<strong>filemanager</strong>&quot;,
+	<strong>filemanager_path : &quot;testcases/multiple_rootpath_files/root2/somedir2&quot;,
+	filemanager_rootpath : &quot;testcases/multiple_rootpath_files/root2&quot;</strong>
+});</pre></div>
+	</div>
+</div>
+
+<div class="footer">
+	<div class="helpindexlink"><a href="index.html">Help index</a></div>
+	<div class="copyright">Copyright &copy; 2005-2006 Moxiecode Systems AB</div>
+	<br style="clear: both" />
+</div>
+
+</body>
+</html>

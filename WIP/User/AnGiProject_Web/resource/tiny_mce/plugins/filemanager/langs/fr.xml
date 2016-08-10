@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<language-pack>
+	<header>
+		<author>Moxiecode Systems AB</author>
+		<version minor="1" major="0" releasedate="2005-09-27" />
+		<description>
+			This is the french language pack for the MCFileManager.
+		</description>
+	</header>
+
+	<language code="fr" title="Francais" dir="ltr">
+		<group target="common">
+			<item name="exe">Fichier executable</item>
+			<item name="image">Fichier image</item>
+			<item name="archive">Archive Compressée</item>
+			<item name="html">Fichier HTML ou script</item>
+			<item name="movie">Fichier vidéo</item>
+			<item name="sound">Fichier son</item>
+			<item name="swf">Fichier Flash</item>
+			<item name="powerpoint">Fichier Powerpoint</item>
+			<item name="document">Document</item>
+			<item name="word">Document Office</item>
+			<item name="pdf">Fichier Adobe Acrobat</item>
+			<item name="excel">Fichier Excel</item>
+			<item name="txt">Fichier texte</item>
+			<item name="xml">Fichier XML</item>
+		</group>
+
+		<group target="frameset">
+			<item name="title">Gestionnaire de fichiers</item>
+		</group>
+
+		<group target="filelist">
+			<item name="title">Gestionnaire de fichiers</item>
+			<item name="filename">Nom du fichier</item>
+			<item name="size">Taille</item>
+			<item name="modified">Date de modification</item>
+			<item name="confirm_cut">Etes-vous sur de vouloir couper / supprimer ces fichiers ?</item>
+			<item name="confirm_copy">Etes-vous sur de vouloir copier ces fichiers ?</item>
+			<item name="confirm_paste">Etes-vous sur de vouloir coller les fichiers ici ?</item>
+			<item name="confirm_delete">Etes-vous sur de vouloir supprimer ces fichiers ?</item>
+			<item name="confirm_unzip">Etes-vous sur de vouloir décompresser ces fichiers ?\nSi la taille totale est très grande, la procédure peut prendre du temps.</item>
+			<item name="zip_removed">Les fichiers suivants ont été supprimés.</item>
+			<item name="createdir">Créer un dossier</item>
+			<item name="createdoc">Créer un fichier</item>
+			<item name="refresh">Rafraîchir</item>
+			<item name="upload">Uploader un fichier</item>
+			<item name="download">Télécharger les fichiers sélectionnés</item>
+			<item name="props">Propriétés du fichier / dossier</item>
+			<item name="cut">Couper les fichiers / dossiers sélectionnés</item>
+			<item name="copy">Copier les fichiers / dossiers sélectionnés</item>
+			<item name="paste">Coller les fichiers / dossiers sélectionnés</item>
+			<item name="delete">Supprimer les fichiers / dossiers sélectionnés</item>
+			<item name="unzip">Décompresse le fichier sélectionné</item>
+			<item name="zip">Compresse les fichiers / dossiers sélectionnés</item>
+			<item name="imagemanager">Image Manager</item>
+			<item name="dir">Dossier</item>
+			<item name="parent_dir">Dossier parent</item>
+			<item name="toggle_all">Cocher tous</item>
+			<item name="error_exists">Erreur : Le fichier / dossier {path} existe déjà.</item>
+			<item name="error_delete_failed">Erreur : Droits d'accès restreints.</item>
+			<item name="error_directory_not_empty">Erreur : Le dossier {path} ne peut pas être supprimé car non vide.</item>
+		</group>
+
+		<group target="preview">
+			<item name="title">Informations sur le fichier / dossier</item>
+			<item name="directory_information">Informations du dossier</item>
+			<item name="file_information">Informations du fichier</item>
+			<item name="creationdate">Date de création :</item>
+			<item name="modificationdate">Date de modification :</item>
+			<item name="access">Accès :</item>
+			<item name="directory">Dossier :</item>
+			<item name="subdirectories">Sous-dossiers :</item>
+			<item name="files">Fichiers :</item>
+			<item name="total_file_size">Taille totale :</item>
+			<item name="filename">Nom du fichier :</item>
+			<item name="file_size">Taille :</item>
+			<item name="file_description">Description :</item>
+			<item name="preview">Prévisualiser</item>
+			<item name="no_preview">Pas de prévisualisation disponible.</item>
+			<item name="button_select">Selectionner</item>
+			<item name="button_view">Voir</item>
+			<item name="readable">Lisible</item>
+			<item name="not_readable">Non lisible</item>
+			<item name="writable">Editable</item>
+			<item name="not_writable">Non editable</item>
+		</group>
+
+		<group target="fileprops">
+			<item name="title">Propriétés du fichier / dossier</item>
+			<item name="description">Propriétés du fichier / dossier</item>
+			<item name="properties_on">Propriétés de :</item>
+			<item name="name">Nom :</item>
+			<item name="button_save">Sauver</item>
+			<item name="button_cancel">Annuler</item>
+			<item name="error_exists">Erreur : Un fichier / dossier de ce nom existe déjà.</item>
+		</group>
+
+		<group target="createdir">
+			<item name="title">Créer dossier</item>
+			<item name="description">Insérez le nom du dossier que vous voulez crééer.</item>
+			<item name="template">Template :</item>
+			<item name="select_template">-- template --</item>
+			<item name="directory_name">Nom du dossier :</item>
+			<item name="create_in">Créer dans :</item>
+			<item name="button_create">Créer</item>
+			<item name="button_cancel">Annuler</item>
+			<item name="error_missing_name">Erreur : Spécifiez un nom.</item>
+			<item name="error_invalid_template_selection">Erreur : Sélectionnez un template.</item>
+			<item name="error_template_not_found">Erreur : Le template sélectionné n'a pas été trouvé.</item>
+			<item name="error_invalid_name">Erreur : Le nom du dossier est invalide.\\nCela inclut les caractères spéciaux comme : :;</item>
+			<item name="error_exists">Erreur : Un dossier portant ce nom existe déjà.</item>
+		</group>
+
+		<group target="createdoc">
+			<item name="title">Créer document</item>
+			<item name="description">Remplissez le formulaire pour créer un document depuis le template.</item>
+			<item name="template">Template :</item>
+			<item name="select_template">-- template --</item>
+			<item name="required_filename">Vous devez donner un nom au nouveau document.</item>
+			<item name="filename">Nom du fichier :</item>
+			<item name="create_in">Créer dans :</item>
+			<item name="button_create">Créer</item>
+			<item name="button_cancel">Annuler</item>
+			<item name="error_missing_document_name">Erreur : Spécifiez un nom apour le document.</item>
+			<item name="error_missing_template_selection">Erreur : Sélectionnez un template.</item>
+			<item name="error_missing_template">Erreur : Le template sélectionné n'a pas été trouvé.</item>
+			<item name="error_invalid_file_name">Erreur : Le nom du fichier est invalide.\\nCela inclut les caractères spéciaux comme : ;.</item>
+			<item name="error_exists">Erreur : Un fichier portant ce nom existe déjà.</item>
+		</group>
+
+		<group target="upload">
+			<item name="title">Upload</item>
+			<item name="description">Utilisez le formulaire pour uploader des fichiers.</item>
+			<item name="upload_in">Uploader dans :</item>
+			<item name="valid_extensions">Extensions valides :</item>
+			<item name="max_upload_size">Taille max :</item>
+			<item name="file_to_upload">Fichiers à uploader :</item>
+			<item name="as_file_name">Comme :</item>
+			<item name="required_filename">Donnez un nom au fichier que vous souhaitez uploader.</item>
+			<item name="button_upload">Upload</item>
+			<item name="button_add_upload">Ajouter champ</item>
+			<item name="button_cancel">Annuler</item>
+			<item name="error_exists">Erreur : Un fichier portant ce nom existe déjà.</item>
+			<item name="error_to_large">Erreur : Le fichier que vous essayez d'uploader est trop grand.</item>
+			<item name="remove">Supprimer</item>
+		</group>
+
+		<group target="unzip">
+			<item name="title">Décompression</item>
+			<item name="description">Une vue du fichier que vous souhaitez décompresser.</item>
+			<item name="zipfile_name">Nom du fichier :</item>
+			<item name="current_folder">Dossier courant :</item>
+			<item name="overwrite_files">Ecraser les fichiers:</item>
+			<item name="name">Nom</item>
+			<item name="size">Taille</item>
+			<item name="csize">Taille compressée</item>
+			<item name="exists">Existe</item>
+			<item name="status">Statut</item>
+			<item name="created">Créer</item>
+			<item name="button_unzip">Décompresser</item>
+			<item name="button_cancel">Annuler</item>
+			<item name="button_back">Retour</item>
+			<item name="button_close">Fermer</item>
+			<item name="Accepted">Accepté</item>
+			<item name="Denied">Refusé</item>
+			<item name="Passed">Passé</item>
+			<item name="Failed">Echoué</item>
+			<item name="Yes">Oui</item>
+			<item name="No">Non</item>
+		</group>
+
+		<group target="zip">
+			<item name="title">Créer zip</item>
+			<item name="description">Insérez le nom du fichier compressé que vous souhaitez créer.</item>
+			<item name="created_in">Le fichier compressé sera créé dans :</item>
+			<item name="name">Nom :</item>
+			<item name="required_filename">Entrez un nom de fichier.</item>
+			<item name="button_create">Créer</item>
+			<item name="button_cancel">Annuler</item>
+		</group>
+	</language>
+</language-pack>

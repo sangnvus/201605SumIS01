@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<title>Custom authentication</title>
+<link href="css/screen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<div class="header">
+	<h1>Custom authentication</h1>
+</div>
+
+<div class="content">
+	<p>MCFileManager if created to be easy to integrate with existing server applications such as CMS systems, web hosting controllers or LMS systems. So the most common need is to handle authentication of end users.</p>
+
+	<div class="separator"></div>
+
+	<h2>Writing your own authentication plug in</h2>
+	<div class="section">
+		<p>The most common need for integration is with a systems authentication logic. Verify the level of access the end user has to the system. MCFileManager comes with a built in session authenticator, this authenticator simply checks for two named session variables. But some times more custom logic is required, then you can extend the build in authenticator logic by writing an authenticator plug in.</p>
+		<p>A authenticator plug in is a PHP class that extends the BaseAuthenicator class located in  &quot;filemanager\classes\Authenticators\BaseAuthenticator.php&quot;. The default behavior of this base class is that everyone is logged in and the user isn't added to any groups. This behavior can easily be changed if you subclass it and extend the base methods with your logic.</p>
+		<h3>Example of a custom Authenticator class:</h3>
+		<div class="example">
+<pre>
+class MyAuthenticator extends BaseAuthenticator {
+    function MyAuthenticator() {
+        // Your custom constructor code
+    }
+
+    function init(&$config) {
+        // Your custom initialization code
+        $config['some.config.option'] = "new value";
+    }
+
+    function getGroups() {
+        return "mygroup1,mygroup2";
+    }
+
+    function isLoggedin() {
+        if ($something)
+            return true;
+
+        return false;
+    }
+}
+</pre>
+		</div>
+		<p>The example above changes a specific config value when it initializes, returns two groups and checks the $something variable to verify access. For more details on the specific methods in BaseAuthenticator consult the API documentation.</p>
+	</div>
+</div>
+
+<div class="footer">
+	<div class="helpindexlink"><a href="index.html">Help index</a></div>
+	<div class="copyright">Copyright &copy; 2005-2006 Moxiecode Systems AB</div>
+	<br style="clear: both" />
+</div>
+
+</body>
+</html>

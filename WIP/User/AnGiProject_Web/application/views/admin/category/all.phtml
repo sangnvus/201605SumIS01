@@ -1,0 +1,45 @@
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">
+    <a class="btn btn-default" href="<?php echo base_url()?>admin/add_category" role="button">Thêm</a>
+  </div>
+  <div class="panel-body">
+    
+  <!-- Table -->
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th class="col-lg-1">ID</th>    
+            <th>Tên</th>   
+            <th class="text-center col-lg-2">Trạng thái</th>
+            <th class="col-lg-2"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php if ($rows > 0){ ?>
+        <?php foreach ($result as $item) {?>
+        <tr>
+            <td><?php echo $item->categoryOfResID; ?></td>
+            <td><?php echo $item->nameCOR; ?></td>  
+            <td class="text-center"><?php echo $item->statusCOR == 1 ? 'Hoạt động' : 'Chưa kích hoạt'; ?></td>
+            <td class="text-center">
+            <a class="btn btn-info" href="<?php echo base_url()?>admin/edit_category/<?php echo $item->categoryOfResID; ?>">Sửa</a>
+            <a class="btn btn-danger" onclick="return categoryModule.delete('<?php echo $item->nameCOR; ?>');" href="<?php echo base_url()?>admin/delete_category/<?php echo $item->categoryOfResID; ?>">Xóa</a>   
+            </td>
+        </tr>
+        <?php } ?>
+        <?php } ?>
+    </tbody>
+  </table>
+  </div>
+      
+</div>
+<script type="text/javascript">
+    window.categoryModule = window.categoryModule || {};
+    
+    categoryModule.delete = categoryModule.delete || function(name){
+        if (confirm('Xóa ' + name + '?'))
+            return true;
+        return false;
+    }
+</script>

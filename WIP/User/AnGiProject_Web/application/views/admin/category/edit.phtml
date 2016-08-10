@@ -1,0 +1,31 @@
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">
+    <a class="btn btn-default" href="<?php echo base_url()?>admin/categories" role="button">Quay về</a>
+  </div>
+  <div class="panel-body">
+    <div class="bg-danger"><?php echo $error; ?></div>
+    <form method="POST" action="">                                                                
+        <div class="form-group"> 
+            <label for="memName">Tên</label>
+            <input type="text" class="form-control" value="<?php echo isset($nameCOR) ? $nameCOR : ''; ?>" id="nameCOR"  name="nameCOR" placeholder=""> 
+        </div>
+        <div class="form-group"> 
+            <label for="userName">Mô tả</label>                            
+            <div>
+                <textarea id="desciptionCOR"  name="desciptionCOR"   class="form-control"><?php echo isset($desciptionCOR) ? $desciptionCOR : ''; ?></textarea>
+            </div>
+        </div>     
+        <div class="form-group">                                                                                                                                
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" name="statusCOR" id="statusCOR" <?php echo (isset($statusCOR) && $statusCOR == 1) ? 'checked': ''; ?>>Kích hoạt
+                </label>
+              </div>
+        </div>
+        <input name="submit" id="submit" class="btn btn-info" type="submit" value="Lưu" />
+        
+    </form>
+  </div> 
+</div>
+   

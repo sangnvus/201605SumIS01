@@ -1,0 +1,72 @@
+<div style="background: #f7f6f4">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <form class="search">
+                    <input type="text" id="keyword" name="keyword" placeholder="Buffet, Lẩu & Nướng, Hải sản...">
+                    <button id="btnSearch"><i class="fa fa-search" aria-hidden="true"></i></button>
+                    <script type="text/javascript">
+                           $(document).ready(function(){
+                                $('#btnSearch').click(function(){   
+                                    var url = '<?php echo base_url('home/search');?>' + '/0/0/' + encodeURIComponent($('#keyword').val());
+                                    location.href = url;
+                                    return false;
+                                })
+                           });
+                    </script>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row"> 
+        <div class="topdisplay-item">
+            <div class="title-content">
+                <div class="title-row">
+                    <div class="col-md-6">
+                        <h3><?php echo $categoryName; ?></h3>
+                    </div>  
+                </div> 
+                <div class="col-md-12">
+                    <hr class="underTit"/>
+                </div>  
+            </div>  
+            <ul class="item-content">
+            <?php foreach($items as $item){ ?>
+                <li class="col-md-3">
+                    <a style="display: block; position: relative" class="img-item" href="<?php echo $this->uriutils->BuildViewResUrl($item->restaurantID); ?>">
+                        <img src="<?php echo $item->imageUrl != '' ? $item->imageUrl : 'http://cdn.pasgo.vn/anh-diem-den/nha-hang-ao-quan-ngo-19-dong-tac-avatarjpg-5138.jpg'; ?>">
+                        <div class="item-infor">
+                            <label class="item-name"><?php echo $item->nameRe; ?></label>
+                            <span class="rate-star">
+                                <?php for($j=0; $j< 5; $j++){?>
+                                <?php if ($j < $item->rateRe){?>
+                                <i class="fa fa-star filled" aria-hidden="true"></i>
+                                <?php }else {?>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <?php }?>                                    
+                                <?php }?>
+                            </span>    
+                            <label class="item-address"><?php echo $item->address; ?></label>
+                        </div>
+                    </a> 
+                    <div style="border: 1px solid #e0e0e0; text-align: center">
+                        <p class="sale-content">Giảm <strong><?php echo $item->discount; ?>%</strong></p>
+                        <p class="quick-description"><?php echo $this->xulychuoi->GetTitleNew( $item->descriptionRes); ?></p>
+                        <a href="<?php echo $this->uriutils->BuildViewResUrl($item->restaurantID); ?>">
+                            <button class="place">Đặt chỗ ngay</button>
+                        </a>
+                    </div>
+                </li>
+            <?php } ?>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div style="text-align: center">
+            <?php echo $pagination; ?>
+        </div>
+</div>
+</div>

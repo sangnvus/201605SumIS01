@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<title>Option: filesystem.directory_templates</title>
+<link href="css/screen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<div class="header">
+	<h1>Option: filesystem.directory_templates</h1>
+</div>
+
+<div class="content">
+	<p>This option is used by the create directory dialog, the files specified in this comma separated list will be used as templates for creating new directories. This enables users to select the template from a drop list and create a instance of that directory. If you only specify one template in this list no drop list will appear in the create directory dialog since it's not needed when the user only has one option.</p>
+	<p>This option can be very useful when for example a index.html file and a images directory is to be auto created for the user.</p>
+	<p>There are a few build in variables that gets auto replaced when this option is used, these variables are:
+	<ul>
+		<li>${path} - The current path.</li>
+		<li>${rootpath} - The current root path.</li>
+		<li>${configpath} - The current mc_access path.</li>
+	</ul>
+	<h3>Example of usage in the config.php file:</h3>
+	<div class="example">
+<code>
+$mcFileManagerConfig['filesystem.directory_templates'] = '${rootpath}/templates/dir1,${rootpath}/templates/dir2';
+</code>
+</div>
+<br />
+	<h3>Example of usage in a mc_access file:</h3>
+	<div class="example">
+<code>
+filesystem.directory_templates=${rootpath}/templates/dir1,${rootpath}/templates/dir2
+</code>
+	</div>
+</div>
+
+<div class="footer">
+	<div class="helpindexlink"><a href="index.html">Help index</a></div>
+	<div class="copyright">Copyright &copy; 2005-2006 Moxiecode Systems AB</div>
+	<br style="clear: both" />
+</div>
+
+</body>
+</html>

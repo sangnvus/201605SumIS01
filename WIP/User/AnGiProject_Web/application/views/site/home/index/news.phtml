@@ -1,0 +1,36 @@
+ <div class="title-content">
+    <div class="title-row">
+        <div class="col-md-6">
+            <h3><?php echo $title; ?></h3>
+        </div>
+        <div class="col-md-6">                                   
+                <a class="small-tit" href="<?php echo $this->uriutils->BuildMenuStaticUrl(30);?>" style="padding-left: 10px">Tất cả</a>
+                <a class="small-tit small-tit-news" href="<?php echo $this->uriutils->BuildMenuStaticUrl(31);?>">Cập nhật</a>
+                <a class="small-tit small-tit-news" href="<?php echo $this->uriutils->BuildMenuStaticUrl(32);?>">Sự kiện</a>
+                <a class="small-tit small-tit-news" href="<?php echo $this->uriutils->BuildMenuStaticUrl(33);?>">Khuyến mãi</a>
+        </div>
+    </div>
+
+    <div class="col-md-12">
+        <hr class="underTit"/>
+    </div>
+</div>
+
+<ul class="item-content">
+    <?php
+    foreach($items as $item){  
+        ?>
+        <li class="col-md-4">
+            <a style="display: block; position: relative" class="img-item" href="<?php echo $this->uriutils->BuildViewNewsUrl($item->newsID); ?>">
+                <img style="max-height: 223px;" src="<?php echo $item->imageNews != '' ? $item->imageNews : 'http://cdn.pasgo.vn/anh-tin-tuc-resize/400/pasgo-nang-cap-va-cau-chuyen-de-men-phieu-luu-ky-54.jpg'; ?>">
+            </a>
+
+            <div style="text-align: center">
+                <h4 class="news-title"><a href=""><?php echo $this->xulychuoi->GetTitleNew( $item->titleNews, 60); ?></a></h4>
+                <p class="news-desc"><?php echo $this->xulychuoi->GetIntroText( $item->contentNews, 200); ?></p>
+            </div>
+        </li>
+        <?php
+    }
+    ?>
+</ul>

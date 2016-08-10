@@ -1,0 +1,71 @@
+<div class="topheader" style="background: #d02028">
+    <div class="container">
+        <div class="row">
+            <nav class="col-md-12 col-sm-12 navbar">
+                <ul class="topbar"> 
+                    <li class="top-home"><a href="<?php echo base_url()?>">Trang chủ</a> </li>
+                    <li>
+                        <a href="">Ẩm thực</a>  
+                        <ul class="hover-menu">                  
+                            <?php if (isset($categoryModels)) {?>
+                            <?php foreach ($categoryModels as $item) {?>
+                            <li><a href="<?php echo base_url().'home/category/'.$item->categoryOfResID ;?>"><?php echo $item->nameCOR;?></a></li> 
+                            <?php } ?> 
+                            <?php } ?>
+                        </ul>
+                    </li>    
+                    <li>
+                        <a href="">Tin tức</a>
+                        <ul class="hover-menu">
+                            <li><a href="<?php echo $this->uriutils->BuildMenuStaticUrl(31);?>">Tin cập nhật</a></li>
+                            <li><a href="<?php echo $this->uriutils->BuildMenuStaticUrl(32);?>">Sự kiện</a></li>
+                            <li><a href="<?php echo $this->uriutils->BuildMenuStaticUrl(33);?>">Kuyến mãi</a></li>
+                            <li><a href="<?php echo $this->uriutils->BuildMenuStaticUrl(34);?>">Trải nghiệm</a></li>   
+                        </ul>
+                    </li>  
+                    <li><a href="">Hướng Dẫn</a></li>  
+                    <li>
+                        <a href="">Giới thiệu</a>
+                        <ul class="hover-menu">
+                            <li><a href="">Về chúng tôi</a></li>
+                            <li><a href="">Đối tác</a></li>
+                        </ul>
+                    </li>      
+                    <?php if($user != '' && $level != 2){//người dùng (thực khác, nhà hàng) ?>
+                    <li>
+                        <a class="" href="<?php echo base_url(); ?>user_profile"><i class="fa fa-user" aria-hidden="true"></i>Thông tin cá nhân</a>
+                    </li>
+                    <?php } ?>      
+                    <?php if($user != '' && $level == 2){//admin ?>
+                    <li>
+                        <a class="" href="<?php echo base_url(); ?>admin"><i class="fa fa-users" aria-hidden="true"></i>Quản trị</a>
+                    </li>
+                    <?php } ?>
+                    <li class="top-register">
+                        <?php if ($user == ''){
+                         ?>
+                        <a href="">Đăng nhập <i class="fa fa-caret-down" aria-hidden="true"></i></a>
+                        <div class="hover-menu hover-signin">
+                            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Đăng nhập</button>
+                            <div class="hover-register">
+                                <label class="small-tit">Thành viên mới? <a href="<?php echo base_url(); ?>home/signup">Đăng ký</a></label>
+                            </div>
+                        </div>
+                        <?php
+                            }
+                            else {
+                                ?>
+                        <a href="">Xin chào: <?php echo $fullname ?> <i class="fa fa-caret-down" aria-hidden="true"></i></a>
+                        <div class="hover-menu hover-signin">                               
+                            <a class="btn btn-info btn-lg" href="<?php echo base_url(); ?>home/logout">Đăng xuất</a>    
+                        </div>    
+                        <?php } ?>
+                        <!-- Modal -->
+                        <?php $this->load->view('site/user/user/login.phtml') ?>
+                    </li>
+                             
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>    

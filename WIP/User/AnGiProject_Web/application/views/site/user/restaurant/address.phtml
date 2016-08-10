@@ -1,0 +1,145 @@
+<div class="form-group">   
+    <div class="col-lg-4"> 
+        <label for="provinceID">Tỉnh/ Thành phố (*)</label> 
+        <select id="provinceID" name="provinceID" class="form-control">        
+          <option id="" value="" selected="selected">--chọn địa chỉ--</option>  
+          <?php foreach($province as $adr){?>
+             <option id="<?php echo $adr->provinceID; ?>" 
+             value="<?php echo $adr->provinceID; ?>" 
+             <?php if(isset($provinceID) && $provinceID == $adr->provinceID.''){ echo 'selected="selected"';} else {echo '';} ?> ><?php echo $adr->namePro; ?></option>
+          <?php } ?>
+        </select>
+    </div>
+    <div class="col-lg-4"> 
+        <label for="districtID">Quận/ Huyện</label> 
+        <select id="districtID" name="districtID" class="form-control">        
+          <option id="" value="" selected="selected">--chọn quận/ huyện--</option>  
+          <?php foreach($district as $adr){?>
+             <option id="<?php echo $adr->districtid; ?>" 
+             value="<?php echo $adr->districtid; ?>" 
+             <?php if(isset($districtID) && $districtID == $adr->districtid.''){ echo 'selected="selected"';} else {echo '';} ?> ><?php echo $adr->nameDis; ?></option>
+          <?php } ?>
+        </select>
+    </div>
+    <div class="col-lg-4"> 
+        <label for="wardID">Xã/ Phường</label> 
+        <select id="wardID" name="wardID" class="form-control">        
+          <option id="" value="" selected="selected">--chọn xã/ phường--</option>  
+          <?php foreach($ward as $adr){?>
+             <option latlng="<?php echo $adr->locationWard;?>" 
+             id="<?php echo $adr->wardid; ?>" 
+             value="<?php echo $adr->wardid; ?>" 
+             <?php if(isset($wardID) && $wardID == $adr->wardid.''){ echo 'selected="selected"';} else {echo '';} ?> ><?php echo $adr->nameWard; ?></option>
+          <?php } ?>
+        </select>
+    </div>
+    <div class="col-lg-12"> 
+        <label for="address">Địa chỉ (*)</label> 
+        <input type="hidden" id="addressID"  name="addressID"  value="<?php echo isset($addressID) ? $addressID : ''; ?>" > 
+        <input type="text" class="form-control" id="address"  name="address"  value="<?php echo isset($address) ? $address : ''; ?>" placeholder="Địa chỉ"> 
+    </div>  
+    <div class="col-lg-4"> 
+        <label for="latitudeRe">latitudeRe</label>
+        <input type="text" class="form-control" id="latitudeRe"  name="latitudeRe"  value="<?php echo isset($latitudeRe) ? $latitudeRe : ''; ?>"> 
+    </div>
+    <div class="col-lg-4"> 
+        <label for="longitudeRe">longitudeRe</label>
+        <input type="text" class="form-control" id="longitudeRe"  name="longitudeRe"  value="<?php echo isset($longitudeRe) ? $longitudeRe : ''; ?>"> 
+    </div> 
+    <div class="col-lg-4"> 
+        <label for="otherPoints">Địa chỉ khác</label>
+        <input type="text" class="form-control" id="otherPoints"  name="otherPoints"  value="<?php echo isset($otherPoints) ? $otherPoints : ''; ?>"> 
+</div>     
+</div>     
+<script type="">
+    window.restaurantModule = window.restaurantModule || {};
+    $(document).ready(function(){
+        $('.datepicker').datetimepicker({locale: 'vi',format: 'DD/MM/YYYY'});   
+        $('#provinceID').change(function(){
+            restaurantModule.findDistrictByProvinceId($(this).val())
+        });
+        $('#districtID').change(function(){
+            restaurantModule.findWardByDistrictId($(this).val())
+        });
+        $('#wardID').change(function(){
+            var latlng = restaurantModule.parseDMS($(this).find('option:selected').attr('latlng'));
+
+            $('#latitudeRe').val(latlng.latitude);
+            $('#longitudeRe').val(latlng.longtitude);
+        });
+    })   
+    
+    restaurantModule.parseDMS = function(input) {
+        if (!input || input.length == 0)
+            return {latitude : '',longtitude: '' }   
+        
+        var parts = input.split(/[^\d\w]+/);
+        var lat = restaurantModule.convertDMSToDD(parts[0], parts[1], parts[2]);
+        var lng = restaurantModule.convertDMSToDD(parts[3], parts[4], parts[5]);
+        return {
+            latitude : lat,
+            longtitude: lng
+        }
+    } 
+     
+    restaurantModule.convertDMSToDD = function(degrees, minutes, seconds) {
+        var direction = seconds[seconds.length-1];
+        seconds = seconds.replace(direction, '');
+        var dd = degrees + minutes/60 + seconds/(60*60);
+
+        if (direction == "S" || direction == "W") {
+            dd = dd * -1;
+        } // Don't do anything for N or E
+        return dd;
+    }
+                                 
+    restaurantModule.findDistrictByProvinceId = restaurantModule.findDistrictByProvinceId || function(id){ 
+        $.ajax({ 
+           type : "GET",  
+           dataType:'json',                                             
+           url: '<?php echo base_url("home/getDistrictByProvinceId"); ?>'+'/'+id, // target element(s) to be updated with server response 
+           cache : false,
+           //check this in firefox browser
+           complete : function(response){ 
+                var jsonData = $.parseJSON(response.responseText);
+                if (jsonData.type == 'success'){
+                    var districts = $.parseJSON(jsonData.text);
+                    restaurantModule.fillData(districts, 'districtID', 'districtid', 'nameDis');    
+                }
+                else if (jsonData.type == 'error'){ 
+                }
+           }
+        });        
+        return false;
+    }
+    
+    restaurantModule.findWardByDistrictId = restaurantModule.findWardByDistrictId || function(id){ 
+        $.ajax({ 
+           type : "GET",  
+           dataType:'json',                                             
+           url: '<?php echo base_url("home/getWardByDistrictId"); ?>'+'/'+id, // target element(s) to be updated with server response 
+           cache : false,
+           //check this in firefox browser
+           complete : function(response){ 
+                var jsonData = $.parseJSON(response.responseText);
+                if (jsonData.type == 'success'){
+                    var districts = $.parseJSON(jsonData.text);
+                    restaurantModule.fillData(districts, 'wardID', 'wardid', 'nameWard');    
+                }
+                else if (jsonData.type == 'error'){ 
+                }
+           }
+        });        
+        return false;
+    }
+    
+    restaurantModule.fillData = restaurantModule.fillData || function(data, id, value, text){ 
+        var options = '<option id="0" value="" selected = "selected">--Chọn giá trị--</option>';
+        for (i = 0; i < data.length; i++) { 
+            options += '<option id="'+data[i][value]+'" value="'+data[i][value]+'" >'+data[i][text]+'</option>';
+        }
+        $('#'+id).html(options);
+        return false;
+    }
+    
+</script>  

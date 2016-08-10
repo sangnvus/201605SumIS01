@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<language-pack>
+	<header>
+		<author>Moxiecode Systems AB / Translated by Markus Vetten</author>
+		<version minor="1" major="0" releasedate="2005-11-05" />
+		<description>
+			This is the german language pack for the MCFileManager.
+		</description>
+	</header>
+
+	<language code="de" title="Deutsch" dir="ltr">
+		<group target="common">
+			<item name="exe">Ausf&#252;hrbare Datei</item>
+			<item name="image">Grafik</item>
+			<item name="archive">Komprimiertes Archiv</item>
+			<item name="html">HTML</item>
+			<item name="movie">Film</item>
+			<item name="sound">Musik</item>
+			<item name="swf">Flash/Shockwave</item>
+			<item name="powerpoint">Powerpoint</item>
+			<item name="document">Dokument</item>
+			<item name="word">Word</item>
+			<item name="pdf">PDF</item>
+			<item name="excel">Excel</item>
+			<item name="txt">Textdatei</item>
+			<item name="xml">XML</item>
+		</group>
+
+		<group target="frameset">
+			<item name="title">Moxiecode File Browser</item>
+		</group>
+
+		<group target="filelist">
+			<item name="title">Moxiecode File Browser</item>
+			<item name="filename">Dateiname</item>
+			<item name="size">Gr&#246;&#223;e</item>
+			<item name="modified">&#196;nderungsdatum</item>
+			<item name="confirm_cut">Sollen die ausgew&#228;hlten Dateien ausgeschnitten/verschoben werden?</item>
+			<item name="confirm_copy">Sollen die ausgew&#228;hlten Dateien kopiert werden?</item>
+			<item name="confirm_paste">Sollen die ausgew&#228;;hlten Dateien einf&#252;gt werden?</item>
+			<item name="confirm_delete">Sollen die ausgew&#228;hlten Dateien endg&#252;ltig gel&#246;scht werden?</item>
+			<item name="confirm_unzip">Sollen die ausgew&#228;hlten Dateien entpackt werden?\nBei gr&#246;&#223;eren Dateien kann dieser Vorgang l&#228;nger dauern.</item>
+			<item name="zip_removed">Die folgenden Datei wurden aus dem Prozess entfernt, da es sich dabei nicht um ZIP Archive handelt.</item>
+			<item name="createdir">Verzeichnis erstellen</item>
+			<item name="createdoc">Datei erstellen</item>
+			<item name="refresh">Aktualisieren</item>
+			<item name="upload">Neue Datei hochladen</item>
+			<item name="download">Ausgew&#228;hlte Datei runterladen</item>
+			<item name="props">Datei/Verzeichnis Eigenschaften</item>
+			<item name="cut">Ausgew&#228;hlte Dateien/Verzeichnisse ausschneiden</item>
+			<item name="copy">Ausgew&#228;hlte Dateien/Verzeichnisse kopieren</item>
+			<item name="paste">Dateien/Verzeichnisse einf&#252;gen</item>
+			<item name="delete">Ausgew&#228;hlte Dateien/Verzeichnisse l&#246;schen</item>
+			<item name="unzip">Ausgew&#228;hltes Archiv entpacken (Unzip)</item>
+			<item name="zip">Ausgew&#228;hlte Dateien/Verzeichnisse packen (Zip)</item>
+			<item name="imagemanager">Zum ImageManager wechseln</item>
+			<item name="dir">Verzeichnis</item>
+			<item name="parent_dir">Vorheriges Verzeichnis</item>
+			<item name="toggle_all">Alle umschalten</item>
+			<item name="error_exists">Fehler: Verzeichnis/Datei {path} existiert bereits.</item>
+			<item name="error_delete_failed">Fehler: Sie haben keinen Zugriff auf dieses Verzeichnis/Datei.</item>
+			<item name="error_directory_not_empty">Fehler: Das Verzeichnis {path} konnte nicht gel&#246;scht werden, da es nicht leer ist.</item>
+		</group>
+
+		<group target="preview">
+			<item name="title">Datei/Verzeichnis Informationen</item>
+			<item name="directory_information">Verzeichnis-Information</item>
+			<item name="file_information">Datei-Informationen</item>
+			<item name="creationdate">Erstellungsdatum:</item>
+			<item name="modificationdate">&#196;nderungsdatum:</item>
+			<item name="access">Zugriff:</item>
+			<item name="directory">Verzeichnis:</item>
+			<item name="subdirectories">Unterverzeichnisse:</item>
+			<item name="files">Dateien:</item>
+			<item name="total_file_size">Gesamtgr&#246;&#223;e:</item>
+			<item name="filename">Dateiname:</item>
+			<item name="file_size">Dateigr&#246;&#223;e:</item>
+			<item name="file_description">Dateiformat:</item>
+			<item name="preview">Vorschau</item>
+			<item name="no_preview">Keine Vorschau verf&#252;gbar.</item>
+			<item name="button_select">Ausw&#228;hlen</item>
+			<item name="button_view">Ansehen</item>
+			<item name="readable">Leserechte</item>
+			<item name="not_readable">Keine Leserechte</item>
+			<item name="writable">Schreibrechte</item>
+			<item name="not_writable">Keine Schreibrechte</item>
+		</group>
+
+		<group target="fileprops">
+			<item name="title">Datei/Verzeichnis Eigenschaften</item>
+			<item name="description">Eigenschaften der Datei/Verzeichnis</item>
+			<item name="properties_on">Eigenschaft:</item>
+			<item name="name">Name:</item>
+			<item name="button_save">Speichern</item>
+			<item name="button_cancel">Abbrechen</item>
+			<item name="error_exists">Fehler: Ein Verzeichnis/Datei mit dem angegebenen Namen existerit bereits.</item>
+		</group>
+
+		<group target="createdir">
+			<item name="title">Verzeichnis erstellen</item>
+			<item name="description">Geben Sie den Namen des zu erstellenden Verzeichnis an.</item>
+			<item name="template">Vorlage:</item>
+			<item name="select_template">-- Vorlage ausw&#228;hlen --</item>
+			<item name="directory_name">Verzeichnisname:</item>
+			<item name="create_in">Erstellen in:</item>
+			<item name="button_create">Erstellen</item>
+			<item name="button_cancel">Abbrechen</item>
+			<item name="error_missing_name">Fehler: Sie m&#252;ssen einen Namen angeben.</item>
+			<item name="error_invalid_template_selection">Fehler: Sie m&#252;ssen eine Vorlage ausw&#228;hlen.</item>
+			<item name="error_template_not_found">Fehler: Die angegebene Vorlage konnte nicht gefunden werden.</item>
+			<item name="error_invalid_name">Fehler: Der Name des zu erstellenden Verzeichnisses ist ung&#252;ltig.\nDer Name beinhaltet ung&#252;ltige Zeichen, wie z.B. :;</item>
+			<item name="error_exists">Fehler: Ein Verzeichnis mit diesem Namen existiert bereits.</item>
+		</group>
+
+		<group target="createdoc">
+			<item name="title">Datei erstellen</item>
+			<item name="description">F&#252;llen Sie das Formular aus, um eine neue Datei vin einer Vorlage zu erstellen.</item>
+			<item name="template">Vorlage:</item>
+			<item name="select_template">-- Vorlage ausw&#228;hlen --</item>
+			<item name="required_filename">Sie m&#252;ssen einen Dateinamen f&#252;r die neue Datei angeben.</item>
+			<item name="filename">Dateiname:</item>
+			<item name="create_in">Erstellen in:</item>
+			<item name="button_create">Erstellen</item>
+			<item name="button_cancel">Abbrechen</item>
+			<item name="error_missing_document_name">Fehler: Sie m&#252;ssen einen Dateinamen angeben.</item>
+			<item name="error_missing_template_selection">Fehler: Sie m&#252;ssen eine Vorlage ausw&#228;hlen.</item>
+			<item name="error_missing_template">Fehler: Die angegebene Vorlage konnte nicht gefunden werden.</item>
+			<item name="error_invalid_file_name">Fehler: Der Name der zu erstellenden Datei ist ung&#252;ltig.\nDer Name beinhaltet ung&#252;ltige Zeichen, wie z.B. .:;</item>
+			<item name="error_exists">Fehler: Eine Datei mit diesem Namen existiert bereits.</item>
+		</group>
+
+		<group target="upload">
+			<item name="title">Neue Datei(en) hochladen</item>
+			<item name="description">Nutzen Sie das Formular, um neue Dateien hochzuladen.</item>
+			<item name="upload_in">Hochladen in:</item>
+			<item name="valid_extensions">Erlaubte Dateierweiterungen:</item>
+			<item name="max_upload_size">Maximale Dateigr&#246;&#223;e:</item>
+			<item name="file_to_upload">Datei:</item>
+			<item name="as_file_name">Speichern unter:</item>
+			<item name="required_filename">Sie m&#252;ssen einen Dateinamen angeben.</item>
+			<item name="button_upload">Hochladen</item>
+			<item name="button_add_upload">Weitere Datei hinzuf&#252;gen</item>
+			<item name="button_cancel">Abbrechen</item>
+			<item name="error_exists">Fehler: Die hochzuladende Datei existiert bereits.</item>
+			<item name="error_to_large">Fehler: Die hochzuladende Datei ist zu gro&#223;.</item>
+			<item name="remove">Entfernen</item>
+		</group>
+
+		<group target="unzip">
+			<item name="title">Archivdaten</item>
+			<item name="description">Inhaltsverzeichnis des ZIP Archivs</item>
+			<item name="zipfile_name">ZIP Archiv:</item>
+			<item name="current_folder">Aktuelles Verzeichnis:</item>
+			<item name="overwrite_files">Dateien &#252;berschreiben:</item>
+			<item name="name">Name</item>
+			<item name="size">Gr&#246;&#223;e</item>
+			<item name="csize">Kompr. Gr&#246;&#223;e</item>
+			<item name="exists">Existiert</item>
+			<item name="status">Status</item>
+			<item name="created">Erstellt</item>
+			<item name="button_unzip">Entpacken</item>
+			<item name="button_cancel">Abbrechen</item>
+			<item name="button_back">Zur&#252;ck</item>
+			<item name="button_close">Schlie&#223;en</item>
+			<item name="Accepted">in Ordnung</item>
+			<item name="Denied">verboten</item>
+			<item name="Passed">&#252;bergangen</item>
+			<item name="Failed">fehlgeschlagen</item>
+			<item name="Yes">ja</item>
+			<item name="No">nein</item>
+		</group>
+
+		<group target="zip">
+			<item name="title">ZIP Archiv erstellen</item>
+			<item name="description">Geben Sie den Namen des zu erstellenden ZIP Archivs an.</item>
+			<item name="created_in">ZIP Archiv wird erstellt in:</item>
+			<item name="name">Name:</item>
+			<item name="required_filename">Geben Sie einen Dateinamen an.</item>
+			<item name="button_create">Erstellen</item>
+			<item name="button_cancel">Abbrechen</item>
+		</group>
+	</language>
+</language-pack>

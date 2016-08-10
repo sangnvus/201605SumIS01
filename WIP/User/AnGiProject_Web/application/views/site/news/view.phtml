@@ -1,0 +1,27 @@
+<div class="container">
+    <div class="row">
+        <div class="breadcrumb"></div>
+
+        <div class="restaurant-home">
+            <div class="col-md-12" style="margin-bottom: 20px">
+                <h2 class="restaurant-name"><?php echo $news->titleNews; ?></h2>
+            </div>    
+            <div class="col-md-12"> 
+                <div class="tab-content">                         
+                    <div class="content-infor shadow-outside"> 
+                        <div class="read-more">
+                            <?php echo $news->contentNews; ?> 
+                            <p></p>  
+                             <div class="fb-like" data-href="<?php echo $this->uriutils->BuildViewNewsUrl($news->newsID); ?>" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+                        </div>
+                    </div>    
+                    <div class="fb-comments" data-href="<?php echo $this->uriutils->BuildViewNewsUrl($news->newsID);?>" data-numposts="5"></div>
+
+                    <hr/> 
+                </div>   
+            </div>
+
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<title>System integration</title>
+<link href="css/screen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<div class="header">
+	<h1>System integration</h1>
+</div>
+
+<div class="content">
+	<p>MCFileManager is made to be easy to integrate with you system and it seamlessly integrates with <a href="http://tinymce.moxiecode.com">TinyMCE</a> (our open source editor).</p>
+
+	<div class="separator"></div>
+
+	<h2>Integrating MCFileManager as standalone</h2>
+	<div class="section">
+		<p>The most common way to use MCFileManager as a standalone application is to simply add browse buttons in forms that then enables the user to select a file and insert that URL into the form, for example selecting a image or document.</p>
+		<p>In order to create a browse button you will need to add the mcfilemanager.js file and then add a special javascript link that opens up the MCFileManager. This javascript link includes a call to a special function that takes a number of parameters.</p>
+		<p>The function with it's parameters looks like this: mcFileManager.open(form_name, element_names, [file_url], [js], [settings]).
+			<ul>
+				<li>form_name - The name of the form element or a index number.</li>
+				<li>element_names - The name of the form elements, like input fields. These fields will be filled with the selected file URL.</li>
+				<li>[file_url] - Optional file URL, this is the default path that will be used by the MCFileManager.</li>
+				<li>[js] - Optional JavaScript callback function name, this function will have the selected URL as it's first argument.</li>
+				<li>[settings] - Optional <a href="javascript_options.html">settings</a> these settings are the same as in the page level init call. These settings will override the page level settings.</li>
+			</ul>
+			The example below shows what lines needs to be added to a simple form page. The lines are marked in bold.<br /><br />
+		</p>
+	<h3>Example how to use MCFileManager in standalone mode:</h3>
+	<div class="example">
+<pre>
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Example&lt;/title&gt;
+<strong>&lt;script language=&quot;javascript&quot; type=&quot;text/javascript&quot; src=&quot;jscripts/mcfilemanager.js&quot;&gt;&lt;/script&gt;</strong>
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;h3&gt;Simple example:&lt;/h3&gt;
+&lt;form name=&quot;example1&quot;&gt;
+Some URL field: &lt;input type=&quot;text&quot; name=&quot;url&quot; value=&quot;Select file&quot;&gt;
+<strong>&lt;a href=&quot;javascript:mcFileManager.open('example1','url');&quot;&gt;[Browse]&lt;/a&gt;</strong>
+&lt;/form&gt;
+
+&lt;h3&gt;Iframe example:&lt;/h3&gt;
+&lt;form name=&quot;example2&quot;&gt;
+&lt;div&gt;&lt;iframe id=&quot;myiframe&quot; src=&quot;about:blank&quot; style=&quot;width: 600px; height: 450px&quot;&gt;&lt;/iframe&gt;&lt;/div&gt;
+Some URL field: &lt;input type=&quot;text&quot; name=&quot;url&quot; value=&quot;Select file&quot;&gt;
+<strong>&lt;a href=&quot;javascript:mcFileManager.openInIframe('myiframe','example2','url');&quot;&gt;[Browse]&lt;/a&gt;</strong>
+&lt;/form&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+	</div>
+</div>
+
+	<div class="separator"></div>
+
+	<h2>Integrating MCFileManager with TinyMCE</h2>
+	<p>To use the MCFileManager as a TinyMCE plugin simply copy the filemanager directory into the plugins directory of TinyMCE then add &quot;filemanager&quot; to the list of plugins in the TinyMCE plugins option. Consult the TinyMCE manuals for details on this option. Specific MCFileManager JavaScript <a href="javascript_options.html">options</a> can also be added to each TinyMCE init call.</p>
+	<h3>Example of how to add the MCFileManager to TinyMCE as a plugin:</h3>
+	<div class="example">
+<pre>
+&lt;script language=&quot;javascript&quot; type=&quot;text/javascript&quot; src=&quot;../jscripts/tiny_mce/tiny_mce.js&quot;&gt;&lt;/script&gt;
+&lt;script language=&quot;javascript&quot; type=&quot;text/javascript&quot;&gt;
+tinyMCE.init({
+	mode : &quot;textareas&quot;,
+	theme : &quot;advanced&quot;,
+	plugins : "<strong>filemanager</strong>"
+});
+</pre>
+	</div>
+
+	<div class="separator"></div>
+
+	<h2>Integrating MCFileManager with MCImageManager</h2>
+	<div class="section">
+		<p>If you have both MCFileManager and the MCImageManager installed on the same system you can integrate them with each other. This is done by changing the <a href="option_imagemanager_urlprefix.html">imagemanager.urlprefix</a> to the URL location of the MCImageManager and adding the imagemanager to the <a href="option_general_tools.html">general.tools</a> option. This will add a new imagemanager button that links to the MCImageManager.</p>
+	</div>
+</div>
+
+<div class="footer">
+	<div class="helpindexlink"><a href="index.html">Help index</a></div>
+	<div class="copyright">Copyright &copy; 2005-2006 Moxiecode Systems AB</div>
+	<br style="clear: both" />
+</div>
+
+</body>
+</html>
