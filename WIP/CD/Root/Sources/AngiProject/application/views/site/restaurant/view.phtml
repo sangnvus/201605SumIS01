@@ -1,0 +1,168 @@
+<link rel="stylesheet" href="<?php echo base_url()?>css/viewRestaurant.css"> 
+<div class="container">
+    <div class="row">
+        <div class="breadcrumb"></div>
+
+        <div class="restaurant-home">
+            <div class="col-md-12" style="margin-bottom: 20px">
+                <h2 class="restaurant-name"><?php echo $restaurant->nameRe; ?></h2>
+            </div>
+
+			<div class="booking-side col-md-3 col-sm-12">
+                <div class="restaurant-rate shadow-outside">
+                    <span style="font-size: 2em">
+                        <?php for($j=0; $j< 5; $j++){?>
+                        <?php if ($j < $restaurant->rateRe){?>
+                        <i class="glyphicon glyphicon-star filled"></i>
+                        <?php }else {?>
+                        <i class="glyphicon glyphicon-star""></i>
+                        <?php }?>                                    
+                        <?php }?>   
+                    </span>        
+
+                    <p><?php echo $restaurant->address; ?></p>
+                </div>
+
+                <div class="stick-point"></div>         
+                <?php $this->load->view('site/booking/index.phtml') ?>  
+            </div>
+
+            <div class="col-md-9  col-sm-12">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#info">Thông tin</a></li>
+                    <li><a data-toggle="tab" href="#price">Bảng giá</a></li>
+                </ul>
+
+                <div class="tab-content">
+                    <div id="info" class="tab-pane fade in active">
+
+
+                        <div id="myCarousel-restaurant" class="carousel slide" data-ride="carousel">
+                            <!-- Indicators -->
+                            <ol class="carousel-indicators">
+                                <?php for ($i=0; $i < count($restaurantBanners); $i++ ){ ?>
+                                <?php $active = '';
+                                    if ($i == 0)
+                                        $active = 'active';
+                                    $item = $restaurantBanners[$i];
+                                 ?>
+                                 <li data-target="#myCarousel-restaurant" data-slide-to="<?php echo $i; ?>" class="<?php echo $active; ?>"></li>
+                                <?php } ?>     
+                            </ol>
+
+                            <!-- Wrapper for slides -->
+                            <div class="carousel-inner" role="listbox">
+                                <?php for ($i=0; $i < count($restaurantBanners); $i++ ){ ?>
+                                <?php $active = '';
+                                    if ($i == 0)
+                                        $active = 'active';
+                                    $item = $restaurantBanners[$i];
+                                 ?>
+                                <div class="item <?php echo $active; ?>">
+                                    <img src="<?php echo base_url().$item->imageUrl; ?>">
+                                </div>
+                                <?php } ?>   
+                            </div>
+
+                            <!-- Left and right controls -->
+                            <a class="left carousel-control" href="#myCarousel-restaurant" role="button" data-slide="prev">
+                                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="right carousel-control" href="#myCarousel-restaurant" role="button" data-slide="next">
+                                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
+
+                        <div class="content-infor shadow-outside">
+                            <div class="highlight-infor">
+                                <h3 style="font-weight: bold; color: #cc0000">ĐIỂM ĐẶC TRƯNG - <?php echo $restaurant->nameRe; ?></h3>
+                                <p>
+                                    <strong>Loại hình ẩm thực: </strong>
+                                    <?php echo $restaurant->nameCOR; ?>
+                                </p>
+
+                                <p>
+                                    <strong>Món đặc sắc: </strong>
+                                    <?php echo $restaurant->favouriteFood; ?>
+                                </p>
+
+                                <p>
+                                    <strong>Giá trung bình/người: </strong>
+                                    <?php echo $restaurant->minPrice.' - '.$restaurant->maxPrice; ?> VNĐ
+                                </p>
+
+                                <p>
+                                    <strong>Giờ mở cửa: </strong>
+                                    <?php echo $restaurant->openTimeRe.' đến '.$restaurant->closeTimeRe; ?>
+                                </p>
+
+                                <p>
+                                    <strong>Không gian nhà hàng: </strong>
+                                    <?php echo $restaurant->spaceRes; ?>
+                                </p>
+
+                                <p>
+                                    <strong>Chỗ để ô tô: </strong><?php echo $restaurant->carParkingRes ? 'Có' : 'Không'; ?>
+                                </p>   
+
+                                <p>
+                                    <strong>Điểm đặc trưng khác: </strong>
+                                    <?php if($restaurant->otherPoints == '') echo 'Không'; else echo $restaurant->otherPoints;?>
+                                </p>  
+
+                            </div>
+
+                            <div class="read-more">
+                                <?php echo $restaurant->descriptionRes; ?>
+                                <h4>Thông tin liên hệ</h4>
+                                <p><strong><?php echo $restaurant->address;  ?></strong></p>
+                                 <div class="fb-like" data-href="<?php echo base_url(); ?>restaurant/view/<?php echo $restaurant->restaurantID; ?>" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+                            </div>
+                        </div>
+
+                        <div class="fb-comments" data-href="<?php echo base_url(); ?>restaurant/view/<?php echo $restaurant->restaurantID; ?>" data-numposts="5"></div>
+
+                        <hr/>
+
+                        <div class="shadow-outside" style="padding: 10px">
+                            <h3>Bản đồ</h3>
+
+                            <script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyBEircpWMuBJODsP6mhzJ9FEPqOLI6hfRQ'></script>
+                            <div style='overflow:hidden;height:440px;width:100%;'>
+                                <div id='gmap_canvas' style='height:440px;width:100%;'></div>
+                                <div>
+                                    <small><a href="http://embedgooglemaps.com">embed google maps</a></small>
+                                </div>
+                                <div>
+                                    <small><a href="https://privacypolicygenerator.info">privacy policy example</a></small>
+                                </div>
+                                <style>#gmap_canvas img{max-width:none!important;background:none!important}</style>
+                            </div>
+                            <script type='text/javascript'>
+                                function init_map(){
+                                    var myOptions = {zoom:17,center:new google.maps.LatLng(<?php echo $restaurant->latitudeRe; ?>,<?php echo $restaurant->longitudeRe; ?>),mapTypeId: google.maps.MapTypeId.ROADMAP};
+                                    map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);
+                                    marker = new google.maps.Marker({map: map,position: new google.maps.LatLng(<?php echo $restaurant->latitudeRe; ?>,<?php echo $restaurant->longitudeRe; ?>)});
+                                    infowindow = new google.maps.InfoWindow({content:'<strong><?php echo $restaurant->nameRe; ?></strong><br><?php echo $restaurant->address; ?><br>'});
+                                    google.maps.event.addListener(marker, 'click', function(){infowindow.open(map,marker);});infowindow.open(map,marker);
+                                }google.maps.event.addDomListener(window, 'load', init_map);
+                            </script>
+                        </div>
+                    </div>
+                    <div id="price" class="tab-pane fade">
+                        <?php $this->load->view('site/restaurant/menus.phtml') ?>
+                    </div>
+
+
+                    <div style="margin: 25px 0 25px -15px">
+                        <?php $this->load->view('site/restaurant/relation.phtml') ?>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+    </div>
+</div>

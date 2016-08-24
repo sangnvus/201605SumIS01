@@ -1,0 +1,157 @@
+.R-topbar{
+    z-index: 100;
+    background: #d02028;
+    position: absolute;
+    width: 100%;
+    display: none;
+}
+.R-topbar>li{
+    width: 100%;
+    padding: 3px 70px 3px 20px;
+    border-bottom: 1px solid #ebb7b8;
+    position: relative;
+}
+.R-topbar>li>a{
+    width: 100%;
+    display: block;
+    padding: 10px 0;
+    color: #fff;
+    font-weight: bold;
+}
+.hidden-nav{
+    display: none !important;
+}
+.R-search{
+    position: relative;
+    z-index: 2;
+}
+.R-search input{
+    height: 40px;
+    width: 100%;
+}
+.R-search button{
+    height: 40px;
+    border-left: none;
+    background: #fff;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.R-topbar li ul.hover-menu{
+    position: relative;
+    border-bottom: 1px solid #ebb7b8;
+}
+.R-topbar li ul.hover-menu li{
+    float: none !important;
+    padding: 3px 20px;
+    border-top: 1px solid #ebb7b8;
+    background: #da3c3c;
+}
+.R-topbar li ul.hover-menu li a{
+    color: #fff !important;
+    padding: 10px 0;
+    display: block;
+}
+.R-topbar li ul.hover-menu li a:hover{background: #da3c3c}
+
+.tool-bar{
+    position: absolute;
+    height: 3px;
+    width: 23px;
+    background-color: #ebb7b8;
+}
+
+#home-list-resp{
+    position: absolute;
+    display: none;
+    width: 23px;
+    height: 17px;
+    vertical-align: top;
+    right:14px;
+    top:15px;
+    z-index: 101;
+}
+.cross-down{
+    display: none;
+    width: 36px;
+    height: 36px;
+    position: absolute;
+    top: 23px;
+    right: 10px;
+    margin-top: -18px;
+    cursor: pointer;
+}
+.bar1{
+    top: 0;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+}
+.bar2{
+    top: 7px;
+}
+.bar3{
+    top: 14px;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+}
+.bar4{
+    position: absolute;
+    height: 2px;
+    width: 14px;
+    background-color: #ebb7b8;
+    top: 17px;
+    left: 11px;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+}
+.bar5{
+    position: absolute;
+    height: 14px;
+    width: 2px;
+    background-color: #ebb7b8;
+    top: 11px;
+    left: 17px;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+}
+.rotated1 {
+    -webkit-transform:translateY(7px) rotate(45deg); -moz-transform:rotate(45deg); -o-transform:rotate(45deg);
+}
+.rotated2 {
+    -webkit-transform:translateY(-7px) rotate(-45deg); -moz-transform:rotate(-45deg); -o-transform:rotate(-45deg);
+}
+.rotated3 {
+    -webkit-transform: rotate(90deg); -moz-transform:rotate(90deg); -o-transform:rotate(90deg);
+}
+
+
+@media screen and (max-width: 992px) {
+    .search{
+        margin-top: 70px;
+    }
+    .stick-point{display: none}
+	.chosen-container{width: 75% !important;}
+}
+
+@media screen and (min-width: 769px) {
+    .topbar{display: block !important;}
+    .topbar>li>ul.hover-menu, .topbar>li>.cross-down{display: none !important;}
+    .search{display: block}
+}
+@media screen and (max-width: 768px) {
+    .navbar{width: 100%}
+    #home-list-resp{display: block}
+    .hidden-nav{display: block !important;}
+    .right-title, .main-banner, .top-register, .search{display: none}
+    .booking-side{float: none !important;}
+    .restaurant-list{padding: 0}
+}

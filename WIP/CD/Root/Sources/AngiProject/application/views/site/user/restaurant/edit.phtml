@@ -1,0 +1,50 @@
+<h1 class="user-tit">Thông tin nhà hàng</h1>
+
+<form class="edit-user" method="POST" action="" id="frmres">
+
+    <?php if($error!='' && $error!=null){?>
+        <div class="bg-danger"><?php echo $error; ?></div>
+    <?php }else if($success!='' && $success!=null){?>
+        <div class="bg-success"><?php echo $success; ?></div>
+    <?php }?>
+     
+        <ul class="nav nav-tabs">
+          <li class="active"><a data-toggle="tab" href="#_res_info">Thông tin chung</a></li>
+          <li><a data-toggle="tab" href="#_res_price">Bảng giá</a></li>   
+          <li><a data-toggle="tab" href="#_res_add">Địa chỉ</a></li>   
+          <li><a data-toggle="tab" href="#_res_desc">Mô tả</a></li>   
+          <li><a data-toggle="tab" href="#_res_food">Món ăn</a></li>   
+        </ul>
+        <div class="tab-content">   
+          <div id="_res_info" class="tab-pane fade in active">
+            <?php $this->load->view('site/user/restaurant/info.phtml'); ?>
+          </div> 
+          <div id="_res_price" class="tab-pane fade in">
+            <?php $this->load->view('site/user/restaurant/price.phtml'); ?>
+          </div>
+          <div id="_res_add" class="tab-pane fade in">
+            <?php $this->load->view('site/user/restaurant/address.phtml'); ?>
+          </div>
+          <div id="_res_desc" class="tab-pane fade in"> 
+            <div style="margin-top: 25px">
+                <textarea id="descriptionRes" name="descriptionRes">
+                    <?php echo isset($descriptionRes) ? $descriptionRes : ''; ?>
+                </textarea>
+            </div>
+          </div>
+          <div id="_res_food" class="tab-pane fade in">
+            <?php 
+                if (isset($restaurantID) && $restaurantID > 0) 
+                    $this->load->view('site/user/restaurant/foods.phtml');
+            ?>
+          </div>
+        </div> 
+        <li class="row">
+            <label class="col-md-3 col-sm-3 col-xs-3"></label>
+           <input class="col-md-9 col-sm-9 col-xs-9" name="submit" id="submit" class="btn" type="submit" value="Lưu" />
+        </li>
+</form>
+<script type=""> 
+    CKFinder.setupCKEditor(null, '/resource/ckfinder/' );
+    CKEDITOR.replace("descriptionRes");
+</script>

@@ -1,0 +1,184 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h2>Kích hoạt tài khoản</h2>
+    </div>
+  <!-- Default panel contents -->
+    <form method="POST" action="">
+    <div class="panel-body">
+        <a style="margin-bottom: 15px" class="btn btn-default" href="<?php echo base_url()?>admin/eater/<?php echo $userLevel; ?>" role="button"><i class="fa fa-long-arrow-left" aria-hidden="true"></i> Quay về</a>
+
+        <?php if($error!='' && $error!=null){?>
+            <div class="bg-danger"><?php echo $error; ?></div>
+        <?php }else if($success!='' && $success!=null){?>
+            <div class="bg-success"><?php echo $success; ?></div>
+        <?php }?>
+          
+        <div class="row">
+            <div class="col-lg-12 form-group">
+                <label for="memName">Tên đầy đủ</label>
+                <input type="hidden" id="userLevel"  name="userLevel"  value="<?php echo isset($userLevel) ? $userLevel : ''; ?>" >
+                <input readonly="readonly" type="text" class="form-control" value="<?php echo isset($memName) ? $memName : ''; ?>" id="memName"  name="memName" placeholder="">
+            </div>
+            <div class="col-lg-6 form-group">
+                <label for="userName">Tên đăng nhập</label>
+                <input readonly="readonly" type="text" class="form-control" id="userName"  name="userName"  value="<?php echo isset($userName) ? $userName : ''; ?>" placeholder="Tên đăng nhập">
+            </div>
+            <div class="col-lg-6 form-group">
+                <label for="userMail">Email</label>
+                <input readonly="readonly" type="text" class="form-control" id="userMail"  name="userMail"  value="<?php echo isset($userMail) ? $userMail : ''; ?>" placeholder="Email">
+            </div>
+
+            <div class="col-lg-6 form-group">
+                <label for="closeTimeRe">Ngày sinh</label>
+                <div class=' input-group date datepicker'>
+                    <input readonly="readonly" type="text" class="form-control" id="memBirthDay"  name="memBirthDay"  value="<?php echo isset($memBirthDay) ? $memBirthDay : ''; ?>">
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+            <div class="col-lg-6 form-group">
+                <label for="memGender">Giới tính</label>
+                <select disabled="true" class="form-control">
+                    <?php if(isset($memGender) && $memGender == '0'){?>
+                        <option>Nữ</option>
+                    <?php }else if(isset($memGender) && $memGender == '1'){?>
+                        <option>Nam</option>
+                    <?php }else if(isset($memGender) && $memGender == '2'){?>
+                        <option>Khác</option>
+                    <?php }?>
+                </select>
+
+                <input hidden id="memGender" name="memGender" type="text" value="<?php echo isset($memGender) ? $memGender : ''; ?>">
+
+            </div>
+
+            <div class="col-lg-4 form-group">
+                <label for="provinceID">Tỉnh/Thành phố (*)</label>
+                <select disabled="true" class="form-control">
+                    <?php foreach($province as $adr){?>
+                        <option id="<?php echo $adr->provinceID; ?>"
+                                value="<?php echo $adr->provinceID; ?>"
+                            <?php if(isset($provinceID) && $provinceID == $adr->provinceID.''){ echo 'selected="selected"';} else {echo '';} ?> ><?php echo $adr->namePro; ?></option>
+                    <?php } ?>
+                </select>
+
+                <input hidden type="text" id="provinceID" name="provinceID" value="<?php echo isset($provinceID) ? $provinceID : ''; ?>">
+            </div>
+
+            <div class="col-lg-4 form-group">
+                <label for="districtID">Quận/Huyện</label>
+                <select disabled="true" id="districtID" name="districtID" class="form-control">
+                    <?php foreach($district as $adr){?>
+                        <option id="<?php echo $adr->districtid; ?>"
+                                value="<?php echo $adr->districtid; ?>"
+                            <?php if(isset($districtID) && $districtID == $adr->districtid.''){ echo 'selected="selected"';} else {echo '';} ?> ><?php echo $adr->nameDis; ?></option>
+                    <?php } ?>
+                </select>
+
+                <input hidden type="text" id="districtID" name="districtID" value="<?php echo isset($districtID) ? $districtID : ''; ?>">
+            </div>
+
+            <div class="col-lg-4 form-group">
+                <label for="wardID">Xã/Phường</label>
+                <select disabled="true" class="form-control">
+                    <?php foreach($ward as $adr){?>
+                        <option latlng="<?php echo $adr->locationWard;?>"
+                                id="<?php echo $adr->wardid; ?>"
+                                value="<?php echo $adr->wardid; ?>"
+                            <?php if(isset($wardID) && $wardID == $adr->wardid.''){ echo 'selected="selected"';} else {echo '';} ?> ><?php echo $adr->nameWard; ?></option>
+                    <?php } ?>
+                </select>
+
+                <input hidden id="wardID" name="wardID" type="text" value="<?php echo isset($wardID) ? $wardID : ''; ?>">
+            </div>
+
+            <div class="col-lg-12 form-group">
+                <label for="address">Địa chỉ</label>
+                <input type="hidden" id="addressID"  name="addressID"  value="<?php echo isset($addressID) ? $addressID : ''; ?>" >
+                <input readonly="readonly" type="text" class="form-control" id="address"  name="address"  value="<?php echo isset($address) ? $address : ''; ?>" placeholder="Địa chỉ">
+            </div>
+            <div class="col-lg-12 form-group">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" name="userActived" id="userActived" <?php echo (isset($userActived) && $userActived) ? 'checked': ''; ?>>Kích hoạt
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <button name="submit" id="submit" class="btn btn-primary" value="save"><i class="fa fa-floppy-o" aria-hidden="true"></i> Lưu</button>
+        </div> 
+  </form>
+</div>
+<script type="">
+    $(document).ready(function(){
+        $('.datepicker').datetimepicker({locale: 'vi',format: 'DD/MM/YYYY'});   
+        $('#provinceID').change(function(){
+            signupModule.findDistrictByProvinceId($(this).val())
+        });
+        $('#districtID').change(function(){
+            signupModule.findWardByDistrictId($(this).val())
+        });
+
+        var ok = '<?php echo isset($ok) ? $ok : ''; ?>';
+        if (ok == '1')
+        {
+            setTimeout(function(){
+                location.href = '<?php echo base_url().'admin/eater/'.$userLevel; ?>';
+            }, 2000)
+        }
+    })
+
+
+    window.signupModule = window.signupModule || {};
+    signupModule.findDistrictByProvinceId = signupModule.findDistrictByProvinceId || function(id){ 
+        $.ajax({ 
+           type : "GET",  
+           dataType:'json',                                             
+           url: '<?php echo base_url("home/getDistrictByProvinceId"); ?>'+'/'+id, // target element(s) to be updated with server response 
+           cache : false,
+           //check this in firefox browser
+           complete : function(response){ 
+                var jsonData = $.parseJSON(response.responseText);
+                if (jsonData.type == 'success'){
+                    var districts = $.parseJSON(jsonData.text);
+                    signupModule.fillData(districts, 'districtID', 'districtid', 'nameDis');    
+                }
+                else if (jsonData.type == 'error'){ 
+                }
+           }
+        });        
+        return false;
+    }
+    
+    signupModule.findWardByDistrictId = signupModule.findWardByDistrictId || function(id){ 
+        $.ajax({ 
+           type : "GET",  
+           dataType:'json',                                             
+           url: '<?php echo base_url("home/getWardByDistrictId"); ?>'+'/'+id, // target element(s) to be updated with server response 
+           cache : false,
+           //check this in firefox browser
+           complete : function(response){ 
+                var jsonData = $.parseJSON(response.responseText);
+                if (jsonData.type == 'success'){
+                    var districts = $.parseJSON(jsonData.text);
+                    signupModule.fillData(districts, 'wardID', 'wardid', 'nameWard');    
+                }
+                else if (jsonData.type == 'error'){ 
+                }
+           }
+        });        
+        return false;
+    }
+    
+    signupModule.fillData = signupModule.fillData || function(data, id, value, text){ 
+        var options = '<option id="0" value="" selected = "selected">--Chọn giá trị--</option>';
+        for (i = 0; i < data.length; i++) { 
+            options += '<option id="'+data[i][value]+'" value="'+data[i][value]+'" >'+data[i][text]+'</option>';
+        }
+        $('#'+id).html(options);
+        return false;
+    }
+    
+</script>    

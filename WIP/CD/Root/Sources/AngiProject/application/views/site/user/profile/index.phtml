@@ -1,0 +1,46 @@
+<h1 class="user-tit"><?php echo $title; ?></h1>
+
+<?php if($error!='' && $error!=null){?>
+<div class="bg-danger"><?php echo $error; ?></div>
+<?php }else if($success!='' && $success!=null){?>
+<div class="bg-success"><?php echo $success; ?></div>
+<?php }?>
+
+<form class="edit-user" method="POST">
+    <ul>
+        <li class="row">
+            <label class="col-md-3 col-sm-3 col-xs-3">Tên:</label>
+            <input class="col-md-6 col-sm-9 col-xs-9" type="text" value="<?php echo isset($memName) ? $memName : ''; ?>" id="memName"  name="memName" placeholder="">
+        </li>
+        <li class="row">
+            <label class="col-md-3 col-sm-3 col-xs-3">Email:</label>
+            <input class="col-md-6 col-sm-9 col-xs-9" type="text" id="userMail"  name="userMail"  value="<?php echo isset($userMail) ? $userMail : ''; ?>" placeholder="Email">
+        </li>
+        <li class="row">
+            <label class="col-md-3 col-sm-3 col-xs-3">Ngày sinh:</label>
+            <div class='input-group date datepicker col-md-3 col-sm-6 col-xs-6'>
+                <input type="text" id="memBirthDay" style="width:100%; border-radius: 4px 0 0 4px" name="memBirthDay"  value="<?php echo isset($memBirthDay) ? $memBirthDay : ''; ?>">
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>                 
+        </li>
+        <li class="row">
+            <label class="col-md-3 col-sm-3 col-xs-3" for="memGender">Giới tính</label>
+            <select class="col-md-3 col-sm-6 col-xs-6" id="memGender" name="memGender">
+                <option id="0" value="0" <?php if(isset($memGender) && $memGender == '0'){ echo 'selected="selected"';} else {echo '';} ?> >Nữ</option>
+                <option id="1" value="1" <?php if(isset($memGender) && $memGender == '1'){ echo 'selected="selected"';} else {echo '';} ?> >Nam</option>
+                <option id="1" value="2" <?php if(isset($memGender) && $memGender == '2'){ echo 'selected="selected"'; } else {echo '';} ?>>Khác</option>
+            </select>
+        </li>
+        <li class="row">
+            <label class="col-md-3 col-sm-3 col-xs-3"></label>
+            <input class="col-md-6 col-sm-9 col-xs-9" type="submit" name="submit" value="Cập nhật">
+        </li>
+    </ul>
+</form>
+<script type="">
+    $(document).ready(function(){
+        $('.datepicker').datetimepicker({locale: 'vi',format: 'DD/MM/YYYY'}); 
+    }) 
+</script>  

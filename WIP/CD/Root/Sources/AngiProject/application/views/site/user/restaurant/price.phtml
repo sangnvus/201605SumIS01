@@ -1,0 +1,17 @@
+
+<ul>
+    <li class="row">
+        <label class="col-md-3 col-sm-3 col-xs-3" for="minPrice">Giá tiền (thấp-cao: vnđ)(*)</label>
+        <input class="col-md-3 col-sm-4 col-xs-4" type="number" id="minPrice"  name="minPrice"  value="<?php echo isset($minPrice) ? $minPrice : ''; ?>" min="0">
+        <p class="col-md-1 col-sm-1 col-xs-1" style="width: auto; padding: 0 10px">-</p>
+        <input class="col-md-3 col-sm-4 col-xs-4" type="number" id="maxPrice"  name="maxPrice"  value="<?php echo isset($maxPrice) ? $maxPrice : ''; ?>" min="0">
+    </li>
+    <li class="row">
+        <label class="col-md-3 col-sm-3 col-xs-3" for="discount">Giảm giá (%)(*)</label>
+        <input class="col-md-3 col-sm-6 col-xs-6" type="number" id="discount"  name="discount"  value="<?php echo isset($discount) ? $discount : ''; ?>">
+    </li>
+    <li style="display: none" >
+        <label for="quantityBooking">quantityBooking</label>
+        <input type="number" id="quantityBooking"  name="quantityBooking"  value="<?php echo isset($quantityBooking) ? $quantityBooking : ''; ?>">
+    </li>
+   </ul>

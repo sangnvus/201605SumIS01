@@ -1,0 +1,66 @@
+<div class="profile-sidebar">
+    <a href="<?php echo base_url();?>admin">
+        <img src="<?php echo $addressImage!= '' ? $addressImage : base_url().'img/no-image.jpg'; ?>">
+    </a>
+
+    <h4>
+        <a href="<?php echo base_url();?>admin"><?php echo $fullname; ?></a>
+    </h4>
+</div>
+
+<ul class="manage-sb">
+    <li>
+        <a href="<?php echo base_url(); ?>">
+            <i class="material-icons">home</i>
+            <span class="title">Website</span>
+        </a>
+    </li>
+    <li>
+        <a href="<?php echo base_url(); ?>admin">
+            <i class="material-icons">equalizer</i>
+            <span class="title">Báo cáo</span>
+        </a>
+    </li>
+    <li>
+        <a href="<?php echo base_url(); ?>admin/news">
+            <i class="material-icons">description</i>
+            <span class="title">Tin tức</span>
+        </a>
+    </li>
+    <li>
+        <a href="<?php echo base_url(); ?>admin/restaurant">
+            <i class="material-icons">store</i>
+            <span class="title">Nhà hàng</span>
+        </a>
+    </li>
+
+    <li>
+        <a href="<?php echo base_url(); ?>admin/eater/0">
+            <i class="material-icons">supervisor_account</i>
+            <span class="title">Tài khoản</span>
+        </a>
+    </li>
+
+    <li>
+        <a href="<?php echo base_url(); ?>admin/booking">
+            <i class="material-icons">person_pin</i>
+            <span class="title">Đặt chỗ</span>
+        </a>
+    </li>
+
+    <li>
+        <a href="<?php echo base_url(); ?>admin/categories">
+            <i class="material-icons">device_hub</i>
+            <span class="title">Danh mục</span>
+        </a>
+    </li>
+
+    <li>
+        <a href="<?php echo base_url(); ?>home/logout">
+            <i class="material-icons">undo</i>
+            <span class="title">Đăng xuất</span>
+        </a>
+    </li>  
+</ul>
+
+

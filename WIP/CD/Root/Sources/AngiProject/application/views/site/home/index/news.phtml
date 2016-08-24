@@ -1,0 +1,39 @@
+ <div class="title-content">
+    <div class="title-row">
+        <div class="col-md-6 col-sm-6">
+            <h3>
+                <a href="<?php echo base_url().'home/news';?>"><?php echo $title; ?></a>
+            </h3>
+        </div>
+        <div class="col-md-6 col-sm-6 right-title">
+                <a class="small-tit" href="<?php echo base_url().'home/news';?>" style="padding-left: 10px">Tất cả</a>
+                <a class="small-tit small-tit-news" href="<?php echo $this->uriutils->BuildMenuStaticUrl(31);?>">Cập nhật</a>
+                <a class="small-tit small-tit-news" href="<?php echo $this->uriutils->BuildMenuStaticUrl(32);?>">Sự kiện</a>
+                <a class="small-tit small-tit-news" href="<?php echo $this->uriutils->BuildMenuStaticUrl(33);?>">Khuyến mãi</a>
+                <a class="small-tit small-tit-news" href="<?php echo $this->uriutils->BuildMenuStaticUrl(34);?>">Trải nghiệm</a>
+        </div>
+    </div>
+
+    <div class="col-md-12">
+        <hr class="underTit"/>
+    </div>
+</div>
+
+<ul class="item-content">
+    <?php
+    foreach($items as $item){  
+        ?>
+        <li class="col-md-4 col-sm-6">
+            <a style="display: block; position: relative" class="img-item" href="<?php echo $this->uriutils->BuildViewNewsUrl($item->newsID); ?>">
+                <img src="<?php echo $item->imageNews != '' ? base_url().$item->imageNews : base_url().'img/no-image.jpg'; ?>">
+            </a>
+
+            <div style="text-align: center">
+                <h4 class="news-title"><a href="<?php echo $this->uriutils->BuildViewNewsUrl($item->newsID); ?>"><?php echo $this->xulychuoi->GetTitleNew( $item->titleNews, 60); ?></a></h4>
+                <p class="news-desc"><?php echo $this->xulychuoi->GetIntroText( $item->contentNews, 200); ?></p>
+            </div>
+        </li>
+        <?php
+    }
+    ?>
+</ul>

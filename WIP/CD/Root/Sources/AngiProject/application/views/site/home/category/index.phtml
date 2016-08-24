@@ -1,0 +1,66 @@
+
+<div class="container">
+    <div class="row"> 
+        <div class="topdisplay-item">
+            <div class="title-content">
+                <div class="title-row">
+                    <div class="col-md-6">
+                        <h3><?php echo $categoryName; ?></h3>
+                    </div>  
+                </div> 
+                <div class="col-md-12">
+                    <hr class="underTit"/>
+                </div>  
+            </div>
+
+            <div class="sidebar col-md-2 col-sm-2">
+                <div class="sidebar-content">
+                    <h4>Danh mục</h4>
+                    <ul class="sidebar-list">
+                        <?php foreach ($categoryModels as $item) {?>
+                            <li><a href="<?php echo base_url().'home/category/'.$item->categoryOfResID ;?>"><?php echo $item->nameCOR;?></a></li>
+                        <?php } ?>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-md-10 col-sm-10">
+                <ul class="item-content">
+                    <?php foreach($items as $item){ ?>
+                        <li class="col-md-3 col-sm-6 restaurant-list">
+                            <a style="display: block; position: relative" class="img-item" href="<?php echo $this->uriutils->BuildViewResUrl($item->restaurantID); ?>">
+                                <img src="<?php echo $item->imageUrl != '' ? base_url().$item->imageUrl : base_url().'img/no-image.jpg'; ?>">
+                                <div class="item-infor">
+                                    <label class="item-name"><?php echo $item->nameRe; ?></label>
+                            <span class="rate-star">
+                                <?php for($j=0; $j< 5; $j++){?>
+                                    <?php if ($j < $item->rateRe){?>
+                                        <i class="fa fa-star filled" aria-hidden="true"></i>
+                                    <?php }else {?>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                    <?php }?>
+                                <?php }?>
+                            </span>
+                                    <label class="item-address"><?php echo $item->address; ?></label>
+                                </div>
+                            </a>
+                            <div style="border: 1px solid #e0e0e0; text-align: center">
+                                <p class="sale-content">Giảm <strong><?php echo $item->discount; ?>%</strong></p>
+                                <p class="quick-description"><?php echo $this->xulychuoi->GetTitleNew( $item->descriptionRes); ?></p>
+                                <a href="<?php echo $this->uriutils->BuildViewResUrl($item->restaurantID); ?>">
+                                    <button class="place">Đặt chỗ ngay</button>
+                                </a>
+                            </div>
+                        </li>
+                    <?php } ?>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div style="text-align: center">
+            <?php echo $pagination; ?>
+        </div>
+    </div>
+</div>

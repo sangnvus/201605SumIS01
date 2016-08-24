@@ -1,0 +1,54 @@
+<h1 class="user-tit">Thông tin đặt chỗ</h1>
+
+<form class="edit-user" method="POST" action="">
+
+    <?php if($error!='' && $error!=null){?>
+        <div class="bg-danger"><?php echo $error; ?></div>
+    <?php }else if($success!='' && $success!=null){?>
+        <div class="bg-success"><?php echo $success; ?></div>
+    <?php }?>
+
+    <ul>
+        <li class="row">
+            <label class="col-md-3 col-sm-3 col-xs-3" for="restaurantName">Tên quán</label>
+            <input class="col-md-6 col-sm-9 col-xs-9" disabled="disabled" type="text" value="<?php echo isset($restaurantName) ? $restaurantName : ''; ?>">
+        </li>
+        <li class="row">
+            <label class="col-md-3 col-sm-3 col-xs-3" for="memName">Mã</label>
+            <input class="col-md-6 col-sm-9 col-xs-9" disabled="disabled" type="text" value="<?php echo isset($bookingID) ? $bookingID : ''; ?>">
+        </li>
+        <li class="row">
+            <label class="col-md-3 col-sm-3 col-xs-3" for="dateCreateBo">Ngày tạo</label>
+            <input class="col-md-6 col-sm-9 col-xs-9" disabled="disabled" type="text" value="<?php echo isset($dateCreateBo) ? $dateCreateBo : ''; ?>">
+        </li>
+        <li class="row">
+            <label class="col-md-3 col-sm-3 col-xs-3" for="quantityMember">Số người</label>
+            <input class="col-md-6 col-sm-9 col-xs-9" disabled="disabled" type="text" value="<?php echo isset($quantityMember) ? $quantityMember : ''; ?>">
+        </li>
+        <li class="row">
+            <label class="col-md-3 col-sm-3 col-xs-3" for="dateCreateBo">Ăn vào thời gian</label>
+            <input class="col-md-6 col-sm-9 col-xs-9" disabled="disabled" type="text" value="<?php echo isset($dateBooking) ? $dateBooking : ''; ?>">
+        </li>
+        <li class="row">
+            <label class="col-md-3 col-sm-3 col-xs-3" for="userName">Người đặt</label>
+            <input class="col-md-6 col-sm-9 col-xs-9" disabled="disabled" type="text" value="<?php echo isset($userName) ? $userName : ''; ?>">
+        </li>
+        <li class="row">
+            <label class="col-md-3 col-sm-3 col-xs-3" for="$statusBo">Trạng thái</label>
+            <select class="col-md-6 col-sm-9 col-xs-9" id="statusBo" name="statusBo">
+                <option id="0" value="0" <?php if(isset($statusBo) && $statusBo == 0){ echo 'selected="selected"';} else {echo '';} ?> >Mới đặt</option>
+                <option id="1" value="1" <?php if(isset($statusBo) && $statusBo == 1){ echo 'selected="selected"';} else {echo '';} ?> >Đã xử lý</option>
+                <option id="99" value="99" <?php if(isset($statusBo) && $statusBo == 99){ echo 'selected="selected"'; } else {echo '';} ?>>Hủy</option>
+            </select>
+        </li>
+        <li class="row">
+            <label class="col-md-3 col-sm-3 col-xs-3" for="commentBo">Ghi chú</label>
+            <textarea class="col-md-6 col-sm-9 col-xs-9" id="commentBo" name="commentBo" type="text"><?php echo isset($commentBo) ? $commentBo : ''; ?></textarea>
+        </li>
+        <li class="row">
+            <label class="col-md-3 col-sm-3 col-xs-3"></label>
+            <input class="col-md-6 col-sm-9 col-xs-9"  name="submit" id="submit" type="submit" value="Cập nhật trạng thái">
+        </li>
+    </ul>
+</form>
+   
